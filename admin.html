@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Carta Tilo Café</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- XLSX para exportar/importar Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    :root{
+      --brand:#8c6954; --brand-dark:#6b4e3d; --ink:#5a3825; --paper:#f7f3f0;
+    }
+    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); }
+    h1 { color: var(--ink); margin-bottom: 10px; }
+    .row { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items: start; }
+    @media (max-width: 900px){ .row{ grid-template-columns: 1fr; } }
+
+    form { background: var(--paper); padding: 15px; border-radius: 10px; }
+    label { font-weight: 600; font-size: 0.9rem; }
+    input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #ccc; border-radius: 6px; }
+    textarea{ min-height: 72px; resize: vertical; }
+
+    button { padding: 8px 12px; margin: 5px 6px 5px 0; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: var(--brand-dark); }
+
+    .toolbar { margin: 10px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    #tokenInput { width: 320px; }
+
+    .search-wrap { display:inline-flex; align-items:center; gap:8px; }
+    #searchBox { padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 6px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #f0e8e3; }
+    td img { max-width: 60px; border-radius: 6px; display:block; }
+
+    .actions button { margin-right: 5px; }
+
+    /* Vista previa */
+    .preview { background: #fff; border: 1px solid #e8e2de; border-radius: 12px; padding: 12px; }
+    .preview h3{ margin: 0 0 8px; font-size: 1.05rem; }
+    .card { border: 1px solid #e6ded9; border-radius: 10px; overflow: hidden; }
+    .card img { width: 100%; height: 180px; object-fit: cover; background:#faf7f5; }
+    .card-body { padding: 10px; }
+    .prev-name { font-weight: 700; margin-bottom: 4px; }
+    .prev-desc { font-size: 0.92rem; margin-bottom: 6px; color:#3d2a1e; }
+    .prev-meta { display:flex; justify-content: space-between; font-size: 0.9rem; }
+    .prev-price { font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<h1>Admin Carta Tilo Café</h1>
+
+<div class="toolbar">
+  <label for="tokenInput">Token de GitHub:</label>
+  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí">
+  <button onclick="exportExcel()">📤 Exportar Excel</button>
+
+  <input type="file" id="importFile" accept=".xlsx" style="display:none" onchange="importExcel(event)">
+  <label for="importFile"><button type="button">📥 Importar Excel</button></label>
+
+  <span class="search-wrap">
+    <input type="text" id="searchBox" placeholder="🔎 Buscar por nombre o categoría" oninput="renderTable()">
+    <button type="button" onclick="resetSearch()">Reset</button>
+  </span>
+</div>
+
+<div class="row">
+  <!-- Formulario -->
+  <form id="productForm">
+    <input type="hidden" id="editIndex" value="">
+    <label>Nombre:</label>
+    <input type="text" id="nombre" required>
+
+    <label>Descripción:</label>
+    <textarea id="descripcion" required></textarea>
+
+    <label>Precio (solo número o con $):</label>
+    <input type="text" id="precio" required>
+
+    <label>Imagen (solo nombre de archivo, ej: cafe.jpg):</label>
+    <input type="text" id="imagen" required placeholder="ej: cafe.jpg">
+
+    <label>Categoría:</label>
+    <input type="text" id="categoria" required>
+
+    <button type="submit">Guardar Producto</button>
+  </form>
+
+  <!-- Vista previa -->
+  <div class="preview">
+    <h3>Vista previa</h3>
+    <div class="card">
+      <img id="prevImg" alt="Vista previa">
+      <div class="card-body">
+        <div class="prev-name" id="prevNombre">—</div>
+        <div class="prev-desc" id="prevDescripcion">—</div>
+        <div class="prev-meta">
+          <div class="prev-cat" id="prevCategoria">—</div>
+          <div class="prev-price" id="prevPrecio">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Productos actuales</h2>
+<table id="productsTable">
+  <thead>
+    <tr>
+      <th>Imagen</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Categoría</th>
+      <th>Precio</th> <!-- Precio última columna para que sea cómodo editar -->
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+const USERNAME = "cholose10";
+const REPO = "Carta";
+const FILE_PATH = "productos.json";
+const BRANCH = "main";
+let productos = [];
+
+// --------- Cargar productos desde GitHub ----------
+async function loadProducts() {
+  const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
+  productos = await res.json();
+  renderTable();
+}
+loadProducts();
+
+// --------- Vista previa en vivo ----------
+function updatePreview() {
+  const nombre = document.getElementById('nombre').value.trim();
+  const descripcion = document.getElementById('descripcion').value.trim();
+  const categoria = document.getElementById('categoria').value.trim();
+  const precio = document.getElementById('precio').value.trim();
+  const imagen = document.getElementById('imagen').value.trim();
+
+  document.getElementById('prevNombre').textContent = nombre || '—';
+  document.getElementById('prevDescripcion').textContent = descripcion || '—';
+  document.getElementById('prevCategoria').textContent = categoria || '—';
+  const showPrice = (precio.startsWith('$') ? precio : (precio ? '$' + precio : '—'));
+  document.getElementById('prevPrecio').textContent = showPrice;
+
+  const src = imagen ? ('img/' + imagen) : '';
+  document.getElementById('prevImg').src = src;
+}
+['nombre','descripcion','precio','imagen','categoria'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+updatePreview();
+
+// --------- Render tabla con buscador (índice real) ----------
+function renderTable() {
+  const search = document.getElementById("searchBox").value.toLowerCase();
+  const tbody = document.querySelector("#productsTable tbody");
+  tbody.innerHTML = "";
+
+  // mantenemos el índice real del array para evitar bugs al editar/eliminar con búsqueda
+  const items = productos
+    .map((p, i) => ({ p, i }))
+    .filter(({p}) =>
+      (p.nombre||'').toLowerCase().includes(search) ||
+      (p.categoria||'').toLowerCase().includes(search)
+    );
+
+  items.forEach(({p, i}) => {
+    const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+      ? String(p.precio).trim()
+      : ('$' + (p.precio ?? ''));
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><img src="${p.imagen}" alt="${p.nombre}"></td>
+      <td>${p.nombre||''}</td>
+      <td>${p.descripcion||''}</td>
+      <td>${p.categoria||''}</td>
+      <td>${priceDisplay}</td>
+      <td class="actions">
+        <button onclick="editProduct(${i})">Editar</button>
+        <button onclick="deleteProduct(${i})">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function resetSearch(){
+  document.getElementById('searchBox').value = '';
+  renderTable();
+}
+
+// --------- Guardar (crear/actualizar) ----------
+document.getElementById("productForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const index = document.getElementById("editIndex").value;
+  const nuevo = {
+    nombre: document.getElementById("nombre").value.trim(),
+    descripcion: document.getElementById("descripcion").value.trim(),
+    // guardamos la imagen con el prefijo img/
+    imagen: "img/" + document.getElementById("imagen").value.trim(),
+    categoria: document.getElementById("categoria").value.trim(),
+    precio: document.getElementById("precio").value.trim()
+  };
+
+  if (index === "") {
+    productos.push(nuevo);
+  } else {
+    productos[index] = nuevo;
+    document.getElementById("editIndex").value = "";
+  }
+
+  await saveToGitHub();
+  renderTable();
+  this.reset();
+  updatePreview();
+});
+
+// --------- Editar ----------
+function editProduct(realIndex) {
+  const p = productos[realIndex];
+  document.getElementById("nombre").value = p.nombre || '';
+  document.getElementById("descripcion").value = p.descripcion || '';
+  document.getElementById("precio").value = p.precio || '';
+  // quitamos el prefijo img/ para que el campo muestre solo el archivo
+  document.getElementById("imagen").value = (p.imagen||'').replace(/^img\//,'');
+  document.getElementById("categoria").value = p.categoria || '';
+  document.getElementById("editIndex").value = realIndex;
+
+  updatePreview();
+  // scroll al formulario cuando edita en móviles
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// --------- Eliminar ----------
+async function deleteProduct(realIndex) {
+  if (confirm("¿Eliminar este producto?")) {
+    productos.splice(realIndex, 1);
+    await saveToGitHub();
+    renderTable();
+  }
+}
+
+// --------- Guardar en GitHub ----------
+async function saveToGitHub() {
+  const TOKEN = document.getElementById("tokenInput").value.trim();
+  if (!TOKEN) { alert("Pegá tu token de GitHub primero."); throw new Error("No token"); }
+
+  // obtenemos SHA actual (si existe)
+  let sha = undefined;
+  try {
+    const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+    }
+  } catch(e) { /* archivo nuevo o error de red */ }
+
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
+
+  const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
+    method: "PUT",
+    headers: {
+      "Authorization": `token ${TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "Actualizar productos",
+      content: content,
+      sha: sha,
+      branch: BRANCH
+    })
+  });
+
+  if (!putRes.ok) {
+    const err = await putRes.text();
+    alert("Error guardando en GitHub:\n" + err);
+    throw new Error(err);
+  }
+}
+
+// --------- Exportar Excel (solo texto, columnas: Nombre | Descripción | Categoría | Precio) ----------
+function exportExcel() {
+  const data = productos.map(p => ({
+    "Nombre": p.nombre || "",
+    "Descripción": p.descripcion || "",
+    "Categoría": p.categoria || "",
+    "Precio": (p.precio || "")
+  }));
+  const ws = XLSX.utils.json_to_sheet(data, { skipHeader:false });
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Productos");
+  // ancho de columnas
+  ws['!cols'] = [{wch:26},{wch:50},{wch:24},{wch:12}];
+  XLSX.writeFile(wb, "productos.xlsx");
+}
+
+// --------- Importar Excel (solo texto) ----------
+async function importExcel(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+    const sheet = workbook.Sheets[workbook.SheetNames[0]];
+    const imported = XLSX.utils.sheet_to_json(sheet);
+    productos = imported.map(r => ({
+      nombre: r["Nombre"] ?? "",
+      descripcion: r["Descripción"] ?? "",
+      categoria: r["Categoría"] ?? "",
+      precio: r["Precio"] ?? "",
+      // si no viene imagen en Excel, dejamos una por defecto
+      imagen: "img/default.jpg"
+    }));
+    await saveToGitHub();
+    renderTable();
+  };
+  reader.readAsArrayBuffer(file);
+}
+</script>
+
+</body>
+</html>
