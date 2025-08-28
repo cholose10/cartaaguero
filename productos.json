@@ -7,11 +7,11 @@
     "categoria": "Cafetería"
   },
   {
-    "nombre": "Café expresso jarito",
+    "nombre": "Café expresso jarrito",
     "descripcion": "Café americano",
-    "precio": "3500",
     "imagen": "img/Americano.jpg",
-    "categoria": "Cafetería"
+    "categoria": "Cafetería",
+    "precio": "3500"
   },
   {
     "nombre": "Café descafeinado",
@@ -23,44 +23,44 @@
   {
     "nombre": "Café expresso Doble",
     "descripcion": "Café expresso Doble",
-    "precio": "$4700",
+    "precio": "4700",
     "imagen": "img/doble.jpg",
     "categoria": "Cafetería"
   },
   {
     "nombre": "Capuccino",
     "descripcion": "Café, leche, canela y cacao",
-    "precio": "$4900",
+    "precio": "4900",
     "imagen": "img/Capuchino.jpg",
     "categoria": "Cafetería"
   },
   {
     "nombre": "Café MOKA",
     "descripcion": " cacao intenso, café, leche espumada",
-    "precio": "$5450",
+    "precio": "5450",
     "imagen": "img/Moka.jpg",
     "categoria": "Cafetería"
   },
   {
     "nombre": "Café CARAMEL",
     "descripcion": "caramelo, café, leche espumada",
-    "precio": "$5450",
+    "precio": "5450",
     "imagen": "img/Caramel.jpg",
     "categoria": "Cafetería"
   },
   {
     "nombre": "Té con leche",
     "descripcion": "te inti zen",
-    "precio": "$4100",
+    "precio": "4100",
     "imagen": "img/te.jpg",
     "categoria": "Cafetería"
   },
   {
     "nombre": "Submarino",
-    "descripcion": "leche espumada y berra de chocolate",
-    "precio": "$4700",
+    "descripcion": "leche espumada y barra de chocolate",
     "imagen": "img/Submarino .jpg",
-    "categoria": "Cafetería"
+    "categoria": "Cafetería",
+    "precio": "4700"
   },
   {
     "nombre": "Leche caliente o fría",
@@ -119,16 +119,16 @@
     "categoria": "Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
   {
-    "nombre": "TOMELETTE DE CLARAS",
+    "nombre": "OMELETTE DE CLARAS",
     "descripcion": "Omelette con queso y tomate (con FRITOLIN) y frutas de estación",
-    "precio": "14700",
     "imagen": "img/Promoomelet.jpg",
-    "categoria": "Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
+    "categoria": "Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)",
+    "precio": "14700"
   },
   {
     "nombre": "AVOCADO",
     "descripcion": "tostada con huevos revueltos, crema de palta y semillas",
-    "precio": "$14500",
+    "precio": "14500",
     "imagen": "img/20250806_094923.jpg",
     "categoria": "Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
@@ -161,6 +161,27 @@
     "categoria": "Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
   {
+    "nombre": "Crema",
+    "descripcion": "Crema deLeche ",
+    "precio": "300",
+    "imagen": "img/medialunas.jpg",
+    "categoria": "Adicionales de café"
+  },
+  {
+    "nombre": "Leche de almendras",
+    "descripcion": "Leche de almendras chico$350-grande$450",
+    "precio": "350-450",
+    "imagen": "img/medialunas.jpg",
+    "categoria": "Adicionales de café"
+  },
+  {
+    "nombre": "Saborizante vainilla o avellanas",
+    "descripcion": "Saborizante vainilla o avellanas",
+    "precio": "350",
+    "imagen": "img/medialunas.jpg",
+    "categoria": "Adicionales de café"
+  },
+  {
     "nombre": "Adicionales",
     "descripcion": "Crema$300, Leche de almendras $350-450, Saborizante vainilla o avellanas $350",
     "precio": "$....",
@@ -188,10 +209,11 @@
     "imagen": "img/Pchoco.jpg",
     "categoria": "Pastelería"
   },
+  
   {
     "nombre": "Cookies",
-    "descripcion": "cookces vinilla con chocolate, chocolate+chocolate",
-    "precio": "$4600",
+    "descripcion": "cookies vainilla con chocolate, chocolate+chocolate",
+    "precio": "4600",
     "imagen": "img/medialunas.jpg",
     "categoria": "Pastelería"
   },
@@ -212,9 +234,9 @@
   {
     "nombre": "Scon de queso",
     "descripcion": "Scon de queso",
-    "precio": "42000",
     "imagen": "img/Sconquso.jpg",
-    "categoria": "Pastelería"
+    "categoria": "Pastelería",
+    "precio": "4200"
   },
   {
     "nombre": "Budín",
@@ -226,9 +248,9 @@
   {
     "nombre": "Alfajor de chocolate",
     "descripcion": "Alfajor de chocolate",
-    "precio": "43000",
     "imagen": "img//Alchoco.jpg",
-    "categoria": "Pastelería"
+    "categoria": "Pastelería",
+    "precio": "4300"
   },
   {
     "nombre": "Alfajor de maicena",
@@ -238,11 +260,11 @@
     "categoria": "Pastelería"
   },
   {
-    "nombre": "Alfajor de almendras ",
-    "descripcion": "Alfajor de almendras ",
-    "precio": "52000",
+    "nombre": "Alfajor de almendras",
+    "descripcion": "Alfajor de almendras",
     "imagen": "img/Almendras.jpg",
-    "categoria": "Pastelería"
+    "categoria": "Pastelería",
+    "precio": "5200"
   },
   {
     "nombre": "Mini tarta ",
@@ -254,14 +276,14 @@
   {
     "nombre": "Medialuna caliente de jamón y queso",
     "descripcion": "Medialuna caliente de jamón y queso",
-    "precio": "$4200",
+    "precio": "4200",
     "imagen": "img/medialunas.jpg",
     "categoria": "Pastelería"
   },
   {
     "nombre": "Plato con frutas de estación",
     "descripcion": "Plato con frutas de estación",
-    "precio": "80000",
+    "precio": "8000",
     "imagen": "img//Platofrutas.jpg",
     "categoria": "Pastelería"
   },
@@ -275,14 +297,14 @@
   {
     "nombre": "Porción de tostadas",
     "descripcion": "Porción de tostadas, blancas o de salvado con semillas",
-    "precio": "$3200",
+    "precio": "3200",
     "imagen": "img/medialunas.jpg",
     "categoria": "Pastelería"
   },
   {
     "nombre": "Porción de mermelada",
     "descripcion": "Porción de mermelada, manteca, queso blanco, miel o aderezo",
-    "precio": "$1700",
+    "precio": "1700",
     "imagen": "img/medialunas.jpg",
     "categoria": "Pastelería"
   },
@@ -324,28 +346,28 @@
   {
     "nombre": "línea Coca-Cola",
     "descripcion": "zeros y clacicas",
-    "precio": "$3500",
+    "precio": "3500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Refrescos"
   },
   {
     "nombre": "Agua local filtrada y mineralizada",
     "descripcion": " agua fria, natural y con gas",
-    "precio": "$500",
+    "precio": "500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Refrescos"
   },
   {
     "nombre": "Adicional con limón",
     "descripcion": "Adicional con limón",
-    "precio": "$4000",
+    "precio": "4000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Refrescos"
   },
   {
     "nombre": "Jugo exprimido de naranja",
     "descripcion": "exprimido de naranja",
-    "precio": "$6200",
+    "precio": "6200",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Refrescos"
   },
@@ -359,7 +381,7 @@
   {
     "nombre": "Licuadas",
     "descripcion": "con frutas de estacion(base de agua, leche o exprimido",
-    "precio": "$6400",
+    "precio": "6400",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Refrescos"
   },
@@ -387,9 +409,9 @@
   {
     "nombre": "tostado mixto",
     "descripcion": "4 triangulos de j y q",
-    "precio": "$14.000",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "Sandwiches"
+    "imagen": "img/20250824_141355.jpg",
+    "categoria": "Sandwiches",
+    "precio": "14.000"
   },
   {
     "nombre": "Jamón, stracciatella y tomate ",
@@ -413,18 +435,46 @@
     "categoria": "Sandwiches"
   },
   {
-    "nombre": "Sandwiches Lomito",
-    "descripcion": "SIMPLE (solo queso) $21.000,CLÁSICO (lechuga, tomate, jamón y queso) $24.000,BACON (queso cheddar, panceta y tomate) $26.000",
-    "precio": "$...",
+    "nombre": "Sandwiches Lomito solo queso",
+    "descripcion": "SIMPLE (solo queso)",
+    "precio": "21.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "Lomitos (fritas)"
   },
   {
-    "nombre": "Burgers",
-    "descripcion": "SIMPLE (solo queso) $$15.00,CLÁSICO (lechuga, tomate, jamón y queso) $17.000,BACON (queso cheddar, panceta y tomate) $19.000",
-    "precio": "0000",
+    "nombre": "Sandwiches Lomito CLÁSICO",
+    "descripcion": "CLÁSICO (lechuga, tomate, jamón y queso)",
+    "precio": "24.000,",
+    "imagen": "img/tarta_brocoli.jpg",
+    "categoria": "Lomitos (fritas)"
+  },
+  {
+    "nombre": "Sandwiches Lomito BACON",
+    "descripcion": "BACON (queso cheddar, panceta y tomate)",
+    "precio": "2600",
+    "imagen": "img/tarta_brocoli.jpg",
+    "categoria": "Lomitos (fritas)"
+  },
+  {
+    "nombre": "Burgers SIMPLE (solo queso)",
+    "descripcion": "SIMPLE (solo queso)",
+    "precio": "15000",
     "imagen": "img/20250816_135012.jpg",
-    "categoria": "Burgers(100% carne, con papas fritas.La burger puede ser,Not Cow)"
+    "categoria":  "Burgers(100% carne, con fritas.La burger puede ser Not Cow)"
+  },
+  {
+    "nombre": "Burgers CLÁSICO",
+    "descripcion": "CLÁSICO (lechuga, tomate, jamón y queso)",
+    "precio": "17000",
+    "imagen": "img/20250816_135012.jpg",
+    "categoria":  "Burgers(100% carne, con fritas.La burger puede ser Not Cow)"
+  },
+  {
+    "nombre": "Burgers BACON",
+    "descripcion": "BACON (queso cheddar, panceta y tomate)",
+    "precio": "19000",
+    "imagen": "img/20250816_135012.jpg",
+    "categoria":  "Burgers(100% carne, con fritas.La burger puede ser Not Cow)"
   },
   {
     "nombre": "Omelette de jamón y queso",
@@ -443,7 +493,7 @@
   {
     "nombre": "Omelette de queso y champignones",
     "descripcion": "Omelette de queso y champignones",
-    "precio": "$15.000",
+    "precio": "15.000",
     "imagen": "img/Omecham.jpg",
     "categoria": "Omelettes/Tortillas"
   },
@@ -456,31 +506,31 @@
   },
   {
     "nombre": "FRESCA",
-    "descripcion": "TRúcula, manzana verde, pepino, tomates cherries, nueces.",
-    "precio": "$18.200",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "ENSALADAS"
+    "descripcion": "Rúcula, manzana verde, pepino, tomates cherries, nueces.",
+    "imagen": "img/Fresca.jpg",
+    "categoria": "ENSALADAS",
+    "precio": "18.200"
   },
   {
-    "nombre": "CASA CON POLLO",
-    "descripcion": "Mix de verdes, croutones, pollo, parmesano y aderezo César",
-    "precio": "16000",
+    "nombre": "CAESAR CON POLLO",
+    "descripcion": "Mix de verdes, croutones, pollo, parmesano y aderezo Caesar",
     "imagen": "img/20250819_121751.jpg",
-    "categoria": "ENSALADAS"
+    "categoria": "ENSALADAS",
+    "precio": "16000"
   },
   {
-    "nombre": "CASA CON POLLO crujiente",
-    "descripcion": "TMix de verdes, croutones, pollo crujiente, parmesano y aderezo César.",
-    "precio": "$17.000",
-    "imagen": "img/Causarcranch.jpg",
-    "categoria": "ENSALADAS"
+    "nombre": "CAESAR CON POLLO CRUJIENTE",
+    "descripcion": "Mix de verdes, croutones, pollo crujiente, parmesano y aderezo Caesar.",
+    "imagen": "img/Cranch.jpg",
+    "categoria": "ENSALADAS",
+    "precio": "17.000"
   },
   {
-    "nombre": "CASA Con langostinos rebozados",
-    "descripcion": "TMix de verdes, croutones, Con langostinos rebozados, parmesano y aderezo César.",
-    "precio": "$18.500",
+    "nombre": "CAESAR Con Langostinos rebozados",
+    "descripcion": "Mix de verdes, croutones, Con langostinos rebozados, parmesano y aderezo Caesar.",
     "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "ENSALADAS"
+    "categoria": "ENSALADAS",
+    "precio": "18.500"
   },
   {
     "nombre": "STRACCIATELLA mozzarella italiana",
@@ -506,9 +556,9 @@
   {
     "nombre": "ESPINACA carne o pollo",
     "descripcion": "Crema de espinaca y queso gratinado Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "21000",
-    "imagen": "img/20250815_143936.jpg",
-    "categoria": "MILANESAS Ternera o Pollo - Pechuga"
+    "imagen": "img/Espi.jpg",
+    "categoria": "MILANESAS Ternera o Pollo - Pechuga",
+    "precio": "21000"
   },
   {
     "nombre": "SUIZA",
@@ -527,7 +577,7 @@
   {
     "nombre": "SMOKE",
     "descripcion": "Salsa de tomate, mermelada de bacon, cheddar Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "$22.000",
+    "precio": "22.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga"
   },
@@ -541,16 +591,16 @@
   {
     "nombre": "Revuelto de Gramajo",
     "descripcion": "Papas fritas, panceta, cebolla morrón, arvejas y huevo frito",
-    "precio": "$17.000",
+    "precio": "17.000",
     "imagen": "img/Rebuelto.jpg",
     "categoria": "Otros platos"
   },
   {
     "nombre": "Empanadas",
     "descripcion": "carne o jamón y queso",
-    "precio": "$17.000",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "ENTRADITAS"
+    "imagen": "img/Empa.jpg",
+    "categoria": "ENTRADITAS",
+    "precio": "17.000"
   },
   {
     "nombre": "Rabas a la romana",
@@ -604,7 +654,7 @@
   {
     "nombre": "Champi",
     "descripcion": "Salsa de tomate, stracciatella, hongos ycebollas salteadas.",
-    "precio": "$23.500",
+    "precio": "23.500",
     "imagen": "img/Pizachampi.jpg",
     "categoria": "PIZZAS (Estilo napolitano)"
   },
@@ -617,15 +667,15 @@
   },
   {
     "nombre": "RISOTTOS Langostinos !",
-    "descripcion": "con verdura, noeces y almendras.",
-    "precio": "$25.000",
+    "descripcion": "con verdura, nueces y almendras.",
     "imagen": "img/Risotolangos.jpg",
-    "categoria": "RISOTTOS"
+    "categoria": "RISOTTOS",
+    "precio": "25.000"
   },
   {
     "nombre": "RISOTTOS Lomo!",
     "descripcion": "con verduras.",
-    "precio": "$27.000",
+    "precio": "27.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "RISOTTOS"
   },
@@ -639,7 +689,7 @@
   {
     "nombre": "Spaghetti",
     "descripcion": "Spaghetti ",
-    "precio": "$11.000",
+    "precio": "11.000",
     "imagen": "img/Spa.jpg",
     "categoria": "PASTAS"
   },
@@ -653,37 +703,44 @@
   {
     "nombre": "Ravioles de espinaca y pollo o caprese",
     "descripcion": "Rellenos de espinaca y pollo o caprese.",
-    "precio": "$13.000",
+    "precio": "13.000",
     "imagen": "img/Ravioles.jpg",
     "categoria": "PASTAS"
   },
   {
     "nombre": "Sorrentinos de ossobuco al vino tinto",
-    "descripcion": "Rellenos de ossobuco al vino tinto",
-    "precio": "$11.000",
+    "descripcion": "Rellenos de osobuco al vino tinto",
     "imagen": "img/Sonren.jpg",
-    "categoria": "PASTAS"
+    "categoria": "PASTAS",
+    "precio": "11.000"
   },
   {
-    "nombre": "salsa banca - fileto",
-    "descripcion": "alsa banca - fileto",
-    "precio": "$6.000",
+    "nombre": "salsa blanca",
+    "descripcion": "alsa blanca",
     "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "SALSAS"
+    "categoria": "SALSAS",
+    "precio": "6.000"
+  },
+  {
+    "nombre": "fileto",
+    "descripcion": "fileto",
+    "imagen": "img/tarta_brocoli.jpg",
+    "categoria": "SALSAS",
+    "precio": "6.000"
   },
   {
     "nombre": "Alfredo Pollo",
-    "descripcion": "salsa banca con Pollo",
-    "precio": "$7.500",
+    "descripcion": "salsa blanca con Pollo",
     "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "SALSAS"
+    "categoria": "SALSAS",
+    "precio": "7.500"
   },
   {
     "nombre": "Alfredo langostinos",
-    "descripcion": "salsa banca con langostinos",
-    "precio": "$9.500",
+    "descripcion": "salsa blanca con langostinos",
     "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "SALSAS"
+    "categoria": "SALSAS",
+    "precio": "9.500"
   },
   {
     "nombre": "Boloñesa",
@@ -708,45 +765,45 @@
   },
   {
     "nombre": "Pollo (pechuga)",
-    "descripcion": "Con frita, pure, esnsalada o arroz",
-    "precio": "19500",
+    "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/Pechuga.jpg",
-    "categoria": "GRILL"
+    "categoria": "GRILL",
+    "precio": "19500"
   },
   {
     "nombre": "Matambre de cerdo",
-    "descripcion": "Con frita, pure, esnsalada o arroz",
-    "precio": "22000",
+    "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/Matam.jpg",
-    "categoria": "GRILL"
+    "categoria": "GRILL",
+    "precio": "22000"
   },
   {
     "nombre": "Bife de chorizo",
-    "descripcion": "Con frita, pure, esnsalada o arroz",
-    "precio": "28.000",
+    "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/20250815_151841.jpg",
-    "categoria": "GRILL"
+    "categoria": "GRILL",
+    "precio": "28.000"
   },
   {
     "nombre": "Bife de lomo",
-    "descripcion": "Con frita, pure, esnsalada o arroz",
-    "precio": "32000",
+    "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/IMG-20250816-WA0008.jpg",
-    "categoria": "GRILL"
+    "categoria": "GRILL",
+    "precio": "32000"
   },
   {
     "nombre": "Salmón rosado",
-    "descripcion": "Con frita, pure, esnsalada o arroz",
-    "precio": "$32.000",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "GRILL"
+    "descripcion": "Con frita, pure, ensalada o arroz",
+    "imagen": "img/Salmón.jpg",
+    "categoria": "GRILL",
+    "precio": "32.000"
   },
   {
     "nombre": "Pollo (pechuga)",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "$21.500",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "GRILL Especiales"
+    "imagen": "img/Espepollo.jpg",
+    "categoria": "GRILL Especiales",
+    "precio": "21.500"
   },
   {
     "nombre": "Matambre de cerdo",
@@ -758,9 +815,9 @@
   {
     "nombre": "Bife de chorizo",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "28.000",
-    "imagen": "img/20250815_151904.jpg",
-    "categoria": "GRILL Especiales"
+    "imagen": "img//Bifepapa.jpg",
+    "categoria": "GRILL Especiales",
+    "precio": "28.000"
   },
   {
     "nombre": "Bife de lomo",
@@ -772,14 +829,14 @@
   {
     "nombre": "Salmón rosado",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "$34.000",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "GRILL Especiales"
+    "imagen": "img/Blu.jpg",
+    "categoria": "GRILL Especiales",
+    "precio": "34.000"
   },
   {
     "nombre": "NUGGETS",
     "descripcion": "DE POLLO CON PAPAS O PURE",
-    "precio": "$17.000",
+    "precio": "17.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "MENU KIDS"
   },
@@ -793,7 +850,7 @@
   {
     "nombre": "Milanesa",
     "descripcion": "DE CARNE CON PAPAS O PURE",
-    "precio": "$17.000",
+    "precio": "17.000",
     "imagen": "img/Menukit.jpg",
     "categoria": "MENU KIDS"
   },
@@ -926,21 +983,21 @@
   {
     "nombre": "BROWNIE TIBIO",
     "descripcion": "Jamón crudo, jamón cocido, queso roquefort, queso tybo, tomates cherries, frutos secos.Incluye dos porrones de Stella.",
-    "precio": "$12.500",
+    "precio": "12.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "POSTRES"
   },
   {
     "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Con salsa de americano y dulce de leche",
-    "precio": "$48.000",
+    "precio": "48.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "PICADAS"
   },
   {
     "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Pollo rebozado, bastones de muzarella, rabas y papas fritas.Incluye dos porrones de Stella",
-    "precio": "$40.000",
+    "precio": "40.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "PICADAS"
   },
@@ -954,63 +1011,63 @@
   {
     "nombre": "STELLA ARTOIS (410cc - Porrón)",
     "descripcion": "porron",
-    "precio": "$7.500",
+    "precio": "7.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "CERVEZAS"
   },
   {
     "nombre": "CORONA (Porrón)",
     "descripcion": "porron",
-    "precio": "$7.500",
+    "precio": "7.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "CERVEZAS"
   },
   {
     "nombre": "Jack Daniel’s",
     "descripcion": "Jack Daniel’s",
-    "precio": "$13.500",
+    "precio": "13.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "Johnny Walker Black",
     "descripcion": "Johnny Walker Black",
-    "precio": "$14.500",
+    "precio": "14.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "JJohnny Walker Red",
     "descripcion": "Johnny Walker Red",
-    "precio": "$12.500",
+    "precio": "12.500",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "Licor Baileys",
     "descripcion": "Licor Baileys",
-    "precio": "$11.000",
+    "precio": "11.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "Fernet con Coca-Cola",
     "descripcion": "Fernet con Coca-Cola",
-    "precio": "$11.000",
+    "precio": "11.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "Gin Tonic Beefeater",
     "descripcion": "Gin Tonic Beefeater",
-    "precio": "$11.000",
+    "precio": "11.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
   {
     "nombre": "Botella de Gancia",
     "descripcion": "Botella de Gancia",
-    "precio": "$9.000",
+    "precio": "9.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "TRAGOS"
   },
@@ -1031,56 +1088,56 @@
   {
     "nombre": "HAPPY HOUR",
     "descripcion": "Aperol Spritz o naranja todos los dias de 18 a20:30",
-    "precio": "$....",
+    "precio": "0000....",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "HAPPY HOUR"
   },
   {
     "nombre": "Trumpeter Malbec",
     "descripcion": "Trumpeter Malbec (750cc) ",
-    "precio": "$25.000",
+    "precio": "25.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BODEGA RUTINI - LA RURAL"
   },
   {
     "nombre": "Trumpeter Cabernet",
     "descripcion": "Trumpeter Cabernet (750cc)",
-    "precio": "$25.000",
+    "precio": "25.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BODEGA RUTINI - LA RURAL"
   },
   {
     "nombre": "JRutini Malbec-Cabernet Franc",
     "descripcion": "Rutini Malbec-Cabernet Franc(750cc)",
-    "precio": "$36.000",
+    "precio": "36.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BODEGA RUTINI - LA RURAL"
   },
   {
     "nombre": "Portillo Malbec",
     "descripcion": "JPortillo Malbec (750cc)",
-    "precio": "$19.000",
+    "precio": "19.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BODEGA SALENTEIN"
   },
   {
     "nombre": "Salentein Reserva Cabernet Sauvignon",
     "descripcion": "Salentein Reserva Cabernet Sauvignon (750cc)",
-    "precio": "$30.000",
+    "precio": "30.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BODEGA SALENTEIN"
   },
   {
     "nombre": "Trumpeter Sauvignon Blanc",
     "descripcion": "STrumpeter Sauvignon Blanc (750cc)",
-    "precio": "$25.000",
+    "precio": "25.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BLANCOS"
   },
   {
     "nombre": "Portillo Chardonnay",
     "descripcion": "Portillo Chardonnay (750cc)",
-    "precio": "$19.000",
+    "precio": "19.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "VINOS BLANCOS"
   },
@@ -1094,36 +1151,36 @@
   {
     "nombre": "Portillo Rosé Malbec",
     "descripcion": "Portillo Rosé Malbec (Vino fresco y fácil de beber)",
-    "precio": "$19.000",
+    "precio": "19.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "ROSÉ vino"
   },
   {
     "nombre": "Champagne Chandon",
     "descripcion": "Champagne Chandon (187cc)",
-    "precio": "$15.000",
+    "precio": "15.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "ESPUMANTES"
   },
   {
     "nombre": "Champagne Salentein Brut Nature",
     "descripcion": "Champagne Salentein Brut Nature",
-    "precio": "$32.000",
+    "precio": "32.000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "ESPUMANTES"
   },
   {
-    "nombre": "Champagne Blanc de Blancs (Salentein)",
-    "descripcion": "Champagne Blanc de Blancs (Salentein)",
-    "precio": "$40.000",
-    "imagen": "img/tarta_brocoli.jpg",
-    "categoria": "ESPUMANTES"
+    "nombre": "Champagne Blanc de Blancs(Salentein)",
+    "descripcion": "Champagne Blanc de Blancs(Salentein)",
+    "categoria": "ESPUMANTES",
+    "precio": "40.000",
+    "imagen": "img/jpg"
   },
   {
-    "nombre": "MENU del DIA o SUJERENCIAS",
-    "descripcion": "PLATOS POR DIAS",
-    "precio": "80000",
-    "imagen": "img/img/.jpg",
-    "categoria": "MENU del DIA o SUJERENCIAS"
+    "nombre": "MENU del DIA o SUGERENCIAS",
+    "descripcion": "menú del día platón + bebida +postre o café, Sugerencia solo es plato",
+    "categoria": "MENU del DIA o SUGERENCIAS",
+    "precio": "00000",
+    "imagen": "img/img/.jpg"
   }
 ]
