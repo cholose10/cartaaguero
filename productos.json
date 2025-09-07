@@ -311,14 +311,14 @@
     "nombre": "Porción de tostadas",
     "descripcion": "Porción de tostadas, blancas o de salvado con semillas",
     "precio": "3200",
-    "imagen": "Tosta.jpg",
+    "imagen": "img/Tosta.jpg",
     "categoria": "🍰 Pastelería"
   },
   {
     "nombre": "Porción de mermelada",
     "descripcion": "Porción de mermelada, manteca, queso blanco, miel or aderezo",
     "precio": "1700",
-    "imagen": "Dip.jpg",
+    "imagen": "img/Dip.jpg",
     "categoria": "🍰 Pastelería"
   },
   {
