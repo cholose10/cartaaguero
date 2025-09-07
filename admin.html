@@ -10,12 +10,12 @@
     :root{
       --brand:#8c6954; --brand-dark:#6b4e3d; --ink:#5a3825; --paper:#f7f3f0;
     }
-    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); }
+    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); background: var(--paper);}
     h1 { color: var(--ink); margin-bottom: 10px; }
     .row { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items: start; }
     @media (max-width: 900px){ .row{ grid-template-columns: 1fr; } }
 
-    form { background: var(--paper); padding: 15px; border-radius: 10px; }
+    form { background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
     label { font-weight: 600; font-size: 0.9rem; }
     input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #ccc; border-radius: 6px; }
     textarea{ min-height: 72px; resize: vertical; }
@@ -24,10 +24,10 @@
     button:hover { background: var(--brand-dark); }
 
     .toolbar { margin: 10px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    #tokenInput { width: 320px; }
+    #tokenInput { width: 300px; }
 
     .search-wrap { display:inline-flex; align-items:center; gap:8px; }
-    #searchBox { padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 6px; }
+    #searchBox { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 6px; }
 
     table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
@@ -53,15 +53,13 @@
 <h1>Admin Carta Cartatilo</h1>
 
 <div class="toolbar">
-  <label for="tokenInput">Token de GitHub:</label>
+  <label for="tokenInput">Token GitHub:</label>
   <input type="password" id="tokenInput" placeholder="Pegá tu token aquí">
   <button onclick="exportExcel()">📤 Exportar Excel</button>
-
   <input type="file" id="importFile" accept=".xlsx" style="display:none" onchange="importExcel(event)">
   <label for="importFile"><button type="button">📥 Importar Excel</button></label>
-
   <span class="search-wrap">
-    <input type="text" id="searchBox" placeholder="🔎 Buscar por nombre o categoría" oninput="renderTable()">
+    <input type="text" id="searchBox" placeholder="🔎 Buscar producto" oninput="renderTable()">
     <button type="button" onclick="resetSearch()">Reset</button>
   </span>
 </div>
@@ -79,7 +77,7 @@
     <label>Precio (solo número o con $):</label>
     <input type="text" id="precio" required>
 
-    <label>Imagen (solo nombre de archivo, ej: cafe.jpg):</label>
+    <label>Imagen (ej: cafe.jpg):</label>
     <input type="text" id="imagen" required placeholder="ej: cafe.jpg">
 
     <label>Categoría:</label>
@@ -122,16 +120,20 @@
 
 <script>
 const USERNAME = "cholose10";
-const REPO = "cartatilo";   // 👈 Ahora apunta al repo correcto
+const REPO = "cartatilo";   // 👈 importante, usa cartatilo
 const FILE_PATH = "productos.json";
 const BRANCH = "main";
 let productos = [];
 
-// --------- Cargar productos desde GitHub ----------
+// --------- Cargar productos ----------
 async function loadProducts() {
-  const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
-  productos = await res.json();
-  renderTable();
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
+    productos = await res.json();
+    renderTable();
+  } catch (e) {
+    alert("Error cargando productos.json");
+  }
 }
 loadProducts();
 
@@ -146,16 +148,12 @@ function updatePreview() {
   document.getElementById('prevNombre').textContent = nombre || '—';
   document.getElementById('prevDescripcion').textContent = descripcion || '—';
   document.getElementById('prevCategoria').textContent = categoria || '—';
-  const showPrice = (precio.startsWith('$') ? precio : (precio ? '$' + precio : '—'));
-  document.getElementById('prevPrecio').textContent = showPrice;
-
-  const src = imagen ? ('img/' + imagen) : '';
-  document.getElementById('prevImg').src = src;
+  document.getElementById('prevPrecio').textContent = precio ? (precio.startsWith('$') ? precio : '$'+precio) : '—';
+  document.getElementById('prevImg').src = imagen ? ('img/' + imagen) : '';
 }
 ['nombre','descripcion','precio','imagen','categoria'].forEach(id=>{
   document.getElementById(id).addEventListener('input', updatePreview);
 });
-updatePreview();
 
 // --------- Render tabla ----------
 function renderTable() {
@@ -189,11 +187,7 @@ function renderTable() {
     tbody.appendChild(tr);
   });
 }
-
-function resetSearch(){
-  document.getElementById('searchBox').value = '';
-  renderTable();
-}
+function resetSearch(){ document.getElementById('searchBox').value=''; renderTable(); }
 
 // --------- Guardar ----------
 document.getElementById("productForm").addEventListener("submit", async function(e) {
@@ -213,7 +207,6 @@ document.getElementById("productForm").addEventListener("submit", async function
     productos[index] = nuevo;
     document.getElementById("editIndex").value = "";
   }
-
   await saveToGitHub();
   renderTable();
   this.reset();
@@ -229,9 +222,7 @@ function editProduct(realIndex) {
   document.getElementById("imagen").value = (p.imagen||'').replace(/^img\//,'');
   document.getElementById("categoria").value = p.categoria || '';
   document.getElementById("editIndex").value = realIndex;
-
   updatePreview();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // --------- Eliminar ----------
@@ -255,10 +246,9 @@ async function saveToGitHub() {
       const fileData = await getRes.json();
       sha = fileData.sha;
     }
-  } catch(e) { }
+  } catch(e) {}
 
   const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
-
   const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
     method: "PUT",
     headers: {
@@ -318,6 +308,5 @@ async function importExcel(event) {
   reader.readAsArrayBuffer(file);
 }
 </script>
-
 </body>
 </html>
