@@ -1,312 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Carta Cartatilo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- XLSX para exportar/importar Excel -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta Tilo Café</title>
   <style>
-    :root{
-      --brand:#8c6954; --brand-dark:#6b4e3d; --ink:#5a3825; --paper:#f7f3f0;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f6f6f6;
+      color: #45270a;
     }
-    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); background: var(--paper);}
-    h1 { color: var(--ink); margin-bottom: 10px; }
-    .row { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items: start; }
-    @media (max-width: 900px){ .row{ grid-template-columns: 1fr; } }
-
-    form { background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
-    label { font-weight: 600; font-size: 0.9rem; }
-    input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #ccc; border-radius: 6px; }
-    textarea{ min-height: 72px; resize: vertical; }
-
-    button { padding: 8px 12px; margin: 5px 6px 5px 0; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
-    button:hover { background: var(--brand-dark); }
-
-    .toolbar { margin: 10px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    #tokenInput { width: 300px; }
-
-    .search-wrap { display:inline-flex; align-items:center; gap:8px; }
-    #searchBox { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 6px; }
-
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #f0e8e3; }
-    td img { max-width: 60px; border-radius: 6px; display:block; }
-
-    .actions button { margin-right: 5px; }
-
-    /* Vista previa */
-    .preview { background: #fff; border: 1px solid #e8e2de; border-radius: 12px; padding: 12px; }
-    .preview h3{ margin: 0 0 8px; font-size: 1.05rem; }
-    .card { border: 1px solid #e6ded9; border-radius: 10px; overflow: hidden; }
-    .card img { width: 100%; height: 180px; object-fit: cover; background:#faf7f5; }
-    .card-body { padding: 10px; }
-    .prev-name { font-weight: 700; margin-bottom: 4px; }
-    .prev-desc { font-size: 0.92rem; margin-bottom: 6px; color:#3d2a1e; }
-    .prev-meta { display:flex; justify-content: space-between; font-size: 0.9rem; }
-    .prev-price { font-weight: 700; }
+    header {
+      background: #806250;
+    }
+    .banner-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .banner {
+      text-align: center;
+      padding: 10px;
+      font-size: 1.5rem;
+      color: #45270a;
+    }
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+    .categories button {
+      padding: 10px 20px;
+      background-color: #8c6954;
+      color: #fffefe;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .categories button:hover {
+      background-color: #6b4e3d;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .item {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.2s ease;
+    }
+    .item:hover {
+      transform: scale(1.02);
+    }
+    .item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .item h3 {
+      margin: 10px;
+    }
+    .item p {
+      margin: 0 10px 10px;
+    }
+    .item .price {
+      font-weight: bold;
+      color: #000;
+    }
   </style>
 </head>
 <body>
+  <!-- FOTO GRANDE ARRIBA -->
+  <header>
+    <img src="img/logo1.png" alt="Tilo Café" class="banner-img" />
+  </header>
 
-<h1>Admin Carta Cartatilo</h1>
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-<div class="toolbar">
-  <label for="tokenInput">Token GitHub:</label>
-  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí">
-  <button onclick="exportExcel()">📤 Exportar Excel</button>
-  <input type="file" id="importFile" accept=".xlsx" style="display:none" onchange="importExcel(event)">
-  <label for="importFile"><button type="button">📥 Importar Excel</button></label>
-  <span class="search-wrap">
-    <input type="text" id="searchBox" placeholder="🔎 Buscar producto" oninput="renderTable()">
-    <button type="button" onclick="resetSearch()">Reset</button>
-  </span>
-</div>
+  <!-- Botones de categorías -->
+  <div class="categories" id="category-buttons"></div>
 
-<div class="row">
-  <!-- Formulario -->
-  <form id="productForm">
-    <input type="hidden" id="editIndex" value="">
-    <label>Nombre:</label>
-    <input type="text" id="nombre" required>
+  <!-- Lista de productos -->
+  <div class="item-list" id="product-list"></div>
 
-    <label>Descripción:</label>
-    <textarea id="descripcion" required></textarea>
+  <script>
+    let productos = [];
 
-    <label>Precio (solo número o con $):</label>
-    <input type="text" id="precio" required>
+    // Cargar productos desde productos.json
+    fetch('productos.json')
+      .then(response => response.json())
+      .then(data => {
+        productos = data;
+        renderCategories();
+        renderProducts('Todos');
+      });
 
-    <label>Imagen (ej: cafe.jpg):</label>
-    <input type="text" id="imagen" required placeholder="ej: cafe.jpg">
-
-    <label>Categoría:</label>
-    <input type="text" id="categoria" required>
-
-    <button type="submit">Guardar Producto</button>
-  </form>
-
-  <!-- Vista previa -->
-  <div class="preview">
-    <h3>Vista previa</h3>
-    <div class="card">
-      <img id="prevImg" alt="Vista previa">
-      <div class="card-body">
-        <div class="prev-name" id="prevNombre">—</div>
-        <div class="prev-desc" id="prevDescripcion">—</div>
-        <div class="prev-meta">
-          <div class="prev-cat" id="prevCategoria">—</div>
-          <div class="prev-price" id="prevPrecio">—</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<h2>Productos actuales</h2>
-<table id="productsTable">
-  <thead>
-    <tr>
-      <th>Imagen</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
-      <th>Categoría</th>
-      <th>Precio</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<script>
-const USERNAME = "cholose10";
-const REPO = "cartatilo";   // 👈 importante, usa cartatilo
-const FILE_PATH = "productos.json";
-const BRANCH = "main";
-let productos = [];
-
-// --------- Cargar productos ----------
-async function loadProducts() {
-  try {
-    const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
-    productos = await res.json();
-    renderTable();
-  } catch (e) {
-    alert("Error cargando productos.json");
-  }
-}
-loadProducts();
-
-// --------- Vista previa ----------
-function updatePreview() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const descripcion = document.getElementById('descripcion').value.trim();
-  const categoria = document.getElementById('categoria').value.trim();
-  const precio = document.getElementById('precio').value.trim();
-  const imagen = document.getElementById('imagen').value.trim();
-
-  document.getElementById('prevNombre').textContent = nombre || '—';
-  document.getElementById('prevDescripcion').textContent = descripcion || '—';
-  document.getElementById('prevCategoria').textContent = categoria || '—';
-  document.getElementById('prevPrecio').textContent = precio ? (precio.startsWith('$') ? precio : '$'+precio) : '—';
-  document.getElementById('prevImg').src = imagen ? ('img/' + imagen) : '';
-}
-['nombre','descripcion','precio','imagen','categoria'].forEach(id=>{
-  document.getElementById(id).addEventListener('input', updatePreview);
-});
-
-// --------- Render tabla ----------
-function renderTable() {
-  const search = document.getElementById("searchBox").value.toLowerCase();
-  const tbody = document.querySelector("#productsTable tbody");
-  tbody.innerHTML = "";
-
-  const items = productos
-    .map((p, i) => ({ p, i }))
-    .filter(({p}) =>
-      (p.nombre||'').toLowerCase().includes(search) ||
-      (p.categoria||'').toLowerCase().includes(search)
-    );
-
-  items.forEach(({p, i}) => {
-    const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-      ? String(p.precio).trim()
-      : ('$' + (p.precio ?? ''));
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td><img src="${p.imagen}" alt="${p.nombre}"></td>
-      <td>${p.nombre||''}</td>
-      <td>${p.descripcion||''}</td>
-      <td>${p.categoria||''}</td>
-      <td>${priceDisplay}</td>
-      <td class="actions">
-        <button onclick="editProduct(${i})">Editar</button>
-        <button onclick="deleteProduct(${i})">Eliminar</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-function resetSearch(){ document.getElementById('searchBox').value=''; renderTable(); }
-
-// --------- Guardar ----------
-document.getElementById("productForm").addEventListener("submit", async function(e) {
-  e.preventDefault();
-  const index = document.getElementById("editIndex").value;
-  const nuevo = {
-    nombre: document.getElementById("nombre").value.trim(),
-    descripcion: document.getElementById("descripcion").value.trim(),
-    imagen: "img/" + document.getElementById("imagen").value.trim(),
-    categoria: document.getElementById("categoria").value.trim(),
-    precio: document.getElementById("precio").value.trim()
-  };
-
-  if (index === "") {
-    productos.push(nuevo);
-  } else {
-    productos[index] = nuevo;
-    document.getElementById("editIndex").value = "";
-  }
-  await saveToGitHub();
-  renderTable();
-  this.reset();
-  updatePreview();
-});
-
-// --------- Editar ----------
-function editProduct(realIndex) {
-  const p = productos[realIndex];
-  document.getElementById("nombre").value = p.nombre || '';
-  document.getElementById("descripcion").value = p.descripcion || '';
-  document.getElementById("precio").value = p.precio || '';
-  document.getElementById("imagen").value = (p.imagen||'').replace(/^img\//,'');
-  document.getElementById("categoria").value = p.categoria || '';
-  document.getElementById("editIndex").value = realIndex;
-  updatePreview();
-}
-
-// --------- Eliminar ----------
-async function deleteProduct(realIndex) {
-  if (confirm("¿Eliminar este producto?")) {
-    productos.splice(realIndex, 1);
-    await saveToGitHub();
-    renderTable();
-  }
-}
-
-// --------- Guardar en GitHub ----------
-async function saveToGitHub() {
-  const TOKEN = document.getElementById("tokenInput").value.trim();
-  if (!TOKEN) { alert("Pegá tu token de GitHub primero."); throw new Error("No token"); }
-
-  let sha = undefined;
-  try {
-    const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
-    if (getRes.ok) {
-      const fileData = await getRes.json();
-      sha = fileData.sha;
+    // Renderizar categorías dinámicamente
+    function renderCategories() {
+      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
+      const container = document.getElementById('category-buttons');
+      container.innerHTML = '';
+      categorias.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.onclick = () => renderProducts(cat);
+        container.appendChild(btn);
+      });
     }
-  } catch(e) {}
 
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
-  const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `token ${TOKEN}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: "Actualizar productos",
-      content: content,
-      sha: sha,
-      branch: BRANCH
-    })
-  });
-
-  if (!putRes.ok) {
-    const err = await putRes.text();
-    alert("Error guardando en GitHub:\n" + err);
-    throw new Error(err);
-  }
-}
-
-// --------- Exportar Excel ----------
-function exportExcel() {
-  const data = productos.map(p => ({
-    "Nombre": p.nombre || "",
-    "Descripción": p.descripcion || "",
-    "Categoría": p.categoria || "",
-    "Precio": (p.precio || "")
-  }));
-  const ws = XLSX.utils.json_to_sheet(data, { skipHeader:false });
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Productos");
-  ws['!cols'] = [{wch:26},{wch:50},{wch:24},{wch:12}];
-  XLSX.writeFile(wb, "productos.xlsx");
-}
-
-// --------- Importar Excel ----------
-async function importExcel(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = async (e) => {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, { type: "array" });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const imported = XLSX.utils.sheet_to_json(sheet);
-    productos = imported.map(r => ({
-      nombre: r["Nombre"] ?? "",
-      descripcion: r["Descripción"] ?? "",
-      categoria: r["Categoría"] ?? "",
-      precio: r["Precio"] ?? "",
-      imagen: "img/default.jpg"
-    }));
-    await saveToGitHub();
-    renderTable();
-  };
-  reader.readAsArrayBuffer(file);
-}
-</script>
+    // Renderizar productos
+    function renderProducts(categoria) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
+      filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
+        item.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <p class="price">${priceDisplay}</p>
+        `;
+        container.appendChild(item);
+      });
+    }
+  </script>
 </body>
 </html>
