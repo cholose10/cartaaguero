@@ -569,7 +569,7 @@
   {
     "nombre": "ESPINACA carne o pollo",
     "descripcion": "Crema de espinaca y queso gratinado Acompañadas con puré, fideos, ensalada o papas fritas",
-    "imagen": "img/Espi.jpg",
+    "imagen": "img/Esp.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga",
     "precio": "21000"
   },
@@ -857,7 +857,7 @@
     "nombre": "Spaghetti o ñoquis",
     "descripcion": "fileto o crema",
     "precio": "17000",
-    "imagen": "img/20250819_123453.jpg",
+    "imagen": "img/Ñoquiskit.jpg",
     "categoria": "👶MENU KIDS"
   },
   {
@@ -906,7 +906,7 @@
     "nombre": "Entraña CRISPY",
     "descripcion": "Rebozado crujiente con ensalada de papa, huevo y mayonesa",
     "precio": "28000",
-    "imagen": "img/20250816_132244.jpg",
+    "imagen": "img/Tari.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
