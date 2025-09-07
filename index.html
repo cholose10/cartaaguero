@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carta Cartatilo</title>
+  <title>Carta Tilo Café</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -81,54 +81,60 @@
   </style>
 </head>
 <body>
-  <!-- LOGO ARRIBA -->
+  <!-- FOTO GRANDE ARRIBA -->
   <header>
-    <img src="img/Logo99.jpg" alt="Cartatilo" class="banner-img" />
+    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
-  <div class="banner">¡Bienvenidos a Cartatilo!</div>
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
+  <!-- Botones de categorías -->
   <div class="categories" id="category-buttons"></div>
+
+  <!-- Lista de productos -->
   <div class="item-list" id="product-list"></div>
 
   <script>
     let productos = [];
 
-    // Cargar productos directamente del repo cartatilo
-    fetch("https://raw.githubusercontent.com/cholose10/cartatilo/main/productos.json")
+    // Cargar productos desde productos.json
+    fetch('productos.json')
       .then(response => response.json())
       .then(data => {
         productos = data;
         renderCategories();
-        renderProducts("Todos");
+        renderProducts('Todos');
       });
 
-    // Crear botones de categorías dinámicamente
+    // Renderizar categorías dinámicamente
     function renderCategories() {
-      const categorias = ["Todos", ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById("category-buttons");
-      container.innerHTML = "";
+      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
+      const container = document.getElementById('category-buttons');
+      container.innerHTML = '';
       categorias.forEach(cat => {
-        const btn = document.createElement("button");
+        const btn = document.createElement('button');
         btn.textContent = cat;
         btn.onclick = () => renderProducts(cat);
         container.appendChild(btn);
       });
     }
 
-    // Renderizar productos por categoría
+    // Renderizar productos
     function renderProducts(categoria) {
-      const container = document.getElementById("product-list");
-      container.innerHTML = "";
-      const filtrados = categoria === "Todos" ? productos : productos.filter(p => p.categoria === categoria);
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
       filtrados.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "item";
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
         item.innerHTML = `
           <img src="${p.imagen}" alt="${p.nombre}">
           <h3>${p.nombre}</h3>
           <p>${p.descripcion}</p>
-          <p class="price">${p.precio}</p>
+          <p class="price">${priceDisplay}</p>
         `;
         container.appendChild(item);
       });
