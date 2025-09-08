@@ -731,7 +731,7 @@
     "nombre": "salsa blanca",
     "descripcion": "Salsa blanca",
     "precio": "6000",
-    "imagen": "img/tarta_brocoli.jpg",
+    "imagen": "img/20250905_131302.jpg",
     "categoria": "🥫SALSAS"
   },
   {
@@ -744,14 +744,14 @@
   {
     "nombre": "Alfredo Pollo",
     "descripcion": "salsa blanca con Pollo",
-    "imagen": "img/tarta_brocoli.jpg",
+    "imagen": "img/Frepollo.jpg",
     "categoria": "🥫SALSAS",
     "precio": "7500"
   },
   {
     "nombre": "Alfredo langostinos",
     "descripcion": "salsa blanca con langostinos",
-    "imagen": "img/20250905_131302.jpg",
+    "imagen": "img/Frelang.jpg",
     "categoria": "🥫SALSAS",
     "precio": "9500"
   },
@@ -1095,7 +1095,7 @@
     "nombre": "HAPPY HOUR",
     "descripcion": "Aperol Spritz o naranja todos los dias de 18 a20:30",
     "precio": "0",
-    "imagen": "img/tarta_brocoli.jpg",
+    "imagen": "img/Api.jpg",
     "categoria": "⏰HAPPY HOUR"
   },
   {
