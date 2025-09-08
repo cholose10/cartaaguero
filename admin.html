@@ -1,144 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carta Tilo Café</title>
+  <meta charset="UTF-8">
+  <title>Admin Carta Cartatilo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f6f6f6;
-      color: #45270a;
-    }
-    header {
-      background: #806250;
-    }
-    .banner-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    .banner {
-      text-align: center;
-      padding: 10px;
-      font-size: 1.5rem;
-      color: #45270a;
-    }
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-    }
-    .categories button {
-      padding: 10px 20px;
-      background-color: #8c6954;
-      color: #fffefe;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .categories button:hover {
-      background-color: #6b4e3d;
-    }
-    .item-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
-    .item {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      width: 280px;
-      transition: transform 0.2s ease;
-    }
-    .item:hover {
-      transform: scale(1.02);
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .item h3 {
-      margin: 10px;
-    }
-    .item p {
-      margin: 0 10px 10px;
-    }
-    .item .price {
-      font-weight: bold;
-      color: #000;
-    }
+    :root { --brand:#8c6954; --brand-dark:#6b4e3d; --ink:#5a3825; --paper:#f7f3f0; }
+    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); background: var(--paper); }
+    h1 { color: var(--ink); margin-bottom: 10px; }
+    .toolbar, form, table { background: #fff; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    input[type="text"], input[type="password"], textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 8px 12px; background: var(--brand); color: white; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: var(--brand-dark); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background: #f0e8e3; }
+    td img { max-width: 50px; border-radius: 4px; }
   </style>
 </head>
 <body>
-  <!-- FOTO GRANDE ARRIBA -->
-  <header>
-    <img src="img/logo1.png" alt="Tilo Café" class="banner-img" />
-  </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
+<h1>Admin Carta Cartatilo</h1>
 
-  <!-- Botones de categorías -->
-  <div class="categories" id="category-buttons"></div>
+<div class="toolbar">
+  <label>Token GitHub:</label>
+  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí">
+  <button onclick="exportExcel()">Exportar Excel</button>
+  <label><button type="button" onclick="triggerImport()">Importar Excel</button><input type="file" id="importFile" accept=".xlsx" style="display:none" onchange="importExcel(event)"></label>
+  <input type="text" id="searchBox" placeholder="Buscar..." oninput="renderTable()" style="margin-left:auto; padding:8px;"/>
+  <button onclick="resetSearch()">Reset</button>
+</div>
 
-  <!-- Lista de productos -->
-  <div class="item-list" id="product-list"></div>
+<form id="productForm">
+  <input type="hidden" id="editIndex">
+  <label>Nombre:</label><input type="text" id="nombre" required>
+  <label>Descripción:</label><textarea id="descripcion" required></textarea>
+  <label>Precio:</label><input type="text" id="precio" required>
+  <label>Imagen (ej: cafe.jpg):</label><input type="text" id="imagen" required>
+  <label>Categoría:</label><input type="text" id="categoria" required>
+  <button type="submit">Guardar</button>
+</form>
 
-  <script>
-    let productos = [];
+<table>
+  <thead>
+    <tr><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
+  </thead>
+  <tbody id="productsTable"></tbody>
+</table>
 
-    // Cargar productos desde productos.json
-    fetch('productos.json')
-      .then(response => response.json())
-      .then(data => {
-        productos = data;
-        renderCategories();
-        renderProducts('Todos');
-      });
+<script>
+const USERNAME = "cholose10";
+const REPO = "cartatilo";  // Apunta al repo correcto
+const FILE_PATH = "productos.json";
+const BRANCH = "main";
+let productos = [];
 
-    // Renderizar categorías dinámicamente
-    function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById('category-buttons');
-      container.innerHTML = '';
-      categorias.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
-        container.appendChild(btn);
-      });
+// Load products
+async function loadProducts() {
+  const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
+  productos = await res.json();
+  renderTable();
+}
+loadProducts();
+
+// Render table
+function renderTable() {
+  const filter = document.getElementById('searchBox').value.toLowerCase();
+  const tbody = document.getElementById('productsTable');
+  tbody.innerHTML = '';
+  productos.forEach((produto, index) => {
+    if (produto.nombre.toLowerCase().includes(filter) || produto.categoria.toLowerCase().includes(filter)) {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><img src="${produto.imagen}"></td>
+        <td>${produto.nombre}</td>
+        <td>${produto.descripcion}</td>
+        <td>${produto.categoria}</td>
+        <td>${produto.precio}</td>
+        <td><button onclick="editProduct(${index})">Editar</button><button onclick="deleteProduct(${index})">Eliminar</button></td>
+      `;
+      tbody.appendChild(tr);
     }
+  });
+}
 
-    // Renderizar productos
-    function renderProducts(categoria) {
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
-      filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-          ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <p class="price">${priceDisplay}</p>
-        `;
-        container.appendChild(item);
-      });
-    }
-  </script>
+function resetSearch() {
+  document.getElementById('searchBox').value = '';
+  renderTable();
+}
+
+// Preview logic...
+
+// Save to GitHub
+async function saveToGitHub() {
+  const token = document.getElementById('tokenInput').value.trim();
+  if (!token) { alert("Pegá tu token"); return; }
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
+  const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
+  const sha = getRes.ok ? (await getRes.json()).sha : null;
+
+  const res = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
+    method: 'PUT',
+    headers: {"Authorization": `token ${token}`, "Content-Type": "application/json"},
+    body: JSON.stringify({message: "Actualizar productos", content, sha, branch: BRANCH})
+  });
+
+  if (!res.ok) alert("Error guardando. Confirmá token y permisos.");
+  else { alert("Guardado exitoso"); loadProducts(); }
+}
+
+// Edit, delete, import/export handlers...
+
+// Trigger import file
+function triggerImport() { document.getElementById('importFile').click(); }
+</script>
 </body>
 </html>
