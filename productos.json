@@ -121,14 +121,14 @@
   {
     "nombre": "Medialunas",
     "descripcion": "3 medialunas caseras",
-    "precio": "9000",
+    "precio": "9500",
     "imagen": "img/Promoluna.jpg",
     "categoria": "☕ 🥐Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
   {
     "nombre": "TOSTADAS",
     "descripcion": "Pan negro o blanco con queso crema y mermelada casera",
-    "precio": "9500",
+    "precio": "9700",
     "imagen": "img/Promotos1.jpg",
     "categoria": "☕ 🥐Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
@@ -198,14 +198,14 @@
   {
     "nombre": "Medialunas",
     "descripcion": "Medialunas 100% manteca",
-    "precio": "2200",
+    "precio": "2300",
     "imagen": "img/Luna.jpg",
     "categoria": "🍰 Pastelería"
   },
   {
     "nombre": "factura",
     "descripcion": "Pasteleras o membrillo",
-    "precio": "2200",
+    "precio": "2300",
     "imagen": "img/20250902_085539(1).jpg",
     "categoria": "🍰 Pastelería"
   },
@@ -289,7 +289,7 @@
   {
     "nombre": "Medialuna caliente de jamón y queso",
     "descripcion": "Medialuna caliente de jamón y queso",
-    "precio": "4400",
+    "precio": "4600",
     "imagen": "img/Lujyq.jpg",
     "categoria": "🍰 Pastelería"
   },
@@ -310,14 +310,14 @@
   {
     "nombre": "Porción de tostadas",
     "descripcion": "Porción de tostadas, blancas o de salvado con semillas",
-    "precio": "3200",
+    "precio": "3500",
     "imagen": "img/Tosta.jpg",
     "categoria": "🍰 Pastelería"
   },
   {
     "nombre": "Porción de mermelada",
     "descripcion": "Porción de mermelada, manteca, queso blanco, miel or aderezo",
-    "precio": "2000",
+    "precio": "2500",
     "imagen": "img/Dip.jpg",
     "categoria": "🍰 Pastelería"
   },
