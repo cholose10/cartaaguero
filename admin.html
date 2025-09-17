@@ -24,8 +24,6 @@
     button:hover { background: var(--brand-dark); }
 
     .toolbar { margin: 10px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    #tokenInput { width: 300px; }
-
     .search-wrap { display:inline-flex; align-items:center; gap:8px; }
     #searchBox { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 6px; }
 
@@ -53,8 +51,6 @@
 <h1>Admin Carta Cartatilo</h1>
 
 <div class="toolbar">
-  <label for="tokenInput">Token GitHub:</label>
-  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí">
   <button onclick="exportExcel()">📤 Exportar Excel</button>
   <input type="file" id="importFile" accept=".xlsx" style="display:none" onchange="importExcel(event)">
   <label for="importFile"><button type="button">📥 Importar Excel</button></label>
@@ -120,7 +116,7 @@
 
 <script>
 const USERNAME = "cholose10";
-const REPO = "cartatilo";   // 👈 ahora apunta al repo correcto
+const REPO = "cartatilo";
 const FILE_PATH = "productos.json";
 const BRANCH = "main";
 let productos = [];
@@ -190,7 +186,7 @@ function renderTable() {
 function resetSearch(){ document.getElementById('searchBox').value=''; renderTable(); }
 
 // --------- Guardar ----------
-document.getElementById("productForm").addEventListener("submit", async function(e) {
+document.getElementById("productForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const index = document.getElementById("editIndex").value;
   const nuevo = {
@@ -207,10 +203,13 @@ document.getElementById("productForm").addEventListener("submit", async function
     productos[index] = nuevo;
     document.getElementById("editIndex").value = "";
   }
-  await saveToGitHub();
+
   renderTable();
   this.reset();
   updatePreview();
+
+  // 👇 OJO: Esto ya no guarda en GitHub, solo actualiza en memoria
+  alert("Guardado solo en memoria. Si querés que suba a GitHub automático hay que usar token.");
 });
 
 // --------- Editar ----------
@@ -226,47 +225,10 @@ function editProduct(realIndex) {
 }
 
 // --------- Eliminar ----------
-async function deleteProduct(realIndex) {
+function deleteProduct(realIndex) {
   if (confirm("¿Eliminar este producto?")) {
     productos.splice(realIndex, 1);
-    await saveToGitHub();
     renderTable();
-  }
-}
-
-// --------- Guardar en GitHub ----------
-async function saveToGitHub() {
-  const TOKEN = document.getElementById("tokenInput").value.trim();
-  if (!TOKEN) { alert("Pegá tu token de GitHub primero."); throw new Error("No token"); }
-
-  let sha = undefined;
-  try {
-    const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
-    if (getRes.ok) {
-      const fileData = await getRes.json();
-      sha = fileData.sha;
-    }
-  } catch(e) {}
-
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
-  const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
-    method: "PUT",
-    headers: {
-      "Authorization": `token ${TOKEN}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: "Actualizar productos",
-      content: content,
-      sha: sha,
-      branch: BRANCH
-    })
-  });
-
-  if (!putRes.ok) {
-    const err = await putRes.text();
-    alert("Error guardando en GitHub:\n" + err);
-    throw new Error(err);
   }
 }
 
@@ -286,11 +248,11 @@ function exportExcel() {
 }
 
 // --------- Importar Excel ----------
-async function importExcel(event) {
+function importExcel(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = async (e) => {
+  reader.onload = (e) => {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: "array" });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -302,7 +264,6 @@ async function importExcel(event) {
       precio: r["Precio"] ?? "",
       imagen: "img/default.jpg"
     }));
-    await saveToGitHub();
     renderTable();
   };
   reader.readAsArrayBuffer(file);
