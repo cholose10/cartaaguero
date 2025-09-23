@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carta Cartatilo</title>
+  <title>Carta Tilo Café</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #8888;
+      background: url("img/fondo.jpg") repeat;
+      background-size: cover;
       color: #45270a;
     }
     header {
-      background: #806250;
+      background: rgba(255,255,255,0.9);
     }
     .banner-img {
       width: 100%;
@@ -24,7 +25,11 @@
       text-align: center;
       padding: 10px;
       font-size: 1.5rem;
-      color: #45270a;
+      font-weight: bold;
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      margin: 15px auto;
+      width: fit-content;
     }
     .categories {
       display: flex;
@@ -35,15 +40,16 @@
     }
     .categories button {
       padding: 10px 20px;
-      background-color: #836350;
-      color: #fffefe;
+      background-color: #8c6954;
+      color: #fff;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s;
+      font-size: 1rem;
     }
     .categories button:hover {
-      background-color: #5f4333;
+      background-color: #6b4e3d;
     }
     .item-list {
       display: flex;
@@ -53,9 +59,9 @@
       padding: 20px;
     }
     .item {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
       overflow: hidden;
       width: 280px;
       transition: transform 0.2s ease;
@@ -77,16 +83,18 @@
     .item .price {
       font-weight: bold;
       color: #000;
+      margin: 0 10px 10px;
+      display: block;
     }
   </style>
 </head>
 <body>
   <!-- FOTO GRANDE ARRIBA -->
   <header>
-    <img src="img/Logo99.jpg" alt="Cartatilo" class="banner-img" />
+    <img src="img/logo1.png" alt="Tilo Café" class="banner-img" />
   </header>
 
-  <div class="banner">¡Bienvenidos a Cartatilo!</div>
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
   <!-- Botones de categorías -->
   <div class="categories" id="category-buttons"></div>
@@ -134,7 +142,7 @@
           <img src="${p.imagen}" alt="${p.nombre}">
           <h3>${p.nombre}</h3>
           <p>${p.descripcion}</p>
-          <p class="price">${priceDisplay}</p>
+          <span class="price">${priceDisplay}</span>
         `;
         container.appendChild(item);
       });
