@@ -13,23 +13,48 @@
     }
     body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); background: var(--paper);}
     h1 { color: var(--ink); margin-bottom: 10px; }
-    .toolbar { margin: 10px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    input, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
-    button { padding: 8px 12px; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 8px 12px; margin: 5px 6px 5px 0; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
     button:hover { background: var(--brand-dark); }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-    th, td { border: 1px solid #ddd; padding: 8px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     th { background: #f0e8e3; }
     td img { max-width: 60px; border-radius: 6px; }
+    .preview { background:#fff; padding:10px; border-radius:10px; margin-top:10px; }
+    .search-wrap { margin: 10px 0; }
   </style>
 </head>
 <body>
   <h1>Admin Carta Cartatilo</h1>
 
-  <div class="toolbar">
-    <label>Token GitHub:</label>
-    <input type="password" id="tokenInput" placeholder="Pegá tu token aquí" />
-    <button onclick="loadProducts()">🔄 Cargar productos</button>
+  <label>Token GitHub:</label>
+  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí" />
+
+  <div class="search-wrap">
+    <input type="text" id="searchBox" placeholder="Buscar por nombre o categoría" oninput="renderTable()" />
+  </div>
+
+  <form id="productForm">
+    <input type="hidden" id="editIndex" value="">
+    <label>Nombre:</label>
+    <input type="text" id="nombre" required>
+    <label>Descripción:</label>
+    <textarea id="descripcion" required></textarea>
+    <label>Precio:</label>
+    <input type="number" id="precio" required>
+    <label>Imagen (ej: plato.jpg):</label>
+    <input type="text" id="imagen" required>
+    <label>Categoría:</label>
+    <input type="text" id="categoria" required>
+    <button type="submit">Guardar Producto</button>
+  </form>
+
+  <div class="preview">
+    <h3>Vista previa</h3>
+    <p><b id="prevNombre">—</b></p>
+    <p id="prevDescripcion">—</p>
+    <p><span id="prevCategoria">—</span> - <span id="prevPrecio">—</span></p>
+    <img id="prevImg" src="" style="max-width:200px; border-radius:8px;">
   </div>
 
   <h2>Productos actuales</h2>
@@ -41,6 +66,7 @@
         <th>Descripción</th>
         <th>Categoría</th>
         <th>Precio</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -48,12 +74,12 @@
 
   <script>
     const USERNAME = "cholose10";
-    const REPO = "cartatilo";   // 👈 importante: tu repo real
+    const REPO = "cartatilo";
     const FILE_PATH = "productos.json";
     const BRANCH = "main";
     let productos = [];
 
-    // --- Cargar productos desde GitHub ---
+    // --- Cargar productos ---
     async function loadProducts() {
       try {
         const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
@@ -63,22 +89,121 @@
         alert("Error cargando productos.json");
       }
     }
+    loadProducts();
 
     // --- Render tabla ---
     function renderTable() {
+      const search = document.getElementById("searchBox").value.toLowerCase();
       const tbody = document.querySelector("#productsTable tbody");
       tbody.innerHTML = "";
-      productos.forEach(p => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td><img src="${p.imagen}" alt="${p.nombre}"></td>
-          <td>${p.nombre}</td>
-          <td>${p.descripcion}</td>
-          <td>${p.categoria}</td>
-          <td>$${p.precio}</td>
-        `;
-        tbody.appendChild(tr);
+      productos
+        .map((p, i) => ({p, i}))
+        .filter(({p}) => 
+          (p.nombre||'').toLowerCase().includes(search) || 
+          (p.categoria||'').toLowerCase().includes(search)
+        )
+        .forEach(({p, i}) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><img src="${p.imagen}" alt="${p.nombre}"></td>
+            <td>${p.nombre}</td>
+            <td>${p.descripcion}</td>
+            <td>${p.categoria}</td>
+            <td>$${p.precio}</td>
+            <td>
+              <button onclick="editProduct(${i})">Editar</button>
+              <button onclick="deleteProduct(${i})">Eliminar</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+    }
+
+    // --- Vista previa ---
+    function updatePreview() {
+      document.getElementById('prevNombre').textContent = document.getElementById('nombre').value || '—';
+      document.getElementById('prevDescripcion').textContent = document.getElementById('descripcion').value || '—';
+      document.getElementById('prevCategoria').textContent = document.getElementById('categoria').value || '—';
+      document.getElementById('prevPrecio').textContent = document.getElementById('precio').value ? "$"+document.getElementById('precio').value : '—';
+      document.getElementById('prevImg').src = document.getElementById('imagen').value ? "img/"+document.getElementById('imagen').value : '';
+    }
+    ["nombre","descripcion","precio","imagen","categoria"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updatePreview);
+    });
+
+    // --- Guardar producto ---
+    document.getElementById("productForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const index = document.getElementById("editIndex").value;
+      const nuevo = {
+        nombre: document.getElementById("nombre").value,
+        descripcion: document.getElementById("descripcion").value,
+        precio: document.getElementById("precio").value,
+        imagen: "img/" + document.getElementById("imagen").value,
+        categoria: document.getElementById("categoria").value
+      };
+      if (index === "") {
+        productos.push(nuevo);
+      } else {
+        productos[index] = nuevo;
+        document.getElementById("editIndex").value = "";
+      }
+      await saveToGitHub();
+      renderTable();
+      this.reset();
+      updatePreview();
+    });
+
+    // --- Editar ---
+    function editProduct(i) {
+      const p = productos[i];
+      document.getElementById("nombre").value = p.nombre;
+      document.getElementById("descripcion").value = p.descripcion;
+      document.getElementById("precio").value = p.precio;
+      document.getElementById("imagen").value = p.imagen.replace("img/","");
+      document.getElementById("categoria").value = p.categoria;
+      document.getElementById("editIndex").value = i;
+      updatePreview();
+    }
+
+    // --- Eliminar ---
+    async function deleteProduct(i) {
+      if (confirm("¿Eliminar este producto?")) {
+        productos.splice(i,1);
+        await saveToGitHub();
+        renderTable();
+      }
+    }
+
+    // --- Guardar en GitHub ---
+    async function saveToGitHub() {
+      const TOKEN = document.getElementById("tokenInput").value.trim();
+      if (!TOKEN) { alert("Pegá tu token de GitHub primero."); return; }
+      let sha;
+      try {
+        const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
+        if (getRes.ok) {
+          const fileData = await getRes.json();
+          sha = fileData.sha;
+        }
+      } catch(e) {}
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
+      const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${TOKEN}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: "Actualizar productos",
+          content: content,
+          sha: sha,
+          branch: BRANCH
+        })
       });
+      if (!putRes.ok) {
+        alert("Error guardando en GitHub");
+      }
     }
   </script>
 </body>
