@@ -3,148 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carta Tilo Café</title>
+  <title>Carta Digital</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: url("img/Fondo1.jpg") repeat;
-      background-size: cover;
-      color: #45270a;
+    body { font-family: Arial, sans-serif; margin:0; background:#f7f3f0; color:#333;}
+    header { background:#8c6954; padding:10px; text-align:center;}
+    header img { max-width:260px; height:auto; margin-bottom: 10px; } 
+    
+    /* ESTILOS DE BOTÓN DE ACCIÓN REFINADO */
+    .action-button {
+        display: block; 
+        background: #e94e33; 
+        color: #fff;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        margin: 5px auto 0;
+        max-width: 250px;
+        transition: background 0.3s;
     }
-    header {
-      background: rgba(255,255,255,0.9);
+    .action-button:hover {
+        background: #dc3e2a; 
     }
-    .banner-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    .banner {
-      text-align: center;
-      padding: 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: rgba(255,255,255,0.8);
-      border-radius: 8px;
-      margin: 15px auto;
-      width: fit-content;
-    }
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-    }
-    .categories button {
-      padding: 10px 20px;
-      background-color: #8c6954;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-size: 1rem;
-    }
-    .categories button:hover {
-      background-color: #6b4e3d;
-    }
-    .item-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
-    .item {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      overflow: hidden;
-      width: 280px;
-      transition: transform 0.2s ease;
-    }
-    .item:hover {
-      transform: scale(1.02);
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .item h3 {
-      margin: 10px;
-    }
-    .item p {
-      margin: 0 10px 10px;
-    }
-    .item .price {
-      font-weight: bold;
-      color: #000;
-      margin: 0 10px 10px;
-      display: block;
-    }
+
+    /* ESTILOS ORIGINALES DE LA CARTA */
+    .categories { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:10px;}
+    .categories button { background:#8c6954; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;}
+    .categories button:hover { background:#6b4e3d;}
+    .item-list { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin:20px;}
+    .item { background:#fff; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,.1); width:260px; overflow:hidden;}
+    .item img { width:100%; height:180px; object-fit:cover;}
+    .item h3 { margin:10px; }
+    .item p { margin:0 10px 10px;}
+    .price { font-weight:bold; color:#000;}
   </style>
 </head>
 <body>
-  <!-- FOTO GRANDE ARRIBA -->
   <header>
-    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
+    <img src="img/logo.png" alt="Logo del restaurante"> 
+    
+    <a href="https://www.google.com.ar/search?sca_esv=c4554e91040c2cd7&biw=1128&bih=2109&sxsrf=AE3TifN7UWKGmG4z2x6NX2hH6eq1vrH0Hg:1758895143491&q=fotos+de+tilo+aguero&uds=AOm0WdE3FO1QWjWIK0cMGjsdjTYHbdsH0fLpn84T_xKMHsvI4M0_DB8zHJzSDYv7yQ-xYS759fe5T2RhcCyZ5h_2IymZKXzgPuGkmfS7SfiqIPQ5_fhk59IM-jirxGe4KoQy9N6UvggMmiMB9POQX4igQyYnJcOLakGq0hw-UbFj09bTgEw9NnD7rKKbZ2oXQtpk1Tqx9K82zmubtQCpAAIjGzQVIG4tmAAGd0-55706QHOQADe5aqokkhGnDgWe1UrYVixJd-AJpjSQH9h54hUo-pOKdzjmQWQljlkjy5gNJTbZp9SHRGNMLULMVXpXNkiVxxuD7aIe0xl3kZQ9ZCvciXN9BoAKcKhoA9MZ4CDRtaV5FRPj063pMPb-FCZgtBK3SjrJkN8vHfI4hDIC9njI5OVK3bomtrTL1lsunpi8srwtjCW1hOR0rx0f_pkFTSY_aicgmG6uJWkT2naIPDoh8u3mB3qHRA&si=AMgyJEsYryDkwdkckb2JoaByOlMW1yempJtOk8Q9EWSOYIlxeEjezapflNZwdXBwvGg1GBhBmCjT4rthsqTqtrPaPpsF7Gr9adrc7t1OZ5k7RjgCdaZfZZRz2KtpQwMrks1YBw8Hd-InX&sa=X&ved=2ahUKEwiIj-aBy_aPAxUhp5UCHW6vHqUQk8gLegQIGxAB&ictx=1&stq=1&cs=1#ebo=2&lpg=cid:CgIgAQ%3D%3D" 
+        target="_blank" 
+        class="action-button">
+        📍 ¿Cómo llegar? Ver Ubicación
+    </a>
   </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
-
-  <!-- Botones de categorías -->
   <div class="categories" id="category-buttons"></div>
-
-  <!-- Lista de productos -->
   <div class="item-list" id="product-list"></div>
 
+  <div style="text-align: center; margin: 30px auto; padding: 20px; background: #fff; border-radius: 12px; max-width: 90%; box-shadow: 0 4px 8px rgba(0,0,0,.1);">
+    <h2>✨ ¡Tu Foto, Nuestro Desayuno!</h2>
+    <p>Subí tu mejor foto de tu visita directamente a Google Maps y ganá un desayuno gratis.</p>
+    
+    <a href="https://www.google.com.ar/search?q=fotos+de+tilo+aguero&source=hp&gws_rd=cr&ei=...#lpg=cid:CgIgAQ%3D%3D&imgf=__photo_tab__" 
+        target="_blank" 
+        class="action-button" 
+        style="max-width: 300px; background: #28a745;"> 
+        Subir Foto a Google Maps 🗺️
+    </a>
+    <p style="margin-top: 10px; font-size: 0.9em;">(Se abrirá la sección de fotos de nuestro local.)</p>
+  </div>
   <script>
     let productos = [];
-
-    // Cargar productos desde productos.json
     fetch('productos.json')
-      .then(response => response.json())
-      .then(data => {
-        productos = data;
-        renderCategories();
-        renderProducts('Todos');
-      });
+      .then(r=>r.json())
+      .then(data=>{ productos=data; renderCategories(); renderProducts('Todos'); });
 
-    // Renderizar categorías dinámicamente
-    function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById('category-buttons');
-      container.innerHTML = '';
-      categorias.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
-        container.appendChild(btn);
+    function renderCategories(){
+      const cats = ['Todos', ...new Set(productos.map(p=>p.categoria))];
+      const cont=document.getElementById('category-buttons');
+      cont.innerHTML='';
+      cats.forEach(cat=>{
+        const b=document.createElement('button');
+        b.textContent=cat;
+        b.onclick=()=>renderProducts(cat);
+        cont.appendChild(b);
       });
     }
-
-    // Renderizar productos
-    function renderProducts(categoria) {
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
-      filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-          ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
-        item.innerHTML = `
+    
+    // FUNCIÓN DE RENDERIZADO MEJORADA
+    function renderProducts(cat){
+      const cont=document.getElementById('product-list');
+      cont.innerHTML='';
+      const list=cat==='Todos'? productos: productos.filter(p=>p.categoria===cat);
+      list.forEach(p=>{
+        const div=document.createElement('div');
+        div.className='item';
+        const precio=String(p.precio||'').startsWith('$')? p.precio: '$'+p.precio;
+        
+        // CÓDIGO HTML DEL PRODUCTO, CON EL LLAMADO A LA ACCIÓN
+        div.innerHTML=`
           <img src="${p.imagen}" alt="${p.nombre}">
           <h3>${p.nombre}</h3>
           <p>${p.descripcion}</p>
-          <span class="price">${priceDisplay}</span>
+          <p class="price">${precio}</p>
+          <p style="margin: 0 10px 10px; font-size: 0.8em; color: #e94e33;">
+            ✨ ¡Subí tu foto y ganá!
+          </p>
         `;
-        container.appendChild(item);
+        cont.appendChild(div);
       });
     }
   </script>
