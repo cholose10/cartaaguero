@@ -3,55 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Carta Tilo Café</title>
+  <title>Admin - Carta Digital</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: url("img/Fondo1.jpg") repeat;
-      background-size: cover;
-      color: #45270a;
+      background: #f6f6f6;
+      color: #333;
     }
     header {
-      background: rgba(255,255,255,0.9);
-      text-align: center;
-      padding: 10px;
-    }
-    .banner-img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    .action-button {
-      display: inline-block;
-      background: #e94e33;
+      background: #806250;
       color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      margin-top: 10px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    .action-button:hover {
-      background: #c73722;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
     }
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: 20px auto;
       padding: 20px;
-      background: rgba(255,255,255,0.95);
+      background: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
       text-align: center;
       color: #806250;
     }
-    /* Token */
+    /* Token box */
     .token-box {
-      background: #f9f9f9;
+      background: #f1f1f1;
       padding: 10px;
       border-radius: 8px;
       margin-bottom: 20px;
@@ -74,6 +55,7 @@
     .token-box button:hover {
       background: #5f4a3b;
     }
+
     /* Formulario */
     form {
       display: flex;
@@ -99,16 +81,19 @@
     form button:hover {
       background: #5f4a3b;
     }
-    /* Vista previa */
+
+    /* Vista previa de imagen */
     .image-preview {
       text-align: center;
       margin-top: 10px;
     }
     .image-preview img {
       max-width: 150px;
+      max-height: 150px;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
+
     /* Buscador */
     .search-box {
       display: flex;
@@ -121,12 +106,12 @@
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
     /* Tabla */
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 15px;
-      background: #fff;
     }
     table, th, td {
       border: 1px solid #ddd;
@@ -158,12 +143,7 @@
 </head>
 <body>
 
-<header>
-  <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
-  <a href="https://maps.google.com?q=Tilo+Cafe+Agüero+2298" target="_blank" class="action-button">
-    📍 ¿Cómo llegar? Ver Ubicación
-  </a>
-</header>
+<header>Panel de Administración - Carta Digital</header>
 
 <div class="container">
   <h2>Gestión de Productos</h2>
@@ -186,41 +166,95 @@
     <input type="text" id="imagen" placeholder="Ruta imagen (ej: img/saltena.jpg)" required oninput="updatePreview()">
     <select id="categoria" required>
       <option value="">Selecciona categoría</option>
-      <option value="ENTRADAS">Entradas</option>
-      <option value="SEGUNDOS">Segundos</option>
-      <option value="FRITOS">Fritos</option>
-      <option value="DOMINGOS">Domingos</option>
-      <option value="POSTRES">Postres</option>
-      <option value="BEBIDAS">Bebidas</option>
-      <option value="CERVEZA">Cerveza</option>
-      <option value="VINO">Vino</option>
+      <option>☕ Cafetería</option>
+      <option>🥐 Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)</option>
+      <option>➕ Adicionales de café</option>
+      <option>🍰 Pastelería</option>
+      <option>🥧 Tartas (con ensaladita)</option>
+      <option>🌯 Burritos (con papas fritas)</option>
+      <option>🥤 Refrescos</option>
+      <option>🥪 Sandwiches</option>
+      <option>🥩 Lomitos (fritas)</option>
+      <option>🍔 Burgers (100% carne, con fritas. La burger puede ser Not Cow)</option>
+      <option>🍳 Omelettes/Tortillas</option>
+      <option>🥗 ENSALADAS</option>
+      <option>🍗 MILANESAS Ternera o Pollo - Pechuga</option>
+      <option>🍽️ Otros platos</option>
+      <option>🥖 ENTRADITAS</option>
+      <option>🍕 PIZZAS (Estilo napolitano)</option>
+      <option>🍚 RISOTTOS</option>
+      <option>🍝 PASTAS</option>
+      <option>🧂 SALSAS</option>
+      <option>🔥 GRILL</option>
+      <option>🍖 GRILL Especiales</option>
+      <option>🐥 MENU KIDS</option>
+      <option>🍲 PLATOS PRINCIPALES</option>
+      <option>🍮 POSTRES</option>
+      <option>🧀 PICADAS</option>
+      <option>🍩 HAPPY HOUR</option>
+      <option>🍷 VINOS BODEGA RUTINI - LA RURAL</option>
+      <option>🍷 VINOS BODEGA SALENTEIN</option>
+      <option>🍷 VINOS BLANCOS</option>
+      <option>🍷 Copa de vino</option>
+      <option>🍷 ROSÉ vino</option>
+      <option>🥂 ESPUMANTES</option>
+      <option>🍺 CERVEZAS</option>
+      <option>🍹 TRAGOS</option>
+      <option>📋 MENU del DIA o SUGERENCIAS</option>
     </select>
     <button type="submit">Guardar Producto</button>
   </form>
 
-  <!-- Vista previa -->
+  <!-- Vista previa de imagen -->
   <div class="image-preview" id="imagePreview">
     <p>Vista previa de imagen</p>
     <img id="previewImg" src="" alt="Sin imagen">
   </div>
 
-  <!-- Buscador -->
+  <!-- BUSCADOR -->
   <div class="search-box">
     <input type="text" id="searchName" placeholder="Buscar por nombre..." oninput="filterProducts()">
     <select id="searchCategory" onchange="filterProducts()">
       <option value="">Todas las categorías</option>
-      <option value="ENTRADAS">Entradas</option>
-      <option value="SEGUNDOS">Segundos</option>
-      <option value="FRITOS">Fritos</option>
-      <option value="DOMINGOS">Domingos</option>
-      <option value="POSTRES">Postres</option>
-      <option value="BEBIDAS">Bebidas</option>
-      <option value="CERVEZA">Cerveza</option>
-      <option value="VINO">Vino</option>
+      <option>☕ Cafetería</option>
+      <option>🥐 Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)</option>
+      <option>➕ Adicionales de café</option>
+      <option>🍰 Pastelería</option>
+      <option>🥧 Tartas (con ensaladita)</option>
+      <option>🌯 Burritos (con papas fritas)</option>
+      <option>🥤 Refrescos</option>
+      <option>🥪 Sandwiches</option>
+      <option>🥩 Lomitos (fritas)</option>
+      <option>🍔 Burgers (100% carne, con fritas. La burger puede ser Not Cow)</option>
+      <option>🍳 Omelettes/Tortillas</option>
+      <option>🥗 ENSALADAS</option>
+      <option>🍗 MILANESAS Ternera o Pollo - Pechuga</option>
+      <option>🍽️ Otros platos</option>
+      <option>🥖 ENTRADITAS</option>
+      <option>🍕 PIZZAS (Estilo napolitano)</option>
+      <option>🍚 RISOTTOS</option>
+      <option>🍝 PASTAS</option>
+      <option>🧂 SALSAS</option>
+      <option>🔥 GRILL</option>
+      <option>🍖 GRILL Especiales</option>
+      <option>🐥 MENU KIDS</option>
+      <option>🍲 PLATOS PRINCIPALES</option>
+      <option>🍮 POSTRES</option>
+      <option>🧀 PICADAS</option>
+      <option>🍩 HAPPY HOUR</option>
+      <option>🍷 VINOS BODEGA RUTINI - LA RURAL</option>
+      <option>🍷 VINOS BODEGA SALENTEIN</option>
+      <option>🍷 VINOS BLANCOS</option>
+      <option>🍷 Copa de vino</option>
+      <option>🍷 ROSÉ vino</option>
+      <option>🥂 ESPUMANTES</option>
+      <option>🍺 CERVEZAS</option>
+      <option>🍹 TRAGOS</option>
+      <option>📋 MENU del DIA o SUGERENCIAS</option>
     </select>
   </div>
 
-  <!-- Tabla -->
+  <!-- TABLA -->
   <table>
     <thead>
       <tr>
@@ -237,33 +271,51 @@
 </div>
 
 <script>
-  /* ======= CONFIG GITHUB ======= */
-  const USERNAME = "sequispe";  // cámbialo a tu usuario
-  const REPO = "carta";         // cámbialo a tu repo
+  /* =============================
+     CONFIG GITHUB
+  ============================= */
+  const USERNAME = "sequispe";
+  const REPO = "carta";
   const FILE_PATH = "productos.json";
 
   let productos = [];
   let filteredProductos = [];
 
+  /* =============================
+     TOKEN LOCALSTORAGE
+  ============================= */
   function saveToken() {
     const token = document.getElementById('token').value.trim();
     if (token) {
       localStorage.setItem('github_token', token);
       document.getElementById('token').value = '';
       document.getElementById('tokenStatus').innerText = "✅ Token guardado correctamente.";
+    } else {
+      alert("Por favor, ingresa un token válido.");
     }
   }
+
   function clearToken() {
     localStorage.removeItem('github_token');
     document.getElementById('tokenStatus').innerText = "⚠️ Token borrado.";
   }
+
   function getToken() {
     return localStorage.getItem('github_token');
   }
+
+  /* =============================
+     VISTA PREVIA IMAGEN
+  ============================= */
   function updatePreview() {
-    document.getElementById('previewImg').src = document.getElementById('imagen').value;
+    const url = document.getElementById('imagen').value;
+    const previewImg = document.getElementById('previewImg');
+    previewImg.src = url || "";
   }
 
+  /* =============================
+     CARGAR PRODUCTOS
+  ============================= */
   async function loadProducts() {
     const url = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
     const res = await fetch(url);
@@ -272,19 +324,31 @@
     renderTable();
   }
 
+  /* =============================
+     GUARDAR EN GITHUB
+  ============================= */
   async function saveToGitHub(newContent) {
     const TOKEN = getToken();
     if (!TOKEN) {
       alert("⚠️ Necesitas guardar tu token primero.");
       return;
     }
+
     const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-    const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${TOKEN}` }});
+
+    const getRes = await fetch(apiUrl, {
+      headers: {
+        "Authorization": `token ${TOKEN}`,
+        "Accept": "application/vnd.github.v3+json"
+      }
+    });
     const data = await getRes.json();
-    await fetch(apiUrl, {
+
+    const updateRes = await fetch(apiUrl, {
       method: "PUT",
       headers: {
         "Authorization": `token ${TOKEN}`,
+        "Accept": "application/vnd.github.v3+json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -293,22 +357,39 @@
         sha: data.sha
       })
     });
+
+    if (updateRes.ok) {
+      alert("✅ Cambios guardados en GitHub correctamente.");
+    } else {
+      alert("❌ Error al guardar en GitHub. Verifica tu token.");
+    }
   }
 
+  /* =============================
+     FILTRO BUSCADOR
+  ============================= */
   function filterProducts() {
     const name = document.getElementById('searchName').value.toLowerCase();
     const category = document.getElementById('searchCategory').value;
-    filteredProductos = productos.filter(p =>
-      p.nombre.toLowerCase().includes(name) && (category ? p.categoria === category : true)
-    );
+
+    filteredProductos = productos.filter(p => {
+      const matchName = p.nombre.toLowerCase().includes(name);
+      const matchCategory = category ? p.categoria === category : true;
+      return matchName && matchCategory;
+    });
+
     renderTable();
   }
 
+  /* =============================
+     RENDER TABLA
+  ============================= */
   function renderTable() {
     const tableBody = document.getElementById('productTable');
     tableBody.innerHTML = '';
+
     filteredProductos.forEach((p, index) => {
-      tableBody.innerHTML += `
+      const row = `
         <tr>
           <td>${p.nombre}</td>
           <td>${p.descripcion}</td>
@@ -321,12 +402,18 @@
           </td>
         </tr>
       `;
+      tableBody.innerHTML += row;
     });
   }
 
+  /* =============================
+     FORMULARIO: AGREGAR/EDITAR
+  ============================= */
   const form = document.getElementById('productForm');
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const nuevo = {
       nombre: document.getElementById('nombre').value,
       descripcion: document.getElementById('descripcion').value,
@@ -334,13 +421,16 @@
       imagen: document.getElementById('imagen').value,
       categoria: document.getElementById('categoria').value
     };
+
     const editIndex = document.getElementById('editIndex').value;
+
     if (editIndex) {
       productos[editIndex] = nuevo;
       document.getElementById('editIndex').value = '';
     } else {
       productos.push(nuevo);
     }
+
     filteredProductos = [...productos];
     renderTable();
     form.reset();
@@ -348,6 +438,9 @@
     saveToGitHub(JSON.stringify(productos, null, 2));
   });
 
+  /* =============================
+     EDITAR PRODUCTO
+  ============================= */
   window.editProduct = function(index) {
     const p = filteredProductos[index];
     document.getElementById('nombre').value = p.nombre;
@@ -356,10 +449,14 @@
     document.getElementById('imagen').value = p.imagen;
     document.getElementById('categoria').value = p.categoria;
     updatePreview();
+
     const originalIndex = productos.findIndex(item => item.nombre === p.nombre && item.descripcion === p.descripcion);
     document.getElementById('editIndex').value = originalIndex;
   };
 
+  /* =============================
+     BORRAR PRODUCTO
+  ============================= */
   window.deleteProduct = function(index) {
     if (confirm('¿Seguro que quieres borrar este producto?')) {
       const originalIndex = productos.findIndex(item => item.nombre === filteredProductos[index].nombre);
@@ -370,8 +467,14 @@
     }
   };
 
+  /* =============================
+     INICIAR
+  ============================= */
   loadProducts();
-  if (getToken()) document.getElementById('tokenStatus').innerText = "🔐 Token cargado en el navegador.";
+
+  if (getToken()) {
+    document.getElementById('tokenStatus').innerText = "🔐 Token cargado en el navegador.";
+  }
 </script>
 
 </body>
