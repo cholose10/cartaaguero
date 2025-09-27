@@ -1,209 +1,151 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Carta Cartatilo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta Tilo Café</title>
   <style>
-    :root {
-      --brand:#8c6954; 
-      --brand-dark:#6b4e3d; 
-      --ink:#5a3825; 
-      --paper:#f7f3f0;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: url("img/Fondo1.jpg") repeat;
+      background-size: cover;
+      color: #45270a;
     }
-    body { font-family: Arial, sans-serif; margin: 20px; color: var(--ink); background: var(--paper);}
-    h1 { color: var(--ink); margin-bottom: 10px; }
-    input, textarea { width: 100%; padding: 8px; margin: 6px 0 12px; border: 1px solid #ccc; border-radius: 6px; }
-    button { padding: 8px 12px; margin: 5px 6px 5px 0; background: var(--brand); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
-    button:hover { background: var(--brand-dark); }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background: #f0e8e3; }
-    td img { max-width: 60px; border-radius: 6px; }
-    .preview { background:#fff; padding:10px; border-radius:10px; margin-top:10px; }
-    .search-wrap { margin: 10px 0; }
+    header {
+      background: rgba(255,255,255,0.9);
+    }
+    .banner-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+    .banner {
+      text-align: center;
+      padding: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      margin: 15px auto;
+      width: fit-content;
+    }
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+    }
+    .categories button {
+      padding: 10px 20px;
+      background-color: #8c6954;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+    .categories button:hover {
+      background-color: #6b4e3d;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .item {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.2s ease;
+    }
+    .item:hover {
+      transform: scale(1.02);
+    }
+    .item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .item h3 {
+      margin: 10px;
+    }
+    .item p {
+      margin: 0 10px 10px;
+    }
+    .item .price {
+      font-weight: bold;
+      color: #000;
+      margin: 0 10px 10px;
+      display: block;
+    }
   </style>
 </head>
 <body>
-  <h1>Admin Carta Cartatilo</h1>
+  <!-- FOTO GRANDE ARRIBA -->
+  <header>
+    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
+  </header>
 
-  <label>Token GitHub:</label>
-  <input type="password" id="tokenInput" placeholder="Pegá tu token aquí" />
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <div class="search-wrap">
-    <input type="text" id="searchBox" placeholder="Buscar por nombre o categoría" oninput="renderTable()" />
-  </div>
+  <!-- Botones de categorías -->
+  <div class="categories" id="category-buttons"></div>
 
-  <form id="productForm">
-    <input type="hidden" id="editIndex" value="">
-    <label>Nombre:</label>
-    <input type="text" id="nombre" required>
-    <label>Descripción:</label>
-    <textarea id="descripcion" required></textarea>
-    <label>Precio:</label>
-    <input type="number" id="precio" required>
-    <label>Imagen (ej: plato.jpg):</label>
-    <input type="text" id="imagen" required>
-    <label>Categoría:</label>
-    <input type="text" id="categoria" required>
-    <button type="submit">Guardar Producto</button>
-  </form>
-
-  <div class="preview">
-    <h3>Vista previa</h3>
-    <p><b id="prevNombre">—</b></p>
-    <p id="prevDescripcion">—</p>
-    <p><span id="prevCategoria">—</span> - <span id="prevPrecio">—</span></p>
-    <img id="prevImg" src="" style="max-width:200px; border-radius:8px;">
-  </div>
-
-  <h2>Productos actuales</h2>
-  <table id="productsTable">
-    <thead>
-      <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Categoría</th>
-        <th>Precio</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <!-- Lista de productos -->
+  <div class="item-list" id="product-list"></div>
 
   <script>
-    const USERNAME = "cholose10";
-    const REPO = "cartatilo";
-    const FILE_PATH = "productos.json";
-    const BRANCH = "main";
     let productos = [];
 
-    // --- Cargar productos ---
-    async function loadProducts() {
-      try {
-        const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${FILE_PATH}`);
-        productos = await res.json();
-        renderTable();
-      } catch (e) {
-        alert("Error cargando productos.json");
-      }
-    }
-    loadProducts();
-
-    // --- Render tabla ---
-    function renderTable() {
-      const search = document.getElementById("searchBox").value.toLowerCase();
-      const tbody = document.querySelector("#productsTable tbody");
-      tbody.innerHTML = "";
-      productos
-        .map((p, i) => ({p, i}))
-        .filter(({p}) => 
-          (p.nombre||'').toLowerCase().includes(search) || 
-          (p.categoria||'').toLowerCase().includes(search)
-        )
-        .forEach(({p, i}) => {
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td><img src="${p.imagen}" alt="${p.nombre}"></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
-            <td>
-              <button onclick="editProduct(${i})">Editar</button>
-              <button onclick="deleteProduct(${i})">Eliminar</button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-        });
-    }
-
-    // --- Vista previa ---
-    function updatePreview() {
-      document.getElementById('prevNombre').textContent = document.getElementById('nombre').value || '—';
-      document.getElementById('prevDescripcion').textContent = document.getElementById('descripcion').value || '—';
-      document.getElementById('prevCategoria').textContent = document.getElementById('categoria').value || '—';
-      document.getElementById('prevPrecio').textContent = document.getElementById('precio').value ? "$"+document.getElementById('precio').value : '—';
-      document.getElementById('prevImg').src = document.getElementById('imagen').value ? "img/"+document.getElementById('imagen').value : '';
-    }
-    ["nombre","descripcion","precio","imagen","categoria"].forEach(id => {
-      document.getElementById(id).addEventListener("input", updatePreview);
-    });
-
-    // --- Guardar producto ---
-    document.getElementById("productForm").addEventListener("submit", async function(e) {
-      e.preventDefault();
-      const index = document.getElementById("editIndex").value;
-      const nuevo = {
-        nombre: document.getElementById("nombre").value,
-        descripcion: document.getElementById("descripcion").value,
-        precio: document.getElementById("precio").value,
-        imagen: "img/" + document.getElementById("imagen").value,
-        categoria: document.getElementById("categoria").value
-      };
-      if (index === "") {
-        productos.push(nuevo);
-      } else {
-        productos[index] = nuevo;
-        document.getElementById("editIndex").value = "";
-      }
-      await saveToGitHub();
-      renderTable();
-      this.reset();
-      updatePreview();
-    });
-
-    // --- Editar ---
-    function editProduct(i) {
-      const p = productos[i];
-      document.getElementById("nombre").value = p.nombre;
-      document.getElementById("descripcion").value = p.descripcion;
-      document.getElementById("precio").value = p.precio;
-      document.getElementById("imagen").value = p.imagen.replace("img/","");
-      document.getElementById("categoria").value = p.categoria;
-      document.getElementById("editIndex").value = i;
-      updatePreview();
-    }
-
-    // --- Eliminar ---
-    async function deleteProduct(i) {
-      if (confirm("¿Eliminar este producto?")) {
-        productos.splice(i,1);
-        await saveToGitHub();
-        renderTable();
-      }
-    }
-
-    // --- Guardar en GitHub ---
-    async function saveToGitHub() {
-      const TOKEN = document.getElementById("tokenInput").value.trim();
-      if (!TOKEN) { alert("Pegá tu token de GitHub primero."); return; }
-      let sha;
-      try {
-        const getRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`);
-        if (getRes.ok) {
-          const fileData = await getRes.json();
-          sha = fileData.sha;
-        }
-      } catch(e) {}
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(productos, null, 2))));
-      const putRes = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `token ${TOKEN}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          message: "Actualizar productos",
-          content: content,
-          sha: sha,
-          branch: BRANCH
-        })
+    // Cargar productos desde productos.json
+    fetch('productos.json')
+      .then(response => response.json())
+      .then(data => {
+        productos = data;
+        renderCategories();
+        renderProducts('Todos');
       });
-      if (!putRes.ok) {
-        alert("Error guardando en GitHub");
-      }
+
+    // Renderizar categorías dinámicamente
+    function renderCategories() {
+      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
+      const container = document.getElementById('category-buttons');
+      container.innerHTML = '';
+      categorias.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.onclick = () => renderProducts(cat);
+        container.appendChild(btn);
+      });
+    }
+
+    // Renderizar productos
+    function renderProducts(categoria) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
+      filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
+        item.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <span class="price">${priceDisplay}</span>
+        `;
+        container.appendChild(item);
+      });
     }
   </script>
 </body>
