@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carta Tilo Café</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Carta Tilo Café</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -14,139 +14,365 @@
     }
     header {
       background: rgba(255,255,255,0.9);
+      text-align: center;
+      padding: 10px;
     }
     .banner-img {
       width: 100%;
-      height: 250px;
+      max-height: 200px;
       object-fit: cover;
-      display: block;
+      border-radius: 6px;
     }
-    .banner {
-      text-align: center;
-      padding: 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: rgba(255,255,255,0.8);
-      border-radius: 8px;
-      margin: 15px auto;
-      width: fit-content;
-    }
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-    }
-    .categories button {
-      padding: 10px 20px;
-      background-color: #8c6954;
+    .action-button {
+      display: inline-block;
+      background: #e94e33;
       color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 10px;
+      text-decoration: none;
       transition: background 0.3s;
-      font-size: 1rem;
     }
-    .categories button:hover {
-      background-color: #6b4e3d;
+    .action-button:hover {
+      background: #c73722;
     }
-    .item-list {
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    }
+    h2 {
+      text-align: center;
+      color: #806250;
+    }
+    /* Token */
+    .token-box {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .token-box input {
+      padding: 10px;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .token-box button {
+      padding: 10px 15px;
+      border: none;
+      background: #806250;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .token-box button:hover {
+      background: #5f4a3b;
+    }
+    /* Formulario */
+    form {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
-    .item {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      overflow: hidden;
-      width: 280px;
-      transition: transform 0.2s ease;
+    form input, form select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      flex: 1 1 45%;
     }
-    .item:hover {
-      transform: scale(1.02);
+    form button {
+      background: #806250;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      flex: 1 1 100%;
     }
-    .item img {
+    form button:hover {
+      background: #5f4a3b;
+    }
+    /* Vista previa */
+    .image-preview {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .image-preview img {
+      max-width: 150px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    /* Buscador */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .search-box input, .search-box select {
+      padding: 10px;
+      flex: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    /* Tabla */
+    table {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #fff;
     }
-    .item h3 {
-      margin: 10px;
+    table, th, td {
+      border: 1px solid #ddd;
     }
-    .item p {
-      margin: 0 10px 10px;
+    th, td {
+      padding: 8px;
+      text-align: center;
     }
-    .item .price {
-      font-weight: bold;
-      color: #000;
-      margin: 0 10px 10px;
-      display: block;
+    th {
+      background: #806250;
+      color: #fff;
+    }
+    .actions button {
+      margin: 0 3px;
+      padding: 5px 8px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background: #4CAF50;
+      color: #fff;
+    }
+    .delete-btn {
+      background: #f44336;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <!-- FOTO GRANDE ARRIBA -->
-  <header>
-    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
-  </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
+<header>
+  <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
+  <a href="https://maps.google.com?q=Tilo+Cafe+Agüero+2298" target="_blank" class="action-button">
+    📍 ¿Cómo llegar? Ver Ubicación
+  </a>
+</header>
 
-  <!-- Botones de categorías -->
-  <div class="categories" id="category-buttons"></div>
+<div class="container">
+  <h2>Gestión de Productos</h2>
 
-  <!-- Lista de productos -->
-  <div class="item-list" id="product-list"></div>
+  <!-- TOKEN -->
+  <div class="token-box">
+    <label for="token">Token de GitHub:</label><br>
+    <input type="password" id="token" placeholder="Pega tu token aquí">
+    <button onclick="saveToken()">Guardar Token</button>
+    <button onclick="clearToken()">Borrar Token</button>
+    <p id="tokenStatus"></p>
+  </div>
 
-  <script>
-    let productos = [];
+  <!-- FORMULARIO -->
+  <form id="productForm">
+    <input type="hidden" id="editIndex" value="">
+    <input type="text" id="nombre" placeholder="Nombre del producto" required>
+    <input type="text" id="descripcion" placeholder="Descripción" required>
+    <input type="number" id="precio" placeholder="Precio" required>
+    <input type="text" id="imagen" placeholder="Ruta imagen (ej: img/saltena.jpg)" required oninput="updatePreview()">
+    <select id="categoria" required>
+      <option value="">Selecciona categoría</option>
+      <option value="ENTRADAS">Entradas</option>
+      <option value="SEGUNDOS">Segundos</option>
+      <option value="FRITOS">Fritos</option>
+      <option value="DOMINGOS">Domingos</option>
+      <option value="POSTRES">Postres</option>
+      <option value="BEBIDAS">Bebidas</option>
+      <option value="CERVEZA">Cerveza</option>
+      <option value="VINO">Vino</option>
+    </select>
+    <button type="submit">Guardar Producto</button>
+  </form>
 
-    // Cargar productos desde productos.json
-    fetch('productos.json')
-      .then(response => response.json())
-      .then(data => {
-        productos = data;
-        renderCategories();
-        renderProducts('Todos');
-      });
+  <!-- Vista previa -->
+  <div class="image-preview" id="imagePreview">
+    <p>Vista previa de imagen</p>
+    <img id="previewImg" src="" alt="Sin imagen">
+  </div>
 
-    // Renderizar categorías dinámicamente
-    function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById('category-buttons');
-      container.innerHTML = '';
-      categorias.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
-        container.appendChild(btn);
-      });
+  <!-- Buscador -->
+  <div class="search-box">
+    <input type="text" id="searchName" placeholder="Buscar por nombre..." oninput="filterProducts()">
+    <select id="searchCategory" onchange="filterProducts()">
+      <option value="">Todas las categorías</option>
+      <option value="ENTRADAS">Entradas</option>
+      <option value="SEGUNDOS">Segundos</option>
+      <option value="FRITOS">Fritos</option>
+      <option value="DOMINGOS">Domingos</option>
+      <option value="POSTRES">Postres</option>
+      <option value="BEBIDAS">Bebidas</option>
+      <option value="CERVEZA">Cerveza</option>
+      <option value="VINO">Vino</option>
+    </select>
+  </div>
+
+  <!-- Tabla -->
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Imagen</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="productTable"></tbody>
+  </table>
+</div>
+
+<script>
+  /* ======= CONFIG GITHUB ======= */
+  const USERNAME = "sequispe";  // cámbialo a tu usuario
+  const REPO = "carta";         // cámbialo a tu repo
+  const FILE_PATH = "productos.json";
+
+  let productos = [];
+  let filteredProductos = [];
+
+  function saveToken() {
+    const token = document.getElementById('token').value.trim();
+    if (token) {
+      localStorage.setItem('github_token', token);
+      document.getElementById('token').value = '';
+      document.getElementById('tokenStatus').innerText = "✅ Token guardado correctamente.";
     }
+  }
+  function clearToken() {
+    localStorage.removeItem('github_token');
+    document.getElementById('tokenStatus').innerText = "⚠️ Token borrado.";
+  }
+  function getToken() {
+    return localStorage.getItem('github_token');
+  }
+  function updatePreview() {
+    document.getElementById('previewImg').src = document.getElementById('imagen').value;
+  }
 
-    // Renderizar productos
-    function renderProducts(categoria) {
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
-      filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-          ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <span class="price">${priceDisplay}</span>
-        `;
-        container.appendChild(item);
-      });
+  async function loadProducts() {
+    const url = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
+    const res = await fetch(url);
+    productos = await res.json();
+    filteredProductos = [...productos];
+    renderTable();
+  }
+
+  async function saveToGitHub(newContent) {
+    const TOKEN = getToken();
+    if (!TOKEN) {
+      alert("⚠️ Necesitas guardar tu token primero.");
+      return;
     }
-  </script>
+    const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
+    const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${TOKEN}` }});
+    const data = await getRes.json();
+    await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "Actualización desde admin.html",
+        content: btoa(unescape(encodeURIComponent(newContent))),
+        sha: data.sha
+      })
+    });
+  }
+
+  function filterProducts() {
+    const name = document.getElementById('searchName').value.toLowerCase();
+    const category = document.getElementById('searchCategory').value;
+    filteredProductos = productos.filter(p =>
+      p.nombre.toLowerCase().includes(name) && (category ? p.categoria === category : true)
+    );
+    renderTable();
+  }
+
+  function renderTable() {
+    const tableBody = document.getElementById('productTable');
+    tableBody.innerHTML = '';
+    filteredProductos.forEach((p, index) => {
+      tableBody.innerHTML += `
+        <tr>
+          <td>${p.nombre}</td>
+          <td>${p.descripcion}</td>
+          <td>$${p.precio}</td>
+          <td><img src="${p.imagen}" alt="${p.nombre}" width="50"></td>
+          <td>${p.categoria}</td>
+          <td>
+            <button class="edit-btn" onclick="editProduct(${index})">Editar</button>
+            <button class="delete-btn" onclick="deleteProduct(${index})">Borrar</button>
+          </td>
+        </tr>
+      `;
+    });
+  }
+
+  const form = document.getElementById('productForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nuevo = {
+      nombre: document.getElementById('nombre').value,
+      descripcion: document.getElementById('descripcion').value,
+      precio: parseFloat(document.getElementById('precio').value),
+      imagen: document.getElementById('imagen').value,
+      categoria: document.getElementById('categoria').value
+    };
+    const editIndex = document.getElementById('editIndex').value;
+    if (editIndex) {
+      productos[editIndex] = nuevo;
+      document.getElementById('editIndex').value = '';
+    } else {
+      productos.push(nuevo);
+    }
+    filteredProductos = [...productos];
+    renderTable();
+    form.reset();
+    updatePreview();
+    saveToGitHub(JSON.stringify(productos, null, 2));
+  });
+
+  window.editProduct = function(index) {
+    const p = filteredProductos[index];
+    document.getElementById('nombre').value = p.nombre;
+    document.getElementById('descripcion').value = p.descripcion;
+    document.getElementById('precio').value = p.precio;
+    document.getElementById('imagen').value = p.imagen;
+    document.getElementById('categoria').value = p.categoria;
+    updatePreview();
+    const originalIndex = productos.findIndex(item => item.nombre === p.nombre && item.descripcion === p.descripcion);
+    document.getElementById('editIndex').value = originalIndex;
+  };
+
+  window.deleteProduct = function(index) {
+    if (confirm('¿Seguro que quieres borrar este producto?')) {
+      const originalIndex = productos.findIndex(item => item.nombre === filteredProductos[index].nombre);
+      productos.splice(originalIndex, 1);
+      filteredProductos.splice(index, 1);
+      renderTable();
+      saveToGitHub(JSON.stringify(productos, null, 2));
+    }
+  };
+
+  loadProducts();
+  if (getToken()) document.getElementById('tokenStatus').innerText = "🔐 Token cargado en el navegador.";
+</script>
+
 </body>
 </html>
