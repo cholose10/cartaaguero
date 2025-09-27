@@ -105,6 +105,45 @@
   <script>
     let productos = [];
 
+    // Orden fijo de categorías
+    const categoriasOrdenadas = [
+      "☕ Cafetería",
+      "🥐 Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)",
+      "➕ Adicionales de café",
+      "🍰 Pastelería",
+      "🥧 Tartas (con ensaladita)",
+      "🌯 Burritos (con papas fritas)",
+      "🥤 Refrescos",
+      "🥪 Sandwiches",
+      "🥩 Lomitos (fritas)",
+      "🍔 Burgers (100% carne, con fritas. La burger puede ser Not Cow)",
+      "🍳 Omelettes/Tortillas",
+      "🥗 ENSALADAS",
+      "🍗 MILANESAS Ternera o Pollo - Pechuga",
+      "🍽️ Otros platos",
+      "🥖 ENTRADITAS",
+      "🍕 PIZZAS (Estilo napolitano)",
+      "🍚 RISOTTOS",
+      "🍝 PASTAS",
+      "🧂 SALSAS",
+      "🔥 GRILL",
+      "🍖 GRILL Especiales",
+      "🐥 MENU KIDS",
+      "🍲 PLATOS PRINCIPALES",
+      "🍮 POSTRES",
+      "🧀 PICADAS",
+      "🍩 HAPPY HOUR",
+      "🍷 VINOS BODEGA RUTINI - LA RURAL",
+      "🍷 VINOS BODEGA SALENTEIN",
+      "🍷 VINOS BLANCOS",
+      "🍷 Copa de vino",
+      "🍷 ROSÉ vino",
+      "🥂 ESPUMANTES",
+      "🍺 CERVEZAS",
+      "🍹 TRAGOS",
+      "📋 MENU del DIA o SUGERENCIAS"
+    ];
+
     // Cargar productos desde productos.json
     fetch('productos.json')
       .then(response => response.json())
@@ -114,16 +153,25 @@
         renderProducts('Todos');
       });
 
-    // Renderizar categorías dinámicamente
+    // Renderizar categorías en orden fijo
     function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
       const container = document.getElementById('category-buttons');
       container.innerHTML = '';
-      categorias.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
-        container.appendChild(btn);
+
+      // Siempre agregar botón "Todos"
+      const btnTodos = document.createElement('button');
+      btnTodos.textContent = "Todos";
+      btnTodos.onclick = () => renderProducts("Todos");
+      container.appendChild(btnTodos);
+
+      categoriasOrdenadas.forEach(cat => {
+        // Solo mostrar botón si existe algún producto con esa categoría
+        if (productos.some(p => p.categoria === cat)) {
+          const btn = document.createElement('button');
+          btn.textContent = cat;
+          btn.onclick = () => renderProducts(cat);
+          container.appendChild(btn);
+        }
       });
     }
 
