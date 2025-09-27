@@ -1,481 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Carta Digital</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Carta</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f6f6f6;
-      color: #333;
-    }
-    header {
-      background: #806250;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-      font-size: 1.5rem;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #806250;
-    }
-    /* Token box */
-    .token-box {
-      background: #f1f1f1;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .token-box input {
-      padding: 10px;
-      width: 70%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .token-box button {
-      padding: 10px 15px;
-      border: none;
-      background: #806250;
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 5px;
-    }
-    .token-box button:hover {
-      background: #5f4a3b;
-    }
-
-    /* Formulario */
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    form input, form select {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      flex: 1 1 45%;
-    }
-    form button {
-      background: #806250;
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      flex: 1 1 100%;
-    }
-    form button:hover {
-      background: #5f4a3b;
-    }
-
-    /* Vista previa de imagen */
-    .image-preview {
-      text-align: center;
-      margin-top: 10px;
-    }
-    .image-preview img {
-      max-width: 150px;
-      max-height: 150px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    /* Buscador */
-    .search-box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .search-box input, .search-box select {
-      padding: 10px;
-      flex: 1;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    /* Tabla */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-    th, td {
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background: #806250;
-      color: #fff;
-    }
-    .actions button {
-      margin: 0 3px;
-      padding: 5px 8px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .edit-btn {
-      background: #4CAF50;
-      color: #fff;
-    }
-    .delete-btn {
-      background: #f44336;
-      color: #fff;
-    }
+    body { font-family: Arial, sans-serif; margin:20px; background:#f7f3f0; color:#333;}
+    form { background:#fff; padding:15px; border-radius:10px; margin-bottom:20px;}
+    input,textarea { width:100%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:6px;}
+    table { width:100%; border-collapse:collapse; background:#fff;}
+    th,td { border:1px solid #ddd; padding:8px; text-align:left;}
+    th { background:#eee;}
+    img { max-width:60px; }
   </style>
 </head>
 <body>
-
-<header>Panel de Administración - Carta Digital</header>
-
-<div class="container">
-  <h2>Gestión de Productos</h2>
-
-  <!-- TOKEN -->
-  <div class="token-box">
-    <label for="token">Token de GitHub:</label><br>
-    <input type="password" id="token" placeholder="Pega tu token aquí">
-    <button onclick="saveToken()">Guardar Token</button>
-    <button onclick="clearToken()">Borrar Token</button>
-    <p id="tokenStatus"></p>
-  </div>
-
-  <!-- FORMULARIO -->
-  <form id="productForm">
-    <input type="hidden" id="editIndex" value="">
-    <input type="text" id="nombre" placeholder="Nombre del producto" required>
-    <input type="text" id="descripcion" placeholder="Descripción" required>
-    <input type="number" id="precio" placeholder="Precio" required>
-    <input type="text" id="imagen" placeholder="Ruta imagen (ej: img/saltena.jpg)" required oninput="updatePreview()">
-    <select id="categoria" required>
-      <option value="">Selecciona categoría</option>
-      <option>☕ Cafetería</option>
-      <option>🥐 Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)</option>
-      <option>➕ Adicionales de café</option>
-      <option>🍰 Pastelería</option>
-      <option>🥧 Tartas (con ensaladita)</option>
-      <option>🌯 Burritos (con papas fritas)</option>
-      <option>🥤 Refrescos</option>
-      <option>🥪 Sandwiches</option>
-      <option>🥩 Lomitos (fritas)</option>
-      <option>🍔 Burgers (100% carne, con fritas. La burger puede ser Not Cow)</option>
-      <option>🍳 Omelettes/Tortillas</option>
-      <option>🥗 ENSALADAS</option>
-      <option>🍗 MILANESAS Ternera o Pollo - Pechuga</option>
-      <option>🍽️ Otros platos</option>
-      <option>🥖 ENTRADITAS</option>
-      <option>🍕 PIZZAS (Estilo napolitano)</option>
-      <option>🍚 RISOTTOS</option>
-      <option>🍝 PASTAS</option>
-      <option>🧂 SALSAS</option>
-      <option>🔥 GRILL</option>
-      <option>🍖 GRILL Especiales</option>
-      <option>🐥 MENU KIDS</option>
-      <option>🍲 PLATOS PRINCIPALES</option>
-      <option>🍮 POSTRES</option>
-      <option>🧀 PICADAS</option>
-      <option>🍩 HAPPY HOUR</option>
-      <option>🍷 VINOS BODEGA RUTINI - LA RURAL</option>
-      <option>🍷 VINOS BODEGA SALENTEIN</option>
-      <option>🍷 VINOS BLANCOS</option>
-      <option>🍷 Copa de vino</option>
-      <option>🍷 ROSÉ vino</option>
-      <option>🥂 ESPUMANTES</option>
-      <option>🍺 CERVEZAS</option>
-      <option>🍹 TRAGOS</option>
-      <option>📋 MENU del DIA o SUGERENCIAS</option>
-    </select>
-    <button type="submit">Guardar Producto</button>
+  <h1>Admin Carta</h1>
+  <form id="form">
+    <input type="hidden" id="editIndex">
+    <label>Nombre</label>
+    <input type="text" id="nombre" required>
+    <label>Descripción</label>
+    <textarea id="descripcion" required></textarea>
+    <label>Precio</label>
+    <input type="text" id="precio" required>
+    <label>Imagen (ej: img/foto.jpg)</label>
+    <input type="text" id="imagen" required>
+    <label>Categoría</label>
+    <input type="text" id="categoria" required>
+    <button type="submit">Guardar</button>
   </form>
 
-  <!-- Vista previa de imagen -->
-  <div class="image-preview" id="imagePreview">
-    <p>Vista previa de imagen</p>
-    <img id="previewImg" src="" alt="Sin imagen">
-  </div>
-
-  <!-- BUSCADOR -->
-  <div class="search-box">
-    <input type="text" id="searchName" placeholder="Buscar por nombre..." oninput="filterProducts()">
-    <select id="searchCategory" onchange="filterProducts()">
-      <option value="">Todas las categorías</option>
-      <option>☕ Cafetería</option>
-      <option>🥐 Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)</option>
-      <option>➕ Adicionales de café</option>
-      <option>🍰 Pastelería</option>
-      <option>🥧 Tartas (con ensaladita)</option>
-      <option>🌯 Burritos (con papas fritas)</option>
-      <option>🥤 Refrescos</option>
-      <option>🥪 Sandwiches</option>
-      <option>🥩 Lomitos (fritas)</option>
-      <option>🍔 Burgers (100% carne, con fritas. La burger puede ser Not Cow)</option>
-      <option>🍳 Omelettes/Tortillas</option>
-      <option>🥗 ENSALADAS</option>
-      <option>🍗 MILANESAS Ternera o Pollo - Pechuga</option>
-      <option>🍽️ Otros platos</option>
-      <option>🥖 ENTRADITAS</option>
-      <option>🍕 PIZZAS (Estilo napolitano)</option>
-      <option>🍚 RISOTTOS</option>
-      <option>🍝 PASTAS</option>
-      <option>🧂 SALSAS</option>
-      <option>🔥 GRILL</option>
-      <option>🍖 GRILL Especiales</option>
-      <option>🐥 MENU KIDS</option>
-      <option>🍲 PLATOS PRINCIPALES</option>
-      <option>🍮 POSTRES</option>
-      <option>🧀 PICADAS</option>
-      <option>🍩 HAPPY HOUR</option>
-      <option>🍷 VINOS BODEGA RUTINI - LA RURAL</option>
-      <option>🍷 VINOS BODEGA SALENTEIN</option>
-      <option>🍷 VINOS BLANCOS</option>
-      <option>🍷 Copa de vino</option>
-      <option>🍷 ROSÉ vino</option>
-      <option>🥂 ESPUMANTES</option>
-      <option>🍺 CERVEZAS</option>
-      <option>🍹 TRAGOS</option>
-      <option>📋 MENU del DIA o SUGERENCIAS</option>
-    </select>
-  </div>
-
-  <!-- TABLA -->
+  <h2>Productos</h2>
   <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Precio</th>
-        <th>Imagen</th>
-        <th>Categoría</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="productTable"></tbody>
+    <thead><tr><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr></thead>
+    <tbody id="tbody"></tbody>
   </table>
-</div>
 
-<script>
-  /* =============================
-     CONFIG GITHUB
-  ============================= */
-  const USERNAME = "sequispe";
-  const REPO = "carta";
-  const FILE_PATH = "productos.json";
+  <script>
+    let productos=[];
+    fetch('productos.json').then(r=>r.json()).then(d=>{productos=d; render();});
 
-  let productos = [];
-  let filteredProductos = [];
-
-  /* =============================
-     TOKEN LOCALSTORAGE
-  ============================= */
-  function saveToken() {
-    const token = document.getElementById('token').value.trim();
-    if (token) {
-      localStorage.setItem('github_token', token);
-      document.getElementById('token').value = '';
-      document.getElementById('tokenStatus').innerText = "✅ Token guardado correctamente.";
-    } else {
-      alert("Por favor, ingresa un token válido.");
-    }
-  }
-
-  function clearToken() {
-    localStorage.removeItem('github_token');
-    document.getElementById('tokenStatus').innerText = "⚠️ Token borrado.";
-  }
-
-  function getToken() {
-    return localStorage.getItem('github_token');
-  }
-
-  /* =============================
-     VISTA PREVIA IMAGEN
-  ============================= */
-  function updatePreview() {
-    const url = document.getElementById('imagen').value;
-    const previewImg = document.getElementById('previewImg');
-    previewImg.src = url || "";
-  }
-
-  /* =============================
-     CARGAR PRODUCTOS
-  ============================= */
-  async function loadProducts() {
-    const url = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
-    const res = await fetch(url);
-    productos = await res.json();
-    filteredProductos = [...productos];
-    renderTable();
-  }
-
-  /* =============================
-     GUARDAR EN GITHUB
-  ============================= */
-  async function saveToGitHub(newContent) {
-    const TOKEN = getToken();
-    if (!TOKEN) {
-      alert("⚠️ Necesitas guardar tu token primero.");
-      return;
-    }
-
-    const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-
-    const getRes = await fetch(apiUrl, {
-      headers: {
-        "Authorization": `token ${TOKEN}`,
-        "Accept": "application/vnd.github.v3+json"
-      }
-    });
-    const data = await getRes.json();
-
-    const updateRes = await fetch(apiUrl, {
-      method: "PUT",
-      headers: {
-        "Authorization": `token ${TOKEN}`,
-        "Accept": "application/vnd.github.v3+json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: "Actualización desde admin.html",
-        content: btoa(unescape(encodeURIComponent(newContent))),
-        sha: data.sha
-      })
-    });
-
-    if (updateRes.ok) {
-      alert("✅ Cambios guardados en GitHub correctamente.");
-    } else {
-      alert("❌ Error al guardar en GitHub. Verifica tu token.");
-    }
-  }
-
-  /* =============================
-     FILTRO BUSCADOR
-  ============================= */
-  function filterProducts() {
-    const name = document.getElementById('searchName').value.toLowerCase();
-    const category = document.getElementById('searchCategory').value;
-
-    filteredProductos = productos.filter(p => {
-      const matchName = p.nombre.toLowerCase().includes(name);
-      const matchCategory = category ? p.categoria === category : true;
-      return matchName && matchCategory;
-    });
-
-    renderTable();
-  }
-
-  /* =============================
-     RENDER TABLA
-  ============================= */
-  function renderTable() {
-    const tableBody = document.getElementById('productTable');
-    tableBody.innerHTML = '';
-
-    filteredProductos.forEach((p, index) => {
-      const row = `
+    function render(){
+      const tb=document.getElementById('tbody'); tb.innerHTML='';
+      productos.forEach((p,i)=>{
+        tb.innerHTML+=`
         <tr>
+          <td><img src="${p.imagen}" alt=""></td>
           <td>${p.nombre}</td>
           <td>${p.descripcion}</td>
-          <td>$${p.precio}</td>
-          <td><img src="${p.imagen}" alt="${p.nombre}" width="50"></td>
           <td>${p.categoria}</td>
-          <td>
-            <button class="edit-btn" onclick="editProduct(${index})">Editar</button>
-            <button class="delete-btn" onclick="deleteProduct(${index})">Borrar</button>
-          </td>
-        </tr>
-      `;
-      tableBody.innerHTML += row;
-    });
-  }
-
-  /* =============================
-     FORMULARIO: AGREGAR/EDITAR
-  ============================= */
-  const form = document.getElementById('productForm');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const nuevo = {
-      nombre: document.getElementById('nombre').value,
-      descripcion: document.getElementById('descripcion').value,
-      precio: parseFloat(document.getElementById('precio').value),
-      imagen: document.getElementById('imagen').value,
-      categoria: document.getElementById('categoria').value
-    };
-
-    const editIndex = document.getElementById('editIndex').value;
-
-    if (editIndex) {
-      productos[editIndex] = nuevo;
-      document.getElementById('editIndex').value = '';
-    } else {
-      productos.push(nuevo);
+          <td>${p.precio}</td>
+          <td><button onclick="edit(${i})">Editar</button><button onclick="del(${i})">Eliminar</button></td>
+        </tr>`;
+      });
     }
 
-    filteredProductos = [...productos];
-    renderTable();
-    form.reset();
-    updatePreview();
-    saveToGitHub(JSON.stringify(productos, null, 2));
-  });
-
-  /* =============================
-     EDITAR PRODUCTO
-  ============================= */
-  window.editProduct = function(index) {
-    const p = filteredProductos[index];
-    document.getElementById('nombre').value = p.nombre;
-    document.getElementById('descripcion').value = p.descripcion;
-    document.getElementById('precio').value = p.precio;
-    document.getElementById('imagen').value = p.imagen;
-    document.getElementById('categoria').value = p.categoria;
-    updatePreview();
-
-    const originalIndex = productos.findIndex(item => item.nombre === p.nombre && item.descripcion === p.descripcion);
-    document.getElementById('editIndex').value = originalIndex;
-  };
-
-  /* =============================
-     BORRAR PRODUCTO
-  ============================= */
-  window.deleteProduct = function(index) {
-    if (confirm('¿Seguro que quieres borrar este producto?')) {
-      const originalIndex = productos.findIndex(item => item.nombre === filteredProductos[index].nombre);
-      productos.splice(originalIndex, 1);
-      filteredProductos.splice(index, 1);
-      renderTable();
-      saveToGitHub(JSON.stringify(productos, null, 2));
+    document.getElementById('form').onsubmit=function(e){
+      e.preventDefault();
+      const idx=document.getElementById('editIndex').value;
+      const prod={
+        nombre:document.getElementById('nombre').value,
+        descripcion:document.getElementById('descripcion').value,
+        precio:document.getElementById('precio').value,
+        imagen:document.getElementById('imagen').value,
+        categoria:document.getElementById('categoria').value
+      };
+      if(idx===''){ productos.push(prod);} else { productos[idx]=prod; document.getElementById('editIndex').value='';}
+      render();
+      this.reset();
     }
-  };
 
-  /* =============================
-     INICIAR
-  ============================= */
-  loadProducts();
-
-  if (getToken()) {
-    document.getElementById('tokenStatus').innerText = "🔐 Token cargado en el navegador.";
-  }
-</script>
-
+    function edit(i){
+      const p=productos[i];
+      document.getElementById('nombre').value=p.nombre;
+      document.getElementById('descripcion').value=p.descripcion;
+      document.getElementById('precio').value=p.precio;
+      document.getElementById('imagen').value=p.imagen;
+      document.getElementById('categoria').value=p.categoria;
+      document.getElementById('editIndex').value=i;
+    }
+    function del(i){ if(confirm('¿Eliminar producto?')){ productos.splice(i,1); render(); } }
+  </script>
 </body>
 </html>
