@@ -3,31 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Carta - Tilo Café</title>
+  <title>Admin Carta</title>
   <style>
     body { font-family: Arial, sans-serif; margin:20px; background:#f7f3f0; color:#333;}
-    h1 { text-align: center; color:#806250; }
     form { background:#fff; padding:15px; border-radius:10px; margin-bottom:20px;}
     input,textarea { width:100%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:6px;}
     table { width:100%; border-collapse:collapse; background:#fff;}
     th,td { border:1px solid #ddd; padding:8px; text-align:left;}
-    th { background:#806250; color:white; }
+    th { background:#eee;}
     img { max-width:60px; }
-    button { cursor:pointer; }
   </style>
 </head>
 <body>
-  <h1>Panel de Administración - Tilo Café</h1>
-
-  <!-- Caja para guardar el token -->
-  <div style="margin-bottom:15px; background:#eee; padding:10px; border-radius:8px;">
-    <label for="token">Token de GitHub:</label><br>
-    <input type="password" id="token" placeholder="Pega tu token aquí" style="width:70%; padding:8px;">
-    <button onclick="saveToken()">Guardar Token</button>
-    <button onclick="clearToken()">Borrar Token</button>
-    <p id="tokenStatus"></p>
-  </div>
-
+  <h1>Admin Carta</h1>
   <form id="form">
     <input type="hidden" id="editIndex">
     <label>Nombre</label>
@@ -35,7 +23,7 @@
     <label>Descripción</label>
     <textarea id="descripcion" required></textarea>
     <label>Precio</label>
-    <input type="number" id="precio" required>
+    <input type="text" id="precio" required>
     <label>Imagen (ej: img/foto.jpg)</label>
     <input type="text" id="imagen" required>
     <label>Categoría</label>
@@ -45,101 +33,44 @@
 
   <h2>Productos</h2>
   <table>
-    <thead>
-      <tr><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
-    </thead>
+    <thead><tr><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr></thead>
     <tbody id="tbody"></tbody>
   </table>
 
   <script>
-    // ⚡ CONFIGURACIÓN: ahora apunta a tu repo real en GitHub
-    const USERNAME = "cholose10";   // <-- tu usuario de GitHub
-    const REPO = "cartatilo";       // <-- tu repo de GitHub
-    const FILE_PATH = "productos.json";
-
     let productos=[];
+    fetch('productos.json').then(r=>r.json()).then(d=>{productos=d; render();});
 
-    // Guardar / borrar token en localStorage
-    function saveToken(){
-      const t=document.getElementById('token').value.trim();
-      if(t){ localStorage.setItem('github_token',t); document.getElementById('token').value=''; 
-        document.getElementById('tokenStatus').innerText="✅ Token guardado."; }
-    }
-    function clearToken(){ localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; }
-    function getToken(){ return localStorage.getItem('github_token'); }
-
-    // Cargar productos desde GitHub
-    async function loadProducts(){
-      const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
-      const res=await fetch(url);
-      productos=await res.json();
-      render();
-    }
-
-    // Renderizar tabla
     function render(){
       const tb=document.getElementById('tbody'); tb.innerHTML='';
       productos.forEach((p,i)=>{
         tb.innerHTML+=`
-          <tr>
-            <td><img src="${p.imagen}" alt=""></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
-            <td>
-              <button onclick="edit(${i})">Editar</button>
-              <button onclick="del(${i})">Eliminar</button>
-            </td>
-          </tr>`;
+        <tr>
+          <td><img src="${p.imagen}" alt=""></td>
+          <td>${p.nombre}</td>
+          <td>${p.descripcion}</td>
+          <td>${p.categoria}</td>
+          <td>${p.precio}</td>
+          <td><button onclick="edit(${i})">Editar</button><button onclick="del(${i})">Eliminar</button></td>
+        </tr>`;
       });
     }
 
-    // Guardar cambios en GitHub
-    async function saveToGitHub(newContent){
-      const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠️ Necesitas guardar tu token primero."); return; }
-
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
-      const data=await getRes.json();
-
-      const updateRes=await fetch(apiUrl,{
-        method:"PUT",
-        headers:{
-          "Authorization":`token ${TOKEN}`,
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:"Actualización desde admin.html",
-          content:btoa(unescape(encodeURIComponent(newContent))),
-          sha:data.sha
-        })
-      });
-
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
-    }
-
-    // Formulario: agregar/editar
     document.getElementById('form').onsubmit=function(e){
       e.preventDefault();
       const idx=document.getElementById('editIndex').value;
       const prod={
         nombre:document.getElementById('nombre').value,
         descripcion:document.getElementById('descripcion').value,
-        precio:parseFloat(document.getElementById('precio').value),
+        precio:document.getElementById('precio').value,
         imagen:document.getElementById('imagen').value,
         categoria:document.getElementById('categoria').value
       };
       if(idx===''){ productos.push(prod);} else { productos[idx]=prod; document.getElementById('editIndex').value='';}
       render();
       this.reset();
-      saveToGitHub(JSON.stringify(productos,null,2));
     }
 
-    // Editar producto
     function edit(i){
       const p=productos[i];
       document.getElementById('nombre').value=p.nombre;
@@ -149,18 +80,7 @@
       document.getElementById('categoria').value=p.categoria;
       document.getElementById('editIndex').value=i;
     }
-
-    // Eliminar producto
-    function del(i){
-      if(confirm('¿Eliminar producto?')){
-        productos.splice(i,1); render();
-        saveToGitHub(JSON.stringify(productos,null,2));
-      }
-    }
-
-    // Iniciar
-    loadProducts();
-    if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
+    function del(i){ if(confirm('¿Eliminar producto?')){ productos.splice(i,1); render(); } }
   </script>
 </body>
 </html>
