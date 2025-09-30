@@ -1195,5 +1195,12 @@
     "categoria": "📋MENU del DIA o SUGERENCIAS",
     "precio": "0",
     "imagen": "img/.jpg"
+  },
+  {
+    "nombre": "tortas nuevas",
+    "descripcion": "sugerencia nueva  ",
+    "precio": "9200",
+    "imagen": "img//Tortasnueva.jpg",
+    "categoria": "🍰 Pastelería"
   }
 ]
