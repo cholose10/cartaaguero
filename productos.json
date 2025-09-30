@@ -1068,54 +1068,54 @@
     "descripcion": "Jack Daniel's",
     "imagen": "img/Daniel’s.jpg",
     "categoria": "🍹TRAGOS",
-    "precio": "13500"
+    "precio": "15000"
   },
   {
     "nombre": "Johnny Walker Black",
     "descripcion": "Johnny Walker Black",
     "imagen": "img/Black.jpg",
     "categoria": "🍹TRAGOS",
-    "precio": "14500"
+    "precio": "15000"
   },
   {
     "nombre": "Johnny Walker Red",
     "descripcion": "Johnny Walker Red",
     "imagen": "img/Ret.jpg",
     "categoria": "🍹TRAGOS",
-    "precio": "12500"
+    "precio": "13000"
   },
   {
     "nombre": "Licor Baileys",
     "descripcion": "Licor Baileys",
-    "precio": "11000",
+    "precio": "12000",
     "imagen": "img/20250903_111957.jpg",
     "categoria": "🍹TRAGOS"
   },
   {
     "nombre": "Fernet con Coca-Cola",
     "descripcion": "Fernet con Coca-Cola",
-    "precio": "11000",
+    "precio": "12000",
     "imagen": "img/Ferne.jpg",
     "categoria": "🍹TRAGOS"
   },
   {
     "nombre": "Gin Tonic Beefeater",
     "descripcion": "Gin Tonic Beefeater",
-    "precio": "11000",
+    "precio": "1000",
     "imagen": "img/Ginton.jpg",
     "categoria": "🍹TRAGOS"
   },
   {
     "nombre": "Batido Gancia",
     "descripcion": "Batido Gancia",
-    "precio": "9000",
+    "precio": "9500",
     "imagen": "img/Gancia.jpg",
     "categoria": "🍹TRAGOS"
   },
   {
     "nombre": "Aperol con naranja",
     "descripcion": "Aperol con naranja",
-    "precio": "9000",
+    "precio": "9500",
     "imagen": "img/Campati.jpg",
     "categoria": "🍹TRAGOS"
   },
@@ -1123,7 +1123,7 @@
     "nombre": "Aperol Spritz",
     "descripcion": "Aperol Spritz",
     "categoria": "🍹TRAGOS",
-    "precio": "11500",
+    "precio": "13000",
     "imagen": "img/Aprol.jpg"
   },
   {
