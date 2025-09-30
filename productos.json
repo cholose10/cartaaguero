@@ -941,14 +941,14 @@
     "nombre": "AMIGOS Y FAMILLAS PASTA",
     "descripcion": "FUENTE DE ÑOQUIES O TALLARINES(BOLOGNESA, CREMA, FILETO ORISA. PODESCONBINAR)",
     "precio": "48000",
-    "imagen": "img/20250817_134218.jpg",
+    "imagen": "img/Fuenteñoquis.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
     "nombre": "AMIGOS Y FAMILLA MILANESA PARA 3",
     "descripcion": "TERNERA NAPOLITANA, SMOKE, SUIZA(PUEDE SER 1/2 Y 1/2 CON FRITAS)",
     "precio": "60000",
-    "imagen": "img/20250817_134218.jpg",
+    "imagen": "img/Milasaurio.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
@@ -1060,7 +1060,7 @@
     "n,ombre": "STELLA 1LITRO",
     "descripcion": "porron",
     "precio": "17000",
-    "imagen": "img/Estelar.jpg",
+    "imagen": "img/SetellaL1.jpg",
     "categoria": "🍺 CERVEZAS"
   },
   {
