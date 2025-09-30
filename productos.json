@@ -91,29 +91,29 @@
     "categoria": "Cafetería☕️"
   },
   {
-    "nombre": "ICE COFFE",
-    "descripcion": "doble shot con hielo",
+    "nombre": "ICE COFFE🥶",
+    "descripcion": "doble shot con hielo❄️",
     "precio": "4800",
     "imagen": "img/20250817_131630.jpg",
     "categoria": "Cafetería☕️"
   },
   {
-    "nombre": "LATTE ICE COFFE",
-    "descripcion": "leche fría con doble shot de café y hielo ",
+    "nombre": "LATTE ICE COFFE🥶",
+    "descripcion": "leche fría con doble shot de café y hielo❄️ ",
     "precio": "4800",
     "imagen": "img/20250817_131330.jpg",
     "categoria": "Cafetería☕️"
   },
   {
-    "nombre": "FRAPPUCCINO OREO",
-    "descripcion": "base de leche ",
+    "nombre": "FRAPPUCCINO OREO🥶",
+    "descripcion": "base de leche ❄️",
     "precio": "6600",
     "imagen": "img/20250817_104537.jpg",
     "categoria": "Cafetería☕️"
   },
   {
-    "nombre": "FRAPPUCCINO OREO",
-    "descripcion": "base de Café",
+    "nombre": "FRAPPUCCINO OREO🥶",
+    "descripcion": "base de Café❄️",
     "precio": "6600",
     "imagen": "img/20250815_154308.jpg",
     "categoria": "Cafetería☕️"
@@ -126,7 +126,7 @@
     "categoria": "☕ 🥐Desayunos y meriendas (Todos incluyen infusión y vasito de jugo o limonada)"
   },
   {
-    "nombre": "TOSTADAS",
+    "nombre": "TOSTADAS🍞",
     "descripcion": "Pan negro o blanco con queso crema y mermelada casera",
     "precio": "9700",
     "imagen": "img/Promotos1.jpg",
@@ -224,7 +224,7 @@
     "categoria": "🍰 Pastelería"
   },
   {
-    "nombre": "Cookies",
+    "nombre": "Cookies🍪",
     "descripcion": "cookies vainilla con chocolate, chocolate+chocolate",
     "precio": "4800",
     "imagen": "img/20250902_085341.jpg",
