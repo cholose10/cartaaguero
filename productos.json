@@ -322,7 +322,7 @@
     "categoria": "🍰 Pastelería"
   },
   {
-    "nombre": "Tarta de BRÓCOLI",
+    "nombre": "Tarta de calabaza",
     "descripcion": "Brócoli, queso sardo, muzarella, cebolla, masa integral",
     "precio": "18000",
     "imagen": "img/Brócoli .jpg",
@@ -784,6 +784,20 @@
     "imagen": "img/Carbonara.jpg"
   },
   {
+    "nombre": "caccio e pepe",
+    "descripcion": "manteca, pimienta y parmesano",
+    "precio": "28000",
+    "imagen": "img/20250817_134218.jpg",
+    "categoria": "🥫SALSA"
+  },
+  {
+    "nombre": "SALSA VARIAS",
+    "descripcion": "MANTECA,OLIVA AJO Y PARMESANO",
+    "precio": "6000",
+    "imagen": "img/20250817_134218.jpg",
+    "categoria":"🥫SALSA"
+  },
+  {
     "nombre": "Pollo (pechuga)",
     "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/Pechuga.jpg",
@@ -910,13 +924,6 @@
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
-    "nombre": "Entraña CRISPY",
-    "descripcion": "Rebozado crujiente con ensalada de papa, huevo y mayonesa",
-    "precio": "28000",
-    "imagen": "img/20250817_134218.jpg",
-    "categoria": "🍽️PLATOS PRINCIPALES"
-  },
-  {
     "nombre": "Matambrito a la PIZZA",
     "descripcion": "De cerdo, muzarella, tomate y orégano con papas fritas",
     "precio": "27500",
@@ -928,6 +935,20 @@
     "descripcion": "De cerdo, cebollitas, morrones, arvejas y huevo frito, con papas fritas",
     "precio": "28000",
     "imagen": "img/Matrio.jpg",
+    "categoria": "🍽️PLATOS PRINCIPALES"
+  },
+  {
+    "nombre": "AMIGOS Y FAMILLAS PASTA",
+    "descripcion": "FUENTE DE ÑOQUIES O TALLARINES(BOLOGNESA, CREMA, FILETO ORISA. PODESCONBINAR)",
+    "precio": "48000",
+    "imagen": "img/20250817_134218.jpg",
+    "categoria": "🍽️PLATOS PRINCIPALES"
+  },
+  {
+    "nombre": "AMIGOS Y FAMILLA MILANESA PARA 3",
+    "descripcion": "TERNERA NAPOLITANA, SMOKE, SUIZA(PUEDE SER 1/2 Y 1/2 CON FRITAS)",
+    "precio": "60000",
+    "imagen": "img/20250817_134218.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
@@ -1029,9 +1050,16 @@
     "categoria": "🍺 CERVEZAS"
   },
   {
-    "nombre": "CORONA (Porrón)",
+    "n,ombre": "CORONA (Porrón)",
     "descripcion": "porron",
     "precio": "7500",
+    "imagen": "img/Estelar.jpg",
+    "categoria": "🍺 CERVEZAS"
+  },
+  {
+    "n,ombre": "STELLA 1LITRO",
+    "descripcion": "porron",
+    "precio": "17000",
     "imagen": "img/Estelar.jpg",
     "categoria": "🍺 CERVEZAS"
   },
