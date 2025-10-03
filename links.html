@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tilo Café - Links</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f9f9f9, #ececec);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    header img {
+      width: 120px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #666;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .link-card img {
+      width: 28px;
+      height: 28px;
+      margin-right: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Poné el logo de Tilo Café aquí -->
+    <img src="img/logo.png" alt="Logo Tilo Café">
+    <h1>Tilo Café</h1>
+    <p>Conectá con nosotros</p>
+  </header>
+
+  <main class="links">
+    <a class="link-card" href="https://wa.me/54911XXXXXXX" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+      WhatsApp
+    </a>
+    <a class="link-card" href="https://instagram.com/tuusuario" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      Instagram
+    </a>
+    <a class="link-card" href="https://cartatilo.vercel.app" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Carta Digital">
+      Ver Carta Digital
+    </a>
+  </main>
+
+  <footer>
+    © 2025 Tilo Café - Todos los derechos reservados
+  </footer>
+</body>
+</html>
