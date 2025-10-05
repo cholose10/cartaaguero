@@ -6,12 +6,13 @@
   <title>Carta Tilo Café</title>
   <style>
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: smooth; /* 🌟 hace el desplazamiento suave */
     }
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #8888; /* 🎨 Fondo sólido */
+      background: url("img/Fondo1.jpg") repeat;
+      background-size: cover;
       color: #45270a;
     }
     header {
@@ -30,38 +31,9 @@
       font-weight: bold;
       background: rgba(255,255,255,0.8);
       border-radius: 8px;
-      margin: 15px auto 10px;
+      margin: 15px auto;
       width: fit-content;
     }
-
-    /* 🔍 BUSCADOR */
-    .search-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .search-container input {
-      width: 60%;
-      max-width: 400px;
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-    .search-container button {
-      padding: 10px 15px;
-      font-size: 1rem;
-      background-color: #8c6954;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-left: 5px;
-      transition: background 0.3s;
-    }
-    .search-container button:hover {
-      background-color: #6b4e3d;
-    }
-
     .categories {
       display: flex;
       flex-wrap: wrap;
@@ -120,17 +92,12 @@
   </style>
 </head>
 <body>
+  <!-- FOTO GRANDE ARRIBA -->
   <header>
     <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
   <div class="banner">¡Bienvenidos a Tilo Café!</div>
-
-  <!-- 🔍 Buscador -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar producto...">
-    <button onclick="buscar()">Buscar</button>
-  </div>
 
   <!-- Botones de categorías -->
   <div class="categories" id="category-buttons"></div>
@@ -150,7 +117,7 @@
         renderProducts('Todos');
       });
 
-    // Renderizar categorías
+    // Renderizar categorías dinámicamente
     function renderCategories() {
       const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
       const container = document.getElementById('category-buttons');
@@ -160,6 +127,7 @@
         btn.textContent = cat;
         btn.onclick = () => {
           renderProducts(cat);
+          // 🔽 Baja automáticamente hacia los productos
           document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
         };
         container.appendChild(btn);
@@ -167,16 +135,10 @@
     }
 
     // Renderizar productos
-    function renderProducts(categoria, filtro = '') {
+    function renderProducts(categoria) {
       const container = document.getElementById('product-list');
       container.innerHTML = '';
-
-      const filtrados = productos.filter(p => {
-        const coincideCategoria = categoria === 'Todos' || p.categoria === categoria;
-        const coincideBusqueda = p.nombre.toLowerCase().includes(filtro.toLowerCase());
-        return coincideCategoria && coincideBusqueda;
-      });
-
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
       filtrados.forEach(p => {
         const item = document.createElement('div');
         item.className = 'item';
@@ -191,26 +153,7 @@
         `;
         container.appendChild(item);
       });
-
-      if (filtrados.length === 0) {
-        container.innerHTML = `<p style="text-align:center; font-weight:bold;">No se encontraron productos.</p>`;
-      }
     }
-
-    // 🔍 Buscar al presionar Enter o botón
-    function buscar() {
-      const valor = document.getElementById('searchInput').value.trim();
-      renderProducts('Todos', valor);
-      document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Permitir Enter
-    document.getElementById('searchInput').addEventListener('keypress', e => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        buscar();
-      }
-    });
   </script>
 </body>
 </html>
