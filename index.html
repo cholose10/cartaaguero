@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carta Tilo Café</title>
   <style>
+    html {
+      scroll-behavior: smooth; /* 🌟 hace el desplazamiento suave */
+    }
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -122,7 +125,11 @@
       categorias.forEach(cat => {
         const btn = document.createElement('button');
         btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
+        btn.onclick = () => {
+          renderProducts(cat);
+          // 🔽 Baja automáticamente hacia los productos
+          document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
+        };
         container.appendChild(btn);
       });
     }
