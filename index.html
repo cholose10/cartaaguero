@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carta Tilo Café</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #444; /* Fondo gris más claro */
+      background-color: #888;
       color: #45270a;
     }
     header {
@@ -30,43 +27,32 @@
       font-weight: bold;
       background: rgba(255,255,255,0.8);
       border-radius: 8px;
-      margin: 15px auto 10px;
+      margin: 15px auto;
       width: fit-content;
     }
 
-    /* 🔍 Buscador + Categorías */
-    .top-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 8px;
-      margin: 0 10px;
+    /* Buscador */
+    .search-container {
+      text-align: center;
+      margin-bottom: 15px;
     }
-
-    .top-bar input {
-      flex: 1 1 250px;
+    .search-container input {
+      width: 70%;
       padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 8px;
-    }
-
-    .top-bar button {
-      padding: 10px 15px;
       font-size: 1rem;
+    }
+    .search-container button {
+      padding: 10px 20px;
       background-color: #8c6954;
-      color: white;
+      color: #fff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
     }
-
-    .top-bar button:hover {
+    .search-container button:hover {
       background-color: #6b4e3d;
     }
 
@@ -75,9 +61,8 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      margin-top: 10px;
+      padding: 10px;
     }
-
     .categories button {
       padding: 10px 20px;
       background-color: #8c6954;
@@ -88,11 +73,9 @@
       transition: background 0.3s;
       font-size: 1rem;
     }
-
     .categories button:hover {
       background-color: #6b4e3d;
     }
-
     .item-list {
       display: flex;
       flex-wrap: wrap;
@@ -100,7 +83,6 @@
       gap: 15px;
       padding: 20px;
     }
-
     .item {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
@@ -109,82 +91,52 @@
       width: 280px;
       transition: transform 0.2s ease;
     }
-
     .item:hover {
       transform: scale(1.02);
     }
-
     .item img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
-
     .item h3 {
       margin: 10px;
     }
-
     .item p {
       margin: 0 10px 10px;
     }
-
     .item .price {
       font-weight: bold;
       color: #000;
       margin: 0 10px 10px;
       display: block;
     }
-
-    /* 🔝 Botón volver arriba */
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #8c6954;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: none;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-      transition: background 0.3s;
-    }
-
-    #scrollTopBtn:hover {
-      background-color: #6b4e3d;
-    }
   </style>
 </head>
 <body>
-
   <header>
     <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Resto Café aguero 2298!</div>
+  <div class="banner">¡Bienvenidos a Tilo Café!</div>
 
-  <!-- 🔍 Buscador y categorías -->
-  <div class="top-bar">
-    <input type="text" id="searchInput" placeholder="Buscar producto..." onkeypress="if(event.key==='Enter'){buscar();}">
-    <button onclick="buscar()">Buscar</button>
+  <!-- Buscador -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar producto...">
+    <button onclick="buscarProducto()">Buscar</button>
   </div>
 
+  <!-- Categorías -->
   <div class="categories" id="category-buttons"></div>
 
   <!-- Lista de productos -->
   <div class="item-list" id="product-list"></div>
 
-  <!-- 🔝 Botón volver arriba -->
-  <button id="scrollTopBtn" onclick="scrollToTop()">⬆️</button>
-
   <script>
+    const JSON_URL = "https://raw.githubusercontent.com/cholose10/cartatilo/main/productos.json";
     let productos = [];
 
-    // Cargar productos desde productos.json
-    fetch('https://cholose10.github.io/Carta/productos.json')
+    fetch(JSON_URL)
       .then(response => response.json())
       .then(data => {
         productos = data;
@@ -192,11 +144,9 @@
         renderProducts('Todos');
       })
       .catch(err => {
-        console.error("Error al cargar productos.json:", err);
-        document.getElementById('product-list').innerHTML = "<p style='color:white;text-align:center;'>⚠️ No se pudo cargar productos.json</p>";
+        document.getElementById('product-list').innerHTML = "<p>⚠️ No se pudo cargar productos.json</p>";
       });
 
-    // Renderizar categorías
     function renderCategories() {
       const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
       const container = document.getElementById('category-buttons');
@@ -206,23 +156,16 @@
         btn.textContent = cat;
         btn.onclick = () => {
           renderProducts(cat);
-          document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
+          scrollToProducts();
         };
         container.appendChild(btn);
       });
     }
 
-    // Renderizar productos
-    function renderProducts(categoria, filtro = '') {
+    function renderProducts(categoria) {
       const container = document.getElementById('product-list');
       container.innerHTML = '';
-
-      const filtrados = productos.filter(p => {
-        const coincideCategoria = categoria === 'Todos' || p.categoria === categoria;
-        const coincideBusqueda = p.nombre.toLowerCase().includes(filtro.toLowerCase());
-        return coincideCategoria && coincideBusqueda;
-      });
-
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
       filtrados.forEach(p => {
         const item = document.createElement('div');
         item.className = 'item';
@@ -237,33 +180,39 @@
         `;
         container.appendChild(item);
       });
-
-      if (filtrados.length === 0) {
-        container.innerHTML = `<p style="text-align:center; font-weight:bold; color:white;">No se encontraron productos.</p>`;
-      }
     }
 
-    // 🔍 Buscar (sin distinguir mayúsculas/minúsculas)
-    function buscar() {
-      const valor = document.getElementById('searchInput').value.trim().toLowerCase();
-      renderProducts('Todos', valor);
+    function buscarProducto() {
+      const texto = document.getElementById('searchInput').value.toLowerCase();
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto));
+      filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
+        item.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <span class="price">${priceDisplay}</span>
+        `;
+        container.appendChild(item);
+      });
+      scrollToProducts();
+    }
+
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        buscarProducto();
+      }
+    });
+
+    function scrollToProducts() {
       document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
     }
-
-    // 🔝 Mostrar botón arriba
-    window.onscroll = function() {
-      const btn = document.getElementById("scrollTopBtn");
-      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btn.style.display = "block";
-      } else {
-        btn.style.display = "none";
-      }
-    };
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
   </script>
-
 </body>
 </html>
