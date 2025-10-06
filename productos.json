@@ -16,105 +16,105 @@
   {
     "nombre": "Café descafeinado",
     "descripcion": "Café descafeinado",
-    "precio": "3700",
+    "precio": "3800",
     "imagen": "img/20250813_094842.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Café con leche tradicional",
     "descripcion": "Café con leche tradicional",
-    "precio": "4100",
+    "precio": "4200",
     "imagen": "img/Cafechechu.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Café expresso Doble",
     "descripcion": "Café expresso Doble",
-    "precio": "4800",
+    "precio": "4900",
     "imagen": "img/doble.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Capuccino",
     "descripcion": "Café, leche, canela y cacao",
-    "precio": "5000",
+    "precio": "5100",
     "imagen": "img/Capuchino.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Capuccino italiana",
     "descripcion": "Capuccino italiana",
-    "precio": "5100",
+    "precio": "5200",
     "imagen": "img/Capuchino.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Café MOKA",
     "descripcion": " cacao intenso, café, leche espumada",
-    "precio": "5550",
+    "precio": "5650",
     "imagen": "img/Moka.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Café CARAMEL",
     "descripcion": "caramelo, café, leche espumada",
-    "precio": "5550",
+    "precio": "5650",
     "imagen": "img/20250903_144413.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Té con leche",
     "descripcion": "te inti zen",
-    "precio": "4100",
+    "precio": "4200",
     "imagen": "img/te.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Submarino",
     "descripcion": "leche espumada y barra de chocolate",
-    "precio": "4800",
+    "precio": "4900",
     "imagen": "img/Submarino .jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Leche caliente o fría",
     "descripcion": "leche descremada",
-    "precio": "2800",
+    "precio": "2900",
     "imagen": "img/20250818_101037.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "CAFE TILO",
     "descripcion": "café, baileys, leche evaporada y chocolate rallado ",
-    "precio": "6900",
+    "precio": "7000",
     "imagen": "img/20250819_160159.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "ICE COFFE🥶",
     "descripcion": "doble shot con hielo❄️",
-    "precio": "4800",
+    "precio": "4900",
     "imagen": "img/20250817_131630.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "LATTE ICE COFFE🥶",
     "descripcion": "leche fría con doble shot de café y hielo❄️ ",
-    "precio": "4800",
+    "precio": "4900",
     "imagen": "img/20250817_131330.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "FRAPPUCCINO OREO🥶",
     "descripcion": "base de leche ❄️",
-    "precio": "6600",
+    "precio": "6700",
     "imagen": "img/20250817_104537.jpg",
     "categoria": "Cafetería☕️"
   },
   {
     "nombre": "FRAPPUCCINO OREO🥶",
     "descripcion": "base de Café❄️",
-    "precio": "6600",
+    "precio": "6700",
     "imagen": "img/20250815_154308.jpg",
     "categoria": "Cafetería☕️"
   },
@@ -302,7 +302,7 @@
   },
   {
     "nombre": "Yogurt ",
-    "descripcion": "Yogurt $5000Yogurt con granola $8.000Yogurt Forte (con frutas y granola) $12.000",
+    "descripcion": "Yogurt $5.000Yogurt con granola $8.000Yogurt Forte (con frutas y granola) $12.000",
     "precio": "12000",
     "imagen": "img/IMG-20250802-WA0010.jpg",
     "categoria": "🍰 Pastelería"
@@ -324,35 +324,35 @@
   {
     "nombre": "Tarta de calabaza",
     "descripcion": "Brócoli, queso sardo, muzarella, cebolla, masa integral",
-    "precio": "18000",
+    "precio": "18500",
     "imagen": "img/Brócoli .jpg",
     "categoria": "🥧 Tartas (con ensaladita)"
   },
   {
     "nombre": "Tarta de POLLO",
     "descripcion": "Pechuga de pollo, puerro, queso sardo, cebolla, masa integral",
-    "precio": "18000",
+    "precio": "18500",
     "imagen": "img/Tartapollo.jpg",
     "categoria": "🥧 Tartas (con ensaladita)"
   },
   {
     "nombre": "Burritos de Langostinos ",
     "descripcion": " (caliente): Tortilla de trigo con langostinos y verduras en salsa Teriyaki",
-    "precio": "22500",
+    "precio": "23500",
     "imagen": "img/Jangostino.jpg",
     "categoria": "🌯 Burritos (con papas fritas)"
   },
   {
     "nombre": "Burritos de CESAR de POLLO ",
     "descripcion": " (fría): Tortilla de trigo, mix de lechugas, clásico aderezo cesar, pechuga, queso parmesano y croutons",
-    "precio": "18000",
+    "precio": "19000",
     "imagen": "img/20250817_135558.jpg",
     "categoria": "🌯 Burritos (con papas fritas)"
   },
   {
     "nombre": "Burritos COMO MEXICANO ",
     "descripcion": " (caliente): Tortilla de trigo con salsa de pollo, relleno de lomo, vegetales y cheddar ",
-    "precio": "22500",
+    "precio": "23500",
     "imagen": "img//Lomi.jpg",
     "categoria": "🌯 Burritos (con papas fritas)"
   },
@@ -522,28 +522,28 @@
     "descripcion": "Rúcula, manzana verde, pepino, tomates cherries, nueces, regianito",
     "imagen": "img/Fresca.jpg",
     "categoria": "🥗 ENSALADAS",
-    "precio": "18200"
+    "precio": "19200"
   },
   {
     "nombre": "CAESAR CON POLLO",
     "descripcion": "Mix de verdes, croutones, pollo, parmesano y aderezo Caesar",
     "imagen": "img/20250819_121751.jpg",
     "categoria": "🥗 ENSALADAS",
-    "precio": "16000"
+    "precio": "17000"
   },
   {
     "nombre": "CAESAR CON POLLO CRUJIENTE",
     "descripcion": "Mix de verdes, croutons, pollo crujiente, parmesano y aderezo Caesar.",
     "imagen": "img/Cranch.jpg",
     "categoria": "🥗 ENSALADAS",
-    "precio": "17000"
+    "precio": "18000"
   },
   {
     "nombre": "CAESAR Con Langostinos rebozados",
     "descripcion": "Mix de verdes, croutons, Con langostinos rebozados, parmesano y aderezo Caesar.",
     "imagen": "img/Caesarlangis.jpg",
     "categoria": "🥗 ENSALADAS",
-    "precio": "18500"
+    "precio": "19500"
   },
   {
     "nombre": "STRACCIATELLA mozzarella italiana",
@@ -555,14 +555,14 @@
   {
     "nombre": "COBB SALAD",
     "descripcion": "Mix de verdes, pollo, huevo, queso azul, tomate y salsa de palta.",
-    "precio": "16800",
+    "precio": "17800",
     "imagen": "img/Cpsala.jpg",
     "categoria": "🥗 ENSALADAS"
   },
   {
     "nombre": "SOLA de POLLO o CARNE",
     "descripcion": "Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "19500",
+    "precio": "20000",
     "imagen": "img/20250816_144204.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga"
   },
@@ -571,19 +571,19 @@
     "descripcion": "Crema de espinaca y queso gratinado Acompañadas con puré, fideos, ensalada o papas fritas",
     "imagen": "img/Esp.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga",
-    "precio": "21500"
+    "precio": "22000"
   },
   {
     "nombre": "SUIZA",
     "descripcion": "Salsa blanca y queso gratinado Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "21500",
+    "precio": "22000",
     "imagen": "img/Mizuisa.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga"
   },
   {
     "nombre": "NAPOLITANA",
     "descripcion": "Salsa de tomate, jamón y queso Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "21500",
+    "precio": "22000",
     "imagen": "img/20250813_125845 (1).jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga"
   },
@@ -592,19 +592,19 @@
     "descripcion": "Salsa de tomate, mermelada de bacon, cheddar Acompañadas con puré, fideos, ensalada o papas fritas",
     "imagen": "img/Smuk.jpg",
     "categoria": "MILANESAS Ternera o Pollo - Pechuga",
-    "precio": "22500"
+    "precio": "23000"
   },
   {
     "nombre": "Filet de Merluza a la romana",
     "descripcion": "con puré mixto",
-    "precio": "18000",
+    "precio": "18500",
     "imagen": "img/20250816_135027.jpg",
     "categoria": "🍽️Otros platos"
   },
   {
     "nombre": "Revuelto de Gramajo",
     "descripcion": "Papas fritas, panceta, cebolla morrón, arvejas y huevo frito",
-    "precio": "17500",
+    "precio": "18000",
     "imagen": "img/Rebuelto.jpg",
     "categoria": "🍽️Otros platos"
   },
@@ -646,35 +646,35 @@
   {
     "nombre": "NAPOLITANA",
     "descripcion": "Salsa de tomate, stracciatella, jamón y rodajas de tomate.",
-    "precio": "26000",
+    "precio": "28000",
     "imagen": "img/20250906_150935.jpg",
     "categoria": "🍕PIZZAS (Estilo napolitano)"
   },
   {
     "nombre": "PARMA",
     "descripcion": "Salsa de tomate, stracciatella, burrata, jamón crudo, albahaca.",
-    "precio": "32000",
+    "precio": "34000",
     "imagen": "img/20250816_135018.jpg",
     "categoria": "🍕PIZZAS (Estilo napolitano)"
   },
   {
     "nombre": "MARGARITA",
     "descripcion": "Salsa de tomate, stracciatella, hojas de albahaca.",
-    "precio": "23500",
+    "precio": "25500",
     "imagen": "img/20250819_125331.jpg",
     "categoria": "🍕PIZZAS (Estilo napolitano)"
   },
   {
     "nombre": "Champi",
     "descripcion": "Salsa de tomate, stracciatella, hongos ycebollas salteadas.",
-    "precio": "28000",
+    "precio": "30000",
     "imagen": "img/Pizachampi.jpg",
     "categoria": "🍕PIZZAS (Estilo napolitano)"
   },
   {
     "nombre": "RISOTTOS de pollo!",
     "descripcion": "con pollo, calabaza y verduras.",
-    "precio": "23000",
+    "precio": "24000",
     "imagen": "img/20250816_143144.jpg",
     "categoria": "🥘RISOTTOS"
   },
@@ -683,12 +683,12 @@
     "descripcion": "con verdura, nueces y almendras.",
     "imagen": "img/Risotolangos.jpg",
     "categoria": "🥘RISOTTOS",
-    "precio": "25000"
+    "precio": "26000"
   },
   {
     "nombre": "RISOTTOS Lomo!",
     "descripcion": "con verduras.",
-    "precio": "27000",
+    "precio": "28000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "🥘RISOTTOS"
   },
@@ -730,7 +730,7 @@
   {
     "nombre": "Sorrentinos de muzzarella y jamón",
     "descripcion": "Sorrentinos de muzzarella y jamón",
-    "precio": "11000",
+    "precio": "15000",
     "imagen": "img/Sonren.jpg",
     "categoria": "🍝 PASTAS"
   },
@@ -786,7 +786,7 @@
   {
     "nombre": "caccio e pepe",
     "descripcion": "manteca, pimienta y parmesano",
-    "precio": "28000",
+    "precio": "7000",
     "imagen": "img/204218.jpg",
     "categoria": "🥫SALSAS"
   },
@@ -802,19 +802,19 @@
     "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/Pechuga.jpg",
     "categoria": "🔥GRILL",
-    "precio": "20000"
+    "precio": "20500"
   },
   {
     "nombre": "Matambre de cerdo",
     "descripcion": "Con frita, pure, ensalada o arroz",
-    "precio": "23500",
+    "precio": "24000",
     "imagen": "img/Matam.jpg",
     "categoria": "🔥GRILL"
   },
   {
     "nombre": "Bife de chorizo",
     "descripcion": "Con frita, pure, ensalada o arroz",
-    "precio": "29500",
+    "precio": "23000",
     "imagen": "img/20250815_151841.jpg",
     "categoria": "🔥GRILL"
   },
@@ -823,7 +823,7 @@
     "descripcion": "Con frita, pure, ensalada o arroz",
     "imagen": "img/IMG-20250816-WA0008.jpg",
     "categoria": "🔥GRILL",
-    "precio": "32500"
+    "precio": "33000"
   },
   {
     "nombre": "Salmón rosado",
@@ -837,26 +837,26 @@
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
     "imagen": "img/Espepollo.jpg",
     "categoria": "🔥GRILL Especiales",
-    "precio": "22000"
+    "precio": "22500"
   },
   {
     "nombre": "Matambre de cerdo",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "25500",
+    "precio": "26000",
     "imagen": "img/Matavergrill.jpg",
     "categoria": "🔥GRILL Especiales"
   },
   {
     "nombre": "Bife de chorizo",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "31500",
+    "precio": "32000",
     "imagen": "img/Bifepapa.jpg",
     "categoria": "🔥GRILL Especiales"
   },
   {
     "nombre": "Bife de lomo",
     "descripcion": "Acompañado con espinaca, papas a la crema o verduras grilladas",
-    "precio": "34500",
+    "precio": "35000",
     "imagen": "img/Lomoesp.jpg",
     "categoria": "🔥GRILL Especiales"
   },
@@ -870,28 +870,28 @@
   {
     "nombre": "NUGGETS",
     "descripcion": "DE POLLO CON PAPAS O PURE",
-    "precio": "17000",
+    "precio": "18000",
     "imagen": "img/Nages.jpg",
     "categoria": "👶MENU KIDS"
   },
   {
     "nombre": "Spaghetti o ñoquis",
     "descripcion": "fileto o crema",
-    "precio": "17000",
+    "precio": "18000",
     "imagen": "img/Ñoquiskit.jpg",
     "categoria": "👶MENU KIDS"
   },
   {
     "nombre": "Milanesa",
     "descripcion": "DE CARNE CON PAPAS O PURE",
-    "precio": "17000",
+    "precio": "18000",
     "imagen": "img/Menukit.jpg",
     "categoria": "👶MENU KIDS"
   },
   {
     "nombre": "Mila PESTO",
     "descripcion": "Milanesa de carne con ñoquis al pesto",
-    "precio": "19500",
+    "precio": "20500",
     "imagen": "img/Milapesto.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
@@ -926,14 +926,14 @@
   {
     "nombre": "Matambrito a la PIZZA",
     "descripcion": "De cerdo, muzarella, tomate y orégano con papas fritas",
-    "precio": "27500",
+    "precio": "28000",
     "imagen": "img/20250815_132057.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
   {
     "nombre": "Matambrito a la RIOJANA",
     "descripcion": "De cerdo, cebollitas, morrones, arvejas y huevo frito, con papas fritas",
-    "precio": "28000",
+    "precio": "28500",
     "imagen": "img/Matrio.jpg",
     "categoria": "🍽️PLATOS PRINCIPALES"
   },
@@ -1031,14 +1031,14 @@
   {
     "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Con salsa de americano y dulce de leche",
-    "precio": "48000",
+    "precio": "52000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "🧀PICADAS"
   },
   {
     "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Pollo rebozado, bastones de muzarella, rabas y papas fritas.Incluye dos porrones de Stella",
-    "precio": "40000",
+    "precio": "42000",
     "imagen": "img/IMG-20250815-WA0005.jpg",
     "categoria": "🧀PICADAS"
   },
@@ -1101,7 +1101,7 @@
   {
     "nombre": "Gin Tonic Beefeater",
     "descripcion": "Gin Tonic Beefeater",
-    "precio": "1000",
+    "precio": "12000",
     "imagen": "img/Ginton.jpg",
     "categoria": "🍹TRAGOS"
   },
