@@ -2,7 +2,7 @@
   {
     "nombre": "Café expresso",
     "descripcion": "Café chico",
-    "precio": "3200",
+    "precio": "3300",
     "imagen": "img/cafe.jpg",
     "categoria": "Cafetería☕️"
   },
@@ -795,7 +795,7 @@
     "descripcion": "MANTECA,OLIVA AJO Y PARMESANO",
     "precio": "6000",
     "imagen": "img/218.jpg",
-    "categoria":"🥫SALSAS"
+    "categoria": "🥫SALSAS"
   },
   {
     "nombre": "Pollo (pechuga)",
