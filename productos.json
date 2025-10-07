@@ -151,21 +151,21 @@
     "descripcion": "Huevos revueltos con jamón y queso, una tostada para acompañar",
     "precio": "13400",
     "imagen": "img/Resultado.jpg",
-    "categoria": " "☕🥐Desayunos/meriendas" 
+    "categoria": "☕🥐Desayunos/meriendas" 
  },
   {
     "nombre": "PROTEICO",
     "descripcion": "Pancake 100% harina de almendras, queso crema y fruta de estación más dip de miel",
     "precio": "15000",
     "imagen": "img/20250815_132946.jpg",
-    "categoria": " "☕🥐Desayunos/meriendas"
+    "categoria": "☕🥐Desayunos/meriendas"
   },
   {
     "nombre": "FRENCH TOAST DULCE",
     "descripcion": "Tostadas marinadas en huevo, con canela y azúcar, queso crema, frutas de estación y dip de miel",
     "precio": "14400",
     "imagen": "img/20250819_113846.jpg",
-    "categoria": " "☕🥐Desayunos/meriendas"
+    "categoria": "☕🥐Desayunos/meriendas"
   },
   {
     "nombre": "FRENCH TOAST SALADO",
@@ -221,7 +221,7 @@
     "descripcion": "masa de croissant con chocolate belga",
     "precio": "4800",
     "imagen": "img/Pchoco.jpg",
-    "categoria":  “Cafetería☕️”
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Cookies🍪",
@@ -248,7 +248,7 @@
     "nombre": "Scon de queso",
     "descripcion": "Scon de queso",
     "imagen": "img/Sconquso.jpg",
-    "categoria": " "Cafetería☕️",
+    "categoria": "Cafetería☕️",
     "precio": "4200"
   },
   {
@@ -256,7 +256,7 @@
     "descripcion": "zanahoria y canela, limón y amapolas, chocolate y cafe",
     "precio": "5500",
     "imagen": "img/20250817_124915.jpg",
-    "categoria": " "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Alfajor de chocolate",
@@ -284,21 +284,21 @@
     "descripcion": "Mini tarta dulces",
     "precio": "9200",
     "imagen": "img/Minitor.jpg",
-    "categoria": " "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Medialuna caliente de jamón y queso",
     "descripcion": "Medialuna caliente de jamón y queso",
     "precio": "4600",
     "imagen": "img/Lujyq.jpg",
-    "categoria": " "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Plato con frutas de estación",
     "descripcion": "Plato con frutas de estación",
     "precio": "8200",
     "imagen": "img/Platofrutas.jpg",
-    "categoria": " "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Yogurt ",
@@ -312,7 +312,7 @@
     "descripcion": "Porción de tostadas, blancas o de salvado con semillas",
     "precio": "3500",
     "imagen": "img/Tosta.jpg",
-    "categoria": " "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Porción de mermelada",
