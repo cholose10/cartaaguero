@@ -134,7 +134,7 @@
     const JSON_URL = "https://raw.githubusercontent.com/cholose10/cartatilo/main/productos.json";
     let productos = [];
 
-    // Normaliza texto (quita acentos y pone minúsculas)
+    // 🔹 Normaliza texto (quita acentos y pone minúsculas)
     function normalizar(texto) {
       return texto
         ? texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
@@ -202,7 +202,7 @@
       });
     }
 
-    // Buscar por letras (en tiempo real)
+    // 🔍 Buscar en vivo (por letras)
     function buscarEnVivo() {
       const texto = normalizar(document.getElementById('searchInput').value.trim());
       if (!texto) {
@@ -217,9 +217,10 @@
       );
 
       mostrarProductos(resultados);
+      scrollToProducts(); // 🔸 Bajar automáticamente
     }
 
-    // Eventos: búsqueda en vivo + botón + Enter
+    // Eventos: búsqueda por letras, click y Enter
     document.getElementById('btnBuscar').addEventListener('click', buscarEnVivo);
     document.getElementById('searchInput').addEventListener('input', buscarEnVivo);
     document.getElementById('searchInput').addEventListener('keypress', e => {
@@ -229,6 +230,7 @@
       }
     });
 
+    // 🔸 Baja automática a la lista de productos
     function scrollToProducts() {
       document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
     }
