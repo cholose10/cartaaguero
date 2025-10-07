@@ -123,7 +123,7 @@
   <!-- Buscador -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Buscar producto...">
-    <button onclick="buscarProducto()">Buscar</button>
+    <button id="btnBuscar">Buscar</button>
   </div>
 
   <!-- Categorías -->
@@ -136,16 +136,19 @@
     const JSON_URL = "https://raw.githubusercontent.com/cholose10/cartatilo/main/productos.json";
     let productos = [];
 
-    fetch(JSON_URL)
-      .then(response => response.json())
-      .then(data => {
-        productos = data;
+    async function cargarProductos() {
+      try {
+        const response = await fetch(JSON_URL);
+        productos = await response.json();
         renderCategories();
         renderProducts('Todos');
-      })
-      .catch(err => {
+      } catch (err) {
         document.getElementById('product-list').innerHTML = "<p>⚠ No se pudo cargar productos.json</p>";
-      });
+        console.error("Error cargando productos:", err);
+      }
+    }
+
+    cargarProductos();
 
     function renderCategories() {
       const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
@@ -184,10 +187,16 @@
 
     function buscarProducto() {
       const texto = document.getElementById('searchInput').value.toLowerCase().trim();
+      if (!texto) {
+        renderProducts('Todos');
+        scrollToProducts();
+        return;
+      }
+
       const container = document.getElementById('product-list');
       container.innerHTML = '';
 
-      // 🔍 Buscar en todos los productos (nombre, descripción o categoría)
+      // Buscar en nombre, descripción y categoría
       const filtrados = productos.filter(p =>
         p.nombre.toLowerCase().includes(texto) ||
         p.descripcion.toLowerCase().includes(texto) ||
@@ -215,10 +224,11 @@
       scrollToProducts();
     }
 
-    // 🔹 Buscar con Enter
+    // Buscar con Enter o con el botón
+    document.getElementById('btnBuscar').addEventListener('click', buscarProducto);
     document.getElementById('searchInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
-        e.preventDefault(); // evita recargar la página
+        e.preventDefault();
         buscarProducto();
       }
     });
