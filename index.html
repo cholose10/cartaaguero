@@ -8,7 +8,7 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background-color: #8888;
+      background-color: #888;
       color: #45270a;
     }
     header {
@@ -51,6 +51,10 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
+    }
+    .search-container button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
     .search-container button:hover {
       background-color: #6b4e3d;
@@ -98,6 +102,7 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
+      background: #eee;
     }
     .item h3 {
       margin: 10px;
@@ -111,6 +116,15 @@
       margin: 0 10px 10px;
       display: block;
     }
+
+    /* Estado / errores visibles */
+    .status {
+      text-align: center;
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      color: #222;
+    }
+    .status.error { color: #8b0000; }
   </style>
 </head>
 <body>
@@ -120,10 +134,13 @@
 
   <div class="banner">¡Bienvenidos a Tilo Resto Café Aguero 2298!</div>
 
+  <!-- Estado (carga / errores) -->
+  <div id="status" class="status">Cargando productos...</div>
+
   <!-- Buscador -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Buscar producto...">
-    <button id="btnBuscar">Buscar</button>
+    <button id="btnBuscar" disabled>Buscar</button>
   </div>
 
   <!-- Categorías -->
@@ -133,27 +150,65 @@
   <div class="item-list" id="product-list"></div>
 
   <script>
+    // URL JSON (dejarla así o reemplazar por la tuya)
     const JSON_URL = "https://raw.githubusercontent.com/cholose10/cartatilo/main/productos.json";
     let productos = [];
+    let loaded = false;
+
+    const statusEl = document.getElementById('status');
+    const btnBuscar = document.getElementById('btnBuscar');
+    const inputBuscar = document.getElementById('searchInput');
+
+    // Normaliza texto: quita acentos y pasa a minúsculas
+    function normalizeText(s) {
+      try {
+        return (s || '').toString()
+          .normalize('NFD')             // separa diacríticos
+          .replace(/[\u0300-\u036f]/g, '') // los quita
+          .toLowerCase();
+      } catch (e) {
+        return (s || '').toString().toLowerCase();
+      }
+    }
 
     async function cargarProductos() {
       try {
-        const response = await fetch(JSON_URL);
+        statusEl.textContent = 'Cargando productos...';
+        const response = await fetch(JSON_URL, { cache: 'no-cache' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
         productos = await response.json();
+
+        // asegurarnos de que es un array
+        if (!Array.isArray(productos)) {
+          throw new Error('productos.json no devuelve un array.');
+        }
+
+        loaded = true;
+        statusEl.textContent = `Cargados ${productos.length} productos.`;
+        statusEl.classList.remove('error');
+        btnBuscar.disabled = false;
         renderCategories();
         renderProducts('Todos');
       } catch (err) {
-        document.getElementById('product-list').innerHTML = "<p>⚠ No se pudo cargar productos.json</p>";
         console.error("Error cargando productos:", err);
+        statusEl.textContent = '⚠ Error cargando productos. Mirá la consola (F12) para más detalles.';
+        statusEl.classList.add('error');
+        btnBuscar.disabled = true;
+        // Mostrar mensaje visible en la lista
+        document.getElementById('product-list').innerHTML = "<p style='text-align:center; width:100%'>No se pudieron cargar los productos.</p>";
       }
     }
 
     cargarProductos();
 
     function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
       const container = document.getElementById('category-buttons');
       container.innerHTML = '';
+      const categoriasSet = new Set();
+      productos.forEach(p => {
+        if (p && p.categoria) categoriasSet.add(p.categoria);
+      });
+      const categorias = ['Todos', ...Array.from(categoriasSet)];
       categorias.forEach(cat => {
         const btn = document.createElement('button');
         btn.textContent = cat;
@@ -168,17 +223,22 @@
     function renderProducts(categoria) {
       const container = document.getElementById('product-list');
       container.innerHTML = '';
-      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => (p.categoria || '') === categoria);
+      if (filtrados.length === 0) {
+        container.innerHTML = "<p style='text-align:center; width:100%'>No hay productos para mostrar.</p>";
+        return;
+      }
       filtrados.forEach(p => {
         const item = document.createElement('div');
         item.className = 'item';
+        const imgSrc = p.imagen || 'https://via.placeholder.com/400x300?text=Sin+imagen';
         const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
           ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
+          : (p.precio != null ? ('$' + p.precio) : '');
         item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
+          <img src="${imgSrc}" alt="${(p.nombre||'Producto')}">
+          <h3>${p.nombre || ''}</h3>
+          <p>${p.descripcion || ''}</p>
           <span class="price">${priceDisplay}</span>
         `;
         container.appendChild(item);
@@ -186,50 +246,81 @@
     }
 
     function buscarProducto() {
-      const texto = document.getElementById('searchInput').value.toLowerCase().trim();
+      // Si aún no cargó, avisar y salir
+      if (!loaded) {
+        statusEl.textContent = 'Cargando productos... esperá un momento y volvé a intentar.';
+        statusEl.classList.add('error');
+        return;
+      }
+
+      const texto = normalizeText(inputBuscar.value).trim();
       if (!texto) {
         renderProducts('Todos');
         scrollToProducts();
+        statusEl.textContent = `Mostrando todos los productos (${productos.length}).`;
+        statusEl.classList.remove('error');
         return;
       }
 
       const container = document.getElementById('product-list');
       container.innerHTML = '';
 
-      // Buscar en nombre, descripción y categoría
-      const filtrados = productos.filter(p =>
-        p.nombre.toLowerCase().includes(texto) ||
-        p.descripcion.toLowerCase().includes(texto) ||
-        p.categoria.toLowerCase().includes(texto)
-      );
-
-      if (filtrados.length === 0) {
-        container.innerHTML = "<p>❌ No se encontraron productos.</p>";
-      } else {
-        filtrados.forEach(p => {
-          const item = document.createElement('div');
-          item.className = 'item';
-          const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-            ? String(p.precio).trim()
-            : ('$' + (p.precio ?? ''));
-          item.innerHTML = `
-            <img src="${p.imagen}" alt="${p.nombre}">
-            <h3>${p.nombre}</h3>
-            <p>${p.descripcion}</p>
-            <span class="price">${priceDisplay}</span>
-          `;
-          container.appendChild(item);
+      try {
+        const filtrados = productos.filter(p => {
+          const nombre = normalizeText(p && p.nombre);
+          const descripcion = normalizeText(p && p.descripcion);
+          const categoria = normalizeText(p && p.categoria);
+          return nombre.includes(texto) || descripcion.includes(texto) || categoria.includes(texto);
         });
+
+        if (filtrados.length === 0) {
+          container.innerHTML = "<p style='text-align:center; width:100%'>❌ No se encontraron productos.</p>";
+          statusEl.textContent = `0 resultados para "${inputBuscar.value}".`;
+          statusEl.classList.add('error');
+        } else {
+          filtrados.forEach(p => {
+            const item = document.createElement('div');
+            item.className = 'item';
+            const imgSrc = p.imagen || 'https://via.placeholder.com/400x300?text=Sin+imagen';
+            const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+              ? String(p.precio).trim()
+              : (p.precio != null ? ('$' + p.precio) : '');
+            item.innerHTML = `
+              <img src="${imgSrc}" alt="${(p.nombre||'Producto')}">
+              <h3>${p.nombre || ''}</h3>
+              <p>${p.descripcion || ''}</p>
+              <span class="price">${priceDisplay}</span>
+            `;
+            container.appendChild(item);
+          });
+          statusEl.textContent = `Mostrando ${filtrados.length} resultados para "${inputBuscar.value}".`;
+          statusEl.classList.remove('error');
+        }
+        scrollToProducts();
+      } catch (err) {
+        console.error('Error durante la búsqueda:', err);
+        statusEl.textContent = 'Ocurrió un error en la búsqueda. Mirá la consola para más info.';
+        statusEl.classList.add('error');
       }
-      scrollToProducts();
     }
 
-    // Buscar con Enter o con el botón
-    document.getElementById('btnBuscar').addEventListener('click', buscarProducto);
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    // Eventos
+    btnBuscar.addEventListener('click', buscarProducto);
+
+    // Enter: usar keydown (más fiable que keypress)
+    inputBuscar.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') {
         e.preventDefault();
         buscarProducto();
+      }
+    });
+
+    // Si borrás el campo, que vuelva toda la carta automáticamente
+    inputBuscar.addEventListener('input', function() {
+      if (this.value.trim() === '') {
+        renderProducts('Todos');
+        statusEl.textContent = `Mostrando todos los productos (${productos.length || 0}).`;
+        statusEl.classList.remove('error');
       }
     });
 
