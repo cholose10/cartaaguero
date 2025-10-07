@@ -118,7 +118,7 @@
     <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Café!</div>
+  <div class="banner">¡Bienvenidos a Tilo Resto Café Aguero 2298!</div>
 
   <!-- Buscador -->
   <div class="search-container">
@@ -144,7 +144,7 @@
         renderProducts('Todos');
       })
       .catch(err => {
-        document.getElementById('product-list').innerHTML = "<p>⚠️ No se pudo cargar productos.json</p>";
+        document.getElementById('product-list').innerHTML = "<p>⚠ No se pudo cargar productos.json</p>";
       });
 
     function renderCategories() {
@@ -183,29 +183,42 @@
     }
 
     function buscarProducto() {
-      const texto = document.getElementById('searchInput').value.toLowerCase();
+      const texto = document.getElementById('searchInput').value.toLowerCase().trim();
       const container = document.getElementById('product-list');
       container.innerHTML = '';
-      const filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto) || p.descripcion.toLowerCase().includes(texto));
-      filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-          ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <span class="price">${priceDisplay}</span>
-        `;
-        container.appendChild(item);
-      });
+
+      // 🔍 Buscar en todos los productos (nombre, descripción o categoría)
+      const filtrados = productos.filter(p =>
+        p.nombre.toLowerCase().includes(texto) ||
+        p.descripcion.toLowerCase().includes(texto) ||
+        p.categoria.toLowerCase().includes(texto)
+      );
+
+      if (filtrados.length === 0) {
+        container.innerHTML = "<p>❌ No se encontraron productos.</p>";
+      } else {
+        filtrados.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'item';
+          const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+            ? String(p.precio).trim()
+            : ('$' + (p.precio ?? ''));
+          item.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p>${p.descripcion}</p>
+            <span class="price">${priceDisplay}</span>
+          `;
+          container.appendChild(item);
+        });
+      }
       scrollToProducts();
     }
 
+    // 🔹 Buscar con Enter
     document.getElementById('searchInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
+        e.preventDefault(); // evita recargar la página
         buscarProducto();
       }
     });
