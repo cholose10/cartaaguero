@@ -130,7 +130,7 @@
     "descripcion": "Pan negro o blanco con queso crema y mermelada casera",
     "precio": "9700",
     "imagen": "img/Promotos1.jpg",
-    "categoria":  "☕🥐Desayunos/categoria"
+    "categoria": "☕🥐Desayunos/meriendas"
   },
   {
     "nombre": "OMELETTE DE CLARAS",
@@ -700,35 +700,35 @@
     "imagen": "img/Faina.jpg"
   },
   {
-    "nombre": "Spaghetti",
+    "nombre": "Spaghetti(salsa aparte)",
     "descripcion": "Spaghetti ",
     "precio": "11000",
     "imagen": "img/Spa.jpg",
     "categoria": "🍝 PASTAS"
   },
   {
-    "nombre": "ñoquis al huevo",
+    "nombre": "ñoquis al huevo(salsa aparte)",
     "descripcion": "ñoquis al huevo ",
     "precio": "11000",
     "imagen": "img/Ñoquis.jpg",
     "categoria": "🍝 PASTAS"
   },
   {
-    "nombre": "Ravioles de verdura,pollo y jamon",
+    "nombre": "Ravioles de verdura,pollo y jamon(salsa aparte)",
     "descripcion": "Rellenos de verdura pollo y jamón ",
     "precio": "13000",
     "imagen": "img/Ravioles.jpg",
     "categoria": "🍝 PASTAS"
   },
   {
-    "nombre": "Ravioles de verdura y ricota",
+    "nombre": "Ravioles de verdura y ricota(salsa aparte)",
     "descripcion": "Rellenos de verdura y rocota",
     "precio": "13000",
     "imagen": "img/Ravioles.jpg",
     "categoria": "🍝 PASTAS"
   },
   {
-    "nombre": "Sorrentinos de muzzarella y jamón",
+    "nombre": "Sorrentinos de muzzarella y jamón(salsa aparte)",
     "descripcion": "Sorrentinos de muzzarella y jamón",
     "precio": "15000",
     "imagen": "img/Sonren.jpg",
