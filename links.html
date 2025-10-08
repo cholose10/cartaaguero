@@ -8,7 +8,13 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f9f9f9, #ececec);
+      /* --- CONFIGURACIÓN DE FONDO --- */
+      background-color: #f5f5f5; /* Color de respaldo */
+      background-image: url('img/1000107642.jpg'); /* RUTA CORREGIDA */
+      background-size: cover; /* Cubre todo el área */
+      background-attachment: fixed; /* Imagen fija al hacer scroll */
+      background-position: center center; /* Centra la imagen */
+      /* ------------------------- */
       color: #333;
       display: flex;
       flex-direction: column;
@@ -29,7 +35,7 @@
       border-radius: 50%;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
       margin-bottom: 20px;
     }
 
@@ -54,29 +60,37 @@
       40% { opacity: 0; }
       100% { opacity: 0; }
     }
-
+    
+    /* --- AJUSTES PARA VISIBILIDAD DE TEXTO --- */
     h1 {
       font-size: 1.8rem;
       margin-bottom: 10px;
-      color: #444;
+      color: #fff; /* Texto blanco */
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
     }
 
     h2 {
       font-size: 1.4rem;
       margin-top: 30px;
       margin-bottom: 10px;
-      color: #5a4031;
+      color: #fff; /* Texto blanco */
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
       border-bottom: 2px solid #d8b384;
       padding-bottom: 5px;
       text-align: center;
+      background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente para la sección */
+      padding: 5px 15px;
+      border-radius: 5px;
     }
 
     p {
       font-size: 1rem;
       margin-bottom: 30px;
-      color: #666;
+      color: #fff; /* Texto blanco */
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
       text-align: center;
     }
+    /* ------------------------------------------ */
 
     .links {
       display: flex;
@@ -91,17 +105,18 @@
       align-items: center;
       padding: 15px 20px;
       border-radius: 12px;
-      background: white;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para destacar */
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
       text-decoration: none;
       color: #333;
       font-weight: 600;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
     }
 
     .link-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      background: white; /* Se hace opaco al pasar el ratón */
     }
 
     .link-card img {
@@ -113,7 +128,8 @@
     footer {
       margin-top: 40px;
       font-size: 0.9rem;
-      color: #888;
+      color: #fff; /* Texto blanco en el footer */
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Sombra para mejor lectura */
       text-align: center;
     }
   </style>
@@ -129,13 +145,11 @@
     <p>Elegí tu sucursal</p>
   </header>
 
-  <!-- Instagram -->
   <a class="link-card" href="https://www.instagram.com/tilo.cafe/?hl=es" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
     Instagram
   </a>
 
-  <!-- Sección Tilo French -->
   <h2>🍽️ Tilo French 3700</h2>
   <div class="links">
     <a class="link-card" href="https://frenchtilo-boop.github.io/cartatilo/index.html" target="_blank">
@@ -154,7 +168,6 @@
     </a>
   </div>
 
-  <!-- Sección Tilo Agüero -->
   <h2>🍽️ Tilo Agüero 2298</h2>
   <div class="links">
     <a class="link-card" href="https://cartatilo.vercel.app/" target="_blank">
