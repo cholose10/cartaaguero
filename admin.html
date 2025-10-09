@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Carta - Tilo Café</title>
+  <title>Admin Carta - Don Pilose</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,7 +79,6 @@
       gap: 10px;
       margin-bottom: 15px;
     }
-    /* 🔼 Botón flecha */
     #btnArriba {
       position: fixed;
       bottom: 25px;
@@ -103,7 +102,7 @@
   </style>
 </head>
 <body>
-  <h1>Panel de Administración - Tilo Café</h1>
+  <h1>Panel de Administración - Don Pilose</h1>
 
   <!-- TOKEN -->
   <div style="margin-bottom:15px; background:#eee; padding:10px; border-radius:8px;">
@@ -155,12 +154,12 @@
   </table>
 
   <!-- BOTÓN ARRIBA -->
-  <button id="btnArriba" onclick="subir()">⬆️</button>
+  <button id="btnArriba" onclick="subir()">⬆</button>
 
   <script>
-    // 🟤 CONFIG GITHUB
-    const USERNAME = "cholose10";
-    const REPO = "cartatilo";
+    // 🟤 CONFIG GITHUB — actualizado
+    const USERNAME = "donpilose-wq";
+    const REPO = "menuclick";
     const FILE_PATH = "productos.json";
     let productos = [];
 
@@ -175,7 +174,7 @@
     }
     function clearToken(){ 
       localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
+      document.getElementById('tokenStatus').innerText="⚠ Token borrado."; 
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
@@ -189,7 +188,7 @@
         updateCategoryList();
       } catch (err) {
         console.error("Error al cargar productos:", err);
-        alert("⚠️ No se pudieron cargar los productos.");
+        alert("⚠ No se pudieron cargar los productos.");
       }
     }
 
@@ -256,16 +255,16 @@
     // 🟤 GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
+      if(!TOKEN){ alert("⚠ Guardá tu token primero."); return; }
 
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
+      const apiUrl=https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH};
+      const getRes=await fetch(apiUrl,{ headers:{Authorization:token ${TOKEN}} });
       const data=await getRes.json();
 
       const updateRes=await fetch(apiUrl,{
         method:"PUT",
         headers:{
-          "Authorization":`token ${TOKEN}`,
+          "Authorization":token ${TOKEN},
           "Content-Type":"application/json"
         },
         body:JSON.stringify({
