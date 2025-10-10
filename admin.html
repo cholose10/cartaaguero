@@ -5,22 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Carta - Don Pilose</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f3f0; color: #333; }
-    h1 { text-align: center; color: #806250; }
-    form { background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 20px; transition: box-shadow 0.5s; }
-    form.editando { box-shadow: 0 0 15px #806250; }
-    input, textarea, datalist { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ccc; border-radius: 6px; }
-    table { width: 100%; border-collapse: collapse; background: #fff; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background: #806250; color: white; }
-    img { max-width: 60px; border-radius: 6px; }
-    button { cursor: pointer; background: #806250; color: white; border: none; padding: 6px 10px; border-radius: 6px; transition: background 0.3s; }
-    button:hover { background: #a07b68; }
-    #preview { max-width: 100px; margin-top: 5px; display: block; border-radius: 8px; }
-    #search { width: 60%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
-    .search-container { display: flex; gap: 10px; margin-bottom: 15px; }
-    #btnArriba { position: fixed; bottom: 25px; right: 25px; background: #806250; color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3); display: none; z-index: 100; transition: background 0.3s; }
-    #btnArriba:hover { background: #a07b68; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f7f3f0;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #806250;
+    }
+    form {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.5s;
+    }
+    form.editando {
+      box-shadow: 0 0 15px #806250;
+    }
+    input, textarea, datalist {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #806250;
+      color: white;
+    }
+    img {
+      max-width: 60px;
+      border-radius: 6px;
+    }
+    button {
+      cursor: pointer;
+      background: #806250;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #a07b68;
+    }
+    #preview {
+      max-width: 100px;
+      margin-top: 5px;
+      display: block;
+      border-radius: 8px;
+    }
+    #search {
+      width: 60%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .search-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    #btnArriba {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #806250;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 100;
+      transition: background 0.3s;
+    }
+    #btnArriba:hover {
+      background: #a07b68;
+    }
   </style>
 </head>
 <body>
@@ -37,8 +115,8 @@
 
   <!-- BUSCADOR -->
   <div class="search-container">
-    <input type="text" id="search" placeholder="Buscar producto...">
-    <button onclick="filterProducts(true)">Buscar</button>
+    <input type="text" id="search" placeholder="Buscar producto o categoría...">
+    <button onclick="filterProducts()">Buscar</button>
   </div>
 
   <!-- FORMULARIO -->
@@ -88,15 +166,15 @@
     // TOKEN
     function saveToken(){
       const t=document.getElementById('token').value.trim();
-      if(t){
-        localStorage.setItem('github_token',t);
-        document.getElementById('token').value='';
-        document.getElementById('tokenStatus').innerText="✅ Token guardado.";
+      if(t){ 
+        localStorage.setItem('github_token',t); 
+        document.getElementById('token').value=''; 
+        document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
       }
     }
-    function clearToken(){
-      localStorage.removeItem('github_token');
-      document.getElementById('tokenStatus').innerText="⚠ Token borrado.";
+    function clearToken(){ 
+      localStorage.removeItem('github_token'); 
+      document.getElementById('tokenStatus').innerText="⚠ Token borrado."; 
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
@@ -106,7 +184,7 @@
         const res = await fetch("productos.json");
         if (!res.ok) throw new Error("No se pudo cargar productos.json");
         productos = await res.json();
-        render(productos); // render con índices originales
+        render(productos);
         updateCategoryList();
       } catch (err) {
         console.error("Error al cargar productos:", err);
@@ -114,21 +192,20 @@
       }
     }
 
-    // RENDER TABLA (mantiene índices originales para Editar/Borrar)
-    function render(lista, originalIndices=null){
+    // RENDER TABLA
+    function render(lista){
       const tb=document.getElementById('tbody'); tb.innerHTML='';
       lista.forEach((p,i)=>{
-        const idx = originalIndices ? originalIndices[i] : i;
         tb.innerHTML+=`
-          <tr data-index="${idx}">
+          <tr>
             <td><img src="${p.imagen}" alt=""></td>
             <td>${p.nombre}</td>
             <td>${p.descripcion}</td>
             <td>${p.categoria}</td>
             <td>$${p.precio}</td>
             <td>
-              <button onclick="edit(${idx})">Editar</button>
-              <button onclick="del(${idx})">Eliminar</button>
+              <button onclick="edit(${i})">Editar</button>
+              <button onclick="del(${i})">Eliminar</button>
             </td>
           </tr>`;
       });
@@ -146,62 +223,27 @@
       });
     }
 
-    // BUSCADOR MEJORADO
+    // BUSCADOR
     const searchInput = document.getElementById("search");
-    // busca al tipear (coincidencia parcial por letra)
-    searchInput.addEventListener("input", ()=> filterProducts(false));
-    // al presionar Enter busca y baja al primer resultado
-    searchInput.addEventListener("keydown", function(e){
+    searchInput.addEventListener("input", filterProducts);
+    searchInput.addEventListener("keypress", function(e){
       if(e.key === "Enter"){
         e.preventDefault();
-        filterProducts(true);
+        filterProducts();
+        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
       }
     });
 
-    /**
-     * filterProducts(scrollToFirst)
-     * - scrollToFirst: si es true, baja al primer producto encontrado.
-     */
-    function filterProducts(scrollToFirst = false){
-      const q = (searchInput.value || '').toLowerCase().trim();
-      if(q === ''){
-        // campo vacío → mostrar todo y subir al título
-        render(productos);
-        updateCategoryList();
-        if(scrollToFirst) document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
-        return;
-      }
-
-      // buscamos índices originales para que Edit/Del funcionen correctamente
-      const indices = [];
-      productos.forEach((p, i) => {
-        const nombre = (p.nombre||'').toLowerCase();
-        const desc = (p.descripcion||'').toLowerCase();
-        const cat  = (p.categoria||'').toLowerCase();
-        if(nombre.includes(q) || desc.includes(q) || cat.includes(q)){
-          indices.push(i);
-        }
-      });
-
-      const filtrados = indices.map(i => productos[i]);
-      render(filtrados, indices);
-
-      if(indices.length > 0 && scrollToFirst){
-        // bajar al primer resultado
-        const tbody = document.getElementById('tbody');
-        const firstRow = tbody.querySelector('tr');
-        if(firstRow){
-          firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
-          // pequeño highlight para que se note
-          const prevBg = firstRow.style.background;
-          firstRow.style.background = "#fff4dc";
-          setTimeout(()=> firstRow.style.background = prevBg, 1100);
-        }
-      }
-      // si no encontró nada, dejamos la tabla vacía (o podés mostrar mensaje)
-      if(indices.length === 0){
-        // opcional: mostrar mensaje (descomentar si querés)
-        // alert('No se encontraron productos con esa búsqueda.');
+    function filterProducts(){
+      const q = searchInput.value.toLowerCase().trim();
+      const filtrados = productos.filter(p =>
+        p.nombre.toLowerCase().includes(q) ||
+        p.descripcion.toLowerCase().includes(q) ||
+        p.categoria.toLowerCase().includes(q)
+      );
+      render(filtrados);
+      if(filtrados.length > 0){
+        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
       }
     }
 
@@ -211,34 +253,30 @@
       document.getElementById('preview').src=src || '';
     }
 
-    // GUARDAR EN GITHUB (corregido para evitar errores de sintaxis)
+    // GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
       if(!TOKEN){ alert("⚠ Guardá tu token primero."); return; }
 
-      const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes = await fetch(apiUrl, { headers: { Authorization: `token ${TOKEN}` } });
-      const data = await getRes.json();
-      const sha = data.sha;
+      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
+      const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
+      const data=await getRes.json();
 
-      const updateRes = await fetch(apiUrl, {
-        method: "PUT",
-        headers: {
-          "Authorization": `token ${TOKEN}`,
-          "Content-Type": "application/json"
+      const updateRes=await fetch(apiUrl,{
+        method:"PUT",
+        headers:{
+          "Authorization":`token ${TOKEN}`,
+          "Content-Type":"application/json"
         },
-        body: JSON.stringify({
-          message: "Actualización desde admin.html",
-          content: btoa(unescape(encodeURIComponent(newContent))),
-          sha: sha
+        body:JSON.stringify({
+          message:"Actualización desde admin.html",
+          content:btoa(unescape(encodeURIComponent(newContent))),
+          sha:data.sha
         })
       });
 
       if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ 
-        console.error('GitHub save error', await updateRes.text());
-        alert("❌ Error al guardar en GitHub.");
-      }
+      else{ alert("❌ Error al guardar en GitHub."); }
     }
 
     // GUARDAR PRODUCTO
