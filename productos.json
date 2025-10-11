@@ -280,8 +280,8 @@
     "categoria":  "Cafetería☕️"
   },
   {
-    "nombre": "Mini tarta ",
-    "descripcion": "Mini tarta dulces",
+    "nombre": "Mini torta ",
+    "descripcion": "Mini tortas dulces",
     "precio": "9200",
     "imagen": "img/Minitor.jpg",
     "categoria": "Cafetería☕️"
@@ -392,7 +392,7 @@
     "categoria": "🥤 Bebidas y vinos"
   },
   {
-    "nombre": "Licuadas",
+    "nombre": "Licuados",
     "descripcion": "con frutas de estacion(base de agua, leche o exprimido",
     "precio": "7000",
     "imagen": "img/20250903_110035.jpg",
