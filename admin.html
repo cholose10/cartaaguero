@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Carta - Don Pilose</title>
+  <title>Admin Carta - Tilo Café</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,6 +79,7 @@
       gap: 10px;
       margin-bottom: 15px;
     }
+    /* 🔼 Botón flecha */
     #btnArriba {
       position: fixed;
       bottom: 25px;
@@ -102,7 +103,7 @@
   </style>
 </head>
 <body>
-  <h1>Panel de Administración - Don Pilose</h1>
+  <h1>Panel de Administración - Tilo Café</h1>
 
   <!-- TOKEN -->
   <div style="margin-bottom:15px; background:#eee; padding:10px; border-radius:8px;">
@@ -115,7 +116,7 @@
 
   <!-- BUSCADOR -->
   <div class="search-container">
-    <input type="text" id="search" placeholder="Buscar producto o categoría...">
+    <input type="text" id="search" placeholder="Buscar producto...">
     <button onclick="filterProducts()">Buscar</button>
   </div>
 
@@ -154,16 +155,16 @@
   </table>
 
   <!-- BOTÓN ARRIBA -->
-  <button id="btnArriba" onclick="subir()">⬆</button>
+  <button id="btnArriba" onclick="subir()">⬆️</button>
 
   <script>
-    // CONFIG GITHUB
-    const USERNAME = "donpilose-wq";
-    const REPO = "menuclick";
+    // 🟤 CONFIG GITHUB
+    const USERNAME = "cholose10";
+    const REPO = "cartatilo";
     const FILE_PATH = "productos.json";
     let productos = [];
 
-    // TOKEN
+    // 🟤 TOKEN
     function saveToken(){
       const t=document.getElementById('token').value.trim();
       if(t){ 
@@ -174,11 +175,11 @@
     }
     function clearToken(){ 
       localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠ Token borrado."; 
+      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
-    // CARGAR PRODUCTOS
+    // 🟤 CARGAR PRODUCTOS
     async function loadProducts(){
       try {
         const res = await fetch("productos.json");
@@ -188,11 +189,11 @@
         updateCategoryList();
       } catch (err) {
         console.error("Error al cargar productos:", err);
-        alert("⚠ No se pudieron cargar los productos.");
+        alert("⚠️ No se pudieron cargar los productos.");
       }
     }
 
-    // RENDER TABLA
+    // 🟤 RENDER TABLA
     function render(lista){
       const tb=document.getElementById('tbody'); tb.innerHTML='';
       lista.forEach((p,i)=>{
@@ -211,7 +212,7 @@
       });
     }
 
-    // ACTUALIZAR CATEGORÍAS
+    // 🟤 ACTUALIZAR CATEGORÍAS
     function updateCategoryList(){
       const cats=[...new Set(productos.map(p=>p.categoria))].sort();
       const datalist=document.getElementById('listaCategorias');
@@ -223,14 +224,13 @@
       });
     }
 
-    // BUSCADOR
+    // 🟤 BUSCADOR FUNCIONAL
     const searchInput = document.getElementById("search");
     searchInput.addEventListener("input", filterProducts);
     searchInput.addEventListener("keypress", function(e){
       if(e.key === "Enter"){
         e.preventDefault();
         filterProducts();
-        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
       }
     });
 
@@ -247,16 +247,16 @@
       }
     }
 
-    // PREVIEW IMG
+    // 🟤 PREVIEW IMG
     function previewImage(){
       const src=document.getElementById('imagen').value.trim();
       document.getElementById('preview').src=src || '';
     }
 
-    // GUARDAR EN GITHUB
+    // 🟤 GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠ Guardá tu token primero."); return; }
+      if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
 
       const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
       const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
@@ -279,7 +279,7 @@
       else{ alert("❌ Error al guardar en GitHub."); }
     }
 
-    // GUARDAR PRODUCTO
+    // 🟤 GUARDAR PRODUCTO
     document.getElementById('form').onsubmit=function(e){
       e.preventDefault();
       const idx=document.getElementById('editIndex').value;
@@ -300,7 +300,7 @@
       saveToGitHub(JSON.stringify(productos,null,2));
     }
 
-    // EDITAR
+    // 🟤 EDITAR
     function edit(i){
       const p=productos[i];
       document.getElementById('nombre').value=p.nombre;
@@ -317,7 +317,7 @@
       setTimeout(()=>form.classList.remove('editando'), 2000);
     }
 
-    // ELIMINAR
+    // 🟤 ELIMINAR
     function del(i){
       if(confirm('¿Eliminar producto?')){
         productos.splice(i,1);
@@ -327,7 +327,7 @@
       }
     }
 
-    // BOTÓN SUBIR
+    // 🟤 BOTÓN SUBIR
     window.onscroll = function() {
       document.getElementById("btnArriba").style.display =
         window.scrollY > 300 ? "block" : "none";
@@ -336,7 +336,7 @@
       document.getElementById("form").scrollIntoView({ behavior: "smooth" });
     }
 
-    // INICIO
+    // 🟤 INICIO
     loadProducts();
     if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
   </script>
