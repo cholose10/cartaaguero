@@ -178,14 +178,14 @@
     "nombre": "Crema",
     "descripcion": "Crema deLeche ",
     "precio": "300",
-    "imagen": "img/medialunas.jpg",
+    "imagen": "img/cremaadi.jpg",
     "categoria":  "Cafetería☕️"
   },
   {
     "nombre": "Leche de almendras",
     "descripcion": "Leche de almendras chico$350-grande$450",
     "precio": "350-450",
-    "imagen": "img/medialunas.jpg",
+    "imagen": "img/lmen.jpg",
     "categoria":  "Cafetería☕️"
   },
   {
@@ -266,6 +266,13 @@
     "categoria":  "Cafetería☕️"
   },
   {
+    "nombre": "Alfajor Arabe",
+    "descripcion": "Alfajor chocolate y pistacho",
+    "precio": "4700",
+    "imagen": "img/alfapis.jpg",
+    "categoria":  "Cafetería☕️"
+  },
+  {
     "nombre": "Alfajor de maicena",
     "descripcion": "Alfajor de maicena (sin TACC)",
     "precio": "4500",
@@ -325,7 +332,7 @@
     "nombre": "Tarta de calabaza",
     "descripcion": "Brócoli, queso sardo, muzarella, cebolla, masa integral",
     "precio": "18500",
-    "imagen": "img/Brócoli .jpg",
+    "imagen": "img/calboso.jpg",
     "categoria": "🍽️Comidas"
   },
   {
@@ -1229,6 +1236,13 @@
     "descripcion": "sugerencia nueva POR POCION  ",
     "precio": "9200",
     "imagen": "img/torgrende.jpg",
+    "categoria": "📋MENU del DIA/SUGERENCIAS Y NOEDADES"
+  },
+   {
+    "nombre": "alfajor arabe pistacho",
+    "descripcion": "alfajor chocola pistacho  ",
+    "precio": "4700",
+    "imagen": "img/pis.jpg",
     "categoria": "📋MENU del DIA/SUGERENCIAS Y NOEDADES"
   }
 ]
