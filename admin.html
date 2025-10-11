@@ -155,7 +155,7 @@
   </table>
 
   <!-- BOTÓN ARRIBA -->
-  <button id="btnArriba" onclick="subir()">⬆️</button>
+  <button id="btnArriba" onclick="subir()">⬆</button>
 
   <script>
     // CONFIG GITHUB
@@ -175,7 +175,7 @@
     }
     function clearToken(){
       localStorage.removeItem('github_token');
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado.";
+      document.getElementById('tokenStatus').innerText="⚠ Token borrado.";
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
@@ -189,7 +189,7 @@
         updateCategoryList();
       } catch (err) {
         console.error("Error al cargar productos:", err);
-        alert("⚠️ No se pudieron cargar los productos.");
+        alert("⚠ No se pudieron cargar los productos.");
       }
     }
 
@@ -224,39 +224,23 @@
       });
     }
 
-    // Debounce util (evita ejecución excesiva en input)
-    function debounce(fn, wait){
-      let t;
-      return function(...args){
-        clearTimeout(t);
-        t = setTimeout(()=>fn.apply(this,args), wait);
-      };
-    }
-
-    // BUSCADOR FUNCIONAL (input, Enter y botón)
+    // BUSCADOR (solo baja con Enter o botón)
     const searchInput = document.getElementById("search");
     const searchBtn = document.getElementById("searchBtn");
 
-    // buscar mientras escribe (ligeramente retrasado)
-    searchInput.addEventListener("input", debounce(filterProducts, 200));
-
-    // Enter key (más compatible que keypress)
     searchInput.addEventListener("keydown", function(e){
       if(e.key === "Enter"){
         e.preventDefault();
-        filterProducts();
+        filterProducts(true);
       }
     });
-
-    // botón Buscar
     searchBtn.addEventListener("click", function(){
-      filterProducts();
+      filterProducts(true);
     });
 
-    function filterProducts(){
+    function filterProducts(shouldScroll=false){
       const q = searchInput.value.toLowerCase().trim();
       if(q === ""){
-        // si borró búsqueda, mostramos todo
         render(productos);
         return;
       }
@@ -266,11 +250,10 @@
         (p.categoria || "").toLowerCase().includes(q)
       );
       render(filtrados);
-      if(filtrados.length > 0){
+      if(shouldScroll && filtrados.length > 0){
         document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
-      } else {
-        // si querés, en vez de alert podemos mostrar un mensaje en pantalla
-        alert("No se encontraron productos que coincidan.");
+      } else if(shouldScroll && filtrados.length === 0){
+        alert("No se encontraron productos.");
       }
     }
 
@@ -283,16 +266,16 @@
     // GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
+      if(!TOKEN){ alert("⚠ Guardá tu token primero."); return; }
 
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
+      const apiUrl=https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH};
+      const getRes=await fetch(apiUrl,{ headers:{Authorization:token ${TOKEN}} });
       const data=await getRes.json();
 
       const updateRes=await fetch(apiUrl,{
         method:"PUT",
         headers:{
-          "Authorization":`token ${TOKEN}`,
+          "Authorization":token ${TOKEN},
           "Content-Type":"application/json"
         },
         body:JSON.stringify({
