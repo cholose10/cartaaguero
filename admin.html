@@ -158,197 +158,182 @@
   <button id="btnArriba" onclick="subir()">⬆</button>
 
   <script>
-    // CONFIG GITHUB
-    const USERNAME = "cholose10";
-    const REPO = "cartatilo";
-    const FILE_PATH = "productos.json";
-    let productos = [];
+  // 🟤 CONFIG GITHUB
+  const USERNAME = "cholose10";
+  const REPO = "cartatilo";
+  const FILE_PATH = "productos.json";
+  let productos = [];
 
-    // TOKEN
-    function saveToken(){
-      const t=document.getElementById('token').value.trim();
-      if(t){
-        localStorage.setItem('github_token',t);
-        document.getElementById('token').value='';
-        document.getElementById('tokenStatus').innerText="✅ Token guardado.";
-      }
+  // 🟤 TOKEN
+  function saveToken() {
+    const t = document.getElementById('token').value.trim();
+    if (t) {
+      localStorage.setItem('github_token', t);
+      document.getElementById('token').value = '';
+      document.getElementById('tokenStatus').innerText = "✅ Token guardado.";
     }
-    function clearToken(){
-      localStorage.removeItem('github_token');
-      document.getElementById('tokenStatus').innerText="⚠ Token borrado.";
-    }
-    function getToken(){ return localStorage.getItem('github_token'); }
+  }
+  function clearToken() {
+    localStorage.removeItem('github_token');
+    document.getElementById('tokenStatus').innerText = "⚠️ Token borrado.";
+  }
+  function getToken() { return localStorage.getItem('github_token'); }
 
-    // CARGAR PRODUCTOS
-    async function loadProducts(){
-      try {
-        const res = await fetch("productos.json");
-        if (!res.ok) throw new Error("No se pudo cargar productos.json");
-        productos = await res.json();
-        render(productos);
-        updateCategoryList();
-      } catch (err) {
-        console.error("Error al cargar productos:", err);
-        alert("⚠ No se pudieron cargar los productos.");
-      }
-    }
-
-    // RENDER TABLA
-    function render(lista){
-      const tb=document.getElementById('tbody'); tb.innerHTML='';
-      lista.forEach((p,i)=>{
-        tb.innerHTML+=`
-          <tr>
-            <td><img src="${p.imagen}" alt=""></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
-            <td>
-              <button onclick="edit(${i})">Editar</button>
-              <button onclick="del(${i})">Eliminar</button>
-            </td>
-          </tr>`;
-      });
-    }
-
-    // ACTUALIZAR CATEGORÍAS
-    function updateCategoryList(){
-      const cats=[...new Set(productos.map(p=>p.categoria))].sort();
-      const datalist=document.getElementById('listaCategorias');
-      datalist.innerHTML='';
-      cats.forEach(c=>{
-        const opt=document.createElement('option');
-        opt.value=c;
-        datalist.appendChild(opt);
-      });
-    }
-
-    // BUSCADOR (solo baja con Enter o botón)
-    const searchInput = document.getElementById("search");
-    const searchBtn = document.getElementById("searchBtn");
-
-    searchInput.addEventListener("keydown", function(e){
-      if(e.key === "Enter"){
-        e.preventDefault();
-        filterProducts(true);
-      }
-    });
-    searchBtn.addEventListener("click", function(){
-      filterProducts(true);
-    });
-
-    function filterProducts(shouldScroll=false){
-      const q = searchInput.value.toLowerCase().trim();
-      if(q === ""){
-        render(productos);
-        return;
-      }
-      const filtrados = productos.filter(p =>
-        (p.nombre || "").toLowerCase().includes(q) ||
-        (p.descripcion || "").toLowerCase().includes(q) ||
-        (p.categoria || "").toLowerCase().includes(q)
-      );
-      render(filtrados);
-      if(shouldScroll && filtrados.length > 0){
-        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
-      } else if(shouldScroll && filtrados.length === 0){
-        alert("No se encontraron productos.");
-      }
-    }
-
-    // PREVIEW IMG
-    function previewImage(){
-      const src=document.getElementById('imagen').value.trim();
-      document.getElementById('preview').src=src || '';
-    }
-
-    // GUARDAR EN GITHUB
-    async function saveToGitHub(newContent){
-      const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠ Guardá tu token primero."); return; }
-
-      const apiUrl=https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH};
-      const getRes=await fetch(apiUrl,{ headers:{Authorization:token ${TOKEN}} });
-      const data=await getRes.json();
-
-      const updateRes=await fetch(apiUrl,{
-        method:"PUT",
-        headers:{
-          "Authorization":token ${TOKEN},
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:"Actualización desde admin.html",
-          content:btoa(unescape(encodeURIComponent(newContent))),
-          sha:data.sha
-        })
-      });
-
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
-    }
-
-    // GUARDAR PRODUCTO
-    document.getElementById('form').onsubmit=function(e){
-      e.preventDefault();
-      const idx=document.getElementById('editIndex').value;
-      const prod={
-        nombre:document.getElementById('nombre').value,
-        descripcion:document.getElementById('descripcion').value,
-        precio:parseFloat(document.getElementById('precio').value),
-        imagen:document.getElementById('imagen').value,
-        categoria:document.getElementById('categoria').value
-      };
-      if(idx===''){ productos.push(prod);}
-      else { productos[idx]=prod; document.getElementById('editIndex').value=''; }
+  // 🟤 CARGAR PRODUCTOS
+  async function loadProducts() {
+    try {
+      const url = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("No se pudo cargar productos.json");
+      productos = await res.json();
       render(productos);
       updateCategoryList();
-      this.reset();
-      document.getElementById('preview').src='';
-      document.getElementById('form').classList.remove('editando');
-      saveToGitHub(JSON.stringify(productos,null,2));
+    } catch (err) {
+      console.error("Error al cargar productos:", err);
+      alert("⚠️ No se pudieron cargar los productos.");
     }
+  }
 
-    // EDITAR
-    function edit(i){
-      const p=productos[i];
-      document.getElementById('nombre').value=p.nombre;
-      document.getElementById('descripcion').value=p.descripcion;
-      document.getElementById('precio').value=p.precio;
-      document.getElementById('imagen').value=p.imagen;
-      document.getElementById('categoria').value=p.categoria;
-      document.getElementById('editIndex').value=i;
-      document.getElementById('preview').src=p.imagen;
+  // 🟤 RENDER TABLA
+  function render(lista) {
+    const tb = document.getElementById('tbody');
+    tb.innerHTML = '';
+    lista.forEach((p, i) => {
+      tb.innerHTML += `
+        <tr>
+          <td><img src="${p.imagen}" alt=""></td>
+          <td>${p.nombre}</td>
+          <td>${p.descripcion}</td>
+          <td>${p.categoria}</td>
+          <td>$${p.precio}</td>
+          <td>
+            <button onclick="edit(${i})">Editar</button>
+            <button onclick="del(${i})">Eliminar</button>
+          </td>
+        </tr>`;
+    });
+  }
 
-      const form=document.getElementById('form');
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-      form.classList.add('editando');
-      setTimeout(()=>form.classList.remove('editando'), 2000);
-    }
+  // 🟤 ACTUALIZAR CATEGORÍAS
+  function updateCategoryList() {
+    const cats = [...new Set(productos.map(p => p.categoria))].sort();
+    const datalist = document.getElementById('listaCategorias');
+    datalist.innerHTML = '';
+    cats.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c;
+      datalist.appendChild(opt);
+    });
+  }
 
-    // ELIMINAR
-    function del(i){
-      if(confirm('¿Eliminar producto?')){
-        productos.splice(i,1);
-        render(productos);
-        updateCategoryList();
-        saveToGitHub(JSON.stringify(productos,null,2));
+  // 🟤 BUSCADOR (solo baja cuando se presiona Enter)
+  const searchInput = document.getElementById("search");
+  searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const q = searchInput.value.toLowerCase().trim();
+      const filtrados = productos.filter(p =>
+        p.nombre.toLowerCase().includes(q) ||
+        p.descripcion.toLowerCase().includes(q) ||
+        p.categoria.toLowerCase().includes(q)
+      );
+      render(filtrados);
+      if (filtrados.length > 0) {
+        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
       }
     }
+  });
 
-    // BOTÓN SUBIR
-    window.onscroll = function() {
-      document.getElementById("btnArriba").style.display =
-        window.scrollY > 300 ? "block" : "none";
+  // 🟤 PREVIEW IMG
+  function previewImage() {
+    const src = document.getElementById('imagen').value.trim();
+    document.getElementById('preview').src = src || '';
+  }
+
+  // 🟤 GUARDAR EN GITHUB
+  async function saveToGitHub(newContent) {
+    const TOKEN = getToken();
+    if (!TOKEN) { alert("⚠️ Guardá tu token primero."); return; }
+
+    const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
+    const getRes = await fetch(apiUrl, { headers: { Authorization: `token ${TOKEN}` } });
+    const data = await getRes.json();
+
+    const updateRes = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        "Authorization": `token ${TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "Actualización desde admin.html",
+        content: btoa(unescape(encodeURIComponent(newContent))),
+        sha: data.sha
+      })
+    });
+
+    if (updateRes.ok) { alert("✅ Cambios guardados en GitHub."); }
+    else { alert("❌ Error al guardar en GitHub."); }
+  }
+
+  // 🟤 GUARDAR PRODUCTO
+  document.getElementById('form').onsubmit = function (e) {
+    e.preventDefault();
+    const idx = document.getElementById('editIndex').value;
+    const prod = {
+      nombre: document.getElementById('nombre').value,
+      descripcion: document.getElementById('descripcion').value,
+      precio: parseFloat(document.getElementById('precio').value),
+      imagen: document.getElementById('imagen').value,
+      categoria: document.getElementById('categoria').value
     };
-    function subir(){
-      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
-    }
+    if (idx === '') { productos.push(prod); }
+    else { productos[idx] = prod; document.getElementById('editIndex').value = ''; }
+    render(productos);
+    updateCategoryList();
+    this.reset();
+    document.getElementById('preview').src = '';
+    document.getElementById('form').classList.remove('editando');
+    saveToGitHub(JSON.stringify(productos, null, 2));
+  }
 
-    // INICIO
-    loadProducts();
-    if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
-  </script>
-</body>
-</html>
+  // 🟤 EDITAR
+  function edit(i) {
+    const p = productos[i];
+    document.getElementById('nombre').value = p.nombre;
+    document.getElementById('descripcion').value = p.descripcion;
+    document.getElementById('precio').value = p.precio;
+    document.getElementById('imagen').value = p.imagen;
+    document.getElementById('categoria').value = p.categoria;
+    document.getElementById('editIndex').value = i;
+    document.getElementById('preview').src = p.imagen;
+
+    const form = document.getElementById('form');
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+    form.classList.add('editando');
+    setTimeout(() => form.classList.remove('editando'), 2000);
+  }
+
+  // 🟤 ELIMINAR
+  function del(i) {
+    if (confirm('¿Eliminar producto?')) {
+      productos.splice(i, 1);
+      render(productos);
+      updateCategoryList();
+      saveToGitHub(JSON.stringify(productos, null, 2));
+    }
+  }
+
+  // 🟤 BOTÓN SUBIR
+  window.onscroll = function () {
+    document.getElementById("btnArriba").style.display =
+      window.scrollY > 300 ? "block" : "none";
+  };
+  function subir() {
+    document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+  }
+
+  // 🟤 INICIO
+  loadProducts();
+  if (getToken()) { document.getElementById('tokenStatus').innerText = "🔐 Token cargado."; }
+</script>
