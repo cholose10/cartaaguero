@@ -76,6 +76,7 @@
     }
     .search-container {
       display: flex;
+      justify-content: center;
       gap: 10px;
       margin-bottom: 15px;
     }
@@ -116,7 +117,7 @@
 
   <!-- BUSCADOR -->
   <div class="search-container">
-    <input type="text" id="search" placeholder="Buscar producto...">
+    <input type="text" id="search" placeholder="Buscar producto... (presiona Enter)">
   </div>
 
   <!-- FORMULARIO -->
@@ -157,13 +158,12 @@
   <button id="btnArriba" onclick="subir()">⬆️</button>
 
   <script>
-    // 🟤 CONFIG GITHUB
     const USERNAME = "cholose10";
     const REPO = "cartatilo";
     const FILE_PATH = "productos.json";
     let productos = [];
 
-    // 🟤 TOKEN
+    // 🔐 TOKEN
     function saveToken(){
       const t=document.getElementById('token').value.trim();
       if(t){ 
@@ -178,24 +178,23 @@
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
-    // 🟤 CARGAR PRODUCTOS
+    // 📦 CARGAR PRODUCTOS
     async function loadProducts(){
+      const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
       try {
-        const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
         const res = await fetch(url);
-        if (!res.ok) throw new Error("No se pudo cargar productos.json");
         productos = await res.json();
         render(productos);
         updateCategoryList();
-      } catch (err) {
-        console.error("Error al cargar productos:", err);
-        alert("⚠️ No se pudieron cargar los productos.");
+      } catch (e) {
+        console.error("Error al cargar productos.json", e);
       }
     }
 
-    // 🟤 RENDER TABLA
+    // 🧾 RENDER TABLA
     function render(lista){
-      const tb=document.getElementById('tbody'); tb.innerHTML='';
+      const tb=document.getElementById('tbody');
+      tb.innerHTML='';
       lista.forEach((p,i)=>{
         tb.innerHTML+=`
           <tr>
@@ -212,7 +211,7 @@
       });
     }
 
-    // 🟤 ACTUALIZAR CATEGORÍAS
+    // 📂 LISTA DE CATEGORÍAS
     function updateCategoryList(){
       const cats=[...new Set(productos.map(p=>p.categoria))].sort();
       const datalist=document.getElementById('listaCategorias');
@@ -224,44 +223,36 @@
       });
     }
 
-    // 🟤 BUSCADOR (solo con Enter)
+    // 🔍 BUSCADOR (solo Enter)
     const searchInput = document.getElementById("search");
-    searchInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
+    searchInput.addEventListener("keypress", function(e){
+      if(e.key === "Enter"){
         e.preventDefault();
-        filterProducts();
+        const q = searchInput.value.toLowerCase().trim();
+        const filtrados = productos.filter(p =>
+          p.nombre.toLowerCase().includes(q) ||
+          p.descripcion.toLowerCase().includes(q) ||
+          p.categoria.toLowerCase().includes(q)
+        );
+
+        if(filtrados.length > 0){
+          render(filtrados);
+          document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
+        } else {
+          document.getElementById('tbody').innerHTML = `
+            <tr><td colspan="6" style="text-align:center; padding:10px;">🔍 No se encontraron resultados</td></tr>
+          `;
+        }
       }
     });
 
-    function filterProducts() {
-      const q = searchInput.value.toLowerCase().trim();
-      if (q === "") {
-        render(productos);
-        return;
-      }
-
-      const filtrados = productos.filter(p =>
-        (p.nombre && p.nombre.toLowerCase().includes(q)) ||
-        (p.descripcion && p.descripcion.toLowerCase().includes(q)) ||
-        (p.categoria && p.categoria.toLowerCase().includes(q))
-      );
-
-      if (filtrados.length > 0) {
-        render(filtrados);
-        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
-      } else {
-        const tb = document.getElementById('tbody');
-        tb.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:10px;">🔍 No se encontraron resultados</td></tr>`;
-      }
-    }
-
-    // 🟤 PREVIEW IMG
+    // 🖼️ PREVISUALIZAR IMAGEN
     function previewImage(){
       const src=document.getElementById('imagen').value.trim();
       document.getElementById('preview').src=src || '';
     }
 
-    // 🟤 GUARDAR EN GITHUB
+    // 💾 GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
       if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
@@ -270,7 +261,7 @@
       const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
       const data=await getRes.json();
 
-      const updateRes=await fetch(apiUrl,{
+      await fetch(apiUrl,{
         method:"PUT",
         headers:{
           "Authorization":`token ${TOKEN}`,
@@ -283,11 +274,10 @@
         })
       });
 
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
+      alert("✅ Cambios guardados en GitHub.");
     }
 
-    // 🟤 GUARDAR PRODUCTO
+    // 🧩 FORMULARIO
     document.getElementById('form').onsubmit=function(e){
       e.preventDefault();
       const idx=document.getElementById('editIndex').value;
@@ -308,7 +298,7 @@
       saveToGitHub(JSON.stringify(productos,null,2));
     }
 
-    // 🟤 EDITAR
+    // ✏️ EDITAR
     function edit(i){
       const p=productos[i];
       document.getElementById('nombre').value=p.nombre;
@@ -322,10 +312,10 @@
       const form=document.getElementById('form');
       form.scrollIntoView({ behavior: "smooth", block: "start" });
       form.classList.add('editando');
-      setTimeout(()=>form.classList.remove('editando'), 2000);
+      setTimeout(()=>form.classList.remove('editando'),2000);
     }
 
-    // 🟤 ELIMINAR
+    // 🗑️ ELIMINAR
     function del(i){
       if(confirm('¿Eliminar producto?')){
         productos.splice(i,1);
@@ -335,16 +325,16 @@
       }
     }
 
-    // 🟤 BOTÓN SUBIR
-    window.onscroll = function() {
-      document.getElementById("btnArriba").style.display =
-        window.scrollY > 300 ? "block" : "none";
-    };
+    // ⬆️ BOTÓN SUBIR
+    window.onscroll=function(){
+      document.getElementById("btnArriba").style.display=
+        window.scrollY>300?"block":"none";
+    }
     function subir(){
-      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("form").scrollIntoView({behavior:"smooth"});
     }
 
-    // 🟤 INICIO
+    // 🚀 INICIO
     loadProducts();
     if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
   </script>
