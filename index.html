@@ -31,7 +31,6 @@
       margin: 15px auto;
       width: fit-content;
     }
-    /* 🔘 Botones de categorías */
     .categories {
       display: flex;
       flex-wrap: wrap;
@@ -46,14 +45,24 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
+      transition: background 0.3s;
       font-size: 1rem;
     }
     .categories button:hover {
       background-color: #6b4e3d;
-      transform: scale(1.05);
     }
-    /* 📋 Productos */
+    .search-box {
+      text-align: center;
+      margin: 15px;
+    }
+    .search-box input {
+      padding: 8px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
     .item-list {
       display: flex;
       flex-wrap: wrap;
@@ -79,139 +88,120 @@
     }
     .item h3 {
       margin: 10px;
-      font-size: 1.1rem;
     }
     .item p {
       margin: 0 10px 10px;
-      font-size: 0.95rem;
     }
     .item .price {
       font-weight: bold;
       color: #000;
       margin: 0 10px 10px;
       display: block;
-      font-size: 1rem;
-    }
-    /* 🔎 Buscador */
-    .search-box {
-      text-align: center;
-      margin: 10px 0;
-    }
-    .search-box input {
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <!-- 🖼️ Banner superior -->
   <header>
     <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
   <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <!-- 🔍 Buscador -->
+  <!-- Buscador -->
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Buscar producto o categoría...">
+    <input type="text" id="search" placeholder="Buscar producto...">
   </div>
 
-  <!-- 🔘 Botones de categorías -->
+  <!-- Categorías -->
   <div class="categories" id="category-buttons"></div>
 
-  <!-- 📋 Lista de productos -->
+  <!-- Lista de productos -->
   <div class="item-list" id="product-list"></div>
 
   <script>
     let productos = [];
 
-    // 🔗 Cargar productos desde GitHub
-    fetch("https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json")
+    // Cargar productos desde GitHub
+    fetch('https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json')
       .then(response => response.json())
       .then(data => {
         productos = data;
         renderCategories();
-        renderProducts("Todos");
+        renderProducts('Todos');
       })
-      .catch(() => {
-        document.getElementById("product-list").innerHTML = "<p>Error al cargar la carta.</p>";
-      });
+      .catch(err => console.error("Error cargando productos:", err));
 
-    // 🧾 Renderizar categorías
+    // Renderizar categorías
     function renderCategories() {
-      const categorias = ["Todos", ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById("category-buttons");
-      container.innerHTML = "";
+      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
+      const container = document.getElementById('category-buttons');
+      container.innerHTML = '';
       categorias.forEach(cat => {
-        const btn = document.createElement("button");
+        const btn = document.createElement('button');
         btn.textContent = cat;
-        btn.onclick = () => renderProducts(cat);
+        btn.onclick = () => {
+          renderProducts(cat);
+          document.getElementById('product-list').scrollIntoView({ behavior: "smooth" });
+        };
         container.appendChild(btn);
       });
     }
 
-    // 🍽️ Renderizar productos
-    function renderProducts(categoria) {
-      const container = document.getElementById("product-list");
-      container.innerHTML = "";
-      const filtrados =
-        categoria === "Todos"
-          ? productos
-          : productos.filter(p => p.categoria === categoria);
-
+    // Renderizar productos
+    function renderProducts(categoria, scroll = true) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
       filtrados.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "item";
-        const precioFormateado = 
-          String(p.precio).trim().startsWith("$")
-            ? p.precio
-            : "$" + p.precio;
-
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
         item.innerHTML = `
           <img src="${p.imagen}" alt="${p.nombre}">
           <h3>${p.nombre}</h3>
           <p>${p.descripcion}</p>
-          <span class="price">${precioFormateado}</span>
+          <span class="price">${priceDisplay}</span>
         `;
         container.appendChild(item);
       });
+      if (scroll) container.scrollIntoView({ behavior: "smooth" });
     }
 
-    // 🔍 Buscador (funciona al escribir o presionar Enter)
-    const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") {
+    // Buscador con enter
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("keypress", function(e){
+      if(e.key === "Enter"){
         e.preventDefault();
-        const query = searchInput.value.toLowerCase();
+        const q = this.value.toLowerCase();
         const filtrados = productos.filter(p =>
-          p.nombre.toLowerCase().includes(query) ||
-          p.descripcion.toLowerCase().includes(query) ||
-          p.categoria.toLowerCase().includes(query)
+          p.nombre.toLowerCase().includes(q) ||
+          p.descripcion.toLowerCase().includes(q) ||
+          p.categoria.toLowerCase().includes(q)
         );
-        renderCustom(filtrados);
+        renderProducts('Todos', false);
+        const container = document.getElementById('product-list');
+        container.innerHTML = '';
+        filtrados.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'item';
+          const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+            ? String(p.precio).trim()
+            : ('$' + (p.precio ?? ''));
+          item.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p>${p.descripcion}</p>
+            <span class="price">${priceDisplay}</span>
+          `;
+          container.appendChild(item);
+        });
+        if (filtrados.length > 0) {
+          container.scrollIntoView({ behavior: "smooth" });
+        }
       }
     });
-
-    function renderCustom(lista) {
-      const container = document.getElementById("product-list");
-      container.innerHTML = "";
-      lista.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "item";
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <span class="price">$${p.precio}</span>
-        `;
-        container.appendChild(item);
-      });
-      container.scrollIntoView({ behavior: "smooth" });
-    }
   </script>
 </body>
 </html>
