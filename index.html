@@ -1,234 +1,134 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Carta - Tilo Café Agüero</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: url("img/Fondo1.jpg") repeat;
-      background-size: cover;
-      color: #45270a;
-    }
-    header {
-      background: rgba(255,255,255,0.9);
-    }
-    .banner-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
-    .banner {
-      text-align: center;
-      padding: 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      background: rgba(255,255,255,0.8);
-      border-radius: 8px;
-      margin: 15px auto;
-      width: fit-content;
-    }
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-    }
-    .categories button {
-      padding: 10px 20px;
-      background-color: #8c6954;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-size: 1rem;
-    }
-    .categories button:hover {
-      background-color: #6b4e3d;
-    }
-
-    .search-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      margin: 10px;
-    }
-    .search-box input {
-      padding: 10px;
-      width: 60%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .search-box button {
-      padding: 10px 20px;
-      background-color: #8c6954;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .search-box button:hover {
-      background-color: #6b4e3d;
-    }
-
-    .item-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
-    .item {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      overflow: hidden;
-      width: 280px;
-      transition: transform 0.2s ease;
-    }
-    .item:hover {
-      transform: scale(1.02);
-    }
-    .item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .item h3 {
-      margin: 10px;
-    }
-    .item p {
-      margin: 0 10px 10px;
-    }
-    .item .price {
-      font-weight: bold;
-      color: #000;
-      margin: 0 10px 10px;
-      display: block;
-    }
+    body { font-family: 'Segoe UI', sans-serif; margin:0; background:url("img/Fondo1.jpg") repeat; background-size:cover; color:#45270a; }
+    header { background:rgba(255,255,255,0.9); }
+    .banner-img { width:100%; height:250px; object-fit:cover; display:block; }
+    .banner { text-align:center; padding:10px; font-size:1.5rem; background:rgba(255,255,255,0.8); border-radius:8px; margin:15px auto; width:fit-content; }
+    .categories{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:10px; }
+    .categories button{ padding:10px 20px; background:#8c6954; color:#fff; border:none; border-radius:10px; cursor:pointer; transition:background .2s; }
+    .categories button:hover{ background:#6b4e3d; transform:scale(1.03); }
+    .search-box{ display:flex; justify-content:center; gap:10px; margin:15px; }
+    .search-box input{ padding:10px; width:60%; max-width:480px; border-radius:8px; border:1px solid #ccc; }
+    .search-box button{ padding:10px 16px; border-radius:8px; border:none; background:#8c6954; color:#fff; cursor:pointer; }
+    .item-list{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; padding:20px; }
+    .item{ background:rgba(255,255,255,0.95); border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.12); width:280px; overflow:hidden; transition:transform .15s; }
+    .item:hover{ transform:scale(1.02); }
+    .item img{ width:100%; height:180px; object-fit:cover; }
+    .item h3{ margin:10px; }
+    .item p{ margin:0 10px 10px; }
+    .price{ font-weight:bold; margin:0 10px 10px; display:block; }
+    .msg { text-align:center; padding:20px; color:#a00; }
   </style>
 </head>
 <body>
-  <!-- FOTO GRANDE ARRIBA -->
-  <header>
-    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
-  </header>
-
+  <header><img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img"></header>
   <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <!-- 🔍 Buscador -->
   <div class="search-box">
-    <input type="text" id="search" placeholder="Buscar por nombre o descripción...">
-    <button onclick="buscar()">Buscar</button>
+    <input id="search" type="text" placeholder="Buscar por nombre, descripción o categoría...">
+    <button id="btnSearch">Buscar</button>
   </div>
 
-  <!-- Botones de categorías -->
   <div class="categories" id="category-buttons"></div>
+  <div id="product-list" class="item-list"></div>
 
-  <!-- Lista de productos -->
-  <div class="item-list" id="product-list"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const RAW_URL = 'https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json';
+  const searchInput = document.getElementById('search');
+  const btnSearch = document.getElementById('btnSearch');
+  const categoryContainer = document.getElementById('category-buttons');
+  const productList = document.getElementById('product-list');
+  let productos = [];
 
-  <script>
-    let productos = [];
-
-    // Cargar productos desde GitHub
-    fetch('https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json')
-      .then(response => response.json())
-      .then(data => {
-        productos = data;
-        renderCategories();
-        renderProducts('Todos');
-      });
-
-    // Renderizar categorías dinámicamente
-    function renderCategories() {
-      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
-      const container = document.getElementById('category-buttons');
-      container.innerHTML = '';
-      categorias.forEach(cat => {
-        const btn = document.createElement('button');
-        btn.textContent = cat;
-        btn.onclick = () => {
-          renderProducts(cat);
-          scrollToProducts();
-        };
-        container.appendChild(btn);
-      });
+  async function load() {
+    try {
+      const res = await fetch(RAW_URL, {cache: "no-store"});
+      if (!res.ok) throw new Error('Error cargando productos.json: ' + res.status);
+      productos = await res.json();
+      renderCategories();
+      renderProducts('Todos', false);
+    } catch (err) {
+      console.error(err);
+      productList.innerHTML = '<div class="msg">⚠️ No se pudieron cargar los productos.</div>';
     }
+  }
 
-    // Renderizar productos filtrados
-    function renderProducts(categoria) {
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      const filtrados = categoria === 'Todos'
-        ? productos
-        : productos.filter(p => p.categoria === categoria);
-      filtrados.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
-          ? String(p.precio).trim()
-          : ('$' + (p.precio ?? ''));
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <span class="price">${priceDisplay}</span>
-        `;
-        container.appendChild(item);
+  function renderCategories() {
+    const cats = ['Todos', ...new Set(productos.map(p => p.categoria).filter(Boolean))];
+    categoryContainer.innerHTML = '';
+    cats.forEach(cat => {
+      const b = document.createElement('button');
+      b.textContent = cat;
+      b.addEventListener('click', () => {
+        renderProducts(cat, true);
       });
-    }
-
-    // 🔍 BUSCADOR FUNCIONAL
-    const searchInput = document.getElementById('search');
-    searchInput.addEventListener('keypress', function(e){
-      if(e.key === 'Enter'){
-        e.preventDefault();
-        buscar();
-      }
+      categoryContainer.appendChild(b);
     });
+  }
 
-    function buscar() {
-      const q = searchInput.value.toLowerCase().trim();
-      const resultados = productos.filter(p =>
-        p.nombre.toLowerCase().includes(q) ||
-        p.descripcion.toLowerCase().includes(q)
-      );
-      renderBusqueda(resultados);
-      if(resultados.length > 0){
-        scrollToProducts();
-      }
+  function renderProducts(categoria = 'Todos', doScroll = true) {
+    productList.innerHTML = '';
+    const lista = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
+    if (!lista || lista.length === 0) {
+      productList.innerHTML = '<div class="msg">No hay productos para mostrar.</div>';
+      if (doScroll) productList.scrollIntoView({behavior:'smooth'});
+      return;
     }
+    lista.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion || ''}</p>
+        <span class="price">${precio}</span>`;
+      productList.appendChild(div);
+    });
+    if (doScroll) productList.scrollIntoView({behavior:'smooth'});
+  }
 
-    // Mostrar resultados de búsqueda
-    function renderBusqueda(lista) {
-      const container = document.getElementById('product-list');
-      container.innerHTML = '';
-      lista.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'item';
-        item.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
-          <h3>${p.nombre}</h3>
-          <p>${p.descripcion}</p>
-          <span class="price">$${p.precio}</span>
-        `;
-        container.appendChild(item);
-      });
+  function buscar() {
+    const q = (searchInput.value || '').toLowerCase().trim();
+    if (!q) { renderProducts('Todos', true); return; }
+    const res = productos.filter(p =>
+      (p.nombre||'').toLowerCase().includes(q) ||
+      (p.descripcion||'').toLowerCase().includes(q) ||
+      (p.categoria||'').toLowerCase().includes(q)
+    );
+    if (res.length === 0) {
+      productList.innerHTML = '<div class="msg">🔍 No se encontraron resultados.</div>';
+      productList.scrollIntoView({behavior:'smooth'});
+      return;
     }
+    productList.innerHTML = '';
+    res.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
+        <h3>${p.nombre}</h3>
+        <p>${p.descripcion || ''}</p>
+        <span class="price">${precio}</span>`;
+      productList.appendChild(div);
+    });
+    productList.scrollIntoView({behavior:'smooth'});
+  }
 
-    // 🔽 Desplazar hacia productos
-    function scrollToProducts() {
-      document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
+  // Enter en input -> buscar
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); buscar(); }
+  });
+  btnSearch.addEventListener('click', buscar);
+
+  // iniciar
+  load();
+});
+</script>
 </body>
 </html>
