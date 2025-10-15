@@ -31,20 +31,6 @@
       margin: 15px auto;
       width: fit-content;
     }
-    .search-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 10px auto;
-      padding: 10px;
-    }
-    #search {
-      padding: 10px;
-      width: 70%;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
     .categories {
       display: flex;
       flex-wrap: wrap;
@@ -65,6 +51,34 @@
     .categories button:hover {
       background-color: #6b4e3d;
     }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin: 10px;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 60%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .search-box button {
+      padding: 10px 20px;
+      background-color: #8c6954;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-box button:hover {
+      background-color: #6b4e3d;
+    }
+
     .item-list {
       display: flex;
       flex-wrap: wrap;
@@ -100,38 +114,20 @@
       margin: 0 10px 10px;
       display: block;
     }
-    #btnArriba {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #806250;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 100;
-      transition: background 0.3s;
-    }
-    #btnArriba:hover {
-      background: #a07b68;
-    }
   </style>
 </head>
 <body>
+  <!-- FOTO GRANDE ARRIBA -->
   <header>
-    <img src="img/Logo99.jpg" alt="Tilo Café Agüero" class="banner-img" />
+    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
   </header>
 
-  <div class="banner">¡Bienvenidos a Tilo Café Agüero!</div>
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <!-- 🔍 BUSCADOR -->
-  <div class="search-container">
-    <input type="text" id="search" placeholder="Buscar por nombre, descripción o categoría...">
+  <!-- 🔍 Buscador -->
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Buscar por nombre o descripción...">
+    <button onclick="buscar()">Buscar</button>
   </div>
 
   <!-- Botones de categorías -->
@@ -140,23 +136,19 @@
   <!-- Lista de productos -->
   <div class="item-list" id="product-list"></div>
 
-  <!-- BOTÓN ARRIBA -->
-  <button id="btnArriba" onclick="subir()">⬆️</button>
-
   <script>
     let productos = [];
 
     // Cargar productos desde GitHub
-    fetch("https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json")
+    fetch('https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json')
       .then(response => response.json())
       .then(data => {
         productos = data;
         renderCategories();
         renderProducts('Todos');
-      })
-      .catch(err => console.error("Error al cargar productos:", err));
+      });
 
-    // Renderizar categorías
+    // Renderizar categorías dinámicamente
     function renderCategories() {
       const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
       const container = document.getElementById('category-buttons');
@@ -166,23 +158,23 @@
         btn.textContent = cat;
         btn.onclick = () => {
           renderProducts(cat);
-          document.getElementById("product-list").scrollIntoView({ behavior: "smooth" });
+          scrollToProducts();
         };
         container.appendChild(btn);
       });
     }
 
-    // Renderizar productos
-    function renderProducts(filtro) {
-      const cont = document.getElementById('product-list');
-      cont.innerHTML = '';
-      const filtrados = filtro === 'Todos'
+    // Renderizar productos filtrados
+    function renderProducts(categoria) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos'
         ? productos
-        : productos.filter(p => p.categoria === filtro);
+        : productos.filter(p => p.categoria === categoria);
       filtrados.forEach(p => {
         const item = document.createElement('div');
         item.className = 'item';
-        const priceDisplay = (String(p.precio || '').trim().startsWith('$'))
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
           ? String(p.precio).trim()
           : ('$' + (p.precio ?? ''));
         item.innerHTML = `
@@ -191,55 +183,51 @@
           <p>${p.descripcion}</p>
           <span class="price">${priceDisplay}</span>
         `;
-        cont.appendChild(item);
+        container.appendChild(item);
       });
     }
 
-    // 🔍 BUSCADOR funcional
-    const searchInput = document.getElementById("search");
-    searchInput.addEventListener("input", filterProducts);
-    searchInput.addEventListener("keypress", function(e){
-      if(e.key === "Enter"){
+    // 🔍 BUSCADOR FUNCIONAL
+    const searchInput = document.getElementById('search');
+    searchInput.addEventListener('keypress', function(e){
+      if(e.key === 'Enter'){
         e.preventDefault();
-        filterProducts(true);
+        buscar();
       }
     });
 
-    function filterProducts(scroll){
+    function buscar() {
       const q = searchInput.value.toLowerCase().trim();
-      const filtrados = productos.filter(p =>
+      const resultados = productos.filter(p =>
         p.nombre.toLowerCase().includes(q) ||
-        p.descripcion.toLowerCase().includes(q) ||
-        p.categoria.toLowerCase().includes(q)
+        p.descripcion.toLowerCase().includes(q)
       );
-      renderFiltered(filtrados);
-      if(scroll && filtrados.length>0){
-        document.getElementById("product-list").scrollIntoView({ behavior: "smooth" });
+      renderBusqueda(resultados);
+      if(resultados.length > 0){
+        scrollToProducts();
       }
     }
 
-    function renderFiltered(lista){
-      const cont=document.getElementById('product-list');
-      cont.innerHTML='';
-      lista.forEach(p=>{
-        const div=document.createElement('div');
-        div.className='item';
-        const precio=String(p.precio||'').startsWith('$')? p.precio: '$'+p.precio;
-        div.innerHTML=`<img src="${p.imagen}" alt="${p.nombre}">
-                       <h3>${p.nombre}</h3>
-                       <p>${p.descripcion}</p>
-                       <p class="price">${precio}</p>`;
-        cont.appendChild(div);
+    // Mostrar resultados de búsqueda
+    function renderBusqueda(lista) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      lista.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <span class="price">$${p.precio}</span>
+        `;
+        container.appendChild(item);
       });
     }
 
-    // 🔼 Botón subir
-    window.onscroll = function() {
-      document.getElementById("btnArriba").style.display =
-        window.scrollY > 300 ? "block" : "none";
-    };
-    function subir(){
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    // 🔽 Desplazar hacia productos
+    function scrollToProducts() {
+      document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' });
     }
   </script>
 </body>
