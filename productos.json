@@ -821,7 +821,7 @@
   {
     "nombre": "Bife de chorizo",
     "descripcion": "Con frita, pure, ensalada o arroz",
-    "precio": "23000",
+   "precio":"30000",
     "imagen": "img/20250815_151841.jpg",
     "categoria": "🍽️Comidas"
   },
