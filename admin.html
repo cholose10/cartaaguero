@@ -3,328 +3,205 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Carta - Tilo Café Agüero</title>
+  <title>Carta Tilo Café Agüero</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f7f3f0;
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: url("img/Fondo1.jpg") repeat;
+      background-size: cover;
+      color: #45270a;
     }
-    h1 {
-      text-align: center;
-      color: #806250;
+    header {
+      background: rgba(255,255,255,0.9);
     }
-    form {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      transition: box-shadow 0.5s;
-    }
-    form.editando {
-      box-shadow: 0 0 15px #806250;
-    }
-    input, textarea, datalist {
+    .banner-img {
       width: 100%;
-      padding: 8px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background: #806250;
-      color: white;
-    }
-    img {
-      max-width: 60px;
-      border-radius: 6px;
-    }
-    button {
-      cursor: pointer;
-      background: #806250;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #a07b68;
-    }
-    #preview {
-      max-width: 100px;
-      margin-top: 5px;
+      height: 250px;
+      object-fit: cover;
       display: block;
+    }
+    .banner {
+      text-align: center;
+      padding: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: rgba(255,255,255,0.8);
       border-radius: 8px;
+      margin: 15px auto;
+      width: fit-content;
     }
-    #search {
-      width: 60%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .search-container {
+    .categories {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      margin-bottom: 15px;
+      padding: 10px;
     }
-    /* 🔼 Botón flecha */
-    #btnArriba {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #806250;
-      color: white;
+    .categories button {
+      padding: 10px 20px;
+      background-color: #8c6954;
+      color: #fff;
       border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 20px;
+      border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 100;
       transition: background 0.3s;
+      font-size: 1rem;
     }
-    #btnArriba:hover {
-      background: #a07b68;
+    .categories button:hover {
+      background-color: #6b4e3d;
+    }
+    .search-box {
+      text-align: center;
+      margin: 15px;
+    }
+    .search-box input {
+      padding: 8px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .item-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+    }
+    .item {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.2s ease;
+    }
+    .item:hover {
+      transform: scale(1.02);
+    }
+    .item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .item h3 {
+      margin: 10px;
+    }
+    .item p {
+      margin: 0 10px 10px;
+    }
+    .item .price {
+      font-weight: bold;
+      color: #000;
+      margin: 0 10px 10px;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <h1>Panel de Administración - Tilo Café Agüero</h1>
+  <header>
+    <img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img" />
+  </header>
 
-  <!-- TOKEN -->
-  <div style="margin-bottom:15px; background:#eee; padding:10px; border-radius:8px;">
-    <label for="token">Token de GitHub:</label><br>
-    <input type="password" id="token" placeholder="Pega tu token aquí" style="width:70%; padding:8px;">
-    <button onclick="saveToken()">Guardar Token</button>
-    <button onclick="clearToken()">Borrar Token</button>
-    <p id="tokenStatus"></p>
-  </div>
+  <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <!-- BUSCADOR -->
-  <div class="search-container">
+  <!-- Buscador -->
+  <div class="search-box">
     <input type="text" id="search" placeholder="Buscar producto...">
   </div>
 
-  <!-- FORMULARIO -->
-  <form id="form">
-    <input type="hidden" id="editIndex">
-    <label>Nombre</label>
-    <input type="text" id="nombre" required>
+  <!-- Categorías -->
+  <div class="categories" id="category-buttons"></div>
 
-    <label>Descripción</label>
-    <textarea id="descripcion" required></textarea>
-
-    <label>Precio</label>
-    <input type="number" id="precio" required>
-
-    <label>Imagen (ej: img/foto.jpg)</label>
-    <input type="text" id="imagen" required oninput="previewImage()">
-    <img id="preview" src="" alt="Vista previa">
-
-    <label>Categoría</label>
-    <input list="listaCategorias" type="text" id="categoria" placeholder="Ej: CAFETERÍA, POSTRES, etc." required>
-    <datalist id="listaCategorias"></datalist>
-
-    <button type="submit">Guardar</button>
-  </form>
-
-  <!-- TABLA -->
-  <h2 id="tablaTitulo">Productos</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody id="tbody"></tbody>
-  </table>
-
-  <!-- BOTÓN ARRIBA -->
-  <button id="btnArriba" onclick="subir()">⬆️</button>
+  <!-- Lista de productos -->
+  <div class="item-list" id="product-list"></div>
 
   <script>
-    // 🟤 CONFIG GITHUB
-    const USERNAME = "cholose10";
-    const REPO = "cartaaguero";
-    const FILE_PATH = "productos.json";
     let productos = [];
 
-    // 🟤 TOKEN
-    function saveToken(){
-      const t=document.getElementById('token').value.trim();
-      if(t){ 
-        localStorage.setItem('github_token',t); 
-        document.getElementById('token').value=''; 
-        document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
-      }
-    }
-    function clearToken(){ 
-      localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
-    }
-    function getToken(){ return localStorage.getItem('github_token'); }
+    // Cargar productos desde GitHub
+    fetch('https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json')
+      .then(response => response.json())
+      .then(data => {
+        productos = data;
+        renderCategories();
+        renderProducts('Todos');
+      })
+      .catch(err => console.error("Error cargando productos:", err));
 
-    // 🟤 CARGAR PRODUCTOS
-    async function loadProducts(){
-      const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
-      const res=await fetch(url);
-      productos=await res.json();
-      render(productos);
-      updateCategoryList();
-    }
-
-    // 🟤 RENDER TABLA
-    function render(lista){
-      const tb=document.getElementById('tbody'); tb.innerHTML='';
-      lista.forEach((p,i)=>{
-        tb.innerHTML+=`
-          <tr>
-            <td><img src="${p.imagen}" alt=""></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
-            <td>
-              <button onclick="edit(${i})">Editar</button>
-              <button onclick="del(${i})">Eliminar</button>
-            </td>
-          </tr>`;
+    // Renderizar categorías
+    function renderCategories() {
+      const categorias = ['Todos', ...new Set(productos.map(p => p.categoria))];
+      const container = document.getElementById('category-buttons');
+      container.innerHTML = '';
+      categorias.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.onclick = () => {
+          renderProducts(cat);
+          document.getElementById('product-list').scrollIntoView({ behavior: "smooth" });
+        };
+        container.appendChild(btn);
       });
     }
 
-    // 🟤 ACTUALIZAR CATEGORÍAS
-    function updateCategoryList(){
-      const cats=[...new Set(productos.map(p=>p.categoria))].sort();
-      const datalist=document.getElementById('listaCategorias');
-      datalist.innerHTML='';
-      cats.forEach(c=>{
-        const opt=document.createElement('option');
-        opt.value=c;
-        datalist.appendChild(opt);
+    // Renderizar productos
+    function renderProducts(categoria, scroll = true) {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      const filtrados = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
+      filtrados.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+          ? String(p.precio).trim()
+          : ('$' + (p.precio ?? ''));
+        item.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}">
+          <h3>${p.nombre}</h3>
+          <p>${p.descripcion}</p>
+          <span class="price">${priceDisplay}</span>
+        `;
+        container.appendChild(item);
       });
+      if (scroll) container.scrollIntoView({ behavior: "smooth" });
     }
 
-    // 🟤 BUSCADOR (solo Enter)
-    document.getElementById("search").addEventListener("keypress", function(e){
+    // Buscador con enter
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("keypress", function(e){
       if(e.key === "Enter"){
         e.preventDefault();
-        const q=this.value.toLowerCase();
-        const filtrados=productos.filter(p=> 
-          p.nombre.toLowerCase().includes(q) || 
+        const q = this.value.toLowerCase();
+        const filtrados = productos.filter(p =>
+          p.nombre.toLowerCase().includes(q) ||
           p.descripcion.toLowerCase().includes(q) ||
           p.categoria.toLowerCase().includes(q)
         );
-        render(filtrados);
-        document.getElementById("tablaTitulo").scrollIntoView({ behavior: "smooth" });
+        renderProducts('Todos', false);
+        const container = document.getElementById('product-list');
+        container.innerHTML = '';
+        filtrados.forEach(p => {
+          const item = document.createElement('div');
+          item.className = 'item';
+          const priceDisplay = (String(p.precio||'').trim().startsWith('$'))
+            ? String(p.precio).trim()
+            : ('$' + (p.precio ?? ''));
+          item.innerHTML = `
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p>${p.descripcion}</p>
+            <span class="price">${priceDisplay}</span>
+          `;
+          container.appendChild(item);
+        });
+        if (filtrados.length > 0) {
+          container.scrollIntoView({ behavior: "smooth" });
+        }
       }
     });
-
-    // 🟤 PREVISUALIZAR IMAGEN
-    function previewImage(){
-      const src=document.getElementById('imagen').value.trim();
-      document.getElementById('preview').src=src || '';
-    }
-
-    // 🟤 GUARDAR EN GITHUB
-    async function saveToGitHub(newContent){
-      const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
-
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{ headers:{Authorization:`token ${TOKEN}`} });
-      const data=await getRes.json();
-
-      const updateRes=await fetch(apiUrl,{
-        method:"PUT",
-        headers:{
-          "Authorization":`token ${TOKEN}`,
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:"Actualización desde admin.html",
-          content:btoa(unescape(encodeURIComponent(newContent))),
-          sha:data.sha
-        })
-      });
-
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
-    }
-
-    // 🟤 GUARDAR PRODUCTO
-    document.getElementById('form').onsubmit=function(e){
-      e.preventDefault();
-      const idx=document.getElementById('editIndex').value;
-      const prod={
-        nombre:document.getElementById('nombre').value,
-        descripcion:document.getElementById('descripcion').value,
-        precio:parseFloat(document.getElementById('precio').value),
-        imagen:document.getElementById('imagen').value,
-        categoria:document.getElementById('categoria').value
-      };
-      if(idx===''){ productos.push(prod);} 
-      else { productos[idx]=prod; document.getElementById('editIndex').value=''; }
-      render(productos);
-      updateCategoryList();
-      this.reset();
-      document.getElementById('preview').src='';
-      document.getElementById('form').classList.remove('editando');
-      saveToGitHub(JSON.stringify(productos,null,2));
-    }
-
-    // 🟤 EDITAR
-    function edit(i){
-      const p=productos[i];
-      document.getElementById('nombre').value=p.nombre;
-      document.getElementById('descripcion').value=p.descripcion;
-      document.getElementById('precio').value=p.precio;
-      document.getElementById('imagen').value=p.imagen;
-      document.getElementById('categoria').value=p.categoria;
-      document.getElementById('editIndex').value=i;
-      document.getElementById('preview').src=p.imagen;
-
-      const form=document.getElementById('form');
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-      form.classList.add('editando');
-      setTimeout(()=>form.classList.remove('editando'), 2000);
-    }
-
-    // 🟤 ELIMINAR
-    function del(i){
-      if(confirm('¿Eliminar producto?')){
-        productos.splice(i,1);
-        render(productos);
-        updateCategoryList();
-        saveToGitHub(JSON.stringify(productos,null,2));
-      }
-    }
-
-    // 🟤 BOTÓN SUBIR
-    window.onscroll = function() {
-      document.getElementById("btnArriba").style.display =
-        window.scrollY > 300 ? "block" : "none";
-    };
-    function subir(){
-      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
-    }
-
-    // 🟤 INICIO
-    loadProducts();
-    if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
   </script>
 </body>
 </html>
