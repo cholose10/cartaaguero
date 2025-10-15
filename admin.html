@@ -5,100 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Carta - Tilo Café Agüero</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f7f3f0;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #806250;
-    }
-    form {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      transition: box-shadow 0.5s;
-    }
-    form.editando {
-      box-shadow: 0 0 15px #806250;
-    }
-    input, textarea, datalist {
-      width: 100%;
-      padding: 8px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background: #806250;
-      color: white;
-    }
-    img {
-      max-width: 60px;
-      border-radius: 6px;
-    }
-    button {
-      cursor: pointer;
-      background: #806250;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #a07b68;
-    }
-    #preview {
-      max-width: 100px;
-      margin-top: 5px;
-      display: block;
-      border-radius: 8px;
-    }
-    #search {
-      width: 60%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .search-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    #btnArriba {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #806250;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 100;
-      transition: background 0.3s;
-    }
-    #btnArriba:hover {
-      background: #a07b68;
-    }
+    body { font-family: Arial, sans-serif; margin:20px; background:#f7f3f0; color:#333;}
+    h1 { text-align:center; color:#806250; }
+    form { background:#fff; padding:15px; border-radius:10px; margin-bottom:20px; transition:box-shadow 0.5s;}
+    form.editando { box-shadow:0 0 15px #806250; }
+    input, textarea, datalist { width:100%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:6px;}
+    table { width:100%; border-collapse:collapse; background:#fff;}
+    th,td { border:1px solid #ddd; padding:8px; text-align:left;}
+    th { background:#806250; color:white; }
+    img { max-width:60px; border-radius:6px; }
+    button { cursor:pointer; background:#806250; color:white; border:none; padding:6px 10px; border-radius:6px; transition:background 0.3s;}
+    button:hover { background:#a07b68;}
+    #preview { max-width:100px; margin-top:5px; display:block; border-radius:8px;}
+    #search { width:60%; padding:8px; border-radius:6px; border:1px solid #ccc;}
+    .search-container { display:flex; gap:10px; margin-bottom:15px;}
+    #btnArriba { position:fixed; bottom:25px; right:25px; background:#806250; color:white; border:none; border-radius:50%; width:45px; height:45px; font-size:20px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.3); display:none; z-index:100; transition:background 0.3s;}
+    #btnArriba:hover { background:#a07b68; }
   </style>
 </head>
 <body>
@@ -115,8 +37,7 @@
 
   <!-- BUSCADOR -->
   <div class="search-container">
-    <input type="text" id="search" placeholder="Buscar producto...">
-    <button onclick="filterProducts()">Buscar</button>
+    <input type="text" id="search" placeholder="Buscar producto por nombre, descripción o categoría...">
   </div>
 
   <!-- FORMULARIO -->
@@ -153,45 +74,36 @@
     <tbody id="tbody"></tbody>
   </table>
 
+  <!-- BOTÓN SUBIR -->
   <button id="btnArriba" onclick="subir()">⬆️</button>
 
   <script>
-    // 🟤 CONFIG GITHUB
+    // CONFIG GITHUB
     const USERNAME = "cholose10";
     const REPO = "cartaaguero";
     const FILE_PATH = "productos.json";
     let productos = [];
 
-    // 🟤 TOKEN
+    // TOKEN
     function saveToken(){
       const t=document.getElementById('token').value.trim();
-      if(t){ 
-        localStorage.setItem('github_token',t); 
-        document.getElementById('token').value=''; 
-        document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
-      }
+      if(t){ localStorage.setItem('github_token',t); document.getElementById('token').value=''; document.getElementById('tokenStatus').innerText="✅ Token guardado."; }
     }
-    function clearToken(){ 
-      localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
-    }
+    function clearToken(){ localStorage.removeItem('github_token'); document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; }
     function getToken(){ return localStorage.getItem('github_token'); }
 
-    // 🟤 CARGAR PRODUCTOS
+    // CARGAR PRODUCTOS
     async function loadProducts(){
-      try {
+      try{
         const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`);
-        if (!res.ok) throw new Error("No se pudo cargar productos.json");
+        if(!res.ok) throw new Error("Error al cargar productos");
         productos = await res.json();
         render(productos);
         updateCategoryList();
-      } catch (err) {
-        alert("⚠️ No se pudieron cargar los productos.");
-        console.error(err);
-      }
+      }catch(err){ alert("⚠️ No se pudieron cargar los productos."); console.error(err); }
     }
 
-    // 🟤 RENDER TABLA
+    // RENDER TABLA
     function render(lista){
       const tb=document.getElementById('tbody'); tb.innerHTML='';
       lista.forEach((p,i)=>{
@@ -210,7 +122,7 @@
       });
     }
 
-    // 🟤 CATEGORÍAS
+    // CATEGORÍAS
     function updateCategoryList(){
       const cats=[...new Set(productos.map(p=>p.categoria))].sort();
       const datalist=document.getElementById('listaCategorias');
@@ -222,16 +134,17 @@
       });
     }
 
-    // 🟤 BUSCADOR
+    // 🔍 BUSCADOR FUNCIONAL
     const searchInput = document.getElementById("search");
-    searchInput.addEventListener("keypress", function(e){
+    searchInput.addEventListener("input", ()=>filterProducts(false));
+    searchInput.addEventListener("keypress", e=>{
       if(e.key === "Enter"){
         e.preventDefault();
         filterProducts(true);
       }
     });
 
-    function filterProducts(scroll=false){
+    function filterProducts(scroll){
       const q = searchInput.value.toLowerCase().trim();
       const filtrados = productos.filter(p =>
         p.nombre.toLowerCase().includes(q) ||
@@ -244,13 +157,13 @@
       }
     }
 
-    // 🟤 PREVISUALIZAR IMAGEN
+    // PREVISUALIZAR IMAGEN
     function previewImage(){
       const src=document.getElementById('imagen').value.trim();
       document.getElementById('preview').src=src || '';
     }
 
-    // 🟤 GUARDAR EN GITHUB
+    // GUARDAR EN GITHUB
     async function saveToGitHub(newContent){
       const TOKEN=getToken();
       if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
@@ -276,7 +189,7 @@
       else{ alert("❌ Error al guardar en GitHub."); }
     }
 
-    // 🟤 GUARDAR PRODUCTO
+    // GUARDAR PRODUCTO
     document.getElementById('form').onsubmit=function(e){
       e.preventDefault();
       const idx=document.getElementById('editIndex').value;
@@ -297,7 +210,7 @@
       saveToGitHub(JSON.stringify(productos,null,2));
     }
 
-    // 🟤 EDITAR
+    // EDITAR PRODUCTO
     function edit(i){
       const p=productos[i];
       document.getElementById('nombre').value=p.nombre;
@@ -307,14 +220,10 @@
       document.getElementById('categoria').value=p.categoria;
       document.getElementById('editIndex').value=i;
       document.getElementById('preview').src=p.imagen;
-
-      const form=document.getElementById('form');
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-      form.classList.add('editando');
-      setTimeout(()=>form.classList.remove('editando'), 2000);
+      document.getElementById('form').scrollIntoView({ behavior:"smooth", block:"start" });
     }
 
-    // 🟤 ELIMINAR
+    // ELIMINAR PRODUCTO
     function del(i){
       if(confirm('¿Eliminar producto?')){
         productos.splice(i,1);
@@ -324,16 +233,15 @@
       }
     }
 
-    // 🟤 BOTÓN SUBIR
-    window.onscroll = function() {
-      document.getElementById("btnArriba").style.display =
-        window.scrollY > 300 ? "block" : "none";
-    };
+    // BOTÓN SUBIR
+    window.onscroll=function(){
+      document.getElementById("btnArriba").style.display=window.scrollY>300?"block":"none";
+    }
     function subir(){
-      document.getElementById("form").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("form").scrollIntoView({ behavior:"smooth" });
     }
 
-    // 🟤 INICIO
+    // INICIO
     loadProducts();
     if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
   </script>
