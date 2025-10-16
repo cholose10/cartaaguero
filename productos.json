@@ -144,15 +144,15 @@
     "descripcion": "tostada con huevos revueltos, crema de palta y semillas",
     "precio": "14700",
     "imagen": "img/20250806_094923.jpg",
-    "categoria":  "☕🥐Desayunos/meriendas"
+    "categoria": "☕🥐Desayunos/meriendas"
   },
   {
     "nombre": "REVUELTO",
     "descripcion": "Huevos revueltos con jamón y queso, una tostada para acompañar",
     "precio": "13400",
     "imagen": "img/Resultado.jpg",
-    "categoria": "☕🥐Desayunos/meriendas" 
- },
+    "categoria": "☕🥐Desayunos/meriendas"
+  },
   {
     "nombre": "PROTEICO",
     "descripcion": "Pancake 100% harina de almendras, queso crema y fruta de estación más dip de miel",
@@ -172,42 +172,42 @@
     "descripcion": "Tostadas marinadas en huevo, con canela y azúcar, con bacon, palta y huevo revuelto",
     "precio": "15000",
     "imagen": "img/20250819_113925.jpg",
-    "categoria":  "☕🥐Desayunos/meriendas"
+    "categoria": "☕🥐Desayunos/meriendas"
   },
   {
     "nombre": "Crema",
     "descripcion": "Crema deLeche ",
     "precio": "300",
     "imagen": "img/cremaadi.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Leche de almendras",
     "descripcion": "Leche de almendras chico$350-grande$450",
     "precio": "350-450",
     "imagen": "img/lmen.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Saborizante vainilla o avellanas",
     "descripcion": "Saborizante vainilla o avellanas",
     "precio": "350",
     "imagen": "img/medialunas.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Medialunas",
     "descripcion": "Medialunas 100% manteca",
     "precio": "2300",
     "imagen": "img/Luna.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "factura",
     "descripcion": "Pasteleras o membrillo",
     "precio": "2300",
     "imagen": "img/20250902_085539(1).jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Cinamon Roll(rol de canela)",
@@ -228,21 +228,21 @@
     "descripcion": "cookies vainilla con chocolate, chocolate+chocolate",
     "precio": "4800",
     "imagen": "img/20250902_085341.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Brownie con nueces blancas",
     "descripcion": "Brownie sin TACC",
     "precio": "6700",
     "imagen": "img/Brownie.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Chipá relleno",
     "descripcion": "Chipá relleno de queso",
     "precio": "3700",
     "imagen": "img/Chipa.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Scon de queso",
@@ -263,28 +263,28 @@
     "descripcion": "Alfajor de chocolate",
     "precio": "4500",
     "imagen": "img/Alchoco.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Alfajor dubai",
     "descripcion": "Alfajor chocolate y pistacho",
     "precio": "4700",
     "imagen": "img/alfapis.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Alfajor de maicena",
     "descripcion": "Alfajor de maicena (sin TACC)",
     "precio": "4500",
     "imagen": "img/Maicena.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Alfajor de almendras",
     "descripcion": "Alfajor de almendras",
     "precio": "5500",
     "imagen": "img/Almendras.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Mini torta ",
@@ -312,7 +312,7 @@
     "descripcion": "Yogurt $5.000Yogurt con granola $8.000Yogurt Forte (con frutas y granola) $12.000",
     "precio": "12000",
     "imagen": "img/IMG-20250802-WA0010.jpg",
-    "categoria":  "Cafetería☕️"
+    "categoria": "Cafetería☕️"
   },
   {
     "nombre": "Porción de tostadas",
@@ -361,14 +361,14 @@
     "descripcion": " (caliente): Tortilla de trigo con salsa de pollo, relleno de lomo, vegetales y cheddar ",
     "precio": "23500",
     "imagen": "img//Lomi.jpg",
-    "categoria":  "🍽️Comidas"
+    "categoria": "🍽️Comidas"
   },
   {
     "nombre": "línea Coca-Cola",
     "descripcion": "zeros y clásicas",
     "precio": "4000",
     "imagen": "img/20250830_141813.jpg",
-    "categoria":  "🥤 Bebidas y vinos"
+    "categoria": "🥤 Bebidas y vinos"
   },
   {
     "nombre": "Agua local filtrada y mineralizada",
@@ -821,7 +821,7 @@
   {
     "nombre": "Bife de chorizo",
     "descripcion": "Con frita, pure, ensalada o arroz",
-   "precio":"30000",
+    "precio": "30000",
     "imagen": "img/20250815_151841.jpg",
     "categoria": "🍽️Comidas"
   },
@@ -1238,11 +1238,18 @@
     "imagen": "img/torgrende.jpg",
     "categoria": "📋MENU del DIA/SUGERENCIAS Y NOEDADES"
   },
-   {
+  {
     "nombre": "alfajor dubai pistacho",
     "descripcion": "alfajor chocola pistacho  ",
     "precio": "4700",
     "imagen": "img/pis.jpg",
+    "categoria": "📋MENU del DIA/SUGERENCIAS Y NOEDADES"
+  },
+  {
+    "nombre": "Brunch Para Dos",
+    "descripcion": "Dos infusiones, 2 jugos o limonadas \n2 yogures con fruta y granola\n chipa tostado de jamon y queso Y toston huevo y palta\n $ 48.000\n",
+    "precio": 48000,
+    "imagen": "img/.jpg",
     "categoria": "📋MENU del DIA/SUGERENCIAS Y NOEDADES"
   }
 ]
