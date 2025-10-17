@@ -112,13 +112,6 @@
     "categoria": "Cafetería☕️"
   },
   {
-    "nombre": "FRAPPUCCINO OREO🥶",
-    "descripcion": "base de Café❄️",
-    "precio": "6700",
-    "imagen": "img/20250815_154308.jpg",
-    "categoria": "Cafetería☕️"
-  },
-  {
     "nombre": "Medialunas",
     "descripcion": "3 medialunas caseras",
     "precio": "9500",
@@ -1213,7 +1206,7 @@
   {
     "nombre": "Champagne Salentein Brut Nature",
     "descripcion": "Champagne Salentein Brut Nature",
-    "precio": "32.000",
+    "precio": "32000",
     "imagen": "img/20250903_104921.jpg",
     "categoria": "🍹TRAGOS"
   },
