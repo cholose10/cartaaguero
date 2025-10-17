@@ -947,9 +947,9 @@
   {
     "nombre": "AMIGOS Y FAMILLAS PASTA",
     "descripcion": "FUENTE DE ÑOQUIES O TALLARINES(BOLOGNESA, CREMA, FILETO ORISA. PODESCONBINAR)",
-    "precio": "48000",
+    "precio": 48000,
     "imagen": "img/Fuenteñoquis.jpg",
-    "categoria": "🍽️Comidas"
+    "categoria": "💡promociones"
   },
   {
     "nombre": "AMIGOS Y FAMILLA MILANESA PARA 3",
