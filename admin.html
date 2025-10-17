@@ -216,7 +216,7 @@
       });
     }
 
-    // 🟤 BUSCADOR
+    // 🟤 BUSCADOR (copiado del admin Don Pilose)
     const searchInput=document.getElementById("search");
     searchInput.addEventListener("keypress",function(e){
       if(e.key==="Enter"){
@@ -227,6 +227,7 @@
 
     function filterProducts(){
       const q=searchInput.value.toLowerCase().trim();
+      if(!q){ render(productos); return; }
       const filtrados=productos.filter(p=>
         p.nombre.toLowerCase().includes(q) ||
         p.descripcion.toLowerCase().includes(q) ||
@@ -287,7 +288,7 @@
       saveToGitHub(JSON.stringify(productos,null,2));
     }
 
-    // 🟤 EDITAR (corrige el índice real)
+    // 🟤 EDITAR
     function edit(i){
       const tabla=document.getElementById('tbody');
       const filas=tabla.querySelectorAll('tr');
