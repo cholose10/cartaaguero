@@ -142,9 +142,9 @@
   {
     "nombre": "AVOCADO",
     "descripcion": "tostada con huevos revueltos, crema de palta y semillas",
-    "precio": "14700",
+    "precio": 14700,
     "imagen": "img/20250806_094923.jpg",
-    "categoria": "☕🥐Desayunos/meriendas"
+    "categoria": "💡pomocines"
   },
   {
     "nombre": "REVUELTO",
