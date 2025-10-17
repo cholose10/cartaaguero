@@ -135,9 +135,9 @@
   {
     "nombre": "OMELETTE DE CLARAS",
     "descripcion": "Omelette con queso y tomate (con FRITOLIN) y frutas de estación",
-    "precio": "15000",
+    "precio": 15000,
     "imagen": "img/Promoomelet.jpg",
-    "categoria": "☕🥐Desayunos/meriendas"
+    "categoria": "💡pomocines"
   },
   {
     "nombre": "AVOCADO",
