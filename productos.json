@@ -128,9 +128,9 @@
   {
     "nombre": "TOSTADAS🍞",
     "descripcion": "Pan negro o blanco con queso crema y mermelada casera",
-    "precio": "9700",
+    "precio": 9700,
     "imagen": "img/Promotos1.jpg",
-    "categoria": "☕🥐Desayunos/meriendas"
+    "categoria": "💡pomocines"
   },
   {
     "nombre": "OMELETTE DE CLARAS",
