@@ -121,9 +121,9 @@
   {
     "nombre": "Medialunas",
     "descripcion": "3 medialunas caseras",
-    "precio": "9500",
+    "precio": 9500,
     "imagen": "img/Promoluna.jpg",
-    "categoria": "☕🥐Desayunos/meriendas"
+    "categoria": "💡pomocines"
   },
   {
     "nombre": "TOSTADAS🍞",
