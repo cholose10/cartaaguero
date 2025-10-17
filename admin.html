@@ -3,102 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Carta - Tilo Café Agüero</title>
+  <title>Admin Carta - Tilo Café Agüero (Buscador robusto)</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f7f3f0;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      color: #806250;
-    }
-    form {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      transition: box-shadow 0.5s;
-    }
-    form.editando {
-      box-shadow: 0 0 15px #806250;
-    }
-    input, textarea, datalist {
-      width: 100%;
-      padding: 8px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background: #806250;
-      color: white;
-    }
-    img {
-      max-width: 60px;
-      border-radius: 6px;
-    }
-    button {
-      cursor: pointer;
-      background: #806250;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #a07b68;
-    }
-    #preview {
-      max-width: 100px;
-      margin-top: 5px;
-      display: block;
-      border-radius: 8px;
-    }
-    #search {
-      width: 60%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .search-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    #btnArriba {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #806250;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      display: none;
-      z-index: 100;
-      transition: background 0.3s;
-    }
-    #btnArriba:hover {
-      background: #a07b68;
-    }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f3f0; color: #333; }
+    h1 { text-align: center; color: #806250; }
+    form { background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 20px; transition: box-shadow 0.5s; }
+    form.editando { box-shadow: 0 0 15px #806250; }
+    input, textarea, datalist { width: 100%; padding: 8px; margin: 6px 0; border: 1px solid #ccc; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #806250; color: white; }
+    img { max-width: 60px; border-radius: 6px; }
+    button { cursor: pointer; background: #806250; color: white; border: none; padding: 6px 10px; border-radius: 6px; transition: background 0.3s; }
+    button:hover { background: #a07b68; }
+    #preview { max-width: 100px; margin-top: 5px; display: block; border-radius: 8px; }
+    #search { width: 60%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
+    .search-container { display: flex; gap: 10px; margin-bottom: 15px; align-items:center; }
+    #btnArriba { position: fixed; bottom: 25px; right: 25px; background: #806250; color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.3); display: none; z-index: 100; transition: background 0.3s; }
+    #btnArriba:hover { background: #a07b68; }
+    .small-note { font-size:12px; color:#666; margin-top:6px; }
   </style>
 </head>
 <body>
@@ -111,12 +34,14 @@
     <button onclick="saveToken()">Guardar Token</button>
     <button onclick="clearToken()">Borrar Token</button>
     <p id="tokenStatus"></p>
+    <div class="small-note">Si la carga de productos falla, revisá la consola (Ctrl+Shift+J) para ver el error.</div>
   </div>
 
   <!-- BUSCADOR -->
   <div class="search-container">
     <input type="text" id="search" placeholder="Buscar producto...">
     <button onclick="filterProducts()">🔍 Buscar</button>
+    <button onclick="resetFilter()" title="Mostrar todo">🔄 Mostrar todo</button>
   </div>
 
   <!-- FORMULARIO -->
@@ -161,180 +86,242 @@
     const FILE_PATH = "productos.json";
     let productos = [];
 
-    // 🟤 TOKEN
+    // TOKEN
     function saveToken(){
-      const t=document.getElementById('token').value.trim();
-      if(t){ 
-        localStorage.setItem('github_token',t); 
-        document.getElementById('token').value=''; 
-        document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
+      const t = document.getElementById('token').value.trim();
+      if(t){
+        localStorage.setItem('github_token', t);
+        document.getElementById('token').value = '';
+        document.getElementById('tokenStatus').innerText = "✅ Token guardado.";
       }
     }
-    function clearToken(){ 
-      localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
+    function clearToken(){
+      localStorage.removeItem('github_token');
+      document.getElementById('tokenStatus').innerText = "⚠️ Token borrado.";
     }
     function getToken(){ return localStorage.getItem('github_token'); }
 
-    // 🟤 CARGAR PRODUCTOS
+    // CARGAR PRODUCTOS (con manejo de errores)
     async function loadProducts(){
-      const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
-      const res=await fetch(url);
-      productos=await res.json();
-      render(productos);
-      updateCategoryList();
+      const url = `https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
+      try {
+        console.log("Cargando productos desde:", url);
+        const res = await fetch(url);
+        if(!res.ok){
+          throw new Error(`HTTP ${res.status} - ${res.statusText}`);
+        }
+        const data = await res.json();
+        if(!Array.isArray(data)){
+          console.warn("El JSON no es un array. Forzando a array vacío.", data);
+          productos = [];
+        } else {
+          productos = data;
+        }
+        render(productos);
+        updateCategoryList();
+        console.log("Productos cargados:", productos.length);
+      } catch (err) {
+        console.error("Error cargando productos:", err);
+        productos = [];
+        render(productos);
+        updateCategoryList();
+        alert("❌ Error al cargar productos. Mirá la consola para más detalles.");
+      }
     }
 
-    // 🟤 RENDER TABLA
+    // RENDER TABLA (usando acceso seguro a propiedades)
     function render(lista){
-      const tb=document.getElementById('tbody'); tb.innerHTML='';
-      lista.forEach((p,i)=>{
-        tb.innerHTML+=`
+      const tb = document.getElementById('tbody');
+      tb.innerHTML = '';
+      if(!Array.isArray(lista) || lista.length === 0){
+        tb.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:12px;">No hay productos</td></tr>`;
+        return;
+      }
+      lista.forEach((p, i) => {
+        const nombre = (p && p.nombre) ? escapeHtml(String(p.nombre)) : '—';
+        const desc = (p && p.descripcion) ? escapeHtml(String(p.descripcion)) : '—';
+        const cat = (p && p.categoria) ? escapeHtml(String(p.categoria)) : '—';
+        const precio = (p && (p.precio !== undefined && p.precio !== null)) ? escapeHtml(String(p.precio)) : '—';
+        const imgSrc = (p && p.imagen) ? escapeHtml(String(p.imagen)) : '';
+
+        tb.innerHTML += `
           <tr>
-            <td><img src="${p.imagen}" alt=""></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
+            <td>${imgSrc ? `<img src="${imgSrc}" alt="">` : ''}</td>
+            <td>${nombre}</td>
+            <td>${desc}</td>
+            <td>${cat}</td>
+            <td>$${precio}</td>
             <td>
               <button onclick="edit(${i})">Editar</button>
               <button onclick="del(${i})">Eliminar</button>
             </td>
-          </tr>`;
+          </tr>
+        `;
       });
     }
 
-    // 🟤 ACTUALIZAR CATEGORÍAS
+    // escapar HTML simple para evitar romper la tabla si hay caracteres raros
+    function escapeHtml(text){
+      return text.replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#039;"})[m]; });
+    }
+
+    // UPDATE CATEGORÍAS
     function updateCategoryList(){
-      const cats=[...new Set(productos.map(p=>p.categoria))].sort();
-      const datalist=document.getElementById('listaCategorias');
-      datalist.innerHTML='';
-      cats.forEach(c=>{
-        const opt=document.createElement('option');
-        opt.value=c;
+      const cats = [...new Set((productos||[]).map(p => (p && p.categoria) ? p.categoria : '').filter(Boolean))].sort();
+      const datalist = document.getElementById('listaCategorias');
+      datalist.innerHTML = '';
+      cats.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
         datalist.appendChild(opt);
       });
     }
 
-    // 🟤 BUSCADOR (copiado del admin Don Pilose)
-    const searchInput=document.getElementById("search");
-    searchInput.addEventListener("keypress",function(e){
-      if(e.key==="Enter"){
+    // BUSCADOR - defensivo y con búsqueda en tiempo real
+    const searchInput = document.getElementById("search");
+    searchInput.addEventListener("keypress", function(e){
+      if(e.key === "Enter"){
         e.preventDefault();
         filterProducts();
       }
     });
+    // búsqueda a medida que tipeás (opcional)
+    let typingTimer;
+    searchInput.addEventListener("input", function(){
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(()=>filterProducts(false), 250);
+    });
 
-    function filterProducts(){
-      const q=searchInput.value.toLowerCase().trim();
-      if(!q){ render(productos); return; }
-      const filtrados=productos.filter(p=>
-        p.nombre.toLowerCase().includes(q) ||
-        p.descripcion.toLowerCase().includes(q) ||
-        p.categoria.toLowerCase().includes(q)
-      );
-      render(filtrados);
-      if(filtrados.length>0){
-        document.getElementById("tablaTitulo").scrollIntoView({behavior:"smooth"});
+    function filterProducts(scrollToResults = true){
+      try {
+        const q = (searchInput.value || '').toLowerCase().trim();
+        if(!q){
+          render(productos);
+          return;
+        }
+        const filtrados = (productos || []).filter(p => {
+          // usar cadenas seguras (toString) y comprobar existencia
+          const nombre = p && p.nombre ? String(p.nombre).toLowerCase() : '';
+          const descripcion = p && p.descripcion ? String(p.descripcion).toLowerCase() : '';
+          const categoria = p && p.categoria ? String(p.categoria).toLowerCase() : '';
+          return nombre.includes(q) || descripcion.includes(q) || categoria.includes(q);
+        });
+        render(filtrados);
+        if(scrollToResults && filtrados.length>0){
+          document.getElementById("tablaTitulo").scrollIntoView({behavior:"smooth"});
+        }
+        console.log(`Búsqueda: "${q}" → ${filtrados.length} resultados`);
+      } catch (err) {
+        console.error("Error en filterProducts:", err);
+        alert("❌ Error en la búsqueda. Mirá la consola para más info.");
       }
     }
 
-    // 🟤 PREVIEW
+    function resetFilter(){
+      searchInput.value = '';
+      render(productos);
+    }
+
+    // PREVIEW
     function previewImage(){
-      const src=document.getElementById('imagen').value.trim();
-      document.getElementById('preview').src=src||'';
+      const src = document.getElementById('imagen').value.trim();
+      document.getElementById('preview').src = src || '';
     }
 
-    // 🟤 GUARDAR EN GITHUB
+    // GUARDAR EN GITHUB (sin cambios funcionales pero con try/catch)
     async function saveToGitHub(newContent){
-      const TOKEN=getToken();
+      const TOKEN = getToken();
       if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{headers:{Authorization:`token ${TOKEN}`}});
-      const data=await getRes.json();
-      const updateRes=await fetch(apiUrl,{
-        method:"PUT",
-        headers:{
-          "Authorization":`token ${TOKEN}`,
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:"Actualización desde admin.html",
-          content:btoa(unescape(encodeURIComponent(newContent))),
-          sha:data.sha
-        })
-      });
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
+      const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
+      try {
+        const getRes = await fetch(apiUrl, { headers: { Authorization: `token ${TOKEN}` }});
+        const data = await getRes.json();
+        if(!data.sha){
+          // si no existe, crear archivo (PUT con no sha puede crear o fallar). Intentaremos igualmente.
+          console.warn("No se encontró SHA (posible archivo nuevo o permisos).", data);
+        }
+        const updateRes = await fetch(apiUrl, {
+          method: "PUT",
+          headers: {
+            "Authorization": `token ${TOKEN}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: "Actualización desde admin.html",
+            content: btoa(unescape(encodeURIComponent(newContent))),
+            sha: data.sha // si es undefined, github puede rechazar; el usuario verá el error en la alerta
+          })
+        });
+        if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
+        else{
+          const txt = await updateRes.text();
+          console.error("Error al guardar en GitHub:", updateRes.status, txt);
+          alert("❌ Error al guardar en GitHub. Mirá la consola para más detalles.");
+        }
+      } catch (err) {
+        console.error("Excepción guardando en GitHub:", err);
+        alert("❌ Error guardando en GitHub. Mirá la consola.");
+      }
     }
 
-    // 🟤 GUARDAR PRODUCTO
-    document.getElementById('form').onsubmit=function(e){
+    // GUARDAR PRODUCTO
+    document.getElementById('form').onsubmit = function(e){
       e.preventDefault();
-      const idx=document.getElementById('editIndex').value;
-      const prod={
-        nombre:document.getElementById('nombre').value,
-        descripcion:document.getElementById('descripcion').value,
-        precio:parseFloat(document.getElementById('precio').value),
-        imagen:document.getElementById('imagen').value,
-        categoria:document.getElementById('categoria').value
+      const idx = document.getElementById('editIndex').value;
+      const prod = {
+        nombre: document.getElementById('nombre').value,
+        descripcion: document.getElementById('descripcion').value,
+        precio: parseFloat(document.getElementById('precio').value),
+        imagen: document.getElementById('imagen').value,
+        categoria: document.getElementById('categoria').value
       };
-      if(idx===''){ productos.push(prod);} 
-      else { productos[idx]=prod; document.getElementById('editIndex').value='';}
+      if(idx === ''){ productos.push(prod); }
+      else { productos[idx] = prod; document.getElementById('editIndex').value = ''; }
       render(productos);
       updateCategoryList();
       this.reset();
-      document.getElementById('preview').src='';
-      saveToGitHub(JSON.stringify(productos,null,2));
+      document.getElementById('preview').src = '';
+      saveToGitHub(JSON.stringify(productos, null, 2));
     }
 
-    // 🟤 EDITAR
+    // EDITAR
     function edit(i){
-      const tabla=document.getElementById('tbody');
-      const filas=tabla.querySelectorAll('tr');
-      const nombreSeleccionado=filas[i].children[1].innerText.trim();
-
-      const p=productos.find(prod=>prod.nombre.trim()===nombreSeleccionado);
-      const realIndex=productos.indexOf(p);
-
-      document.getElementById('nombre').value=p.nombre;
-      document.getElementById('descripcion').value=p.descripcion;
-      document.getElementById('precio').value=p.precio;
-      document.getElementById('imagen').value=p.imagen;
-      document.getElementById('categoria').value=p.categoria;
-      document.getElementById('editIndex').value=realIndex;
-      document.getElementById('preview').src=p.imagen;
-
-      const form=document.getElementById('form');
+      // tomamos el producto basado en el índice real del array actual
+      const p = productos[i];
+      if(!p){ alert("No se encontró el producto para editar."); return; }
+      document.getElementById('nombre').value = p.nombre || '';
+      document.getElementById('descripcion').value = p.descripcion || '';
+      document.getElementById('precio').value = p.precio || '';
+      document.getElementById('imagen').value = p.imagen || '';
+      document.getElementById('categoria').value = p.categoria || '';
+      document.getElementById('editIndex').value = i;
+      document.getElementById('preview').src = p.imagen || '';
+      const form = document.getElementById('form');
       form.scrollIntoView({behavior:"smooth",block:"start"});
       form.classList.add('editando');
       setTimeout(()=>form.classList.remove('editando'),2000);
     }
 
-    // 🟤 ELIMINAR
+    // ELIMINAR
     function del(i){
       if(confirm('¿Eliminar producto?')){
-        const tabla=document.getElementById('tbody');
-        const nombre=tabla.querySelectorAll('tr')[i].children[1].innerText.trim();
-        const realIndex=productos.findIndex(prod=>prod.nombre.trim()===nombre);
-        productos.splice(realIndex,1);
+        if(i < 0 || i >= productos.length){ alert("Índice inválido."); return; }
+        productos.splice(i, 1);
         render(productos);
         updateCategoryList();
-        saveToGitHub(JSON.stringify(productos,null,2));
+        saveToGitHub(JSON.stringify(productos, null, 2));
       }
     }
 
-    // 🟤 BOTÓN ARRIBA
-    window.onscroll=function(){
-      document.getElementById("btnArriba").style.display=window.scrollY>300?"block":"none";
+    // BOTÓN ARRIBA
+    window.onscroll = function(){
+      document.getElementById("btnArriba").style.display = window.scrollY > 300 ? "block" : "none";
     };
-    function subir(){
-      document.getElementById("form").scrollIntoView({behavior:"smooth"});
-    }
+    function subir(){ document.getElementById("form").scrollIntoView({behavior:"smooth"}); }
 
-    // 🟤 INICIO
+    // INICIO
     loadProducts();
-    if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
+    if(getToken()){ document.getElementById('tokenStatus').innerText = "🔐 Token cargado."; }
   </script>
 </body>
 </html>
