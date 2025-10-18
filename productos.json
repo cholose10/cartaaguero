@@ -1164,9 +1164,9 @@
   {
     "nombre": "alfajor dubai pistacho",
     "descripcion": "alfajor chocola pistacho  ",
-    "precio": "4700",
+    "precio": 4700,
     "imagen": "img/pis.jpg",
-    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOEDADES"
+    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   },
   {
     "nombre": "Brunch Para Dos",
