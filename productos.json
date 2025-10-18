@@ -1171,8 +1171,8 @@
   {
     "nombre": "Brunch Para Dos",
     "descripcion": "Dos infusiones, 2 jugos o limonadas, 2 yogures con fruta y granola",
-    "precio": "25000",
+    "precio": 25000,
     "imagen": "img/Bru.jpg",
-    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOEDADES"
+    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   }
 ]
