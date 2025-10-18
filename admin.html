@@ -155,186 +155,232 @@
 
   <button id="btnArriba" onclick="subir()">⬆️</button>
 
-  <script>
-    const USERNAME = "cholose10";
-    const REPO = "cartaaguero";
-    const FILE_PATH = "productos.json";
-    let productos = [];
+ <script>
+  const USERNAME = "cholose10";
+  const REPO = "cartaaguero"; // ⚠️ cambiar por "cartafrench" en la otra sucursal
+  const FILE_PATH = "productos.json";
+  let productos = [];
+  let autoSaveTimer = null;
 
-    // 🟤 TOKEN
-    function saveToken(){
-      const t=document.getElementById('token').value.trim();
-      if(t){ 
-        localStorage.setItem('github_token',t); 
-        document.getElementById('token').value=''; 
-        document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
-      }
+  // 🟤 TOKEN
+  function saveToken(){
+    const t=document.getElementById('token').value.trim();
+    if(t){ 
+      localStorage.setItem('github_token',t); 
+      document.getElementById('token').value=''; 
+      document.getElementById('tokenStatus').innerText="✅ Token guardado."; 
     }
-    function clearToken(){ 
-      localStorage.removeItem('github_token'); 
-      document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
-    }
-    function getToken(){ return localStorage.getItem('github_token'); }
+  }
+  function clearToken(){ 
+    localStorage.removeItem('github_token'); 
+    document.getElementById('tokenStatus').innerText="⚠️ Token borrado."; 
+  }
+  function getToken(){ return localStorage.getItem('github_token'); }
 
-    // 🟤 CARGAR PRODUCTOS
-    async function loadProducts(){
-      const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
-      const res=await fetch(url);
-      productos=await res.json();
-      render(productos);
-      updateCategoryList();
-    }
+  // 🟤 CARGAR PRODUCTOS
+  async function loadProducts(){
+    const url=`https://raw.githubusercontent.com/${USERNAME}/${REPO}/main/${FILE_PATH}`;
+    const res=await fetch(url);
+    productos=await res.json();
+    render(productos);
+    updateCategoryList();
+  }
 
-    // 🟤 RENDER TABLA
-    function render(lista){
-      const tb=document.getElementById('tbody'); tb.innerHTML='';
-      lista.forEach((p,i)=>{
-        tb.innerHTML+=`
-          <tr>
-            <td><img src="${p.imagen}" alt=""></td>
-            <td>${p.nombre}</td>
-            <td>${p.descripcion}</td>
-            <td>${p.categoria}</td>
-            <td>$${p.precio}</td>
-            <td>
-              <button onclick="edit(${i})">Editar</button>
-              <button onclick="del(${i})">Eliminar</button>
-            </td>
-          </tr>`;
-      });
-    }
-
-    // 🟤 ACTUALIZAR CATEGORÍAS
-    function updateCategoryList(){
-      const cats=[...new Set(productos.map(p=>p.categoria))].sort();
-      const datalist=document.getElementById('listaCategorias');
-      datalist.innerHTML='';
-      cats.forEach(c=>{
-        const opt=document.createElement('option');
-        opt.value=c;
-        datalist.appendChild(opt);
-      });
-    }
-
-    // 🟤 BUSCADOR (copiado del admin Don Pilose)
-    const searchInput=document.getElementById("search");
-    searchInput.addEventListener("keypress",function(e){
-      if(e.key==="Enter"){
-        e.preventDefault();
-        filterProducts();
-      }
+  // 🟤 RENDER TABLA
+  function render(lista){
+    const tb=document.getElementById('tbody'); tb.innerHTML='';
+    lista.forEach((p,i)=>{
+      tb.innerHTML+=`
+        <tr>
+          <td><img src="${p.imagen}" alt=""></td>
+          <td>${p.nombre}</td>
+          <td>${p.descripcion}</td>
+          <td>${p.categoria}</td>
+          <td>$${p.precio}</td>
+          <td>
+            <button onclick="edit(${i})">Editar</button>
+            <button onclick="del(${i})">Eliminar</button>
+          </td>
+        </tr>`;
     });
+  }
 
-    function filterProducts(){
-      const q=searchInput.value.toLowerCase().trim();
-      if(!q){ render(productos); return; }
-      const filtrados=productos.filter(p=>
-        p.nombre.toLowerCase().includes(q) ||
-        p.descripcion.toLowerCase().includes(q) ||
-        p.categoria.toLowerCase().includes(q)
-      );
-      render(filtrados);
-      if(filtrados.length>0){
-        document.getElementById("tablaTitulo").scrollIntoView({behavior:"smooth"});
-      }
-    }
+  // 🟤 ACTUALIZAR CATEGORÍAS
+  function updateCategoryList(){
+    const cats=[...new Set(productos.map(p=>p.categoria))].sort();
+    const datalist=document.getElementById('listaCategorias');
+    datalist.innerHTML='';
+    cats.forEach(c=>{
+      const opt=document.createElement('option');
+      opt.value=c;
+      datalist.appendChild(opt);
+    });
+  }
 
-    // 🟤 PREVIEW
-    function previewImage(){
-      const src=document.getElementById('imagen').value.trim();
-      document.getElementById('preview').src=src||'';
-    }
-
-    // 🟤 GUARDAR EN GITHUB
-    async function saveToGitHub(newContent){
-      const TOKEN=getToken();
-      if(!TOKEN){ alert("⚠️ Guardá tu token primero."); return; }
-      const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
-      const getRes=await fetch(apiUrl,{headers:{Authorization:`token ${TOKEN}`}});
-      const data=await getRes.json();
-      const updateRes=await fetch(apiUrl,{
-        method:"PUT",
-        headers:{
-          "Authorization":`token ${TOKEN}`,
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-          message:"Actualización desde admin.html",
-          content:btoa(unescape(encodeURIComponent(newContent))),
-          sha:data.sha
-        })
-      });
-      if(updateRes.ok){ alert("✅ Cambios guardados en GitHub."); }
-      else{ alert("❌ Error al guardar en GitHub."); }
-    }
-
-    // 🟤 GUARDAR PRODUCTO
-    document.getElementById('form').onsubmit=function(e){
+  // 🟤 BUSCADOR
+  const searchInput=document.getElementById("search");
+  searchInput.addEventListener("keypress",function(e){
+    if(e.key==="Enter"){
       e.preventDefault();
+      filterProducts();
+    }
+  });
+
+  function filterProducts(){
+    const q=searchInput.value.toLowerCase().trim();
+    if(!q){ render(productos); return; }
+    const filtrados=productos.filter(p=>
+      p.nombre.toLowerCase().includes(q) ||
+      p.descripcion.toLowerCase().includes(q) ||
+      p.categoria.toLowerCase().includes(q)
+    );
+    render(filtrados);
+    if(filtrados.length>0){
+      document.getElementById("tablaTitulo").scrollIntoView({behavior:"smooth"});
+    }
+  }
+
+  // 🟤 PREVIEW
+  function previewImage(){
+    const src=document.getElementById('imagen').value.trim();
+    document.getElementById('preview').src=src||'';
+  }
+
+  // 🟤 NOTIFICACIÓN (sin alert)
+  function mostrarNotificacion(mensaje, exito = true) {
+    const notif = document.getElementById('notificacion');
+    notif.style.background = exito ? '#806250' : '#c0392b';
+    notif.innerText = mensaje;
+    notif.style.display = 'block';
+    setTimeout(() => notif.style.display = 'none', 3000);
+  }
+
+  // 🟤 GUARDAR EN GITHUB
+  async function saveToGitHub(newContent){
+    const TOKEN=getToken();
+    if(!TOKEN){ mostrarNotificacion("⚠️ Guardá tu token primero.", false); return; }
+    const apiUrl=`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE_PATH}`;
+    const getRes=await fetch(apiUrl,{headers:{Authorization:`token ${TOKEN}`}});
+    const data=await getRes.json();
+    const updateRes=await fetch(apiUrl,{
+      method:"PUT",
+      headers:{
+        "Authorization":`token ${TOKEN}`,
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        message:"Auto guardado desde admin.html",
+        content:btoa(unescape(encodeURIComponent(newContent))),
+        sha:data.sha
+      })
+    });
+    if(updateRes.ok){ mostrarNotificacion("✅ Cambios guardados en GitHub."); }
+    else{ mostrarNotificacion("❌ Error al guardar en GitHub.", false); }
+  }
+
+  // 🟤 AUTO GUARDADO
+  function autoGuardar(){
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(()=>{
       const idx=document.getElementById('editIndex').value;
-      const prod={
+      if(idx==='') return; // solo si estamos editando
+      productos[idx]={
         nombre:document.getElementById('nombre').value,
         descripcion:document.getElementById('descripcion').value,
         precio:parseFloat(document.getElementById('precio').value),
         imagen:document.getElementById('imagen').value,
         categoria:document.getElementById('categoria').value
       };
-      if(idx===''){ productos.push(prod);} 
-      else { productos[idx]=prod; document.getElementById('editIndex').value='';}
+      saveToGitHub(JSON.stringify(productos,null,2));
+    },1000); // guarda 1 segundo después de dejar de escribir
+  }
+
+  // 🟤 GUARDAR PRODUCTO MANUAL
+  document.getElementById('form').onsubmit=function(e){
+    e.preventDefault();
+    const idx=document.getElementById('editIndex').value;
+    const prod={
+      nombre:document.getElementById('nombre').value,
+      descripcion:document.getElementById('descripcion').value,
+      precio:parseFloat(document.getElementById('precio').value),
+      imagen:document.getElementById('imagen').value,
+      categoria:document.getElementById('categoria').value
+    };
+    if(idx===''){ productos.push(prod);} 
+    else { productos[idx]=prod; document.getElementById('editIndex').value='';}
+    render(productos);
+    updateCategoryList();
+    this.reset();
+    document.getElementById('preview').src='';
+    saveToGitHub(JSON.stringify(productos,null,2));
+  }
+
+  // 🟤 EDITAR
+  function edit(i){
+    const tabla=document.getElementById('tbody');
+    const filas=tabla.querySelectorAll('tr');
+    const nombreSeleccionado=filas[i].children[1].innerText.trim();
+
+    const p=productos.find(prod=>prod.nombre.trim()===nombreSeleccionado);
+    const realIndex=productos.indexOf(p);
+
+    document.getElementById('nombre').value=p.nombre;
+    document.getElementById('descripcion').value=p.descripcion;
+    document.getElementById('precio').value=p.precio;
+    document.getElementById('imagen').value=p.imagen;
+    document.getElementById('categoria').value=p.categoria;
+    document.getElementById('editIndex').value=realIndex;
+    document.getElementById('preview').src=p.imagen;
+
+    const form=document.getElementById('form');
+    form.scrollIntoView({behavior:"smooth",block:"start"});
+    form.classList.add('editando');
+    setTimeout(()=>form.classList.remove('editando'),2000);
+  }
+
+  // 🟤 ELIMINAR
+  function del(i){
+    if(confirm('¿Eliminar producto?')){
+      const tabla=document.getElementById('tbody');
+      const nombre=tabla.querySelectorAll('tr')[i].children[1].innerText.trim();
+      const realIndex=productos.findIndex(prod=>prod.nombre.trim()===nombre);
+      productos.splice(realIndex,1);
       render(productos);
       updateCategoryList();
-      this.reset();
-      document.getElementById('preview').src='';
       saveToGitHub(JSON.stringify(productos,null,2));
     }
+  }
 
-    // 🟤 EDITAR
-    function edit(i){
-      const tabla=document.getElementById('tbody');
-      const filas=tabla.querySelectorAll('tr');
-      const nombreSeleccionado=filas[i].children[1].innerText.trim();
+  // 🟤 BOTÓN ARRIBA
+  window.onscroll=function(){
+    document.getElementById("btnArriba").style.display=window.scrollY>300?"block":"none";
+  };
+  function subir(){
+    document.getElementById("form").scrollIntoView({behavior:"smooth"});
+  }
 
-      const p=productos.find(prod=>prod.nombre.trim()===nombreSeleccionado);
-      const realIndex=productos.indexOf(p);
+  // 🟤 EVENTOS DE AUTO GUARDADO
+  ["nombre","descripcion","precio","imagen","categoria"].forEach(id=>{
+    document.getElementById(id).addEventListener("input",autoGuardar);
+  });
 
-      document.getElementById('nombre').value=p.nombre;
-      document.getElementById('descripcion').value=p.descripcion;
-      document.getElementById('precio').value=p.precio;
-      document.getElementById('imagen').value=p.imagen;
-      document.getElementById('categoria').value=p.categoria;
-      document.getElementById('editIndex').value=realIndex;
-      document.getElementById('preview').src=p.imagen;
+  // 🟤 INICIO
+  loadProducts();
+  if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
+</script>
 
-      const form=document.getElementById('form');
-      form.scrollIntoView({behavior:"smooth",block:"start"});
-      form.classList.add('editando');
-      setTimeout(()=>form.classList.remove('editando'),2000);
-    }
-
-    // 🟤 ELIMINAR
-    function del(i){
-      if(confirm('¿Eliminar producto?')){
-        const tabla=document.getElementById('tbody');
-        const nombre=tabla.querySelectorAll('tr')[i].children[1].innerText.trim();
-        const realIndex=productos.findIndex(prod=>prod.nombre.trim()===nombre);
-        productos.splice(realIndex,1);
-        render(productos);
-        updateCategoryList();
-        saveToGitHub(JSON.stringify(productos,null,2));
-      }
-    }
-
-    // 🟤 BOTÓN ARRIBA
-    window.onscroll=function(){
-      document.getElementById("btnArriba").style.display=window.scrollY>300?"block":"none";
-    };
-    function subir(){
-      document.getElementById("form").scrollIntoView({behavior:"smooth"});
-    }
-
-    // 🟤 INICIO
-    loadProducts();
-    if(getToken()){ document.getElementById('tokenStatus').innerText="🔐 Token cargado."; }
-  </script>
-</body>
-</html>
+<!-- 🔔 Notificación -->
+<div id="notificacion" style="
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #806250;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: none;
+  z-index: 200;
+  font-weight: bold;
+  font-size: 15px;
+"></div>
