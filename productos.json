@@ -568,8 +568,8 @@
   },
   {
     "nombre": "Mila SOLA de POLLO o CARNE",
-    "descripcion": "Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "20000",
+    "descripcion": "Acompañadas con puré, fideos, ensalada o fritas",
+    "precio": 20000,
     "imagen": "img/20250816_144204.jpg",
     "categoria": " 🍽 ️Comidas"
   },
