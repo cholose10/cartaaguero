@@ -5,73 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Carta - Tilo Café Agüero</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin:0;
-      background:url("img/Fondo1.jpg") repeat;
-      background-size:cover;
-      color:#45270a;
-    }
+    body { font-family: 'Segoe UI', sans-serif; margin:0; background:url("img/Fondo1.jpg") repeat; background-size:cover; color:#45270a; }
     header { background:rgba(255,255,255,0.9); }
     .banner-img { width:100%; height:250px; object-fit:cover; display:block; }
     .banner { text-align:center; padding:10px; font-size:1.5rem; background:rgba(255,255,255,0.8); border-radius:8px; margin:15px auto; width:fit-content; }
-
-    /* 🔹 Botones de idioma */
-    #languageSwitcher {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 15px 0 5px;
-    }
-    .lang-btn {
-      background: #8c6954;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .lang-btn:hover {
-      background: #6b4e3d;
-      transform: scale(1.05);
-    }
-    .lang-btn.active {
-      background: #a07b68;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .categories { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:10px; }
-    .categories button { padding:10px 20px; background:#8c6954; color:#fff; border:none; border-radius:10px; cursor:pointer; transition:background .2s; }
-    .categories button:hover { background:#6b4e3d; transform:scale(1.03); }
-
-    .search-box { display:flex; justify-content:center; gap:10px; margin:15px; }
-    .search-box input { padding:10px; width:60%; max-width:480px; border-radius:8px; border:1px solid #ccc; }
-    .search-box button { padding:10px 16px; border-radius:8px; border:none; background:#8c6954; color:#fff; cursor:pointer; }
-
-    .item-list { display:flex; flex-wrap:wrap; justify-content:center; gap:15px; padding:20px; }
-    .item { background:rgba(255,255,255,0.95); border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.12); width:280px; overflow:hidden; transition:transform .15s; }
-    .item:hover { transform:scale(1.02); }
-    .item img { width:100%; height:180px; object-fit:cover; }
-    .item h3 { margin:10px; }
-    .item p { margin:0 10px 10px; }
-    .price { font-weight:bold; margin:0 10px 10px; display:block; }
+    .categories{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; padding:10px; }
+    .categories button{ padding:10px 20px; background:#8c6954; color:#fff; border:none; border-radius:10px; cursor:pointer; transition:background .2s; }
+    .categories button:hover{ background:#6b4e3d; transform:scale(1.03); }
+    .search-box{ display:flex; justify-content:center; gap:10px; margin:15px; }
+    .search-box input{ padding:10px; width:60%; max-width:480px; border-radius:8px; border:1px solid #ccc; }
+    .search-box button{ padding:10px 16px; border-radius:8px; border:none; background:#8c6954; color:#fff; cursor:pointer; }
+    .item-list{ display:flex; flex-wrap:wrap; justify-content:center; gap:15px; padding:20px; }
+    .item{ background:rgba(255,255,255,0.95); border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,.12); width:280px; overflow:hidden; transition:transform .15s; }
+    .item:hover{ transform:scale(1.02); }
+    .item img{ width:100%; height:180px; object-fit:cover; }
+    .item h3{ margin:10px; }
+    .item p{ margin:0 10px 10px; }
+    .price{ font-weight:bold; margin:0 10px 10px; display:block; }
     .msg { text-align:center; padding:20px; color:#a00; }
   </style>
 </head>
-
 <body>
   <header><img src="img/Logo99.jpg" alt="Tilo Café" class="banner-img"></header>
   <div class="banner">¡Bienvenidos a Tilo Café Agüero 2298!</div>
 
-  <!-- 🌍 Selector de idioma -->
-  <div id="languageSwitcher">
-    <button id="btn-es" class="lang-btn">🇪🇸 Español</button>
-    <button id="btn-en" class="lang-btn">🇬🇧 English</button>
-  </div>
-
-  <!-- 🔍 Buscador -->
   <div class="search-box">
     <input id="search" type="text" placeholder="Buscar por nombre, descripción o categoría...">
     <button id="btnSearch">Buscar</button>
@@ -82,32 +39,17 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  let idiomaActual = localStorage.getItem('idioma') || 'es';
-  const btnEs = document.getElementById('btn-es');
-  const btnEn = document.getElementById('btn-en');
-
-  const categoryContainer = document.getElementById('category-buttons');
-  const productList = document.getElementById('product-list');
+  const RAW_URL = 'https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json';
   const searchInput = document.getElementById('search');
   const btnSearch = document.getElementById('btnSearch');
-
+  const categoryContainer = document.getElementById('category-buttons');
+  const productList = document.getElementById('product-list');
   let productos = [];
 
-  function actualizarBotones() {
-    if (idiomaActual === 'es') {
-      btnEs.classList.add('active');
-      btnEn.classList.remove('active');
-    } else {
-      btnEn.classList.add('active');
-      btnEs.classList.remove('active');
-    }
-  }
-
   async function load() {
-    const RAW_URL = `https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos-${idiomaActual}.json`;
     try {
       const res = await fetch(RAW_URL, {cache: "no-store"});
-      if (!res.ok) throw new Error('Error cargando ' + RAW_URL);
+      if (!res.ok) throw new Error('Error cargando productos.json: ' + res.status);
       productos = await res.json();
       renderCategories();
       renderProducts('Todos', false);
@@ -123,7 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cats.forEach(cat => {
       const b = document.createElement('button');
       b.textContent = cat;
-      b.addEventListener('click', () => renderProducts(cat, true));
+      b.addEventListener('click', () => {
+        renderProducts(cat, true);
+      });
       categoryContainer.appendChild(b);
     });
   }
@@ -140,8 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div');
       div.className = 'item';
       const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
-      div.innerHTML = `
-        <img src="${p.imagen}" alt="${p.nombre}">
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
         <p>${p.descripcion || ''}</p>
         <span class="price">${precio}</span>`;
@@ -168,8 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const div = document.createElement('div');
       div.className = 'item';
       const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
-      div.innerHTML = `
-        <img src="${p.imagen}" alt="${p.nombre}">
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
         <p>${p.descripcion || ''}</p>
         <span class="price">${precio}</span>`;
@@ -178,26 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
     productList.scrollIntoView({behavior:'smooth'});
   }
 
-  // 🔄 Cambiar idioma
-  btnEs.addEventListener('click', () => {
-    idiomaActual = 'es';
-    localStorage.setItem('idioma', 'es');
-    actualizarBotones();
-    load();
+  // Enter en input -> buscar
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); buscar(); }
   });
-  btnEn.addEventListener('click', () => {
-    idiomaActual = 'en';
-    localStorage.setItem('idioma', 'en');
-    actualizarBotones();
-    load();
-  });
-
-  // 🔍 Buscar
   btnSearch.addEventListener('click', buscar);
-  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); buscar(); }});
 
-  // 🚀 Iniciar
-  actualizarBotones();
+  // iniciar
   load();
 });
 </script>
