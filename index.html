@@ -39,111 +39,18 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const USER = 'cholose10';
-  const REPO = 'cartaaguero';
-  let idiomaActual = localStorage.getItem('idioma') || 'es';
-
-  const btnEs = document.getElementById('btn-es');
-  const btnEn = document.getElementById('btn-en');
-  const categoryContainer = document.getElementById('category-buttons');
-  const productList = document.getElementById('product-list');
+  const RAW_URL = 'https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json';
   const searchInput = document.getElementById('search');
   const btnSearch = document.getElementById('btnSearch');
+  const categoryContainer = document.getElementById('category-buttons');
+  const productList = document.getElementById('product-list');
+  let productos = [];
 
-  let productos = [];        // productos cargados del JSON seleccionado
-  let productosEs = null;    // copia de fallback (español), si la necesitamos
-
-  function actualizarBotones() {
-    if (idiomaActual === 'es') {
-      btnEs.classList.add('active');
-      btnEn.classList.remove('active');
-    } else {
-      btnEn.classList.add('active');
-      btnEs.classList.remove('active');
-    }
-  }
-
-  // helper para acceder múltiples posibles nombres de campo
-  function getProp(obj, names) {
-    for (const n of names) {
-      if (obj[n] !== undefined && obj[n] !== null) return obj[n];
-    }
-    return undefined;
-  }
-
-  // normalizar un producto a { nombre, descripcion, precio, imagen, categoria }
-  function normalizeProduct(raw, fallbackMap = null) {
-    // obtener posibles campos
-    const nombre = getProp(raw, ['nombre','name','title']) || '';
-    let descripcion = getProp(raw, ['descripcion','description','desc','detalle']);
-    const precio = getProp(raw, ['precio','price']) ?? '';
-    const imagen = getProp(raw, ['imagen','image','img']) || '';
-    let categoria = getProp(raw, ['categoria','category','cat']);
-
-    // si falta descripcion o categoria y tenemos fallbackMap (productos en ES), intentar rellenar por nombre
-    if ((!descripcion || descripcion === '') && fallbackMap) {
-      const f = fallbackMap.get(nombre.trim().toLowerCase());
-      if (f && f.descripcion) descripcion = f.descripcion;
-    }
-    if ((!categoria || categoria === '') && fallbackMap) {
-      const f = fallbackMap.get(nombre.trim().toLowerCase());
-      if (f && f.categoria) categoria = f.categoria;
-    }
-
-    // formatear precio para mostrar (mantener $ si ya viene así)
-    let precioDisplay = precio;
-    if (precio !== '' && typeof precio !== 'string') precioDisplay = String(precio);
-    if (precioDisplay && !precioDisplay.trim().startsWith('$')) precioDisplay = '$' + precioDisplay;
-
-    return {
-      nombre: String(nombre),
-      descripcion: descripcion || '',
-      precio: precioDisplay || '',
-      imagen: String(imagen),
-      categoria: categoria || 'Sin categoría'
-    };
-  }
-
-  // carga productos español (para fallback) y luego el del idioma activo
   async function load() {
-    actualizarBotones();
-    productos = [];
-    productosEs = null;
-
-    // primero intentamos cargar el español como fallback
     try {
-      const urlEs = `https://raw.githubusercontent.com/${USER}/${REPO}/main/productos.json`;
-      const resEs = await fetch(urlEs, { cache: "no-store" });
-      if (resEs.ok) {
-        const rawEs = await resEs.json();
-        // crear mapa por nombre en minúsculas para buscar fallback
-        const map = new Map();
-        rawEs.forEach(r => {
-          const n = (getProp(r, ['nombre','name','title']) || '').trim().toLowerCase();
-          map.set(n, {
-            nombre: getProp(r, ['nombre','name','title']) || '',
-            descripcion: getProp(r, ['descripcion','description','desc']) || '',
-            categoria: getProp(r, ['categoria','category','cat']) || ''
-          });
-        });
-        productosEs = map;
-      }
-    } catch (e) {
-      // no crítico si falla; seguimos
-      console.warn('No se pudo cargar fallback español:', e);
-    }
-
-    // ahora cargar el archivo según idioma
-    const filename = idiomaActual === 'es' ? 'productos.json' : 'productos-en.json';
-    const RAW_URL = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${filename}`;
-    try {
-      const res = await fetch(RAW_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error('Error cargando ' + RAW_URL + ' -> ' + res.status);
-      const raw = await res.json();
-
-      // normalizar todos los productos
-      productos = raw.map(r => normalizeProduct(r, productosEs));
-
+      const res = await fetch(RAW_URL, {cache: "no-store"});
+      if (!res.ok) throw new Error('Error cargando productos.json: ' + res.status);
+      productos = await res.json();
       renderCategories();
       renderProducts('Todos', false);
     } catch (err) {
@@ -158,7 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cats.forEach(cat => {
       const b = document.createElement('button');
       b.textContent = cat;
-      b.addEventListener('click', () => renderProducts(cat, true));
+      b.addEventListener('click', () => {
+        renderProducts(cat, true);
+      });
       categoryContainer.appendChild(b);
     });
   }
@@ -174,9 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
     lista.forEach(p => {
       const div = document.createElement('div');
       div.className = 'item';
-      const precio = p.precio || '';
-      div.innerHTML = `
-        <img src="${p.imagen}" alt="${p.nombre}">
+      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
         <p>${p.descripcion || ''}</p>
         <span class="price">${precio}</span>`;
@@ -202,9 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     res.forEach(p => {
       const div = document.createElement('div');
       div.className = 'item';
-      const precio = p.precio || '';
-      div.innerHTML = `
-        <img src="${p.imagen}" alt="${p.nombre}">
+      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
+      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
         <p>${p.descripcion || ''}</p>
         <span class="price">${precio}</span>`;
@@ -213,29 +120,15 @@ document.addEventListener('DOMContentLoaded', () => {
     productList.scrollIntoView({behavior:'smooth'});
   }
 
-  // eventos idioma
-  btnEs.addEventListener('click', () => {
-    idiomaActual = 'es';
-    localStorage.setItem('idioma', 'es');
-    actualizarBotones();
-    load();
+  // Enter en input -> buscar
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); buscar(); }
   });
-  btnEn.addEventListener('click', () => {
-    idiomaActual = 'en';
-    localStorage.setItem('idioma', 'en');
-    actualizarBotones();
-    load();
-  });
-
-  // buscar
   btnSearch.addEventListener('click', buscar);
-  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); buscar(); }});
 
   // iniciar
-  actualizarBotones();
   load();
 });
 </script>
-
 </body>
 </html>
