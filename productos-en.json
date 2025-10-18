@@ -1,0 +1,1178 @@
+[
+  {
+    "name": "Espresso",
+    "description": "Small coffee",
+    "price": "3300",
+    "imagen": "img/cafe.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Espresso in a small mug",
+    "description": "American coffee",
+    "price": "3500",
+    "imagen": "img/Americano.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Decaffeinated Coffee",
+    "description": "Decaffeinated coffee",
+    "price": "3800",
+    "imagen": "img/20250813_094842.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Traditional coffee with milk",
+    "description": "Traditional coffee with milk",
+    "price": "4200",
+    "imagen": "img/Cafechechu.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Double Espresso",
+    "description": "Double Espresso",
+    "price": "4900",
+    "imagen": "img/doble.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Capuccino",
+    "description": "Coffee, milk, cinnamon, and cocoa",
+    "price": "5100",
+    "imagen": "img/Capuchino.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Italian Cappuccino",
+    "description": "Italian Cappuccino",
+    "price": "5200",
+    "imagen": "img/Capuchino.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "MOKA Coffee",
+    "description": "Intense cocoa, coffee, frothed milk",
+    "price": "5650",
+    "imagen": "img/Moka.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "CARAMEL Coffee",
+    "description": "Caramel, coffee, frothed milk",
+    "price": "5650",
+    "imagen": "img/20250903_144413.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Tea with milk",
+    "description": "inti zen tea",
+    "price": "4200",
+    "imagen": "img/te.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Submarine",
+    "description": "frothed milk and chocolate bar",
+    "price": "4900",
+    "imagen": "img/Submarino.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Hot or cold milk",
+    "description": "Skim milk",
+    "price": "2900",
+    "imagen": "img/20250818_101037.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "LIME COFFEE",
+    "description": "coffee, baileys, evaporated milk and grated chocolate ",
+    "price": "7000",
+    "imagen": "img/20250819_160159.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "ICE COFFEE 🥶 ",
+    "description": "double shot with ice ❄ ️",
+    "price": "4900",
+    "imagen": "img/20250817_131630.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "LATTE ICE COFFEE 🥶 ",
+    "description": "cold milk with double shot of coffee and ice ❄ ️ ",
+    "price": "4900",
+    "imagen": "img/20250817_131330.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "FRAPPUCCINO with Milk and OREO 🥶 ",
+    "description": "milk base ❄ ️",
+    "price": "6700",
+    "imagen": "img/20250817_104537.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "FRAPPUCCINO OREO 🥶 ",
+    "description": "Coffee base ❄ ️",
+    "price": "6700",
+    "imagen": "img/20250815_154308.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Croissants",
+    "description": "3 homemade croissants",
+    "price": "9500",
+    "imagen": "img/Promoluna.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "TOASTS 🍞 ",
+    "description": "Black or white bread with cream cheese and homemade jam",
+    "price": "9700",
+    "imagen": "img/Promotos1.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "EGG WHITE OMELETTE",
+    "description": "Omelette with cheese and tomato (with FRITOLIN) and seasonal fruits",
+    "price": "15000",
+    "imagen": "img/Promoomelet.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "AVOCADO",
+    "description": "toast with scrambled eggs, avocado cream and seeds",
+    "price": "14700",
+    "imagen": "img/20250806_094923.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "SCRAMBLED",
+    "description": "Scrambled eggs with ham and cheese, a toast to accompany",
+    "price": "13400",
+    "imagen": "img/Resultado.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "PROTEIN",
+    "description": "100% almond flour pancake, cream cheese and seasonal fruit plus honey dip",
+    "price": "15000",
+    "imagen": "img/20250815_132946.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "SWEET FRENCH TOAST",
+    "description": "Toast marinated in egg, with cinnamon and sugar, cream cheese, seasonal fruits and honey dip",
+    "price": "14400",
+    "imagen": "img/20250819_113846.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "SAVORY FRENCH TOAST",
+    "description": "Toast marinated in egg, with cinnamon and sugar, with bacon, avocado and scrambled egg",
+    "price": "15000",
+    "imagen": "img/20250819_113925.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "Cream",
+    "description": "Milk Cream ",
+    "price": "300",
+    "imagen": "img/cremaadi.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Almond milk",
+    "description": "Almond milk small$350-large$450",
+    "price": "350-450",
+    "imagen": "img/lmen.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Vanilla or hazelnut flavoring",
+    "description": "Vanilla or hazelnut flavoring",
+    "price": "350",
+    "imagen": "img/medialunas.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Croissants",
+    "description": "100% butter croissants",
+    "price": "2300",
+    "imagen": "img/Luna.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Pastry",
+    "description": "Custard or quince paste",
+    "price": "2300",
+    "imagen": "img/20250902_085539(1).jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Cinnamon Roll",
+    "description": "cinnamon roll",
+    "price": "4500",
+    "imagen": "img/Rolcanela.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Chocolate bread",
+    "description": "croissant dough with Belgian chocolate",
+    "price": "4800",
+    "imagen": "img/Pchoco.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Cookies 🍪 ",
+    "description": "vanilla cookies with chocolate, chocolate+chocolate",
+    "price": "4800",
+    "imagen": "img/20250902_085341.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Brownie with white walnuts",
+    "description": "Gluten-free Brownie",
+    "price": "6700",
+    "imagen": "img/Brownie.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Stuffed Chipá",
+    "description": "Chipá stuffed with cheese",
+    "price": "3700",
+    "imagen": "img/Chipa.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Cheese Scone",
+    "description": "Cheese Scone",
+    "price": "4200",
+    "imagen": "img/Sconquso.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Pudding/Cake",
+    "description": "carrot and cinnamon, lemon and poppy seeds, chocolate and coffee",
+    "price": "5500",
+    "imagen": "img/20250817_124915.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Chocolate Alfajor",
+    "description": "Chocolate Alfajor",
+    "price": "4500",
+    "imagen": "img/Alchoco.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Dubai Alfajor",
+    "description": "Chocolate and pistachio alfajor",
+    "price": "4700",
+    "imagen": "img/alfapis.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Cornstarch Alfajor",
+    "description": "Cornstarch alfajor (gluten-free)",
+    "price": "4500",
+    "imagen": "img/Maicena.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Almond Alfajor",
+    "description": "Almond Alfajor",
+    "price": "5500",
+    "imagen": "img/Almendras.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Mini cake ",
+    "description": "Sweet mini cakes",
+    "price": "9200",
+    "imagen": "img/Minitor.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Hot ham and cheese croissant",
+    "description": "Hot ham and cheese croissant",
+    "price": "4600",
+    "imagen": "img/Lujyq.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Plate with seasonal fruits",
+    "description": "Plate with seasonal fruits",
+    "price": "8200",
+    "imagen": "img/Platofrutas.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Yogurt ",
+    "description": "Yogurt $5.000, Yogurt with granola $8.000, Forte Yogurt (with fruit and granola) $12.000",
+    "price": "12000",
+    "imagen": "img/IMG-20250802-WA0010.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Portion of toast",
+    "description": "Portion of toast, white or whole wheat with seeds",
+    "price": "3500",
+    "imagen": "img/Tosta.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Portion of jam",
+    "description": "Portion of jam, butter, cream cheese, honey or dressing",
+    "price": "2500",
+    "imagen": "img/Dip.jpg",
+    "category": "Coffee Shop ☕ ️"
+  },
+  {
+    "name": "Pumpkin Tart",
+    "description": "Broccoli, Sardo cheese, mozzarella, onion, whole wheat crust",
+    "price": "18500",
+    "imagen": "img/calboso.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "CHICKEN Tart",
+    "description": "Chicken breast, leek, Sardo cheese, onion, whole wheat crust",
+    "price": "18500",
+    "imagen": "img/Tartapollo.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Shrimp Burritos ",
+    "description": " (hot): Wheat tortilla with shrimp and vegetables in Teriyaki sauce",
+    "price": "23500",
+    "imagen": "img/Jangostino.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "CHICKEN CAESAR Burritos ",
+    "description": " (cold): Wheat tortilla, mixed greens, classic Caesar dressing, chicken breast, Parmesan cheese, and croutons",
+    "price": "19000",
+    "imagen": "img/20250817_135558.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "LIKE MEXICAN Burritos ",
+    "description": " (hot): Wheat tortilla with chicken sauce, beef loin filling, vegetables, and cheddar ",
+    "price": "23500",
+    "imagen": "img/Lomi.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Coca-Cola line",
+    "description": "zeros and classics",
+    "price": "4000",
+    "imagen": "img/20250830_141813.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Local filtered and mineralized water",
+    "description": "cold, natural, and sparkling water",
+    "price": "3700",
+    "imagen": "img/20250830_142147.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Additional with lemon",
+    "description": "Additional with lemon",
+    "price": "400",
+    "imagen": "img/20250903_093625.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Fresh squeezed orange juice",
+    "description": "squeezed orange",
+    "price": "6500",
+    "imagen": "img/Exprimido.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "OREO Milkshake",
+    "description": "cream ice cream, with oreos and whipped cream",
+    "price": "8800",
+    "imagen": "img/Mioreo.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Smoothies",
+    "description": "with seasonal fruits (water, milk, or squeezed juice base",
+    "price": "7000",
+    "imagen": "img/20250903_110035.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Mint lemonade with ginger",
+    "description": "Mint lemonade with ginger",
+    "price": "6500",
+    "imagen": "img/Limonada.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Lemonade ",
+    "description": "Simple lemonade",
+    "price": "6200",
+    "imagen": "img/Limosim.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Cooked ham, cheese and tomato ",
+    "description": "ciabatta, arabic bread",
+    "price": "13000",
+    "imagen": "img/Jqyt.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "mixed toast",
+    "description": "4 ham and cheese triangles",
+    "price": "14000",
+    "imagen": "img/20250824_141355.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "Prosciutto, stracciatella and tomato ",
+    "description": "Prosciutto, stracciatella and tomato ",
+    "price": "19000",
+    "imagen": "img/20250820_143727.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "Turkey, cheese and tomato",
+    "description": "ciabatta or arabic bread",
+    "price": "16000",
+    "imagen": "img/Pabita.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "Toasted Chipa ",
+    "description": "with H and C 15.000, cheddar and H 16.000",
+    "price": "15000",
+    "imagen": "img/Chipatostado.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "Loin Sandwiches only cheese",
+    "description": "SIMPLE (only cheese)with fries",
+    "price": "21000",
+    "imagen": "img/20250910_132716.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "CLASSIC Loin Sandwiches",
+    "description": "CLASSIC (lettuce, tomato, ham and cheese) with fries",
+    "price": "24000",
+    "imagen": "img/20250914_130533.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "BACON Loin Sandwiches",
+    "description": "BACON (cheddar cheese, bacon and tomato)with fries",
+    "price": "26000",
+    "imagen": "img/Lomitobac.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "SIMPLE Burgers (only cheese)",
+    "description": "SIMPLE (only cheese) with fries",
+    "price": "15000",
+    "imagen": "img/20250816_135012.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "CLASSIC Burgers",
+    "description": "CLASSIC (lettuce, tomato, ham and cheese)",
+    "price": "17000",
+    "imagen": "img/20250816_135012.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "BACON Burgers",
+    "description": "BACON (cheddar cheese, bacon and tomato)",
+    "price": "19000",
+    "imagen": "img/Bacon.jpg",
+    "category": " 🥪 Sandwiches"
+  },
+  {
+    "name": "Ham and cheese omelette",
+    "description": "Ham and cheese omelette",
+    "price": "15000",
+    "imagen": "img/20250804_132736.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Potato and onion omelette",
+    "description": "Potato and onion omelette",
+    "price": "15500",
+    "imagen": "img/20250816_134538.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Cheese and mushroom omelette",
+    "description": "Cheese and mushroom omelette",
+    "price": "17000",
+    "imagen": "img/Omecham.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Spinach omelette",
+    "description": "Spinach omelette",
+    "price": "15700",
+    "imagen": "img/20250813_131026 (1).jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " FRESH SALAD",
+    "description": "Arugula, green apple, cucumber, cherry tomatoes, walnuts, Reggianito cheese",
+    "price": "19200",
+    "imagen": "img/Fresca.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " CHICKEN CAESAR SALAD",
+    "description": "Mixed greens, croutons, chicken, Parmesan, and Caesar dressing",
+    "price": "17000",
+    "imagen": "img/20250819_121751.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " CRISPY CHICKEN CAESAR SALAD",
+    "description": "Mixed greens, croutons, crispy chicken, Parmesan, and Caesar dressing.",
+    "price": "18000",
+    "imagen": "img/Cranch.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " CAESAR SALAD with Breaded Shrimp",
+    "description": "Mixed greens, croutons, With breaded shrimp, Parmesan, and Caesar dressing.",
+    "price": "19500",
+    "imagen": "img/Caesarlangis.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " STRACCIATELLA Italian mozzarella SALAD",
+    "description": "Mixed greens, cherry tomatoes, prosciutto, mozzarella, tortilla strips",
+    "price": "28000",
+    "imagen": "img/Estrachatelaens.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " COBB SALAD",
+    "description": "Mixed greens, chicken, egg, blue cheese, tomato, and avocado sauce.",
+    "price": "17800",
+    "imagen": "img/Cpsala.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " Plain CHICKEN or BEEF Milanese",
+    "description": "Accompanied by mashed potatoes, noodles, salad, or french fries",
+    "price": "20000",
+    "imagen": "img/20250816_144204.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " SPINACH Milanese beef or chicken",
+    "description": "Cream of spinach and gratinated cheese Accompanied by mashed potatoes, noodles, salad, or french fries",
+    "price": "22000",
+    "imagen": "img/Esp.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " SWISS Milanese",
+    "description": "White sauce and gratinated cheese Accompanied by mashed potatoes, noodles, salad, or french fries",
+    "price": "22000",
+    "imagen": "img/Mizuisa.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " NAPOLITANA Milanese",
+    "description": "Tomato sauce, ham, and cheese Accompanied by mashed potatoes, noodles, salad, or french fries",
+    "price": "22000",
+    "imagen": "img/20250813_125845 (1).jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " SMOKE Milanese",
+    "description": "Tomato sauce, bacon jam, cheddar Accompanied by mashed potatoes, noodles, salad, or french fries",
+    "price": "23000",
+    "imagen": "img/Smuk.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Hake fillet a la romana",
+    "description": "with mixed mashed potatoes",
+    "price": "18500",
+    "imagen": "img/20250816_135027.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Gramajo Scramble",
+    "description": "French fries, bacon, bell pepper onion, peas, and fried egg",
+    "price": "18000",
+    "imagen": "img/Rebuelto.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Empanadas",
+    "description": "beef or ham and cheese",
+    "price": "2500",
+    "imagen": "img/Empa.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "Squid rings a la romana",
+    "description": "Squid rings a la romana",
+    "price": "23000",
+    "imagen": "img/Rabas.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "Breaded Mozzarellas",
+    "description": "Breaded Mozzarellas",
+    "price": "16000",
+    "imagen": "img/20250817_131412.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "Nachos",
+    "description": "Beef nachos with cheddar and avocado",
+    "price": "18000",
+    "imagen": "img/20250815_155313.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "Farinata recommended",
+    "description": "Fainá with stracciatella, prosciutto, tomatoes, and basil.",
+    "price": "20000",
+    "imagen": "img/Farinata.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "NAPOLITANA PIZZA",
+    "description": "Tomato sauce, stracciatella, ham, and tomato slices.",
+    "price": "28000",
+    "imagen": "img/20250906_150935.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "PARMA PIZZA",
+    "description": "Tomato sauce, stracciatella, burrata, prosciutto, basil.",
+    "price": "34000",
+    "imagen": "img/20250816_135018.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "MARGARITA PIZZA",
+    "description": "Tomato sauce, stracciatella, basil leaves.",
+    "price": "25500",
+    "imagen": "img/20250819_125331.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Mushroom PIZZA",
+    "description": "Tomato sauce, stracciatella, sautéed mushrooms and onions.",
+    "price": "30000",
+    "imagen": "img/Pizachampi.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Chicken RISOTTO!",
+    "description": "with chicken, pumpkin, and vegetables.",
+    "price": "24000",
+    "imagen": "img/20250816_143144.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Shrimp RISOTTO !",
+    "description": "with vegetables, walnuts, and almonds.",
+    "price": "26000",
+    "imagen": "img/Risotolangos.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Beef Loin RISOTTO!",
+    "description": "with vegetables.",
+    "price": "28000",
+    "imagen": "img/tarta_brocoli.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "portion of faina",
+    "description": "recommended to accompany a pizza",
+    "price": "5000",
+    "imagen": "img/Faina.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Spaghetti (sauce separate)",
+    "description": "Spaghetti ",
+    "price": "11000",
+    "imagen": "img/Spa.jpg",
+    "category": " 🍝 PASTA"
+  },
+  {
+    "name": "egg gnocchi (sauce separate)",
+    "description": "egg gnocchi ",
+    "price": "11000",
+    "imagen": "img/Ñoquis.jpg",
+    "category": " 🍝 PASTA"
+  },
+  {
+    "name": "Vegetable, chicken, and ham Ravioli (sauce separate)",
+    "description": "Stuffed with vegetable, chicken, and ham ",
+    "price": "13000",
+    "imagen": "img/Ravioles.jpg",
+    "category": " 🍝 PASTA"
+  },
+  {
+    "name": "Vegetable and ricotta Ravioli (sauce separate)",
+    "description": "Stuffed with vegetable and ricotta",
+    "price": "13000",
+    "imagen": "img/Ravioles.jpg",
+    "category": " 🍝 PASTA"
+  },
+  {
+    "name": "Mozzarella and ham Sorrentinos (sauce separate)",
+    "description": "Mozzarella and ham Sorrentinos",
+    "price": "15000",
+    "imagen": "img/Sonren.jpg",
+    "category": " 🍝 PASTA"
+  },
+  {
+    "name": "white sauce",
+    "description": "White sauce",
+    "price": "6000",
+    "imagen": "img/20250905_131302.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "fileto",
+    "description": "fileto",
+    "price": "6000",
+    "imagen": "img/20250903_124659.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Alfredo Chicken",
+    "description": "white sauce with Chicken",
+    "price": "7500",
+    "imagen": "img/Frepollo.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Alfredo shrimp",
+    "description": "white sauce with shrimp",
+    "price": "9500",
+    "imagen": "img/Frelang.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Bolognese",
+    "description": "sauce with meat",
+    "price": "7700",
+    "imagen": "img/Bolo.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Pesto with walnut",
+    "description": "walnut, garlic, and parsley",
+    "price": "6800",
+    "imagen": "img/IMG-20250816-WA0011.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Carbonara",
+    "description": "Cream, bacon, and green onion",
+    "price": "7700",
+    "imagen": "img/Carbonara.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "caccio e pepe",
+    "description": "butter, pepper, and Parmesan",
+    "price": "7000",
+    "imagen": "img/204218.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "VARIOUS SAUCE",
+    "description": "BUTTER, OLIVE OIL, GARLIC, AND PARMESAN",
+    "price": "6000",
+    "imagen": "img/218.jpg",
+    "category": " 🥫 SAUCES"
+  },
+  {
+    "name": "Chicken (breast)",
+    "description": "With fries, mashed potatoes, salad, or rice",
+    "price": "20500",
+    "imagen": "img/Pechuga.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Pork Matambre (Flank Steak)",
+    "description": "Con frita, pure, ensalada o arroz",
+    "price": "24000",
+    "imagen": "img/Matam.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Sirloin Steak",
+    "description": "With fries, mashed potatoes, salad, or rice",
+    "price": "30000",
+    "imagen": "img/20250815_151841.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Tenderloin Steak",
+    "description": "With fries, mashed potatoes, salad, or rice",
+    "price": "33000",
+    "imagen": "img/IMG-20250816-WA0008.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Pink Salmon",
+    "description": "With fries, mashed potatoes, salad, or rice",
+    "price": "34500",
+    "imagen": "img/Salmón.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Chicken (breast)",
+    "description": "Accompanied by spinach, creamed potatoes, or grilled vegetables",
+    "price": "22500",
+    "imagen": "img/Espepollo.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Pork Matambre (Flank Steak)",
+    "description": "Accompanied by spinach, creamed potatoes, or grilled vegetables",
+    "price": "26000",
+    "imagen": "img/Matavergrill.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Sirloin Steak",
+    "description": "Accompanied by spinach, creamed potatoes, or grilled vegetables",
+    "price": "32000",
+    "imagen": "img/Bifepapa.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Tenderloin Steak",
+    "description": "Accompanied by spinach, creamed potatoes, or grilled vegetables",
+    "price": "35000",
+    "imagen": "img/Lomoesp.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Pink Salmon",
+    "description": "Accompanied by spinach, creamed potatoes, or grilled vegetables",
+    "price": "36500",
+    "imagen": "img/Blu.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " 👶 KIDS MENU NUGGETS",
+    "description": "CHICKEN WITH FRIES OR MASHED POTATOES",
+    "price": "18000",
+    "imagen": "img/Nages.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " 👶 KIDS MENU Spaghetti or gnocchi",
+    "description": "fileto or cream sauce",
+    "price": "18000",
+    "imagen": "img/Ñoquiskit.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": " 👶 KIDS MENU Milanese",
+    "description": "BEEF WITH FRIES OR MASHED POTATOES",
+    "price": "18000",
+    "imagen": "img/Menukit.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "PESTO Milanese",
+    "description": "Beef Milanese with pesto gnocchi",
+    "price": "20500",
+    "imagen": "img/Milapesto.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "N.Y Chicken",
+    "description": "Smoked chicken, mixed cheese, green onion, tomato, and french fries",
+    "price": "23500",
+    "imagen": "img/Ny.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "MUSHROOM Chicken",
+    "description": "In mushroom sauce with french fries",
+    "price": "24500",
+    "imagen": "img/Pechuchapi.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "TERIYAKI Chicken",
+    "description": "Chicken breast in sweet sauce with sautéed rice and vegetables",
+    "price": "23500",
+    "imagen": "img/Tari.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "BLUE Salmon",
+    "description": "Grilled pink salmon in blue cheese cream sauce with Spanish potatoes",
+    "price": "37500",
+    "imagen": "img/20250817_142010.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Matambrito (Flank Steak) a la PIZZA",
+    "description": "Pork, mozzarella, tomato, and oregano with french fries",
+    "price": "28000",
+    "imagen": "img/20250815_132057.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Matambrito (Flank Steak) a la RIOJANA",
+    "description": "Pork, spring onions, bell peppers, peas, and fried egg, with french fries",
+    "price": "28500",
+    "imagen": "img/Matrio.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "FRIENDS AND FAMILY PASTA",
+    "description": "PLATTER OF GNOCCHI OR NOODLES (BOLOGNESE, CREAM, FILETO, OR RICE. YOU CAN COMBINE)",
+    "price": "48000",
+    "imagen": "img/Fuenteñoquis.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "FRIENDS AND FAMILY MILANESE FOR 3",
+    "description": "VEAL NAPOLITANA, SMOKE, SWISS (CAN BE 1/2 AND 1/2 WITH FRIES)",
+    "price": "60000",
+    "imagen": "img/mila3.jpg",
+    "category": " 💡 promotions"
+  },
+  {
+    "name": "CACIO E PEPE Beef Loin",
+    "description": "Grilled tenderloin steak with spaghetti in pepper and cheese",
+    "price": "35500",
+    "imagen": "img/Pepe.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "MUSHROOM Beef Loin",
+    "description": "Grilled tenderloin steak in mushroom sauce with french fries",
+    "price": "36500",
+    "imagen": "img/IMG-20250816-WA0009.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Beef Loin BROCHETTE",
+    "description": "With french fries (for 2 people)",
+    "price": "70000",
+    "imagen": "img/Brochette.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Chicken BROCHETTE",
+    "description": "With french fries (for 2 people)",
+    "price": "50000",
+    "imagen": "img/20250817_135608.jpg",
+    "category": " 🍽 ️Meals"
+  },
+  {
+    "name": "Dulce de leche pancake",
+    "description": "Dulce de leche pancake",
+    "price": "13500",
+    "imagen": "img/20250818_132532.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "HOT BANANA",
+    "description": "Cheesecake base with flambéed bananas and dulce de leche sauce",
+    "price": "14700",
+    "imagen": "img/Hotbana.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "Homemade flan",
+    "description": "with cream and dulce de leche. $8.000-$11.000",
+    "price": "11000",
+    "imagen": "img/Flan.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "Fruit salad ",
+    "description": "with a scoop of ice cream. $11.000-$14.000",
+    "price": "14000",
+    "imagen": "img/Ensfruta.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "Ice Cream",
+    "description": "(scoops): $8.500 (flavors: dulce de leche, chocolate, americano)",
+    "price": "8500",
+    "imagen": "img/Helado.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "HOT APPLE",
+    "description": "Warm apple crumble with vanilla ice cream and toasted almonds",
+    "price": "14700",
+    "imagen": "img/Apeljot.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "WARM BROWNIE",
+    "description": "Warm brownie with vanilla ice cream",
+    "price": "12500",
+    "imagen": "img/Brouni.jpg",
+    "category": " 🍮 DESSERTS"
+  },
+  {
+    "name": "SNACK PLATTER (for 2 people)",
+    "description": "Prosciutto, cooked ham, Roquefort cheese, Tybo cheese, cherry tomatoes, nuts.Includes two bottles of Stella.",
+    "price": "52000",
+    "imagen": "img/tarta_brocoli.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "SNACK PLATTER (for 2 people)",
+    "description": "Breaded chicken, mozzarella sticks, squid rings, and french fries.Includes two bottles of Stella",
+    "price": "42000",
+    "imagen": "img/IMG-20250815-WA0005.jpg",
+    "category": " 🥟 APPETIZERS"
+  },
+  {
+    "name": "STELLA ARTOIS (410cc - Bottle)",
+    "description": "bottle",
+    "price": "7200",
+    "imagen": "img/Coroa.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "CORONA (Bottle)",
+    "description": "bottle",
+    "price": "7500",
+    "imagen": "img/Estelar.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "STELLA 1 LITER",
+    "description": "bottle",
+    "price": "17000",
+    "imagen": "img/SetellaL1.jpg",
+    "category": " 🥤 Drinks and Wines"
+  },
+  {
+    "name": "Jack Daniel's",
+    "description": "Jack Daniel's",
+    "price": "15000",
+    "imagen": "img/Daniel’s.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Johnny Walker Black",
+    "description": "Johnny Walker Black",
+    "price": "15000",
+    "imagen": "img/Black.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Johnny Walker Red",
+    "description": "Johnny Walker Red",
+    "price": "13000",
+    "imagen": "img/Ret.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Baileys Liqueur",
+    "description": "Baileys Liqueur",
+    "price": "12000",
+    "imagen": "img/20250903_111957.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Fernet with Coca-Cola",
+    "description": "Fernet with Coca-Cola",
+    "price": "12000",
+    "imagen": "img/Ferne.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Beefeater Gin Tonic",
+    "description": "Beefeater Gin Tonic",
+    "price": "12000",
+    "imagen": "img/Ginton.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Bombay Gin Tonic",
+    "description": "Bombay Gin Tonic",
+    "price": "13000",
+    "imagen": "img/20250903_111516.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Mojito",
+    "description": "Rum, mint, lemon, sugar, carbonated water",
+    "price": "13000",
+    "imagen": "img/Mojito.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Daiquirí (strawberry or peach)",
+    "description": "Rum, fruit, sugar, ice",
+    "price": "12000",
+    "imagen": "img/Dai.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Margarita (lemon)",
+    "description": "Tequila, Cointreau, lemon, ice, salt",
+    "price": "13000",
+    "imagen": "img/Marga.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "Champagne Blanc de Blancs (Salentein)",
+    "description": "Champagne Blanc de Blancs (Salentein)",
+    "price": "40000",
+    "imagen": "img/20250903_105019.jpg",
+    "category": " 🍹 COCKTAILS"
+  },
+  {
+    "name": "DAILY MENU or SUGGESTIONS",
+    "description": "daily menu dish + drink + dessert or coffee, Suggestion is dish only",
+    "price": "0",
+    "imagen": "img/.jpg",
+    "category": " 📋 DAILY MENU/SUGGESTIONS AND NEWS"
+  },
+  {
+    "name": "new cakes",
+    "description": "new suggestion PER PORTION  ",
+    "price": "9200",
+    "imagen": "img/torgrende.jpg",
+    "category": " 📋 DAILY MENU/SUGGESTIONS AND NEWS"
+  },
+  {
+    "name": "dubai pistachio alfajor",
+    "description": "chocolate pistachio alfajor  ",
+    "price": "4700",
+    "imagen": "img/pis.jpg",
+    "category": " 📋 DAILY MENU/SUGGESTIONS AND NEWS"
+  },
+  {
+    "name": "Brunch For Two",
+    "description": "Two infusions, 2 juices or lemonades, 2 yogurts with fruit and granola",
+    "price": "25000",
+    "imagen": "img/Bru.jpg",
+    "category": " 📋 DAILY MENU/SUGGESTIONS AND NEWS"
+  }
+]
