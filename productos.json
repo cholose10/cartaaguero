@@ -1150,9 +1150,9 @@
   {
     "nombre": "MENU del DIA o SUGERENCIAS",
     "descripcion": "menú del día plató + bebida +postre o café, Sugerencia solo es plato",
-    "precio": "0",
+    "precio": 0,
     "imagen": "img/.jpg",
-    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOEDADES"
+    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   },
   {
     "nombre": "tortas nuevas",
