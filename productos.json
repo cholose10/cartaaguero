@@ -1157,9 +1157,9 @@
   {
     "nombre": "tortas nuevas",
     "descripcion": "sugerencia nueva POR POCION  ",
-    "precio": "9200",
+    "precio": 9200,
     "imagen": "img/torgrende.jpg",
-    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOEDADES"
+    "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   },
   {
     "nombre": "alfajor dubai pistacho",
