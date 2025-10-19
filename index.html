@@ -39,94 +39,124 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const RAW_URL = 'https://raw.githubusercontent.com/cholose10/cartaaguero/main/productos.json';
-  const searchInput = document.getElementById('search');
-  const btnSearch = document.getElementById('btnSearch');
+  const USER = 'cholose10';
+  const REPO = 'cartaaguero';
+  let idiomaActual = localStorage.getItem('idioma') || 'es';
+
+  const btnEs = document.getElementById('btn-es');
+  const btnEn = document.getElementById('btn-en');
   const categoryContainer = document.getElementById('category-buttons');
   const productList = document.getElementById('product-list');
+  const searchInput = document.getElementById('search');
+  const btnSearch = document.getElementById('btnSearch');
+
   let productos = [];
 
+  function actualizarBotones() {
+    btnEs.classList.toggle('active', idiomaActual === 'es');
+    btnEn.classList.toggle('active', idiomaActual === 'en');
+  }
+
   async function load() {
+    actualizarBotones();
+    const filename = idiomaActual === 'es' ? 'productos.json' : 'productos-en.json';
+    const RAW_URL = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${filename}`;
+
     try {
-      const res = await fetch(RAW_URL, {cache: "no-store"});
-      if (!res.ok) throw new Error('Error cargando productos.json: ' + res.status);
-      productos = await res.json();
+      const res = await fetch(RAW_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error('Error cargando ' + RAW_URL);
+      const data = await res.json();
+
+      // Adaptamos los nombres según el idioma
+      productos = data.map(p => ({
+        nombre: idiomaActual === 'es' ? p.nombre : p.name,
+        descripcion: idiomaActual === 'es' ? p.descripcion : p.description,
+        precio: p.precio || p.price,
+        imagen: p.imagen,
+        categoria: idiomaActual === 'es' ? p.categoria : p.category
+      }));
+
       renderCategories();
-      renderProducts('Todos', false);
+      renderProducts('Todos');
     } catch (err) {
       console.error(err);
-      productList.innerHTML = '<div class="msg">⚠️ No se pudieron cargar los productos.</div>';
+      productList.innerHTML = '<div class="msg">⚠️ Error al cargar los productos.</div>';
     }
   }
 
   function renderCategories() {
-    const cats = ['Todos', ...new Set(productos.map(p => p.categoria).filter(Boolean))];
+    const categorias = ['Todos', ...new Set(productos.map(p => p.categoria).filter(Boolean))];
     categoryContainer.innerHTML = '';
-    cats.forEach(cat => {
-      const b = document.createElement('button');
-      b.textContent = cat;
-      b.addEventListener('click', () => {
-        renderProducts(cat, true);
-      });
-      categoryContainer.appendChild(b);
+    categorias.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.textContent = cat;
+      btn.addEventListener('click', () => renderProducts(cat));
+      categoryContainer.appendChild(btn);
     });
   }
 
-  function renderProducts(categoria = 'Todos', doScroll = true) {
+  function renderProducts(categoria) {
     productList.innerHTML = '';
     const lista = categoria === 'Todos' ? productos : productos.filter(p => p.categoria === categoria);
-    if (!lista || lista.length === 0) {
-      productList.innerHTML = '<div class="msg">No hay productos para mostrar.</div>';
-      if (doScroll) productList.scrollIntoView({behavior:'smooth'});
+    if (lista.length === 0) {
+      productList.innerHTML = '<div class="msg">No hay productos disponibles.</div>';
       return;
     }
     lista.forEach(p => {
       const div = document.createElement('div');
       div.className = 'item';
-      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
-      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
+      div.innerHTML = `
+        <img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
-        <p>${p.descripcion || ''}</p>
-        <span class="price">${precio}</span>`;
+        <p>${p.descripcion}</p>
+        <span class="price">$${p.precio}</span>
+      `;
       productList.appendChild(div);
     });
-    if (doScroll) productList.scrollIntoView({behavior:'smooth'});
   }
 
   function buscar() {
-    const q = (searchInput.value || '').toLowerCase().trim();
-    if (!q) { renderProducts('Todos', true); return; }
+    const q = searchInput.value.toLowerCase().trim();
     const res = productos.filter(p =>
-      (p.nombre||'').toLowerCase().includes(q) ||
-      (p.descripcion||'').toLowerCase().includes(q) ||
-      (p.categoria||'').toLowerCase().includes(q)
+      p.nombre.toLowerCase().includes(q) ||
+      p.descripcion.toLowerCase().includes(q) ||
+      p.categoria.toLowerCase().includes(q)
     );
     if (res.length === 0) {
       productList.innerHTML = '<div class="msg">🔍 No se encontraron resultados.</div>';
-      productList.scrollIntoView({behavior:'smooth'});
       return;
     }
     productList.innerHTML = '';
     res.forEach(p => {
       const div = document.createElement('div');
       div.className = 'item';
-      const precio = (String(p.precio||'').trim().startsWith('$')) ? p.precio : ('$' + (p.precio ?? ''));
-      div.innerHTML = `<img src="${p.imagen}" alt="${p.nombre}">
+      div.innerHTML = `
+        <img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
-        <p>${p.descripcion || ''}</p>
-        <span class="price">${precio}</span>`;
+        <p>${p.descripcion}</p>
+        <span class="price">$${p.precio}</span>
+      `;
       productList.appendChild(div);
     });
-    productList.scrollIntoView({behavior:'smooth'});
   }
 
-  // Enter en input -> buscar
-  searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); buscar(); }
+  btnEs.addEventListener('click', () => {
+    idiomaActual = 'es';
+    localStorage.setItem('idioma', 'es');
+    load();
   });
-  btnSearch.addEventListener('click', buscar);
 
-  // iniciar
+  btnEn.addEventListener('click', () => {
+    idiomaActual = 'en';
+    localStorage.setItem('idioma', 'en');
+    load();
+  });
+
+  btnSearch.addEventListener('click', buscar);
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') buscar();
+  });
+
   load();
 });
 </script>
