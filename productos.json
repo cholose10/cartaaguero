@@ -695,8 +695,8 @@
   {
     "nombre": "RISOTTOS Lomo!",
     "descripcion": "con verduras.",
-    "precio": "28000",
-    "imagen": "img/tarta_brocoli.jpg",
+    "precio": 28000,
+    "imagen": "img/Risotolomo.jpg",
     "categoria": " 🍽 ️Comidas"
   },
   {
