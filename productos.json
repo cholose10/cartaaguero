@@ -114,8 +114,8 @@
   {
     "nombre": "FRAPPUCCINO OREO 🥶 ",
     "descripcion": "base de Café ❄ ️",
-    "precio": "6700",
-    "imagen": "img/20250815_154308.jpg",
+    "precio": 6700,
+    "imagen": "img/20251018_131222.jpg",
     "categoria": "Cafetería ☕ ️"
   },
   {
@@ -1170,8 +1170,8 @@
   },
   {
     "nombre": "Brunch Para Dos",
-    "descripcion": "Dos infusiones,2 jugos o limonadas,2 yogures con fruta y granola chipatostada con jyq,toston huevo y palta,2 medialunas,1 budin o 1 mini torta",
-    "precio": 48000,
+    "descripcion": "Dos infusiones, 2 jugos o limonadas, 2 yogures con fruta y granola",
+    "precio": 25000,
     "imagen": "img/brunch.jpg",
     "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   }
