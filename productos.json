@@ -413,6 +413,13 @@
     "categoria": " 🥤  Bebidas y vinos"
   },
   {
+    "nombre": "Pomelada",
+    "descripcion": "pomelo natural Fronzen",
+    "precio": "7000",
+    "imagen": "img/pomelada.jpg",
+    "categoria": " 🥤  Bebidas y vinos"
+  },
+  {
     "nombre": "Limonada ",
     "descripcion": "Limonada simple",
     "precio": "6200",
