@@ -8,13 +8,11 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      /* --- CONFIGURACIÓN DE FONDO --- */
-      background-color: #f5f5f5; /* Color de respaldo */
-      background-image: url('img/Magua.jpg'); /* RUTA CORREGIDA */
-      background-size: cover; /* Cubre todo el área */
-      background-attachment: fixed; /* Imagen fija al hacer scroll */
-      background-position: center center; /* Centra la imagen */
-      /* ------------------------- */
+      background-color: #f5f5f5;
+      background-image: url('img/Magua.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center center;
       color: #333;
       display: flex;
       flex-direction: column;
@@ -60,25 +58,24 @@
       40% { opacity: 0; }
       100% { opacity: 0; }
     }
-    
-    /* --- AJUSTES PARA VISIBILIDAD DE TEXTO --- */
+
     h1 {
       font-size: 1.8rem;
       margin-bottom: 10px;
-      color: #fff; /* Texto blanco */
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
     }
 
     h2 {
       font-size: 1.4rem;
       margin-top: 30px;
       margin-bottom: 10px;
-      color: #fff; /* Texto blanco */
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
       border-bottom: 2px solid #d8b384;
       padding-bottom: 5px;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.3); /* Fondo semi-transparente para la sección */
+      background-color: rgba(0, 0, 0, 0.3);
       padding: 5px 15px;
       border-radius: 5px;
     }
@@ -86,11 +83,10 @@
     p {
       font-size: 1rem;
       margin-bottom: 30px;
-      color: #fff; /* Texto blanco */
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para mejor lectura */
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
       text-align: center;
     }
-    /* ------------------------------------------ */
 
     .links {
       display: flex;
@@ -105,7 +101,7 @@
       align-items: center;
       padding: 15px 20px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente para destacar */
+      background: rgba(255, 255, 255, 0.9);
       box-shadow: 0 3px 8px rgba(0,0,0,0.2);
       text-decoration: none;
       color: #333;
@@ -116,7 +112,7 @@
     .link-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-      background: white; /* Se hace opaco al pasar el ratón */
+      background: white;
     }
 
     .link-card img {
@@ -128,8 +124,8 @@
     footer {
       margin-top: 40px;
       font-size: 0.9rem;
-      color: #fff; /* Texto blanco en el footer */
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Sombra para mejor lectura */
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
       text-align: center;
     }
   </style>
@@ -142,7 +138,7 @@
       <img src="img/lito.jpg" alt="Foto 3">
     </div>
     <h1>Tilo Resto Café</h1>
-    <h1>Comé rico,comé fácil..</h1>
+    <h1>Comé rico, comé fácil..</h1>
     <h1>Comé con nosotros</h1>
     <p>Elegí tu sucursal</p>
   </header>
@@ -158,8 +154,14 @@
       <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Carta Digital">
       Carta Digital - Tilo French
     </a>
-    
-    <a class="link-card" href=https://www.pedidosya.com.ar/restaurantes/buenos-aires/tilo-palermo--cocina-abierta-sabor-sin-horario-eb27643b-be28-4a52-9ac9-643530ab4327-menu?search=TILO++PALERMO">
+
+    <!-- 📄 Carta de Delivery - French -->
+    <a class="link-card" href="file:///C:/Users/cholo/Desktop/cartaaguero/French.pdf" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF">
+      Carta de Delivery - Tilo French
+    </a>
+
+    <a class="link-card" href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/tilo-palermo--cocina-abierta-sabor-sin-horario-eb27643b-be28-4a52-9ac9-643530ab4327-menu?search=TILO++PALERMO" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/5968/5968874.png" alt="PedidosYa">
       PedidosYa - Tilo French
     </a>
@@ -182,6 +184,12 @@
       Carta Digital - Tilo Agüero
     </a>
 
+    <!-- 📄 Carta de Delivery - Agüero -->
+    <a class="link-card" href="file:///C:/Users/cholo/Desktop/cartaaguero/Aguero.pdf" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="PDF">
+      Carta de Delivery - Tilo Agüero
+    </a>
+
     <a class="link-card" href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/tilo-recoleta-cocina-abierta-sabor-sin-horario-81b0c196-84ae-4ba5-882f-a31612b13795-menu?search=TILO+RECOLETA" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/5968/5968874.png" alt="PedidosYa">
       PedidosYa - Tilo Agüero
@@ -191,7 +199,7 @@
       <img src="https://cdn-icons-png.flaticon.com/512/3059/3059530.png" alt="Teléfono">
       Teléfono Fijo: 5242-8489
     </a>
-    <a class="link-card" href="https://maps.app.goo.gl/CJfPpMsr12aTWHZL6">
+    <a class="link-card" href="https://maps.app.goo.gl/CJfPpMsr12aTWHZL6" target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Ubicación">
       Ver en Google Maps
     </a>
