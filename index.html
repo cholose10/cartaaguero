@@ -155,8 +155,6 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const USER = 'cholose10';
-    const REPO = 'cartaaguero';
     let idiomaActual = localStorage.getItem('idioma') || 'es';
 
     const btnEs = document.getElementById('btn-es');
@@ -176,11 +174,11 @@
     async function load() {
       actualizarBotones();
       const filename = idiomaActual === 'es' ? 'productos.json' : 'productos-en.json';
-      const RAW_URL = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${filename}`;
 
       try {
-        const res = await fetch(RAW_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error('Error cargando ' + RAW_URL);
+        // ✅ Carga directa desde el servidor (sin usar GitHub)
+        const res = await fetch(filename, { cache: "no-store" });
+        if (!res.ok) throw new Error('Error cargando ' + filename);
         const data = await res.json();
 
         productos = data.map(p => ({
