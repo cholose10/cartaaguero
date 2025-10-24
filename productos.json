@@ -1,4 +1,4 @@
- [
+[
   {
     "nombre": "Café expresso",
     "descripcion": "Café chico",
@@ -399,6 +399,13 @@
     "categoria": " 🥤  Bebidas y vinos"
   },
   {
+    "nombre": "Pomelada",
+    "descripcion": "pomelo natural fronzen",
+    "precio": "7000",
+    "imagen": "img/pomelada.jpg",
+    "categoria": " 🥤  Bebidas y vinos"
+  },
+  {
     "nombre": "Licuados",
     "descripcion": "con frutas de estacion(base de agua, leche o exprimido",
     "precio": "7000",
@@ -410,13 +417,6 @@
     "descripcion": "Limonada a la menta con jengibre",
     "precio": "6500",
     "imagen": "img/Limonada.jpg",
-    "categoria": " 🥤  Bebidas y vinos"
-  },
-  {
-    "nombre": "Pomelada",
-    "descripcion": "pomelo natural Fronzen",
-    "precio": "7000",
-    "imagen": "img/pomelada.jpg",
     "categoria": " 🥤  Bebidas y vinos"
   },
   {
@@ -1043,14 +1043,14 @@
     "categoria": " 🍮 POSTRES"
   },
   {
-    "nombre": "PICADITA Fria(para 2 personas)",
+    "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Jamón crudo, jamón cocido, queso roquefort, queso tybo, tomates cherries, frutos secos.Incluye dos porrones de Stella.",
     "precio": "52000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": " 🥟 ENTRADITAS"
   },
   {
-    "nombre": "PICADITA Caliente (para 2 personas)",
+    "nombre": "PICADITA (para 2 personas)",
     "descripcion": "Pollo rebozado, bastones de muzarella, rabas y papas fritas.Incluye dos porrones de Stella",
     "precio": "42000",
     "imagen": "img/IMG-.jpg",
@@ -1178,7 +1178,7 @@
   {
     "nombre": "Brunch Para Dos",
     "descripcion": "Dos infusiones, 2 jugos o limonadas, 2 yogures con fruta y granola",
-    "pComidas"48000,
+    "precio": 48000,
     "imagen": "img/brunch.jpg",
     "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   }
