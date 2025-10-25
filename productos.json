@@ -1175,6 +1175,91 @@
     "imagen": "img/pis.jpg",
     "categoria": " 📋 MENU del DIA/SUGERENCIAS Y NOVEDADES"
   },
+    {
+    "nombre": "Trumpeter Malbec",
+    "descripcion": "Trumpeter Malbec (750cc) ",
+    "precio": "25000",
+    "imagen": "img/20250903_112612.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Trumpeter Cabernet",
+    "descripcion": "Trumpeter Cabernet (750cc)",
+    "precio": "25000",
+    "imagen": "img/20250903_112534.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Rutini Malbec-Cabernet Franc",
+    "descripcion": "Rutini Malbec-Cabernet Franc(750cc)",
+    "precio": "36000",
+    "imagen": "img/Rutinicaber.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Portillo Malbec",
+    "descripcion": "Portillo Malbec (750cc)",
+    "precio": "19000",
+    "imagen": "img/20250903_111015.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Salentein Reserva Cabernet Sauvignon",
+    "descripcion": "Salentein Reserva Cabernet Sauvignon (750cc)",
+    "precio": "30000",
+    "imagen": "img/20250903_123740.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Trumpeter Sauvignon Blanc",
+    "descripcion": "STrumpeter Sauvignon Blanc (750cc)",
+    "precio": "25000",
+    "imagen": "img/20250903_112257.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Portillo Chardonnay",
+    "descripcion": "Portillo Chardonnay (750cc)",
+    "precio": "19000",
+    "imagen": "img/20250903_110934.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "copa de vino",
+    "descripcion": "BLANCOS o TINTO",
+    "precio": "8000",
+    "imagen": "img/20250903_124351.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Portillo Rosé Malbec",
+    "descripcion": "Portillo Rosé Malbec (Vino fresco y fácil de beber)",
+    "precio": "19000",
+    "imagen": "img/20250903_110955.jpg",
+    "categoria": "🥤 Bebidas y vinos"
+  },
+  {
+    "nombre": "Champagne Chandon",
+    "descripcion": "Champagne Chandon (187cc)",
+    "precio": "15000",
+    "imagen": "img/20250903_113545.jpg",
+    "categoria": "🍹TRAGOS"
+  },
+  {
+    "nombre": "Champagne Salentein Brut Nature",
+    "descripcion": "Champagne Salentein Brut Nature",
+    "precio": "32.000",
+    "imagen": "img/20250903_104921.jpg",
+    "categoria": "🍹TRAGOS"
+  },
+  {
+    "nombre": "Champagne Blanc de Blancs(Salentein)",
+    "descripcion": "Champagne Blanc de Blancs(Salentein)",
+    "precio": "40000",
+    "imagen": "img/20250903_105019.jpg",
+    "categoria": "🍹TRAGOS"
+  },
+
   {
     "nombre": "Brunch Para Dos",
     "descripcion": "Dos infusiones, 2 jugos o limonadas 2 yogures con fruta y granola chipa tostado de jamon y queso Y toston huevo y palta $ 48.000",
