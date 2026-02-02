@@ -1422,5 +1422,21 @@
     "imagen": "img/Rojel.jpg",
     "categoria": "📋MENU del DIA/SUGERENCIAS Y NOVEDADES",
     "id": "prod0181"
+  },
+  {
+    "nombre": "croque monsieur",
+    "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel",
+    "precio": "17000",
+    "imagen": "",
+    "categoria": "Sandwich",
+    "id": "prod0182"
+  },
+  {
+    "nombre": "croque monsieur",
+    "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel",
+    "precio": "17000",
+    "imagen": "",
+    "categoria": "Sandwich",
+    "id": "prod0183"
   }
 ]
