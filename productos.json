@@ -1432,9 +1432,9 @@
     "id": "prod0182"
   },
   {
-    "nombre": "croque monsieur",
-    "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel",
-    "precio": "17000",
+    "nombre": "croque madame",
+    "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel con huevo frito",
+    "precio": "18500",
     "imagen": "",
     "categoria": "Sandwich",
     "id": "prod0183"
