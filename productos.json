@@ -1438,5 +1438,13 @@
     "imagen": "",
     "categoria": "Sandwich",
     "id": "prod0183"
+  },
+  {
+    "nombre": "croque madame",
+    "descripcion": "sandwich en pan blanco de molde relleno con jamon y queso gratinado en salsa bechamel con huevo frito",
+    "precio": "18500",
+    "imagen": "",
+    "categoria": "Sandwich",
+    "id": "prod0184"
   }
 ]
