@@ -402,7 +402,9 @@ async function syncPricesToLangs(){
         if('preco' in item && String(item.preco) !== nuevo){ item.preco = nuevo; changed = true; }
       }
       // 🔄 sincronizar imagen por ID (ES / EN / PT)
-const nuevaImagen = byId[itemId].imagen || '';
+const baseProd = itemId && byId[itemId] ? byId[itemId] : null;
+const nuevaImagen = baseProd ? baseProd.imagen || '' : '';
+
 
 if('imagen' in item && item.imagen !== nuevaImagen){
   item.imagen = nuevaImagen;
