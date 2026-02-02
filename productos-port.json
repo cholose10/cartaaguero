@@ -2,7 +2,7 @@
   {
     "nome": "Café expresso",
     "descricao": "Café pequeno",
-    "preco": "3400",
+    "preco": "3400000",
     "imagem": "img/Cafe.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0001"
@@ -795,7 +795,7 @@
     "nome": "BROCHETTE de Lomo",
     "descricao": "Com batatas fritas (para 2 pessoas)",
     "preco": "73000",
-    "imagem": "img/Brochette.jpg",
+    "imagem": "",
     "categoria": "🍽️Refeições",
     "id": "prod0100"
   },
@@ -803,7 +803,7 @@
     "nome": "BROCHETTE de Pollo",
     "descricao": "Com batatas fritas (para 2 pessoas)",
     "preco": "53000",
-    "imagem": "img/20250817_135608.jpg",
+    "imagem": "",
     "categoria": "🍽️Refeições",
     "id": "prod0101"
   },
@@ -1084,13 +1084,13 @@
     "descricao": "MANTEIGA, AZEITE, ALHO E PARMESÃO",
     "preco": "6000",
     "imagem": "img/218.jpg",
-   "categoria": "🥫 Molhos",
+    "categoria": "🥫 Molhos",
     "id": "prod0136"
   },
   {
     "nome": "linha Coca-Cola",
     "descricao": "Zeros e clássicas",
-    "preco": "4200",
+    "preco": "4500",
     "imagem": "img/20250830_141813.jpg",
     "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0137"
@@ -1100,7 +1100,7 @@
     "descricao": "Água fria, natural e com gás",
     "preco": "3700",
     "imagem": "img/20250830_142147.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0138"
   },
   {
@@ -1108,7 +1108,7 @@
     "descricao": "Adicional com limão",
     "preco": "400",
     "imagem": "img/20250903_093625.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0139"
   },
   {
@@ -1116,7 +1116,7 @@
     "descricao": "Espremido de laranja natural",
     "preco": "6700",
     "imagem": "img/Exprimido.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0140"
   },
   {
@@ -1132,7 +1132,7 @@
     "descricao": "Sorvete de creme, com oreos e chantilly",
     "preco": "9000",
     "imagem": "img/Mioreo.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0142"
   },
   {
@@ -1164,7 +1164,7 @@
     "descricao": "Cerveja Stella Artois 330cc",
     "preco": "7400",
     "imagem": "img/Coroa.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0146"
   },
   {
@@ -1172,7 +1172,7 @@
     "descricao": "Cerveja Corona 330cc",
     "preco": "7700",
     "imagem": "img/Estelar.jpg",
-   "categoria": "🥤 Bebidas e vinhos",
+    "categoria": "🥤 Bebidas e vinhos",
     "id": "prod0147"
   },
   {
@@ -1315,7 +1315,7 @@
     "nome": "Aperol com laranja",
     "descricao": "Aperol com laranja",
     "preco": "9500",
-    "imagem": "img/Campati.jpg",
+    "imagem": "img/Api.jpg",
     "categoria": "🍹Tragos",
     "id": "prod0165"
   },
