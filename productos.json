@@ -2,7 +2,7 @@
   {
     "nombre": "Café expresso",
     "descripcion": "Café chico",
-    "precio": "3400",
+    "precio": "3400000",
     "imagen": "img/Cafe.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0001"
@@ -1438,13 +1438,5 @@
     "imagen": "",
     "categoria": "Sandwich",
     "id": "prod0183"
-  },
-  {
-    "nombre": "croque madame",
-    "descripcion": "sandwich en pan blanco de molde relleno con jamon y queso gratinado en salsa bechamel con huevo frito",
-    "precio": "18500",
-    "imagen": "",
-    "categoria": "Sandwich",
-    "id": "prod0184"
   }
 ]
