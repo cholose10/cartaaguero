@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "3400",
+    "price": "3400000",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -796,7 +796,7 @@
     "name": "Beef Loin Skewers",
     "description": "With French fries (for 2 people)",
     "price": "73000",
-    "image": "img/Brochette.jpg",
+    "image": "",
     "category": "🍽️Meals"
   },
   {
@@ -804,7 +804,7 @@
     "name": "Chicken Skewers",
     "description": "With French fries (for 2 people)",
     "price": "53000",
-    "image": "img/20250817_135608.jpg",
+    "image": "",
     "category": "🍽️Meals"
   },
   {
@@ -1091,7 +1091,7 @@
     "id": "prod0137",
     "name": "Coca-Cola Line",
     "description": "Zero and classic",
-    "price": "4200",
+    "price": "4500",
     "image": "img/20250830_141813.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1316,7 +1316,7 @@
     "name": "Aperol with Orange",
     "description": "Aperol with orange",
     "price": "9500",
-    "image": "img/Campati.jpg",
+    "image": "img/Api.jpg",
     "category": "🍹Drinks"
   },
   {
