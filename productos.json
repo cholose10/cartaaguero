@@ -792,22 +792,6 @@
     "id": "prod0099"
   },
   {
-    "nombre": "BROCHETTE de Lomo",
-    "descripcion": "Con papas fritas (para 2 personas)",
-    "precio": "73000",
-    "imagen": "img/Brochette.jpg",
-    "categoria": "🍽️Comidas",
-    "id": "prod0100"
-  },
-  {
-    "nombre": "BROCHETTE de Pollo",
-    "descripcion": "Con papas fritas (para 2 personas)",
-    "precio": "53000",
-    "imagen": "img/20250817_135608.jpg",
-    "categoria": "🍽️Comidas",
-    "id": "prod0101"
-  },
-  {
     "nombre": "👶MENU KIDS NUGGETS",
     "descripcion": "De pollo frita o puré",
     "precio": "18000",
