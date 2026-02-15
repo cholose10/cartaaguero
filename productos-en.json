@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "3400",
+    "price": "3500",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -11,7 +11,7 @@
     "id": "prod0002",
     "name": "Espresso Coffee (jarrito)",
     "description": "Americano coffee",
-    "price": "3600",
+    "price": "3700",
     "image": "img/Americano.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -19,7 +19,7 @@
     "id": "prod0003",
     "name": "Decaf Coffee",
     "description": "Decaffeinated coffee",
-    "price": "3900",
+    "price": "4100",
     "image": "img/20250813_094842.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -27,7 +27,7 @@
     "id": "prod0004",
     "name": "Traditional Coffee with Milk",
     "description": "Traditional coffee with milk",
-    "price": "4400",
+    "price": "4600",
     "image": "img/Cafechechu.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -35,7 +35,7 @@
     "id": "prod0005",
     "name": "Double Espresso Coffee",
     "description": "Double espresso coffee",
-    "price": "5200",
+    "price": "5400",
     "image": "img/doble.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -43,7 +43,7 @@
     "id": "prod0006",
     "name": "Cappuccino",
     "description": "Coffee, milk, cinnamon and cocoa",
-    "price": "5400",
+    "price": "5600",
     "image": "img/Capuchino.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -51,7 +51,7 @@
     "id": "prod0007",
     "name": "Italian Cappuccino",
     "description": "Italian cappuccino",
-    "price": "5500",
+    "price": "5700",
     "image": "img/Capuchino.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -59,7 +59,7 @@
     "id": "prod0008",
     "name": "MOKA Coffee",
     "description": "Intense cocoa, coffee, frothed milk",
-    "price": "5950",
+    "price": "6150",
     "image": "img/Moka.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -67,7 +67,7 @@
     "id": "prod0009",
     "name": "CARAMEL Coffee",
     "description": "Caramel, coffee, frothed milk",
-    "price": "5950",
+    "price": "6150",
     "image": "img/20250903_144413.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -75,7 +75,7 @@
     "id": "prod0010",
     "name": "Tea with Milk",
     "description": "Inti Zen tea",
-    "price": "4400",
+    "price": "4600",
     "image": "img/te.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -83,7 +83,7 @@
     "id": "prod0011",
     "name": "Submarino",
     "description": "Frothed milk and chocolate bar",
-    "price": "5200",
+    "price": "5400",
     "image": "img/Submarino.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -91,7 +91,7 @@
     "id": "prod0012",
     "name": "Hot or Cold Milk",
     "description": "Skimmed milk",
-    "price": "3000",
+    "price": "3200",
     "image": "img/20250818_101037.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -99,7 +99,7 @@
     "id": "prod0013",
     "name": "TILO COFFEE",
     "description": "Coffee, Baileys, evaporated milk and grated chocolate",
-    "price": "7500",
+    "price": "7700",
     "image": "img/20250819_160159.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -107,7 +107,7 @@
     "id": "prod0014",
     "name": "ICE COFFEE🥶",
     "description": "Double shot with ice❄️",
-    "price": "5200",
+    "price": "5400",
     "image": "img/20250817_131630.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -115,7 +115,7 @@
     "id": "prod0015",
     "name": "LATTE ICE COFFEE🥶",
     "description": "Cold milk with double shot of coffee and ice❄️",
-    "price": "5200",
+    "price": "5400",
     "image": "img/20250817_131330.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -123,7 +123,7 @@
     "id": "prod0016",
     "name": "FRAPPUCCINO with Milk and OREO🥶",
     "description": "Milk-based ❄️",
-    "price": "7100",
+    "price": "7300",
     "image": "img/miloreo.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -131,7 +131,7 @@
     "id": "prod0017",
     "name": "OREO FRAPPUCCINO🥶",
     "description": "Coffee-based ❄️",
-    "price": "7100",
+    "price": "7300",
     "image": "img/20250815_154308.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -155,7 +155,7 @@
     "id": "prod0020",
     "name": "Vanilla or Hazelnut Flavoring",
     "description": "Vanilla or hazelnut flavoring",
-    "price": "300",
+    "price": "350",
     "image": "img/vaunilla.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -163,7 +163,7 @@
     "id": "prod0021",
     "name": "Croissants",
     "description": "100% butter croissants",
-    "price": "2500",
+    "price": "2600",
     "image": "img/Luna.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -171,7 +171,7 @@
     "id": "prod0022",
     "name": "Pastry",
     "description": "Custard or quince",
-    "price": "2400",
+    "price": "2600",
     "image": "img/20250902_085539(1).jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -179,7 +179,7 @@
     "id": "prod0023",
     "name": "Cinnamon Roll",
     "description": "Cinnamon roll",
-    "price": "4500",
+    "price": "4600",
     "image": "img/Rolcanela.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -187,7 +187,7 @@
     "id": "prod0024",
     "name": "Chocolate Bread",
     "description": "Croissant dough with Belgian chocolate",
-    "price": "4800",
+    "price": "4600",
     "image": "img/Pchoco.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -195,7 +195,7 @@
     "id": "prod0025",
     "name": "Cookies🍪",
     "description": "Vanilla cookies with chocolate, chocolate+chocolate each",
-    "price": "4800",
+    "price": "4900",
     "image": "img/20250902_085341.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -203,7 +203,7 @@
     "id": "prod0026",
     "name": "Brownie with White Nuts",
     "description": "Gluten-free brownie",
-    "price": "6700",
+    "price": "6800",
     "image": "img/Brownie.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -211,7 +211,7 @@
     "id": "prod0027",
     "name": "Stuffed Chipá",
     "description": "Chipá stuffed with cheese each",
-    "price": "3700",
+    "price": "3800",
     "image": "img/Chipa.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -219,7 +219,7 @@
     "id": "prod0028",
     "name": "Cheese Scone",
     "description": "Cheese scone each",
-    "price": "4200",
+    "price": "4300",
     "image": "img/Sconquso.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -227,7 +227,7 @@
     "id": "prod0029",
     "name": "Pound Cake",
     "description": "Carrot & cinnamon, lemon & poppy seeds, chocolate & coffee each",
-    "price": "5500",
+    "price": "5600",
     "image": "img/20250817_124915.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -235,7 +235,7 @@
     "id": "prod0030",
     "name": "Chocolate Alfajor",
     "description": "Chocolate alfajor each",
-    "price": "4500",
+    "price": "4600",
     "image": "img/Alchoco.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -251,7 +251,7 @@
     "id": "prod0032",
     "name": "Cornstarch Alfajor",
     "description": "Cornstarch alfajor (gluten-free) each",
-    "price": "4500",
+    "price": "4600",
     "image": "img/Maicena.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -259,7 +259,7 @@
     "id": "prod0033",
     "name": "Almond Alfajor",
     "description": "Almond alfajor each",
-    "price": "5500",
+    "price": "5600",
     "image": "img/Almendras.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -267,7 +267,7 @@
     "id": "prod0034",
     "name": "Mini Cake",
     "description": "Mini sweet cakes each",
-    "price": "9200",
+    "price": "9300",
     "image": "img/Minitor.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -275,7 +275,7 @@
     "id": "prod0035",
     "name": "Hot Ham and Cheese Croissant",
     "description": "Hot ham and cheese croissant each",
-    "price": "4600",
+    "price": "5200",
     "image": "img/Lujyq.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -291,7 +291,7 @@
     "id": "prod0037",
     "name": "Yogurt",
     "description": "Yogurt $5,000 | Yogurt with granola $8,000 | Forte Yogurt (with fruits and granola) $12,000",
-    "price": "12000",
+    "price": "13000",
     "image": "img/forte.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -299,7 +299,7 @@
     "id": "prod0038",
     "name": "Toast Portion",
     "description": "Toast portion, white or whole grain with seeds, 2 units",
-    "price": "3500",
+    "price": "4000",
     "image": "img/Tosta.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -307,7 +307,7 @@
     "id": "prod0039",
     "name": "Jam Portion",
     "description": "Portion of jam, butter, cream cheese, honey or dressing",
-    "price": "2500",
+    "price": "3000",
     "image": "img/Dip.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -331,7 +331,7 @@
     "id": "prod0042",
     "name": "EGG WHITES OMELETTE",
     "description": "Omelette with cheese and tomato (with FRITOLIN) and seasonal fruits",
-    "price": "16000",
+    "price": "17000",
     "image": "img/Promoomelet.jpg",
     "category": "💡Promotions"
   },
@@ -339,7 +339,7 @@
     "id": "prod0043",
     "name": "AVOCADO",
     "description": "Toast with scrambled eggs, avocado cream and seeds",
-    "price": "16000",
+    "price": "17000",
     "image": "img/avocado.jpg",
     "category": "💡Promotions"
   },
@@ -347,7 +347,7 @@
     "id": "prod0044",
     "name": "SCRAMBLED",
     "description": "Scrambled eggs with ham and cheese, served with toast",
-    "price": "14000",
+    "price": "15000",
     "image": "img/Resultado.jpg",
     "category": "💡Promotions"
   },
@@ -355,7 +355,7 @@
     "id": "prod0045",
     "name": "PROTEIN",
     "description": "100% almond flour pancake, cream cheese and seasonal fruit plus honey dip",
-    "price": "16000",
+    "price": "17000",
     "image": "img/20250815_132946.jpg",
     "category": "💡Promotions"
   },
@@ -363,7 +363,7 @@
     "id": "prod0046",
     "name": "SWEET FRENCH TOAST",
     "description": "Egg-marinated toast with cinnamon and sugar, cream cheese, seasonal fruits and honey dip",
-    "price": "15000",
+    "price": "16000",
     "image": "img/20250819_113846.jpg",
     "category": "💡Promotions"
   },
@@ -371,7 +371,7 @@
     "id": "prod0047",
     "name": "SAVORY FRENCH TOAST",
     "description": "Egg-marinated toast with cinnamon and sugar, with bacon, avocado and scrambled eggs",
-    "price": "16000",
+    "price": "17000",
     "image": "img/20250819_113925.jpg",
     "category": "💡Promotions"
   },
@@ -379,7 +379,7 @@
     "id": "prod0048",
     "name": "FRIENDS & FAMILY PASTA",
     "description": "Tray of gnocchi or noodles (bolognese, cream, fileto or rosé). You can combine.",
-    "price": "51000",
+    "price": "55000",
     "image": "img/Fuenteñoquis.jpg",
     "category": "💡Promotions"
   },
@@ -387,7 +387,7 @@
     "id": "prod0049",
     "name": "FRIENDS & FAMILY MILANESA FOR 3",
     "description": "Veal napolitana, smoked, swiss (can be 1/2 and 1/2) with fries",
-    "price": "63000",
+    "price": "65000",
     "image": "img/mil3.jpg",
     "category": "💡Promotions"
   },
@@ -395,7 +395,7 @@
     "id": "prod0050",
     "name": "Brunch for Two",
     "description": "Two infusions, 2 juices or lemonades, 2 yogurts with fruit and granola, chipá, ham and cheese toast, and toast with egg and avocado.",
-    "price": "48000",
+    "price": "50000",
     "image": "img/-52.jpg",
     "category": "💡Promotions"
   },
@@ -523,7 +523,7 @@
     "id": "prod0066",
     "name": "Chicken or Beef Milanesa",
     "description": "Served with mashed potatoes, pasta, salad or French fries",
-    "price": "21000",
+    "price": "22000",
     "image": "img/20250816_144204.jpg",
     "category": "🍽️Meals"
   },
@@ -531,7 +531,7 @@
     "id": "prod0067",
     "name": "Spinach Milanesa (chicken or beef)",
     "description": "Spinach cream and gratin cheese. Served with mashed potatoes, pasta, salad or fries",
-    "price": "23000",
+    "price": "24000",
     "image": "img/Esp.jpg",
     "category": "🍽️Meals"
   },
@@ -539,7 +539,7 @@
     "id": "prod0068",
     "name": "Swiss Milanesa",
     "description": "White sauce and gratin cheese. Served with mashed potatoes, pasta, salad or fries",
-    "price": "23000",
+    "price": "24000",
     "image": "img/Mizuisa.jpg",
     "category": "🍽️Meals"
   },
@@ -547,7 +547,7 @@
     "id": "prod0069",
     "name": "Napolitana Milanesa",
     "description": "Tomato sauce, ham and cheese. Served with mashed potatoes, pasta, salad or fries",
-    "price": "23000",
+    "price": "24000",
     "image": "img/20250813_125845 (1).jpg",
     "category": "🍽️Meals"
   },
@@ -555,7 +555,7 @@
     "id": "prod0070",
     "name": "Smoke Milanesa",
     "description": "Tomato sauce, bacon jam, cheddar. Served with mashed potatoes, pasta, salad or fries",
-    "price": "24000",
+    "price": "25000",
     "image": "img/smo.jpg",
     "category": "🍽️Meals"
   },
@@ -563,7 +563,7 @@
     "id": "prod0071",
     "name": "Battered Hake Fillet",
     "description": "Served with mixed mashed potatoes",
-    "price": "18500",
+    "price": "19000",
     "image": "img/20250816_135027.jpg",
     "category": "🍽️Meals"
   },
@@ -571,7 +571,7 @@
     "id": "prod0072",
     "name": "Gramajo Scramble",
     "description": "French fries, bacon, onion, bell pepper, peas and fried egg",
-    "price": "18000",
+    "price": "19000",
     "image": "img/Rebuelto.jpg",
     "category": "🍽️Meals"
   },
@@ -619,7 +619,7 @@
     "id": "prod0078",
     "name": "Chicken Risotto",
     "description": "With chicken, pumpkin and vegetables",
-    "price": "24000",
+    "price": "24500",
     "image": "img/ridopo.jpg",
     "category": "🍽️Meals"
   },
@@ -723,7 +723,7 @@
     "id": "prod0091",
     "name": "Pesto Milanesa",
     "description": "Beef milanesa with pesto gnocchi",
-    "price": "21500",
+    "price": "22500",
     "image": "img/Milapesto.jpg",
     "category": "🍽️Meals"
   },
@@ -811,7 +811,7 @@
     "id": "prod0102",
     "name": "👶KIDS MENU Nuggets",
     "description": "Chicken with fries or mashed potatoes",
-    "price": "18000",
+    "price": "20000",
     "image": "img/Nages.jpg",
     "category": "🍽️Meals"
   },
@@ -819,7 +819,7 @@
     "id": "prod0103",
     "name": "👶KIDS MENU Spaghetti or Gnocchi",
     "description": "Fileto or cream sauce",
-    "price": "18000",
+    "price": "20000",
     "image": "img/Ñoquis.jpg",
     "category": "🍽️Meals"
   },
@@ -827,7 +827,7 @@
     "id": "prod0104",
     "name": "👶KIDS MENU Milanesa",
     "description": "Beef milanesa with fries or mashed potatoes",
-    "price": "18000",
+    "price": "20000",
     "image": "img/Menukit.jpg",
     "category": "🍽️Meals"
   },
@@ -851,7 +851,7 @@
     "id": "prod0107",
     "name": "Cured Ham, Stracciatella and Tomato",
     "description": "Cured ham, stracciatella and tomato",
-    "price": "20000",
+    "price": "19000",
     "image": "img/20250820_143727.jpg",
     "category": "🥪 Sandwiches"
   },
@@ -867,7 +867,7 @@
     "id": "prod0109",
     "name": "Toasted Chipá",
     "description": "Ham and cheese $16.000, cheddar and ham $17.000",
-    "price": "16000",
+    "price": "17000",
     "image": "img/Chipatostado.jpg",
     "category": "🥪 Sandwiches"
   },
@@ -875,7 +875,7 @@
     "id": "prod0110",
     "name": "Loin Sandwich (Cheese Only)",
     "description": "Simple (cheese only) with French fries",
-    "price": "22500",
+    "price": "23500",
     "image": "img/lomosolo.jpeg",
     "category": "🥪 Sandwiches"
   },
@@ -883,7 +883,7 @@
     "id": "prod0111",
     "name": "Classic Loin Sandwich",
     "description": "Lettuce, tomato, ham and cheese, with French fries",
-    "price": "25500",
+    "price": "26500",
     "image": "img/20250914_130533.jpg",
     "category": "🥪 Sandwiches"
   },
@@ -891,7 +891,7 @@
     "id": "prod0112",
     "name": "Bacon Loin Sandwich",
     "description": "Cheddar cheese, bacon and tomato, with French fries",
-    "price": "27500",
+    "price": "28500",
     "image": "img/Lomitobac.jpg",
     "category": "🥪 Sandwiches"
   },
@@ -899,7 +899,7 @@
     "id": "prod0113",
     "name": "Simple Burger",
     "description": "Simple (cheese only) with French fries",
-    "price": "15000",
+    "price": "15500",
     "image": "img/buersimple.jpg",
     "category": "🥪 Sandwiches"
   },
@@ -979,7 +979,7 @@
     "id": "prod0123",
     "name": "Spaghetti (sauce separate)",
     "description": "Spaghetti with sauce of your choice",
-    "price": "11000",
+    "price": "13000",
     "image": "img/Spa.jpg",
     "category": "🍝 Pasta"
   },
@@ -987,7 +987,7 @@
     "id": "prod0124",
     "name": "Egg Gnocchi (sauce separate)",
     "description": "Egg gnocchi with sauce of your choice",
-    "price": "11000",
+    "price": "13000",
     "image": "img/Ñoquis.jpg",
     "category": "🍝 Pasta"
   },
@@ -995,7 +995,7 @@
     "id": "prod0125",
     "name": "Vegetable, Chicken & Ham Ravioli (sauce separate)",
     "description": "Filled with vegetables, chicken and ham",
-    "price": "13000",
+    "price": "15000",
     "image": "img/Ravioles.jpg",
     "category": "🍝 Pasta"
   },
@@ -1003,7 +1003,7 @@
     "id": "prod0126",
     "name": "Vegetable & Ricotta Ravioli (sauce separate)",
     "description": "Filled with vegetables and ricotta",
-    "price": "13000",
+    "price": "15000",
     "image": "img/Ravioles.jpg",
     "category": "🍝 Pasta"
   },
@@ -1011,7 +1011,7 @@
     "id": "prod0127",
     "name": "Ham & Mozzarella Sorrentinos (sauce separate)",
     "description": "Sorrentinos filled with mozzarella and ham",
-    "price": "15000",
+    "price": "17000",
     "image": "img/Sonren.jpg",
     "category": "🍝 Pasta"
   },
