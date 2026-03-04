@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin · Teleprompter</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- PANEL IZQUIERDO -->
+  <aside class="panel">
+    <h2>📝 Teleprompter</h2>
+
+    <label>Sugerencias (una por línea)</label>
+    <textarea id="editor" placeholder="Ej: Promo café con medialuna"></textarea>
+
+    <button id="guardar">💾 Guardar cambios</button>
+    <small id="estado"></small>
+  </aside>
+
+  <!-- PREVIEW -->
+  <main class="preview">
+    <iframe id="preview" src="../index.html"></iframe>
+  </main>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:system-ui, Arial;
+  background:#eee;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  height:100vh;
+}
+
+/* PANEL */
+.panel{
+  background:#111;
+  color:#fff;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+}
+
+.panel h2{
+  margin-top:0;
+}
+
+.panel label{
+  margin:10px 0 5px;
+  font-size:14px;
+}
+
+.panel textarea{
+  flex:1;
+  resize:none;
+  padding:10px;
+  font-size:14px;
+  border-radius:6px;
+  border:none;
+}
+
+.panel button{
+  margin-top:12px;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#00c896;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.panel small{
+  margin-top:8px;
+  opacity:.7;
+}
+
+/* PREVIEW */
+.preview iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  background:#fff;
+}
