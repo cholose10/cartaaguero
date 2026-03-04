@@ -33,10 +33,30 @@
     .toast.info { background: #3498db; }
     .toast.err { background: #e74c3c; }
     @media(max-width:720px){ .topRow{flex-direction:column;align-items:flex-start} table{font-size:13px} }
+    #guardarTodos, #btnMozo{
+  position:fixed;
+  top:18px;
+  z-index:1200;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:600;
+}
+
+#guardarTodos{
+  right:18px;
+  background:#a07b68;
+  color:#fff;
+}
+
+#btnMozo{
+  right:220px; /* lo posiciona al lado */
+  background:#c0392b; /* rojo elegante */
+  color:#fff;
+}
   </style>
 </head>
 <body>
-  <h1>Admin Carta — Tilo Café Aguero</h1>
+  <h1>Admin Carta — Tilo Café cartaaguero</h1>
   <div class="topRow">
     <div style="flex:1">
       <div style="margin-bottom:6px"><span class="small">Repositorio:</span> <b> tilo-restocafe / cartaaguero</b></div>
@@ -57,8 +77,8 @@
     </div>
   </div>
 
-  <button id="guardarTodos" onclick="guardarTodosLosPrecios()">💾 Guardar TODOS los cambios</button>
-
+    <button id="guardarTodos" onclick="guardarTodosLosPrecios()">💾 Guardar TODOS los cambios</button>
+   <button id="btnMozo" onclick="irTeleprompter()">🙋‍♂️ Mozo Digital</button>
   <!-- Formulario simple -->
   <form id="form">
     <input type="hidden" id="editId">
@@ -141,8 +161,11 @@ function toggleTokenVisibility(){ const inp = document.getElementById('token'); 
  **********************************************************/
 function extractNumberFromProdId(id){ if(!id) return null; const m = String(id).match(/(\d+)\s*$/); if(m) return parseInt(m[1],10); return null; }
 function generateNextProdId(){ let max = 0; for(const p of productos){ const n = extractNumberFromProdId(p.id || ''); if(Number.isFinite(n) && n > max) max = n; } const next = max + 1; return 'prod' + String(next).padStart(4, '0'); }
-function sanitizePrice(v){ if(v===undefined||v===null) return ''; const only = String(v).replace(/[^\d]/g,''); return only || ''; }
-
+function sanitizePrice(v){ if(v===undefined||v===null) return ''; const only = String(v).replace(/[^\d]/g,''); return only || ''; 
+}
+function findIndexById(id){
+  return productos.findIndex(p => p.id === id);
+}
 /**********************************************************
  * Ordenar campos por idioma (ES id al final, EN id primero, PT id al final)
  **********************************************************/
@@ -242,44 +265,65 @@ function render(lista){
     tdCat.appendChild(cat);
     tr.appendChild(tdCat);
 
-    // precio
-    const tdPrecio = document.createElement('td');
-    const precio = document.createElement('input');
-    precio.type = 'text';
-    precio.value = p.precio || '';
-    precio.oninput = e => { const idx = findIndexById(p.id); if(idx !== -1) productos[idx].precio = e.target.value; };
-    tdPrecio.appendChild(precio);
-    tr.appendChild(tdPrecio);
+   // precio
+const tdPrecio = document.createElement('td');
+const precio = document.createElement('input');
+precio.type = 'text';
+precio.value = p.precio || '';
 
-    // acciones
-    const tdAcc = document.createElement('td');
-    tdAcc.className = 'rowActions';
+precio.oninput = e => { 
+  const idx = findIndexById(p.id); 
+  if(idx !== -1) productos[idx].precio = e.target.value; 
+};
 
-    const b1 = document.createElement('button');
-    b1.textContent = "Guardar";
-    b1.onclick = () => guardarFilaPorId(p.id);
+// 👇 TAB baja al precio de la fila siguiente
+precio.addEventListener("keydown", function(e){
+  if(e.key === "Tab" && !e.shiftKey){
+    e.preventDefault();
 
-    const b2 = document.createElement('button');
-    b2.textContent = "Editar";
-    b2.style.background = "#2d87d6";
-    b2.onclick = () => loadIntoFormById(p.id);
+    const filaActual = e.target.closest("tr");
+    const siguienteFila = filaActual.nextElementSibling;
 
-    const b3 = document.createElement('button');
-    b3.textContent = "Eliminar";
-    b3.className = "danger";
-    b3.onclick = () => eliminarProductoPorId(p.id);
+    if(siguienteFila){
+      const inputPrecioSiguiente = siguienteFila.children[4].querySelector("input");
+      if(inputPrecioSiguiente){
+        inputPrecioSiguiente.focus();
+        inputPrecioSiguiente.select();
+      }
+    }
+  }
+});
 
-    tdAcc.appendChild(b1);
-    tdAcc.appendChild(b2);
-    tdAcc.appendChild(b3);
+tdPrecio.appendChild(precio);
+tr.appendChild(tdPrecio);
+// acciones
+const tdAcc = document.createElement('td');
+tdAcc.className = 'rowActions';
 
-    tr.appendChild(tdAcc);
-    tb.appendChild(tr);
-  });
-}
+const b1 = document.createElement('button');
+b1.textContent = "Guardar";
+b1.onclick = () => guardarFilaPorId(p.id);
 
-function findIndexById(id){ return productos.findIndex(x => x.id === id); }
+const b2 = document.createElement('button');
+b2.textContent = "Editar";
+b2.style.background = "#2d87d6";
+b2.onclick = () => loadIntoFormById(p.id);
 
+const b3 = document.createElement('button');
+b3.textContent = "Eliminar";
+b3.className = "danger";
+b3.onclick = () => eliminarProductoPorId(p.id);
+
+tdAcc.appendChild(b1);
+tdAcc.appendChild(b2);
+tdAcc.appendChild(b3);
+
+tr.appendChild(tdAcc);
+tb.appendChild(tr);
+
+}); // 👈 CIERRA el forEach
+
+} // 👈 CIERRA render()
 /**********************************************************
  * Form helpers (ahora cargan por ID y scrollean al form)
  **********************************************************/
@@ -401,26 +445,6 @@ async function syncPricesToLangs(){
         if('price' in item && String(item.price) !== nuevo){ item.price = nuevo; changed = true; }
         if('preco' in item && String(item.preco) !== nuevo){ item.preco = nuevo; changed = true; }
       }
-      // 🔄 sincronizar imagen por ID (ES / EN / PT)
-const baseProd = itemId && byId[itemId] ? byId[itemId] : null;
-const nuevaImagen = baseProd ? baseProd.imagen || '' : '';
-
-
-if('imagen' in item && item.imagen !== nuevaImagen){
-  item.imagen = nuevaImagen;
-  changed = true;
-}
-
-if('image' in item && item.image !== nuevaImagen){
-  item.image = nuevaImagen;
-  changed = true;
-}
-
-if('imagem' in item && item.imagem !== nuevaImagen){
-  item.imagem = nuevaImagen;
-  changed = true;
-}
-
       if(!item.id && itemId) item.id = itemId;
       return ordenarCamposPorIdioma(item, idioma);
     });
@@ -495,6 +519,9 @@ function filterProducts(){
   );
   render(filtered);
 }
+  function irTeleprompter(){
+  window.open("https://tilo-restocafe.github.io/cartafrench/admin/admin.html", "_blank");
+}
 function irWhatsApp(){
   const numero = "5491123140119"; // ← poné tu número real
   const mensaje = encodeURIComponent(
@@ -509,7 +536,5 @@ function irWhatsApp(){
 document.addEventListener('DOMContentLoaded', () => { loadProducts(); });
 </script>
 
-</body>
-</html>
 </body>
 </html>
