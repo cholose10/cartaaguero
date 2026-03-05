@@ -1428,7 +1428,7 @@
     "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel",
     "precio": "17000",
     "imagen": "",
-    "categoria": "Sandwich",
+    "categoria": "🥪 Sandwiches",
     "id": "prod0182"
   },
   {
@@ -1436,7 +1436,7 @@
     "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel con huevo frito",
     "precio": "18500",
     "imagen": "",
-    "categoria": "Sandwich",
+    "categoria": "🥪 Sandwiches",
     "id": "prod0183"
   }
 ]
