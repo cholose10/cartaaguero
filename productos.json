@@ -1404,7 +1404,7 @@
     "descripcion": "Sugerencia nueva por porción.",
     "precio": "9200",
     "imagen": "img/tortas.jpg",
-    "categoria": "📋MENU del DIA/SUGERENCIAS Y NOVEDADES",
+    "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0179"
   },
   {
@@ -1420,7 +1420,7 @@
     "descripcion": "Nueva torta Rogel",
     "precio": "8800",
     "imagen": "img/Rojel.jpg",
-    "categoria": "📋MENU del DIA/SUGERENCIAS Y NOVEDADES",
+    "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0181"
   },
   {
