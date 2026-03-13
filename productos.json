@@ -1322,7 +1322,7 @@
   {
     "nombre": "Champagne Chandon",
     "descripcion": "Champagne Chandon (187cc)",
-    "precio": "15000",
+    "precio": "17000",
     "imagen": "img/20250903_113545.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0168"
@@ -1330,7 +1330,7 @@
   {
     "nombre": "Champagne Salentein Brut Nature",
     "descripcion": "Champagne Salentein Brut Nature",
-    "precio": "32000",
+    "precio": "45000",
     "imagen": "img/20250903_104921.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0169"
@@ -1338,7 +1338,7 @@
   {
     "nombre": "Champagne Blanc de Blancs (Salentein)",
     "descripcion": "Champagne Blanc de Blancs (Salentein)",
-    "precio": "40000",
+    "precio": "48000",
     "imagen": "img/20250903_105019.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0170"
