@@ -35,7 +35,7 @@
     "id": "prod0005",
     "name": "Double Espresso Coffee",
     "description": "Double espresso coffee",
-    "price": "5400",
+    "price": "5500",
     "image": "img/doble.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -59,7 +59,7 @@
     "id": "prod0008",
     "name": "MOKA Coffee",
     "description": "Intense cocoa, coffee, frothed milk",
-    "price": "6150",
+    "price": "6350",
     "image": "img/Moka.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -67,7 +67,7 @@
     "id": "prod0009",
     "name": "CARAMEL Coffee",
     "description": "Caramel, coffee, frothed milk",
-    "price": "6150",
+    "price": "6350",
     "image": "img/20250903_144413.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -83,7 +83,7 @@
     "id": "prod0011",
     "name": "Submarino",
     "description": "Frothed milk and chocolate bar",
-    "price": "5400",
+    "price": "5600",
     "image": "img/Submarino.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -107,7 +107,7 @@
     "id": "prod0014",
     "name": "ICE COFFEE🥶",
     "description": "Double shot with ice❄️",
-    "price": "5400",
+    "price": "5500",
     "image": "img/20250817_131630.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -115,7 +115,7 @@
     "id": "prod0015",
     "name": "LATTE ICE COFFEE🥶",
     "description": "Cold milk with double shot of coffee and ice❄️",
-    "price": "5400",
+    "price": "5500",
     "image": "img/20250817_131330.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -123,7 +123,7 @@
     "id": "prod0016",
     "name": "FRAPPUCCINO with Milk and OREO🥶",
     "description": "Milk-based ❄️",
-    "price": "7300",
+    "price": "7500",
     "image": "img/miloreo.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -131,7 +131,7 @@
     "id": "prod0017",
     "name": "OREO FRAPPUCCINO🥶",
     "description": "Coffee-based ❄️",
-    "price": "7300",
+    "price": "7500",
     "image": "img/20250815_154308.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -963,7 +963,7 @@
     "id": "prod0121",
     "name": "Cold Platter (for 2 people)",
     "description": "Cured ham, cooked ham, roquefort cheese, tybo cheese, cherry tomatoes, nuts",
-    "price": "55000",
+    "price": "65000",
     "image": "img/tarta_brocoli.jpg",
     "category": "🥟 Starters"
   },
@@ -971,7 +971,7 @@
     "id": "prod0122",
     "name": "Hot Platter (for 2 people)",
     "description": "Breaded chicken, mozzarella sticks, squid rings and French fries. Includes two Stella beers",
-    "price": "45000",
+    "price": "65000",
     "image": "img/IMG-20250815.jpg",
     "category": "🥟 Starters"
   },
@@ -1187,7 +1187,7 @@
     "id": "prod0149",
     "name": "Trumpeter Malbec",
     "description": "Trumpeter Malbec (750 cc)",
-    "price": "25000",
+    "price": "27000",
     "image": "img/20250903_112612.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1195,7 +1195,7 @@
     "id": "prod0150",
     "name": "Trumpeter Cabernet",
     "description": "Trumpeter Cabernet (750 cc)",
-    "price": "25000",
+    "price": "27000",
     "image": "img/20250903_112534.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1203,7 +1203,7 @@
     "id": "prod0151",
     "name": "Rutini Malbec-Cabernet Franc",
     "description": "Rutini Malbec-Cabernet Franc (750 cc)",
-    "price": "36000",
+    "price": "42000",
     "image": "img/Rutinicaber.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1211,7 +1211,7 @@
     "id": "prod0152",
     "name": "Portillo Malbec",
     "description": "Portillo Malbec (750 cc)",
-    "price": "19000",
+    "price": "21000",
     "image": "img/20250903_111015.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1219,7 +1219,7 @@
     "id": "prod0153",
     "name": "Salentein Reserva Cabernet Sauvignon",
     "description": "Salentein Reserva Cabernet Sauvignon (750 cc)",
-    "price": "30000",
+    "price": "32000",
     "image": "img/20250903_123740.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1227,7 +1227,7 @@
     "id": "prod0154",
     "name": "Trumpeter Sauvignon Blanc",
     "description": "Trumpeter Sauvignon Blanc (750 cc)",
-    "price": "25000",
+    "price": "27000",
     "image": "img/20250903_112257.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1235,7 +1235,7 @@
     "id": "prod0155",
     "name": "Portillo Chardonnay",
     "description": "Portillo Chardonnay (750 cc)",
-    "price": "19000",
+    "price": "21000",
     "image": "img/20250903_110934.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1243,7 +1243,7 @@
     "id": "prod0156",
     "name": "Portillo Rosé Malbec",
     "description": "Portillo Rosé Malbec (Fresh and easy-to-drink wine)",
-    "price": "19000",
+    "price": "21000",
     "image": "img/20250903_110955.jpg",
     "category": "🥤 Drinks & Wine"
   },
@@ -1259,7 +1259,7 @@
     "id": "prod0158",
     "name": "Jack Daniel's",
     "description": "Jack Daniel's",
-    "price": "15000",
+    "price": "17000",
     "image": "img/Daniel’s.jpg",
     "category": "🍹Drinks"
   },
@@ -1267,7 +1267,7 @@
     "id": "prod0159",
     "name": "Johnny Walker Black",
     "description": "Johnny Walker Black",
-    "price": "15000",
+    "price": "17000",
     "image": "img/Black.jpg",
     "category": "🍹Drinks"
   },
@@ -1275,7 +1275,7 @@
     "id": "prod0160",
     "name": "Johnny Walker Red",
     "description": "Johnny Walker Red",
-    "price": "13000",
+    "price": "14000",
     "image": "img/Ret.jpg",
     "category": "🍹Drinks"
   },
@@ -1283,7 +1283,7 @@
     "id": "prod0161",
     "name": "Baileys Liqueur",
     "description": "Baileys Liqueur",
-    "price": "12000",
+    "price": "12500",
     "image": "img/20250903_111957.jpg",
     "category": "🍹Drinks"
   },
@@ -1307,7 +1307,7 @@
     "id": "prod0164",
     "name": "Gancia Shake",
     "description": "Gancia Shake",
-    "price": "9500",
+    "price": "11000",
     "image": "img/Gancia.jpg",
     "category": "🍹Drinks"
   },
@@ -1315,7 +1315,7 @@
     "id": "prod0165",
     "name": "Aperol with Orange",
     "description": "Aperol with orange",
-    "price": "9500",
+    "price": "11500",
     "image": "img/Api.jpg",
     "category": "🍹Drinks"
   },
@@ -1331,7 +1331,7 @@
     "id": "prod0167",
     "name": "HAPPY HOUR",
     "description": "Aperol Spritz $13000 or orange $9500, Gin Tonic $12000 or Fernet with Coke $12000. Every day from 18 to 20:30.",
-    "price": "0",
+    "price": "11500",
     "image": "img/Api.jpg",
     "category": "🍹Drinks"
   },
