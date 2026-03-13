@@ -43,7 +43,7 @@
     "id": "prod0006",
     "name": "Cappuccino",
     "description": "Coffee, milk, cinnamon and cocoa",
-    "price": "5600",
+    "price": "5700",
     "image": "img/Capuchino.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -51,7 +51,7 @@
     "id": "prod0007",
     "name": "Italian Cappuccino",
     "description": "Italian cappuccino",
-    "price": "5700",
+    "price": "5900",
     "image": "img/Capuchino.jpg",
     "category": "Coffee Shop ☕️"
   },
