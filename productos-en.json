@@ -1339,7 +1339,7 @@
     "id": "prod0168",
     "name": "Chandon Champagne",
     "description": "Chandon Champagne (187cc)",
-    "price": "15000",
+    "price": "17000",
     "image": "img/20250903_113545.jpg",
     "category": "🍹Drinks"
   },
@@ -1347,7 +1347,7 @@
     "id": "prod0169",
     "name": "Salentein Brut Nature Champagne",
     "description": "Salentein Brut Nature Champagne",
-    "price": "32000",
+    "price": "45000",
     "image": "img/20250903_104921.jpg",
     "category": "🍹Drinks"
   },
@@ -1355,7 +1355,7 @@
     "id": "prod0170",
     "name": "Blanc de Blancs Champagne (Salentein)",
     "description": "Blanc de Blancs Champagne (Salentein)",
-    "price": "40000",
+    "price": "48000",
     "image": "img/20250903_105019.jpg",
     "category": "🍹Drinks"
   },
