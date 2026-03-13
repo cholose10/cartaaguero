@@ -42,7 +42,7 @@
   {
     "nome": "Capuccino",
     "descricao": "Café, leite, canela e cacau",
-    "preco": "5600",
+    "preco": "5700",
     "imagem": "img/Capuchino.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0006"
@@ -50,7 +50,7 @@
   {
     "nome": "Capuccino italiano",
     "descricao": "Capuccino italiano",
-    "preco": "5700",
+    "preco": "5900",
     "imagem": "img/Capuchino.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0007"
