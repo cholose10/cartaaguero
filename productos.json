@@ -34,7 +34,7 @@
   {
     "nombre": "Café expresso Doble",
     "descripcion": "Café expresso Doble",
-    "precio": "5400",
+    "precio": "5500",
     "imagen": "img/doble.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0005"
@@ -58,7 +58,7 @@
   {
     "nombre": "Café MOKA",
     "descripcion": "Cacao intenso, café, leche espumada",
-    "precio": "6150",
+    "precio": "6350",
     "imagen": "img/Moka.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0008"
@@ -66,7 +66,7 @@
   {
     "nombre": "Café CARAMEL",
     "descripcion": "Caramelo, café, leche espumada",
-    "precio": "6150",
+    "precio": "6350",
     "imagen": "img/20250903_144413.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0009"
@@ -82,7 +82,7 @@
   {
     "nombre": "Submarino",
     "descripcion": "Leche espumada y barra de chocolate",
-    "precio": "5400",
+    "precio": "5600",
     "imagen": "img/Submarino.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0011"
@@ -106,7 +106,7 @@
   {
     "nombre": "ICE COFFE🥶",
     "descripcion": "Doble shot con hielo❄️",
-    "precio": "5400",
+    "precio": "5500",
     "imagen": "img/20250817_131630.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0014"
@@ -114,7 +114,7 @@
   {
     "nombre": "LATTE ICE COFFE🥶",
     "descripcion": "Leche fría con doble shot de café y hielo❄️",
-    "precio": "5400",
+    "precio": "5500",
     "imagen": "img/20250817_131330.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0015"
@@ -122,7 +122,7 @@
   {
     "nombre": "FRAPPUCCINO con Leche y OREO🥶",
     "descripcion": "Base de leche ❄️",
-    "precio": "7300",
+    "precio": "7500",
     "imagen": "img/miloreo.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0016"
@@ -130,7 +130,7 @@
   {
     "nombre": "FRAPPUCCINO OREO🥶",
     "descripcion": "Base de café y leche ❄️",
-    "precio": "7300",
+    "precio": "7500",
     "imagen": "img/20250815_154308.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0017"
@@ -946,7 +946,7 @@
   {
     "nombre": "PICADITA FRIA (para 2 personas)",
     "descripcion": "Jamón crudo, jamón cocido, queso roquefort, queso tybo, tomates cherries, frutos secos",
-    "precio": "55000",
+    "precio": "65000",
     "imagen": "img/tarta_brocoli.jpg",
     "categoria": "🥟 ENTRADITAS",
     "id": "prod0121"
@@ -954,7 +954,7 @@
   {
     "nombre": "PICADITA CALIENTE (para 2 personas)",
     "descripcion": "Pollo rebozado, bastones de muzarella, rabas y papas fritas. Incluye dos porrones de Stella",
-    "precio": "45000",
+    "precio": "65000",
     "imagen": "img/IMG-20250815.jpg",
     "categoria": "🥟 ENTRADITAS",
     "id": "prod0122"
@@ -1170,7 +1170,7 @@
   {
     "nombre": "Trumpeter Malbec",
     "descripcion": "Trumpeter Malbec (750 cc)",
-    "precio": "25000",
+    "precio": "27000",
     "imagen": "img/20250903_112612.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0149"
@@ -1178,7 +1178,7 @@
   {
     "nombre": "Trumpeter Cabernet",
     "descripcion": "Trumpeter Cabernet (750 cc)",
-    "precio": "25000",
+    "precio": "27000",
     "imagen": "img/20250903_112534.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0150"
@@ -1186,7 +1186,7 @@
   {
     "nombre": "Rutini Malbec-Cabernet Franc",
     "descripcion": "Rutini Malbec-Cabernet Franc (750 cc)",
-    "precio": "36000",
+    "precio": "42000",
     "imagen": "img/Rutinicaber.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0151"
@@ -1194,7 +1194,7 @@
   {
     "nombre": "Portillo Malbec",
     "descripcion": "Portillo Malbec (750 cc)",
-    "precio": "19000",
+    "precio": "21000",
     "imagen": "img/20250903_111015.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0152"
@@ -1202,7 +1202,7 @@
   {
     "nombre": "Salentein Reserva Cabernet Sauvignon",
     "descripcion": "Salentein Reserva Cabernet Sauvignon (750 cc)",
-    "precio": "30000",
+    "precio": "32000",
     "imagen": "img/20250903_123740.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0153"
@@ -1210,7 +1210,7 @@
   {
     "nombre": "Trumpeter Sauvignon Blanc",
     "descripcion": "Trumpeter Sauvignon Blanc (750 cc)",
-    "precio": "25000",
+    "precio": "27000",
     "imagen": "img/20250903_112257.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0154"
@@ -1218,7 +1218,7 @@
   {
     "nombre": "Portillo Chardonnay",
     "descripcion": "Portillo Chardonnay (750 cc)",
-    "precio": "19000",
+    "precio": "21000",
     "imagen": "img/20250903_110934.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0155"
@@ -1226,7 +1226,7 @@
   {
     "nombre": "Portillo Rosé Malbec",
     "descripcion": "Portillo Rosé Malbec (Vino fresco y fácil de beber)",
-    "precio": "19000",
+    "precio": "21000",
     "imagen": "img/20250903_110955.jpg",
     "categoria": "🥤 Bebidas y vinos",
     "id": "prod0156"
@@ -1242,7 +1242,7 @@
   {
     "nombre": "Jack Daniel's",
     "descripcion": "Jack Daniel's",
-    "precio": "15000",
+    "precio": "17000",
     "imagen": "img/Daniel’s.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0158"
@@ -1250,7 +1250,7 @@
   {
     "nombre": "Johnny Walker Black",
     "descripcion": "Johnny Walker Black",
-    "precio": "15000",
+    "precio": "17000",
     "imagen": "img/Black.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0159"
@@ -1258,7 +1258,7 @@
   {
     "nombre": "Johnny Walker Red",
     "descripcion": "Johnny Walker Red",
-    "precio": "13000",
+    "precio": "14000",
     "imagen": "img/Ret.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0160"
@@ -1266,7 +1266,7 @@
   {
     "nombre": "Licor Baileys",
     "descripcion": "Licor Baileys",
-    "precio": "12000",
+    "precio": "12500",
     "imagen": "img/20250903_111957.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0161"
@@ -1290,7 +1290,7 @@
   {
     "nombre": "Batido Gancia",
     "descripcion": "Batido Gancia",
-    "precio": "9500",
+    "precio": "11000",
     "imagen": "img/Gancia.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0164"
@@ -1298,7 +1298,7 @@
   {
     "nombre": "Aperol con naranja",
     "descripcion": "Aperol con naranja",
-    "precio": "9500",
+    "precio": "11500",
     "imagen": "img/Api.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0165"
@@ -1313,8 +1313,8 @@
   },
   {
     "nombre": "HAPPY HOUR",
-    "descripcion": "Aperol Spritz $13000 o naranja $9500, Gin Tonic $12000 o Fernet con Coca $12000. Todos los días de 18 a 20:30.",
-    "precio": "0",
+    "descripcion": "Aperol con naranja, Gin Tonic Todos los días de 18 a 20:30.",
+    "precio": "11500",
     "imagen": "img/Api.jpg",
     "categoria": "🍹TRAGOS",
     "id": "prod0167"
