@@ -2,7 +2,7 @@
   {
     "nome": "Café expresso",
     "descricao": "Café pequeno",
-    "preco": "3500",
+    "preco": "3600",
     "imagem": "img/Cafe.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0001"
@@ -10,7 +10,7 @@
   {
     "nome": "Café expresso jarrito",
     "descricao": "Café americano",
-    "preco": "3700",
+    "preco": "3800",
     "imagem": "img/Americano.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0002"
@@ -18,7 +18,7 @@
   {
     "nome": "Café descafeinado",
     "descricao": "Café descafeinado",
-    "preco": "4100",
+    "preco": "4200",
     "imagem": "img/20250813_094842.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0003"
@@ -26,7 +26,7 @@
   {
     "nome": "Café com leite tradicional",
     "descricao": "Café com leite tradicional",
-    "preco": "4600",
+    "preco": "4700",
     "imagem": "img/Cafechechu.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0004"
@@ -170,7 +170,7 @@
   {
     "nome": "Fatura",
     "descricao": "Pastelera ou membrillo",
-    "preco": "2600",
+    "preco": "2700",
     "imagem": "img/20250902_085539(1).jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0022"
