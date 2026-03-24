@@ -162,7 +162,7 @@
   {
     "nombre": "Medialunas",
     "descripcion": "Medialunas 100% manteca",
-    "precio": "2600",
+    "precio": "2700",
     "imagen": "img/Luna.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0021"
@@ -170,7 +170,7 @@
   {
     "nombre": "Factura",
     "descripcion": "Pasteleras o membrillo",
-    "precio": "2700",
+    "precio": "2600",
     "imagen": "img/20250902_085539(1).jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0022"
