@@ -162,7 +162,7 @@
   {
     "nome": "Croissants",
     "descricao": "Medialunas 100% manteiga",
-    "preco": "2600",
+    "preco": "2700",
     "imagem": "img/Luna.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0021"
@@ -170,7 +170,7 @@
   {
     "nome": "Fatura",
     "descricao": "Pastelera ou membrillo",
-    "preco": "2700",
+    "preco": "2600",
     "imagem": "img/20250902_085539(1).jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0022"
