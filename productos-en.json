@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "3500",
+    "price": "3600",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -11,7 +11,7 @@
     "id": "prod0002",
     "name": "Espresso Coffee (jarrito)",
     "description": "Americano coffee",
-    "price": "3700",
+    "price": "3800",
     "image": "img/Americano.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -19,7 +19,7 @@
     "id": "prod0003",
     "name": "Decaf Coffee",
     "description": "Decaffeinated coffee",
-    "price": "4100",
+    "price": "4200",
     "image": "img/20250813_094842.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -27,7 +27,7 @@
     "id": "prod0004",
     "name": "Traditional Coffee with Milk",
     "description": "Traditional coffee with milk",
-    "price": "4600",
+    "price": "4700",
     "image": "img/Cafechechu.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -171,7 +171,7 @@
     "id": "prod0022",
     "name": "Pastry",
     "description": "Custard or quince",
-    "price": "2600",
+    "price": "2700",
     "image": "img/20250902_085539(1).jpg",
     "category": "Coffee Shop ☕️"
   },
