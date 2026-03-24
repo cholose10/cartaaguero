@@ -163,7 +163,7 @@
     "id": "prod0021",
     "name": "Croissants",
     "description": "100% butter croissants",
-    "price": "2600",
+    "price": "2700",
     "image": "img/Luna.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -171,7 +171,7 @@
     "id": "prod0022",
     "name": "Pastry",
     "description": "Custard or quince",
-    "price": "2700",
+    "price": "2600",
     "image": "img/20250902_085539(1).jpg",
     "category": "Coffee Shop ☕️"
   },
