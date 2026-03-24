@@ -463,7 +463,7 @@ btnVoice.addEventListener("click", () => {
   },4000);
 
   recognition.start();
-  btnVoice.textContent = "🎙️";
+  btnVoice.textContent = "🗣️🎙️";
 
 });
   recognition.addEventListener("result", (event) => {
@@ -473,11 +473,11 @@ btnVoice.addEventListener("click", () => {
     render(filtrar());
     scrollToProducts();
 
-    btnVoice.textContent = "🎤";
+    btnVoice.textContent = "🗣️🎤";
   });
 
   recognition.addEventListener("end", () => {
-    btnVoice.textContent = "🎤";
+    btnVoice.textContent = "🗣️🎤";
   });
 
 } else {
