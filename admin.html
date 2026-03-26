@@ -474,6 +474,7 @@ async function syncPricesToLangs(){
  * Guardar fila por ID (usa saveMainJson + syncPricesToLangs)
  **********************************************************/
 async function guardarFilaPorId(id){
+  mostrarLoading();
   try{
     const idx = findIndexById(id);
     if(idx === -1) throw new Error('Producto no encontrado');
@@ -486,7 +487,11 @@ async function guardarFilaPorId(id){
 
     showToast('Producto guardado y precios sincronizados en EN/PT', 'ok', 2600);
     render(productos);
-  }catch(e){ console.error(e); showToast('Error al guardar fila: ' + (e.message||e), 'err', 5000); }
+  }catch(e){ 
+  console.error(e); 
+  showToast('Error al guardar fila: ' + (e.message||e), 'err', 5000); 
+} finally {
+  ocultarLoading();
 }
 
 /**********************************************************
