@@ -137,8 +137,14 @@ let filteredIds = null; // si hay filtro, guardamos ids ordenados para acciones 
 
 /**********************************************************
  * Toast
- **********************************************************/
-function showToast(msg, variant = 'ok', timeout = 3000){
+ **********************************************************/  function mostrarLoading(){
+  document.getElementById("loadingOverlay").style.display = "flex";
+}
+
+function ocultarLoading(){
+  document.getElementById("loadingOverlay").style.display = "none";
+} 
+ function showToast(msg, variant = 'ok', timeout = 3000){
   const div = document.createElement('div');
   div.className = 'toast ' + (variant === 'info' ? 'info' : variant === 'err' ? 'err' : 'ok');
   div.innerText = (variant === 'err' ? '✖︎ ' : variant === 'info' ? 'ℹ︎ ' : '✔︎ ') + msg;
@@ -487,6 +493,7 @@ async function guardarFilaPorId(id){
  * Guardar TODOS - refresca tabla y usa saveMainJson parcheado
  **********************************************************/
 async function guardarTodosLosPrecios(){
+  mostrarLoading();
   try{
     // NO reconstruir productos desde la tabla
     productos = productos.map(p => ({
@@ -500,10 +507,12 @@ async function guardarTodosLosPrecios(){
     showToast('Todos los cambios guardados y sincronizados (ES/EN/PT)', 'ok', 3000);
     render(productos);
 
-  }catch(e){
-    console.error(e);
-    showToast('Error al guardar todos: ' + (e.message||e), 'err', 6000);
-  }
+ }catch(e){
+  console.error(e);
+  showToast('Error al guardar todos: ' + (e.message||e), 'err', 6000);
+} finally {
+  ocultarLoading();
+}
 }
 
 /**********************************************************
@@ -535,6 +544,19 @@ function irWhatsApp(){
  **********************************************************/
 document.addEventListener('DOMContentLoaded', () => { loadProducts(); });
 </script>
-
+<div id="loadingOverlay" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.6);
+color:#fff;
+display:none;
+align-items:center;
+justify-content:center;
+font-size:22px;
+z-index:5000;
+">
+⏳ Guardando cambios... no cierres esta página hasta que se actualice
+</div>
 </body>
 </html>
