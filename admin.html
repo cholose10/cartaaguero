@@ -143,7 +143,21 @@ let filteredIds = null; // si hay filtro, guardamos ids ordenados para acciones 
 
 function ocultarLoading(){
   document.getElementById("loadingOverlay").style.display = "none";
-} 
+} function bloquearUI(){
+  document.querySelectorAll("button").forEach(b => {
+    b.disabled = true;
+    b.style.opacity = "0.5";
+    b.style.cursor = "not-allowed";
+  });
+}
+
+function desbloquearUI(){
+  document.querySelectorAll("button").forEach(b => {
+    b.disabled = false;
+    b.style.opacity = "1";
+    b.style.cursor = "pointer";
+  });
+}
  function showToast(msg, variant = 'ok', timeout = 3000){
   const div = document.createElement('div');
   div.className = 'toast ' + (variant === 'info' ? 'info' : variant === 'err' ? 'err' : 'ok');
@@ -475,6 +489,13 @@ async function syncPricesToLangs(){
  **********************************************************/
 async function guardarFilaPorId(id){
   mostrarLoading();
+  bloquearUI();
+
+  const btn = document.querySelector(`button[data-id="${id}"]`);
+  if(btn){
+    btn.textContent = "Guardando...";
+  }
+
   try{
     const idx = findIndexById(id);
     if(idx === -1) throw new Error('Producto no encontrado');
@@ -492,6 +513,11 @@ async function guardarFilaPorId(id){
   showToast('Error al guardar fila: ' + (e.message||e), 'err', 5000); 
 } finally {
   ocultarLoading();
+  desbloquearUI();
+
+  if(btn){
+    btn.textContent = "Guardar";
+  }
 }
 
 /**********************************************************
@@ -517,6 +543,7 @@ async function guardarTodosLosPrecios(){
   showToast('Error al guardar todos: ' + (e.message||e), 'err', 6000);
 } finally {
   ocultarLoading();
+  desbloquearUI();
 }
 }
 
