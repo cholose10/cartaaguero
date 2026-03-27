@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "360099999",
+    "price": "3600",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -11,7 +11,7 @@
     "id": "prod0002",
     "name": "Espresso Coffee (jarrito)",
     "description": "Americano coffee",
-    "price": "38009999",
+    "price": "3800",
     "image": "img/Americano.jpg",
     "category": "Coffee Shop ☕️"
   },
