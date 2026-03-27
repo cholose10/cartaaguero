@@ -322,6 +322,7 @@ tdAcc.className = 'rowActions';
 
 const b1 = document.createElement('button');
 b1.textContent = "Guardar";
+b1.setAttribute("data-id", p.id);
 b1.onclick = () => guardarFilaPorId(p.id);
 
 const b2 = document.createElement('button');
@@ -519,7 +520,7 @@ async function guardarFilaPorId(id){
     btn.textContent = "Guardar";
   }
 }
-
+}
 /**********************************************************
  * Guardar TODOS - refresca tabla y usa saveMainJson parcheado
  **********************************************************/
