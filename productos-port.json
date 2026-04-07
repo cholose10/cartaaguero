@@ -386,7 +386,7 @@
   {
     "nome": "AMIGOS Y FAMILLA MILANESA PARA 3",
     "descricao": "Vitela napolitana, smoke, suíça (pode ser 1/2 e 1/2) com fritas",
-    "preco": "65000",
+    "preco": "67000",
     "imagem": "img/mil3.jpg",
     "categoria": "💡promoções",
     "id": "prod0049"
@@ -722,7 +722,7 @@
   {
     "nome": "Mila PESTO",
     "descricao": "Milanesa de carne com nhoques ao pesto",
-    "preco": "22500",
+    "preco": "24000",
     "imagem": "img/Milapesto.jpg",
     "categoria": "🍽️Refeições",
     "id": "prod0091"
@@ -730,7 +730,7 @@
   {
     "nome": "Pollo N.Y",
     "descricao": "Frango defumado, mix de queijos, cebolinha, tomate e batatas fritas",
-    "preco": "24500",
+    "preco": "25500",
     "imagem": "img/Ny.jpg",
     "categoria": "🍽️Refeições",
     "id": "prod0092"
@@ -738,7 +738,7 @@
   {
     "nome": "Pollo al CHAMPI",
     "descricao": "Em molho de cogumelos com batatas fritas",
-    "preco": "25500",
+    "preco": "26500",
     "imagem": "img/polcha.jpg",
     "categoria": "🍽️Refeições",
     "id": "prod0093"
@@ -762,7 +762,7 @@
   {
     "nome": "Matambrito a la PIZZA",
     "descricao": "Suíno, muçarela, tomate e orégano com batatas fritas",
-    "preco": "29000",
+    "preco": "30000",
     "imagem": "img/20250815_132057.jpg",
     "categoria": "🍽️Refeições",
     "id": "prod0096"
@@ -770,7 +770,7 @@
   {
     "nome": "Matambrito a la RIOJANA",
     "descricao": "Suíno, cebolinhas, pimentões, ervilhas e ovo frito com batatas fritas",
-    "preco": "29500",
+    "preco": "30500",
     "imagem": "img/Matrio.jpg",
     "categoria": "🍽️Refeições",
     "id": "prod0097"
