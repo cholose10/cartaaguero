@@ -736,14 +736,6 @@
     "id": "prod0093"
   },
   {
-    "nombre": "Pollo TERIYAKI",
-    "descripcion": "Pechuga en salsa dulce con arroz salteado y verduras",
-    "precio": "24500",
-    "imagen": "img/Tari.jpg",
-    "categoria": "🍽️Comidas",
-    "id": "prod0094"
-  },
-  {
     "nombre": "Salmón AZUL",
     "descripcion": "Salmón rosado grillado en salsa crema de queso azul con papas españolas",
     "precio": "39000",
