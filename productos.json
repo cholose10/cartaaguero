@@ -2,7 +2,7 @@
   {
     "nombre": "Café expresso",
     "descripcion": "Café chico",
-    "precio": "3600000",
+    "precio": "3600",
     "imagen": "img/Cafe.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0001"
@@ -1414,13 +1414,5 @@
     "imagen": "img/Rojel.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0181"
-  },
-  {
-    "nombre": "croque monsieur",
-    "descripcion": "sandwich en pan blanco de molde relleno de jamon y queso gratinado con salasa bechamel",
-    "precio": "17000",
-    "imagen": "",
-    "categoria": "🥪 Sandwiches",
-    "id": "prod0182"
   }
 ]
