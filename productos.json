@@ -386,7 +386,7 @@
   {
     "nombre": "AMIGOS Y FAMILLA MILANESA PARA 3",
     "descripcion": "Ternera napolitana, smoke, suiza (puede ser 1/2 y 1/2) con fritas",
-    "precio": "65000",
+    "precio": "67000",
     "imagen": "img/mil3.jpg",
     "categoria": "💡promociones",
     "id": "prod0049"
@@ -722,7 +722,7 @@
   {
     "nombre": "Mila PESTO",
     "descripcion": "Milanesa de carne con ñoquis al pesto",
-    "precio": "22500",
+    "precio": "24000",
     "imagen": "img/Milapesto.jpg",
     "categoria": "🍽️Comidas",
     "id": "prod0091"
@@ -730,7 +730,7 @@
   {
     "nombre": "Pollo N.Y",
     "descripcion": "Pollo ahumado, mix de queso, verdeo, tomate and papas fritas",
-    "precio": "24500",
+    "precio": "25500",
     "imagen": "img/Ny.jpg",
     "categoria": "🍽️Comidas",
     "id": "prod0092"
@@ -738,7 +738,7 @@
   {
     "nombre": "Pollo al CHAMPI",
     "descripcion": "En salsa de hongos con papas fritas",
-    "precio": "25500",
+    "precio": "26500",
     "imagen": "img/polcha.jpg",
     "categoria": "🍽️Comidas",
     "id": "prod0093"
@@ -762,7 +762,7 @@
   {
     "nombre": "Matambrito a la PIZZA",
     "descripcion": "De cerdo, muzarella, tomate y orégano con papas fritas",
-    "precio": "29000",
+    "precio": "30000",
     "imagen": "img/20250815_132057.jpg",
     "categoria": "🍽️Comidas",
     "id": "prod0096"
@@ -770,7 +770,7 @@
   {
     "nombre": "Matambrito a la RIOJANA",
     "descripcion": "De cerdo, cebollitas, morrones, arvejas y huevo frito, con papas fritas",
-    "precio": "29500",
+    "precio": "30500",
     "imagen": "img/Matrio.jpg",
     "categoria": "🍽️Comidas",
     "id": "prod0097"
