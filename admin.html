@@ -361,8 +361,38 @@ function guardarFormulario(){ const nombre=document.getElementById('nombre').val
 }
 function procesarMulti(){ const raw=document.getElementById('multiInput').value.trim(); if(!raw){ showToast('Nada para procesar','err'); return;} const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean); for(const ln of lines){ const parts=ln.split('|').map(p=>p.trim()); const nombre=parts[0]||'Sin nombre'; const descripcion=parts[1]||''; const precio=sanitizePrice(parts[2]||''); const imagen=parts[3]||''; const categoria=parts[4]||''; const id=generateNextProdId(); productos.push({ id, nombre, descripcion, precio, imagen, categoria }); } document.getElementById('multiInput').value=''; render(productos); showToast('Productos agregados localmente. Presioná "Guardar TODOS los cambios".','info',3500); }
 
-function eliminarProductoPorId(id){ if(!confirm('Eliminar producto?')) return; const idx = findIndexById(id); if(idx !== -1){ productos.splice(idx,1); render(productos); showToast('Producto eliminado localmente','info',1600); } else { showToast('Producto no encontrado','err'); } }
+async function eliminarProductoPorId(id){ 
+  if(!confirm('¿Estás seguro de que quieres eliminar este producto permanentemente?')) return; 
 
+  const idx = findIndexById(id); 
+  if(idx !== -1){ 
+    // 1. Lo quitamos de la lista local
+    const eliminado = productos.splice(idx,1)[0]; 
+    
+    mostrarLoading();
+    bloquearUI();
+
+    try {
+      // 2. Guardamos la nueva lista (sin el producto) en GitHub
+      await saveMainJson(productos, `Eliminado producto: ${eliminado.nombre || id}`);
+      // 3. Sincronizamos con los otros idiomas
+      await syncPricesToLangs();
+      
+      render(productos); 
+      showToast('Producto eliminado definitivamente de la base de datos', 'info', 3000);
+    } catch(e) {
+      console.error(e);
+      showToast('Error al eliminar en GitHub: ' + (e.message || e), 'err', 5000);
+      // Si falla, lo volvemos a cargar para no perder datos por error de red
+      loadProducts(); 
+    } finally {
+      ocultarLoading();
+      desbloquearUI();
+    }
+  } else { 
+    showToast('Producto no encontrado', 'err'); 
+  } 
+}
 /**********************************************************
  * Refrescar array desde la tabla (importante antes de "Guardar TODOS")
  * Ahora se usa data-row-id para mapear
