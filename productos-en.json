@@ -387,7 +387,7 @@
     "id": "prod0049",
     "name": "FRIENDS & FAMILY MILANESA FOR 3",
     "description": "Veal napolitana, smoked, swiss (can be 1/2 and 1/2) with fries",
-    "price": "65000",
+    "price": "67000",
     "image": "img/mil3.jpg",
     "category": "💡Promotions"
   },
@@ -723,7 +723,7 @@
     "id": "prod0091",
     "name": "Pesto Milanesa",
     "description": "Beef milanesa with pesto gnocchi",
-    "price": "22500",
+    "price": "24000",
     "image": "img/Milapesto.jpg",
     "category": "🍽️Meals"
   },
@@ -731,7 +731,7 @@
     "id": "prod0092",
     "name": "N.Y Chicken",
     "description": "Smoked chicken, cheese mix, green onion, tomato and French fries",
-    "price": "24500",
+    "price": "25500",
     "image": "img/Ny.jpg",
     "category": "🍽️Meals"
   },
@@ -739,7 +739,7 @@
     "id": "prod0093",
     "name": "Mushroom Chicken",
     "description": "In mushroom sauce with French fries",
-    "price": "25500",
+    "price": "26500",
     "image": "img/polcha.jpg",
     "category": "🍽️Meals"
   },
@@ -763,7 +763,7 @@
     "id": "prod0096",
     "name": "Pizza-Style Pork Matambre",
     "description": "Pork, mozzarella, tomato and oregano with French fries",
-    "price": "29000",
+    "price": "30000",
     "image": "img/20250815_132057.jpg",
     "category": "🍽️Meals"
   },
@@ -771,7 +771,7 @@
     "id": "prod0097",
     "name": "Riojana Pork Matambre",
     "description": "Pork, onions, bell peppers, peas and fried egg, with French fries",
-    "price": "29500",
+    "price": "30500",
     "image": "img/Matrio.jpg",
     "category": "🍽️Meals"
   },
