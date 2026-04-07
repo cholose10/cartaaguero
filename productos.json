@@ -552,14 +552,6 @@
     "id": "prod0069"
   },
   {
-    "nombre": "Mila SMOKE",
-    "descripcion": "Salsa de tomate, mermelada de bacon, cheddar Acompañadas con puré, fideos, ensalada o papas fritas",
-    "precio": "25000",
-    "imagen": "img/smo.jpg",
-    "categoria": "🍽️Comidas",
-    "id": "prod0070"
-  },
-  {
     "nombre": "Filet de Merluza a la romana",
     "descripcion": "Con puré mixto",
     "precio": "19000",
@@ -1438,5 +1430,13 @@
     "imagen": "",
     "categoria": "🥪 Sandwiches",
     "id": "prod0183"
+  },
+  {
+    "nombre": "SMOKEmmmmm",
+    "descripcion": "fgergerg",
+    "precio": "18200",
+    "imagen": "img/.jpg",
+    "categoria": "Cafetería☕️",
+    "id": "prod0185"
   }
 ]
