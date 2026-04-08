@@ -1390,21 +1390,5 @@
     "imagen": "img/tortas.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0179"
-  },
-  {
-    "nombre": "cHOLO",
-    "descripcion": "MM",
-    "precio": "18500",
-    "imagen": "MNB",
-    "categoria": "Sandwich ",
-    "id": "prod0180"
-  },
-  {
-    "nombre": "CHOLA",
-    "descripcion": "VV",
-    "precio": "18500",
-    "imagen": "BB",
-    "categoria": "Sandwich ",
-    "id": "prod0181"
   }
 ]
