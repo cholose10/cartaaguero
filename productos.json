@@ -1406,5 +1406,21 @@
     "imagen": "img/Rojel.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0181"
+  },
+  {
+    "nombre": "Café expresso",
+    "descripcion": "fhrhr",
+    "precio": "858",
+    "imagen": "fgfg",
+    "categoria": "🍽️Comidas",
+    "id": "prod0182"
+  },
+  {
+    "nombre": "Café expytgf",
+    "descripcion": "fhrhr",
+    "precio": "858",
+    "imagen": "fgfg",
+    "categoria": "🍽️Comidas",
+    "id": "prod0183"
   }
 ]
