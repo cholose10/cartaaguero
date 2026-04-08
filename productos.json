@@ -1390,21 +1390,5 @@
     "imagen": "img/tortas.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0179"
-  },
-  {
-    "nombre": "Ensalada CAESAR con Atun",
-    "descripcion": "Mix de verdes, croutons, atun rebozados, parmesano y aderezo Caesar",
-    "precio": "20000",
-    "imagen": "img/Nueva.jpg",
-    "categoria": "🍽️Comidas",
-    "id": "prod0180"
-  },
-  {
-    "nombre": "ROGEL",
-    "descripcion": "Nueva torta Rogel",
-    "precio": "8800",
-    "imagen": "img/Rojel.jpg",
-    "categoria": "📋/SUGERENCIAS Y NOVEDADES",
-    "id": "prod0181"
   }
 ]
