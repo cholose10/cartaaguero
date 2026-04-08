@@ -168,21 +168,48 @@ function render(lista){
   lista.forEach(p => {
     const tr = document.createElement('tr');
     tr.dataset.rowId = p.id;
+    
+    // Creamos la fila (mantenemos tu estructura)
     tr.innerHTML = `
       <td><img src="${p.imagen}" class="mini" onerror="this.style.display='none'"></td>
       <td><input type="text" value="${p.nombre}" oninput="updateLocal('${p.id}', 'nombre', this.value)"></td>
       <td><textarea oninput="updateLocal('${p.id}', 'descripcion', this.value)">${p.descripcion}</textarea></td>
       <td><input type="text" value="${p.categoria}" oninput="updateLocal('${p.id}', 'categoria', this.value)"></td>
-      <td><input type="text" value="${p.precio}" oninput="updateLocal('${p.id}', 'precio', this.value)"></td>
+      <td><input type="text" class="input-precio" data-id="${p.id}" value="${p.precio}"></td>
       <td class="rowActions">
         <button onclick="loadIntoFormById('${p.id}')" style="background:#2d87d6">Editar</button>
         <button class="danger" onclick="eliminarProductoPorId('${p.id}')">Borrar</button>
       </td>
     `;
+    
+    // --- AQUÍ ESTÁ EL TRUCO DEL TAB ---
+    const precioInput = tr.querySelector('.input-precio');
+    
+    // 1. Guardamos el cambio al escribir
+    precioInput.oninput = (e) => updateLocal(p.id, 'precio', e.target.value);
+
+    // 2. Detectamos el TAB para bajar
+    precioInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault(); // Evitamos que el TAB salte a "Acciones"
+        
+        // Buscamos la siguiente fila
+        const siguienteFila = tr.nextElementSibling;
+        if (siguienteFila) {
+          const proximoInput = siguienteFila.querySelector('.input-precio');
+          if (proximoInput) {
+            proximoInput.focus();
+            proximoInput.select(); // Lo dejamos seleccionado para borrar y escribir rápido
+          }
+        } else {
+          showToast("Llegaste al final de la lista", "info");
+        }
+      }
+    });
+
     tb.appendChild(tr);
   });
 }
-
 function updateLocal(id, field, value){
   const idx = findIndexById(id);
   if(idx !== -1) {
