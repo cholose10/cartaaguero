@@ -3,26 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin Carta - Tilo Café Aguero (Sincroniza precios ES/EN/PT)</title>
+  <title>Admin Carta - MenuClick (Tilo Café)</title>
   <style>
     body{font-family:Arial,Helvetica,sans-serif;margin:18px;background:#f7f3f0;color:#333}
     h1{text-align:center;color:#806250;margin-bottom:10px}
     .topRow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px}
     .controls{display:flex;gap:8px;align-items:center}
     input[type="text"], input[type="password"], textarea{padding:8px;border-radius:6px;border:1px solid #ccc;width:100%;box-sizing:border-box}
-    button{background:#806250;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer}
+    button{background:#806250;color:#fff;border:none;padding:8px 10px;border-radius:6px;cursor:pointer;font-weight:600}
     button.secondary{background:#5c8a50}
     button.danger{background:#c0392b}
-    form{background:#fff;padding:12px;border-radius:10px;margin-bottom:12px;display:none}
+    form{background:#fff;padding:12px;border-radius:10px;margin-bottom:12px;display:none;box-shadow: 0 4px 6px rgba(0,0,0,0.05)}
     table{width:100%;border-collapse:collapse;background:#fff}
     th,td{border:1px solid #ddd;padding:8px;vertical-align:top}
     th{background:#806250;color:#fff}
     img.mini{max-width:60px;border-radius:6px}
-    #guardarTodos{position:fixed;top:18px;right:18px;z-index:1200;padding:10px 14px;background:#a07b68;color:#fff;border-radius:8px}
+    #guardarTodos{position:fixed;top:18px;right:18px;z-index:1200;padding:10px 14px;background:#a07b68;color:#fff;border-radius:8px;box-shadow: 0 4px 10px rgba(0,0,0,0.2)}
+    #btnMozo{position:fixed;top:18px;right:220px;z-index:1200;padding:10px 14px;background:#c0392b;color:#fff;border-radius:8px}
     .small{font-size:13px;color:#666}
     .rowActions{display:flex;gap:6px}
     .previewImg{max-width:120px;margin-top:8px;border-radius:6px}
-    textarea#multiInput{width:100%;padding:8px;border-radius:6px;border:1px solid #ccc;box-sizing:border-box}
     .toast {
       position: fixed; top: 24px; right: 24px; z-index: 2000; padding: 12px 16px;
       border-radius: 8px; color: white; font-weight: 600; box-shadow: 0 6px 18px rgba(0,0,0,0.15);
@@ -32,594 +32,309 @@
     .toast.ok { background: #2ecc71; }
     .toast.info { background: #3498db; }
     .toast.err { background: #e74c3c; }
-    @media(max-width:720px){ .topRow{flex-direction:column;align-items:flex-start} table{font-size:13px} }
-    #guardarTodos, #btnMozo{
-  position:fixed;
-  top:18px;
-  z-index:1200;
-  padding:10px 14px;
-  border-radius:8px;
-  font-weight:600;
-}
-
-#guardarTodos{
-  right:18px;
-  background:#a07b68;
-  color:#fff;
-}
-
-#btnMozo{
-  right:220px; /* lo posiciona al lado */
-  background:#c0392b; /* rojo elegante */
-  color:#fff;
-}
+    #loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;font-size:20px;z-index:5000;text-align:center;padding:20px}
+    @media(max-width:720px){ .topRow{flex-direction:column;align-items:flex-start} table{font-size:12px} #btnMozo, #guardarTodos{position:static;width:100%;margin-bottom:10px} }
   </style>
 </head>
 <body>
-  <h1>Admin Carta — Tilo Café cartaaguero</h1>
+
+  <h1>Admin Carta — Tilo Café</h1>
+
   <div class="topRow">
     <div style="flex:1">
       <div style="margin-bottom:6px"><span class="small">Repositorio:</span> <b> tilo-restocafe / cartaaguero</b></div>
       <div style="display:flex;gap:8px;align-items:center">
-        <label style="min-width:40px">Token:</label>
-        <input type="password" id="token" placeholder="Pegar token de GitHub (repo contents)" style="max-width:340px">
+        <label>Token:</label>
+        <input type="password" id="token" placeholder="GitHub Token" style="max-width:250px">
         <button onclick="saveToken()">Guardar</button>
-        <button onclick="clearToken()">Borrar</button>
-        <button style="background:#888;padding:6px 8px;border-radius:6px;margin-left:6px" onclick="toggleTokenVisibility()">👁</button>
-        <span class="small" id="tokenStatus" style="margin-left:8px">No guardado</span>
+        <button onclick="clearToken()" style="background:#999">Borrar</button>
+        <span id="tokenStatus" class="small" style="font-weight:bold">Validando...</span>
       </div>
     </div>
-
     <div class="controls">
-      <input id="search" placeholder="Buscar..." oninput="filterProducts()" style="min-width:180px;max-width:360px">
-      <button id="toggleFormBtn" onclick="toggleForm()">+ Agregar producto</button>
-      <button class="secondary" onclick="irWhatsApp()">📲 Ayuda por WhatsApp</button>
+      <input id="search" placeholder="Buscar plato..." oninput="filterProducts()" style="min-width:150px">
+      <button onclick="toggleForm()">+ Nuevo Producto</button>
+      <button class="secondary" onclick="irWhatsApp()">📲 Soporte</button>
     </div>
   </div>
 
-    <button id="guardarTodos" onclick="guardarTodosLosPrecios()">💾 Guardar TODOS los cambios</button>
-   <button id="btnMozo" onclick="irTeleprompter()">🙋‍♂️ Mozo Digital</button>
-  <!-- Formulario simple -->
+  <button id="guardarTodos" onclick="guardarTodosLosPrecios()">💾 Guardar TODO en la nube</button>
+  <button id="btnMozo" onclick="irTeleprompter()">🙋‍♂️ Mozo Digital</button>
+
   <form id="form">
     <input type="hidden" id="editId">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div>
-        <label>Nombre</label>
-        <input id="nombre" type="text">
-      </div>
-      <div>
-        <label>Precio</label>
-        <input id="precio" type="text" placeholder="Ej: 3400 (sin $)">
-      </div>
-
-      <div style="grid-column:1/3">
-        <label>Descripción</label>
-        <textarea id="descripcion" rows="3"></textarea>
-      </div>
-
-      <div>
-        <label>Imagen (ruta o URL)</label>
-        <input id="imagen" type="text" oninput="previewImage()">
-        <img id="preview" class="previewImg" style="display:none">
-      </div>
-
-      <div>
-        <label>Categoría</label>
-        <input id="categoria" type="text" placeholder="Ej: Cafetería">
-      </div>
+      <div><label>Nombre</label><input id="nombre" type="text"></div>
+      <div><label>Precio</label><input id="precio" type="text" placeholder="Solo números"></div>
+      <div style="grid-column:1/3"><label>Descripción</label><textarea id="descripcion" rows="2"></textarea></div>
+      <div><label>Imagen URL</label><input id="imagen" type="text" oninput="previewImage()"></div>
+      <div><label>Categoría</label><input id="categoria" type="text" placeholder="Ej: Cafetería"></div>
     </div>
-
-    <div style="margin-top:10px;display:flex;gap:8px">
-      <button type="button" onclick="guardarFormulario()">Guardar</button>
+    <div style="margin-top:10px">
+      <button type="button" onclick="guardarFormulario()">Agregar a la lista</button>
       <button type="button" onclick="cancelForm()" style="background:#999">Cancelar</button>
     </div>
+    <img id="preview" class="previewImg" style="display:none">
   </form>
 
-  <table aria-label="Productos">
+  <table>
     <thead>
-      <tr><th style="width:80px">Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th style="width:100px">Precio (ES)</th><th style="width:180px">Acciones</th></tr>
+      <tr><th>Imagen</th><th>Nombre</th><th>Descripción</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
     </thead>
     <tbody id="tbody"></tbody>
   </table>
 
+  <div id="loadingOverlay">
+    <div style="font-size:40px; margin-bottom:15px">⏳</div>
+    <div><b>Guardando y sincronizando ES / EN / PT...</b></div>
+    <div style="font-size:14px; margin-top:10px; color:#ccc">No cierres la página, se descargará un backup automáticamente.</div>
+  </div>
+
 <script>
-/**********************************************************
- * Config + estado
- **********************************************************/
 const USERNAME = "tilo-restocafe";
 const REPO = "cartaaguero";
 const BRANCH = "main";
 const MAIN_JSON = "productos.json";
 const EN_JSON = "productos-en.json";
 const PT_JSON = "productos-port.json";
-let productos = []; // esta es la fuente de verdad
-let filteredIds = null; // si hay filtro, guardamos ids ordenados para acciones por fila
+let productos = [];
 
-/**********************************************************
- * Toast
- **********************************************************/  function mostrarLoading(){
-  document.getElementById("loadingOverlay").style.display = "flex";
-}
+/**************** UI HELPERS ****************/
+function mostrarLoading(){ document.getElementById("loadingOverlay").style.display = "flex"; }
+function ocultarLoading(){ document.getElementById("loadingOverlay").style.display = "none"; }
+function bloquearUI(){ document.querySelectorAll("button").forEach(b => { b.disabled = true; b.style.opacity = "0.5"; }); }
+function desbloquearUI(){ document.querySelectorAll("button").forEach(b => { b.disabled = false; b.style.opacity = "1"; }); }
 
-function ocultarLoading(){
-  document.getElementById("loadingOverlay").style.display = "none";
-} function bloquearUI(){
-  document.querySelectorAll("button").forEach(b => {
-    b.disabled = true;
-    b.style.opacity = "0.5";
-    b.style.cursor = "not-allowed";
-  });
-}
-
-function desbloquearUI(){
-  document.querySelectorAll("button").forEach(b => {
-    b.disabled = false;
-    b.style.opacity = "1";
-    b.style.cursor = "pointer";
-  });
-}
- function showToast(msg, variant = 'ok', timeout = 3000){
+function showToast(msg, variant = 'ok'){
   const div = document.createElement('div');
-  div.className = 'toast ' + (variant === 'info' ? 'info' : variant === 'err' ? 'err' : 'ok');
-  div.innerText = (variant === 'err' ? '✖︎ ' : variant === 'info' ? 'ℹ︎ ' : '✔︎ ') + msg;
+  div.className = `toast ${variant}`;
+  div.innerText = msg;
   document.body.appendChild(div);
   requestAnimationFrame(() => div.classList.add('show'));
-  setTimeout(() => { div.classList.remove('show'); setTimeout(()=> div.remove(), 300); }, timeout);
+  setTimeout(() => { div.classList.remove('show'); setTimeout(()=> div.remove(), 300); }, 3000);
 }
 
-/**********************************************************
- * Token (guardado en localStorage, botón de ver/ocultar)
- **********************************************************/
-function saveToken(){ const t = document.getElementById('token').value.trim(); if(!t){ showToast('Pegá tu token primero', 'err'); return; } localStorage.setItem('github_token', t); document.getElementById('tokenStatus').innerText = 'Token guardado'; showToast('Token guardado', 'ok', 1800); }
-function clearToken(){ localStorage.removeItem('github_token'); document.getElementById('token').value = ''; document.getElementById('tokenStatus').innerText = 'Token borrado'; showToast('Token borrado', 'info', 1500); }
+/**************** TOKEN ****************/
+function saveToken(){
+  const t = document.getElementById('token').value.trim();
+  localStorage.setItem('github_token', t);
+  validarTokenGitHub();
+  showToast('Token guardado');
+}
+function clearToken(){ localStorage.removeItem('github_token'); location.reload(); }
 function getToken(){ return localStorage.getItem('github_token'); }
-function toggleTokenVisibility(){ const inp = document.getElementById('token'); inp.type = inp.type === 'password' ? 'text' : 'password'; }
-(function initTokenStatus(){ const t = getToken(); if(t){ document.getElementById('tokenStatus').innerText = 'Token guardado'; document.getElementById('token').value = t; /* opcional: mostrar token en input */ } })();
 
-/**********************************************************
- * IDs y util
- **********************************************************/
-function extractNumberFromProdId(id){ if(!id) return null; const m = String(id).match(/(\d+)\s*$/); if(m) return parseInt(m[1],10); return null; }
-function generateNextProdId(){ let max = 0; for(const p of productos){ const n = extractNumberFromProdId(p.id || ''); if(Number.isFinite(n) && n > max) max = n; } const next = max + 1; return 'prod' + String(next).padStart(4, '0'); }
-function sanitizePrice(v){ if(v===undefined||v===null) return ''; const only = String(v).replace(/[^\d]/g,''); return only || ''; 
-}
-function findIndexById(id){
-  return productos.findIndex(p => p.id === id);
-}
-/**********************************************************
- * Ordenar campos por idioma (ES id al final, EN id primero, PT id al final)
- **********************************************************/
-function ordenarCamposPorIdioma(item, idioma){
-  const id = item.id || '';
-  if(idioma === 'EN'){
-    return { id: id, name: item.name || item.nombre || item.nome || '', description: item.description || item.descripcion || item.descricao || '', price: item.price || item.precio || item.preco || '', image: item.image || item.imagen || item.imagem || '', category: item.category || item.categoria || '' };
-  }
-  if(idioma === 'PT'){
-    return { nome: item.nome || item.name || item.nombre || '', descricao: item.descricao || item.description || item.descripcion || '', preco: item.preco || item.price || item.precio || '', imagem: item.imagem || item.image || item.imagen || '', categoria: item.categoria || item.category || '', id: id };
-  }
-  return { nombre: item.nombre || item.name || item.nome || '', descripcion: item.descripcion || item.description || item.descricao || '', precio: item.precio || item.price || item.preco || '', imagen: item.imagen || item.image || item.imagem || '', categoria: item.categoria || item.category || '', id: id };
+async function validarTokenGitHub() {
+  const token = getToken();
+  const statusEl = document.getElementById('tokenStatus');
+  if (!token) { statusEl.innerText = "❌ Sin Token"; statusEl.style.color = "red"; return; }
+  try {
+    const res = await fetch('https://api.github.com/user', { headers: { Authorization: `token ${token}` } });
+    if (res.ok) {
+      const data = await res.json();
+      statusEl.innerText = `✅ ON: ${data.login}`;
+      statusEl.style.color = "green";
+    } else {
+      statusEl.innerText = "⚠️ Token Vencido";
+      statusEl.style.color = "orange";
+    }
+  } catch (e) { statusEl.innerText = "Error conexión"; }
 }
 
-/**********************************************************
- * Cargar productos.json (desde raw.githubusercontent)
- **********************************************************/
+/**************** CORE LOGIC ****************/
+function sanitizePrice(v){ return String(v).replace(/[^\d]/g,'') || '0'; }
+function findIndexById(id){ return productos.findIndex(p => p.id === id); }
+function generateNextProdId(){
+  let max = 0;
+  productos.forEach(p => {
+    const n = parseInt(String(p.id).replace('prod',''), 10);
+    if(n > max) max = n;
+  });
+  return 'prod' + String(max + 1).padStart(4, '0');
+}
+
 async function loadProducts(){
   try{
-    const r = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${MAIN_JSON}`);
-    if(!r.ok) throw new Error(`No se pudo cargar ${MAIN_JSON} (${r.status})`);
-    const arr = await r.json();
-    if(!Array.isArray(arr)) throw new Error('Formato inválido en productos.json');
-
-    productos = arr.map(item => ({
-      id: item.id || '',
-      nombre: item.nombre || item.name || item.nome || '',
-      descripcion: item.descripcion || item.description || item.descricao || '',
-      precio: String(item.precio || item.price || item.preco || ''),
-      imagen: item.imagen || item.image || item.imagem || '',
-      categoria: item.categoria || item.category || ''
-    }));
-
-    let changed = false;
-    productos.forEach(p => { if(!p.id || !/^prod\d{4}$/.test(p.id)){ p.id = generateNextProdId(); changed = true; } });
+    const r = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${MAIN_JSON}?t=${Date.now()}`);
+    if(!r.ok) throw new Error('Error al cargar');
+    productos = await r.json();
     render(productos);
-    if(changed) showToast('Se asignaron IDs faltantes (prodXXXX)', 'info', 2500);
-
-  }catch(e){
-    console.warn(e);
-    productos = [];
-    render(productos);
-    showToast("No se pudo cargar productos.json", 'err', 5000);
-  }
+  }catch(e){ showToast("Error cargando JSON", 'err'); }
 }
 
-/**********************************************************
- * Render tabla (usar data-id por fila para evitar confundir índices)
- **********************************************************/
 function render(lista){
   const tb = document.getElementById('tbody');
   tb.innerHTML = '';
-
-  // cuando se renderiza, guardamos la lista de ids visibles (para acciones desde la fila)
-  filteredIds = lista.map(p => p.id);
-
-  lista.forEach((p, i) => {
+  lista.forEach(p => {
     const tr = document.createElement('tr');
-    tr.dataset.rowId = p.id || '';
-
-    // imagen
-    const tdImg = document.createElement('td');
-    const img = document.createElement('img');
-    img.className = 'mini';
-    img.src = p.imagen || '';
-    img.onerror = () => { img.style.display='none'; };
-    tdImg.appendChild(img);
-    tr.appendChild(tdImg);
-
-    // nombre
-    const tdNombre = document.createElement('td');
-    const nombreInput = document.createElement('input');
-    nombreInput.type = 'text';
-    nombreInput.value = p.nombre || '';
-    nombreInput.oninput = e => {
-      const idx = findIndexById(p.id);
-      if(idx !== -1) productos[idx].nombre = e.target.value;
-    };
-    tdNombre.appendChild(nombreInput);
-    tr.appendChild(tdNombre);
-
-    // descripcion
-    const tdDesc = document.createElement('td');
-    const desc = document.createElement('textarea');
-    desc.rows = 2;
-    desc.value = p.descripcion || '';
-    desc.oninput = e => { const idx = findIndexById(p.id); if(idx !== -1) productos[idx].descripcion = e.target.value; };
-    tdDesc.appendChild(desc);
-    tr.appendChild(tdDesc);
-
-    // categoria
-    const tdCat = document.createElement('td');
-    const cat = document.createElement('input');
-    cat.type = 'text';
-    cat.value = p.categoria || '';
-    cat.oninput = e => { const idx = findIndexById(p.id); if(idx !== -1) productos[idx].categoria = e.target.value; };
-    tdCat.appendChild(cat);
-    tr.appendChild(tdCat);
-
-   // precio
-const tdPrecio = document.createElement('td');
-const precio = document.createElement('input');
-precio.type = 'text';
-precio.value = p.precio || '';
-
-precio.oninput = e => { 
-  const idx = findIndexById(p.id); 
-  if(idx !== -1) productos[idx].precio = e.target.value; 
-};
-
-// 👇 TAB baja al precio de la fila siguiente
-precio.addEventListener("keydown", function(e){
-  if(e.key === "Tab" && !e.shiftKey){
-    e.preventDefault();
-
-    const filaActual = e.target.closest("tr");
-    const siguienteFila = filaActual.nextElementSibling;
-
-    if(siguienteFila){
-      const inputPrecioSiguiente = siguienteFila.children[4].querySelector("input");
-      if(inputPrecioSiguiente){
-        inputPrecioSiguiente.focus();
-        inputPrecioSiguiente.select();
-      }
-    }
-  }
-});
-
-tdPrecio.appendChild(precio);
-tr.appendChild(tdPrecio);
-// acciones
-const tdAcc = document.createElement('td');
-tdAcc.className = 'rowActions';
-
-const b1 = document.createElement('button');
-b1.textContent = "Guardar";
-b1.setAttribute("data-id", p.id);
-b1.onclick = () => guardarFilaPorId(p.id);
-
-const b2 = document.createElement('button');
-b2.textContent = "Editar";
-b2.style.background = "#2d87d6";
-b2.onclick = () => loadIntoFormById(p.id);
-
-const b3 = document.createElement('button');
-b3.textContent = "Eliminar";
-b3.className = "danger";
-b3.onclick = () => eliminarProductoPorId(p.id);
-
-tdAcc.appendChild(b1);
-tdAcc.appendChild(b2);
-tdAcc.appendChild(b3);
-
-tr.appendChild(tdAcc);
-tb.appendChild(tr);
-
-}); // 👈 CIERRA el forEach
-
-} // 👈 CIERRA render()
-/**********************************************************
- * Form helpers (ahora cargan por ID y scrollean al form)
- **********************************************************/
-function toggleForm(){ const f=document.getElementById('form'); f.style.display = f.style.display === 'none' || f.style.display === '' ? 'block' : 'none'; if(f.style.display==='block') f.scrollIntoView({behavior:'smooth', block:'center'}); }
-function cancelForm(){ document.getElementById('editId').value=''; document.getElementById('nombre').value=''; document.getElementById('descripcion').value=''; document.getElementById('precio').value=''; document.getElementById('imagen').value=''; document.getElementById('categoria').value=''; document.getElementById('preview').style.display='none'; document.getElementById('form').style.display='none'; }
-function previewImage(){ const v=document.getElementById('imagen').value.trim(); const img=document.getElementById('preview'); if(!v){ img.style.display='none'; img.src=''; return; } img.src=v; img.style.display='block'; img.onerror=()=>{ img.style.display='none'; }; }
-function loadIntoFormById(id){ const idx = findIndexById(id); if(idx === -1){ showToast('Producto no encontrado para editar','err'); return; } const p = productos[idx]; document.getElementById('editId').value = p.id; document.getElementById('nombre').value = p.nombre||''; document.getElementById('descripcion').value = p.descripcion||''; document.getElementById('precio').value = p.precio||''; document.getElementById('imagen').value = p.imagen||''; document.getElementById('categoria').value = p.categoria||''; previewImage(); const f = document.getElementById('form'); f.style.display = 'block'; f.scrollIntoView({behavior:'smooth', block:'center'}); }
-function validarProductoObj(obj){ if(!obj.nombre) return "Falta nombre"; if(!obj.precio) return "Falta precio"; return null; }
-function guardarFormulario(){ const nombre=document.getElementById('nombre').value.trim(); const descripcion=document.getElementById('descripcion').value.trim(); const precio=sanitizePrice(document.getElementById('precio').value.trim()); const imagen=document.getElementById('imagen').value.trim(); const categoria=document.getElementById('categoria').value.trim(); const editId=document.getElementById('editId').value; const obj={ nombre, descripcion, precio, imagen, categoria }; const err=validarProductoObj(obj); if(err){ showToast(err,'err'); return; } if(editId){ const idx = findIndexById(editId); if(idx !== -1){ productos[idx] = { ...productos[idx], ...obj }; if(!productos[idx].id || !/^prod\d{4}$/.test(productos[idx].id)) productos[idx].id = generateNextProdId(); } else { showToast('ID de edición no encontrado','err'); }
-  } else { const id = generateNextProdId(); productos.push({ id, ...obj }); }
-  render(productos);
-  document.getElementById('form').style.display='none';
-  showToast('Producto agregado/actualizado localmente','ok',1800);
-}
-function procesarMulti(){ const raw=document.getElementById('multiInput').value.trim(); if(!raw){ showToast('Nada para procesar','err'); return;} const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean); for(const ln of lines){ const parts=ln.split('|').map(p=>p.trim()); const nombre=parts[0]||'Sin nombre'; const descripcion=parts[1]||''; const precio=sanitizePrice(parts[2]||''); const imagen=parts[3]||''; const categoria=parts[4]||''; const id=generateNextProdId(); productos.push({ id, nombre, descripcion, precio, imagen, categoria }); } document.getElementById('multiInput').value=''; render(productos); showToast('Productos agregados localmente. Presioná "Guardar TODOS los cambios".','info',3500); }
-
-async function eliminarProductoPorId(id){ 
-  if(!confirm('¿Estás seguro de que quieres eliminar este producto permanentemente?')) return; 
-
-  const idx = findIndexById(id); 
-  if(idx !== -1){ 
-    // 1. Lo quitamos de la lista local
-    const eliminado = productos.splice(idx,1)[0]; 
-    
-    mostrarLoading();
-    bloquearUI();
-
-    try {
-      // 2. Guardamos la nueva lista (sin el producto) en GitHub
-      await saveMainJson(productos, `Eliminado producto: ${eliminado.nombre || id}`);
-      // 3. Sincronizamos con los otros idiomas
-      await syncPricesToLangs();
-      
-      render(productos); 
-      showToast('Producto eliminado definitivamente de la base de datos', 'info', 3000);
-    } catch(e) {
-      console.error(e);
-      showToast('Error al eliminar en GitHub: ' + (e.message || e), 'err', 5000);
-      // Si falla, lo volvemos a cargar para no perder datos por error de red
-      loadProducts(); 
-    } finally {
-      ocultarLoading();
-      desbloquearUI();
-    }
-  } else { 
-    showToast('Producto no encontrado', 'err'); 
-  } 
-}
-/**********************************************************
- * Refrescar array desde la tabla (importante antes de "Guardar TODOS")
- * Ahora se usa data-row-id para mapear
- **********************************************************/
-function refrescarArrayDesdeTabla(){
-  const filas = document.querySelectorAll("#tbody tr");
-  const nuevos = [];
-  filas.forEach((fila) => {
-    const id = fila.dataset.rowId || generateNextProdId();
-    const celdas = fila.querySelectorAll("td");
-    const nombre = celdas[1].querySelector("input").value.trim();
-    const descripcion = celdas[2].querySelector("textarea").value.trim();
-    const categoria = celdas[3].querySelector("input").value.trim();
-    const precio = sanitizePrice(celdas[4].querySelector("input").value.trim());
-    const productoExistente = productos.find(p => p.id === id) || {};
-    const imagen = productoExistente.imagen || '';
-    nuevos.push({ id, nombre, descripcion, categoria, precio, imagen });
+    tr.dataset.rowId = p.id;
+    tr.innerHTML = `
+      <td><img src="${p.imagen}" class="mini" onerror="this.style.display='none'"></td>
+      <td><input type="text" value="${p.nombre}" oninput="updateLocal('${p.id}', 'nombre', this.value)"></td>
+      <td><textarea oninput="updateLocal('${p.id}', 'descripcion', this.value)">${p.descripcion}</textarea></td>
+      <td><input type="text" value="${p.categoria}" oninput="updateLocal('${p.id}', 'categoria', this.value)"></td>
+      <td><input type="text" value="${p.precio}" oninput="updateLocal('${p.id}', 'precio', this.value)"></td>
+      <td class="rowActions">
+        <button onclick="loadIntoFormById('${p.id}')" style="background:#2d87d6">Editar</button>
+        <button class="danger" onclick="eliminarProductoPorId('${p.id}')">Borrar</button>
+      </td>
+    `;
+    tb.appendChild(tr);
   });
-  productos = nuevos;
 }
 
-/**********************************************************
- * GitHub helpers
- **********************************************************/
-async function githubGetFileInfo(path){
-  const token = getToken();
-  const headers = token ? { Authorization: 'token ' + token, 'Accept': 'application/vnd.github.v3+json' } : { 'Accept': 'application/vnd.github.v3+json' };
-  const url = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${path}?ref=${BRANCH}`;
-  const res = await fetch(url, { headers });
-  if(!res.ok) {
-    const txt = await res.text().catch(()=>'');
-    throw new Error(`GitHub get ${path} -> ${res.status} ${txt}`);
+function updateLocal(id, field, value){
+  const idx = findIndexById(id);
+  if(idx !== -1) {
+    if(field === 'precio') value = sanitizePrice(value);
+    productos[idx][field] = value;
   }
-  return await res.json();
 }
 
-async function githubPutFile(path, contentString, message, sha){
+function eliminarProductoPorId(id){
+  if(!confirm('¿Quitar plato de la lista?')) return;
+  productos = productos.filter(p => p.id !== id);
+  render(productos);
+  showToast("Quitado localmente. Recordá Guardar Todo.", "info");
+}
+
+/**************** GITHUB SYNC ****************/
+async function githubPutFile(path, contentString, message){
   const token = getToken();
-  if(!token) throw new Error('Token requerido para subir cambios a GitHub');
+  const cacheBuster = `?t=${Date.now()}`;
+  
+  // Pedir SHA fresco SIEMPRE
+  const resInfo = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${path}${cacheBuster}`, {
+    headers: { Authorization: `token ${token}` }
+  });
+  let sha = undefined;
+  if(resInfo.ok) { const data = await resInfo.json(); sha = data.sha; }
 
   const url = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${path}`;
-  const body = { message, content: btoa(unescape(encodeURIComponent(contentString))), branch: BRANCH };
-  if(sha) body.sha = sha;
+  const body = { 
+    message, 
+    content: btoa(unescape(encodeURIComponent(contentString))), 
+    branch: BRANCH,
+    sha: sha
+  };
 
   const res = await fetch(url, {
     method: 'PUT',
-    headers: { Authorization: 'token ' + token, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+    headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
-
-  const data = await res.json().catch(()=>({}));
-  if(!res.ok){
-    throw new Error(`GitHub PUT ${path} -> ${res.status}: ${data.message || JSON.stringify(data)}`);
-  }
-  return data;
+  if(!res.ok) throw new Error(`Error en ${path}`);
 }
 
-/**********************************************************
- * Guardar productos.json (PARCHE: pedir SHA FRESCO justo antes de PUT)
- **********************************************************/
-async function saveMainJson(arr, commitMessage){
-  const out = arr.map(item => ordenarCamposPorIdioma(item, 'ES'));
-  const contentString = JSON.stringify(out, null, 2);
+async function guardarTodosLosPrecios(){
+  if(!getToken()){ showToast("Falta Token", "err"); return; }
+  
+  // Backup automático
+  const blob = new Blob([JSON.stringify(productos, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `backup_carta_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
 
-  let shaActual;
-  try{ const info = await githubGetFileInfo(MAIN_JSON); shaActual = info.sha; }catch(e){ shaActual = undefined; }
-
-  try{ const info2 = await githubGetFileInfo(MAIN_JSON); shaActual = info2.sha; }catch(e){ }
-
-  await githubPutFile(MAIN_JSON, contentString, commitMessage, shaActual);
-}
-
-/**********************************************************
- * Sincronizar precios en EN y PT (PARCHE: pedir SHA fresco ANTES de PUT)
- **********************************************************/
-async function syncPricesToLangs(){
-  const token = getToken();
-  if(!token){ showToast('Token requerido para sincronizar EN/PT', 'err', 4000); return; }
-
-  const byId = {};
-  productos.forEach(p => { if(p.id) byId[p.id] = p; });
-
-  async function processLangFile(filename, idioma){
-    let info;
-    try{ info = await githubGetFileInfo(filename); }catch(e){ info = null; }
-
-    let arr = [];
-    if(info && info.content){
-      const raw = info.content.replace(/\n/g,'');
-      const decoded = decodeURIComponent(escape(window.atob(raw)));
-      try{ arr = JSON.parse(decoded); if(!Array.isArray(arr)) arr = []; } catch(e){ arr = []; }
-    }
-
-    let changed = false;
-
-    const newArr = arr.map(item => {
-      const itemId = item.id || null;
-      if(itemId && byId[itemId]){
-        const nuevo = sanitizePrice(byId[itemId].precio);
-        if('precio' in item && String(item.precio) !== nuevo){ item.precio = nuevo; changed = true; }
-        if('price' in item && String(item.price) !== nuevo){ item.price = nuevo; changed = true; }
-        if('preco' in item && String(item.preco) !== nuevo){ item.preco = nuevo; changed = true; }
-      }
-      if(!item.id && itemId) item.id = itemId;
-      return ordenarCamposPorIdioma(item, idioma);
-    });
-
-    if(info === null){
-      const created = [];
-      for(const pid in byId){ const p = byId[pid]; if(!p) continue; const obj = ordenarCamposPorIdioma({ id: p.id, nombre: p.nombre, descripcion: p.descripcion, precio: p.precio, imagen: p.imagen, categoria: p.categoria }, idioma); created.push(obj); }
-      const contentStringCreate = JSON.stringify(created, null, 2);
-      await githubPutFile(filename, contentStringCreate, `Crea ${filename} desde productos.json`, undefined);
-      return;
-    }
-
-    if(changed){ const latestInfo = await githubGetFileInfo(filename); const latestSha = latestInfo.sha; const contentString = JSON.stringify(newArr, null, 2); await githubPutFile(filename, contentString, `Sincroniza precios desde productos.json`, latestSha); }
-  }
-
-  await processLangFile(EN_JSON, 'EN');
-  await processLangFile(PT_JSON, 'PT');
-}
-
-/**********************************************************
- * Guardar fila por ID (usa saveMainJson + syncPricesToLangs)
- **********************************************************/
-async function guardarFilaPorId(id){
   mostrarLoading();
   bloquearUI();
 
-  const btn = document.querySelector(`button[data-id="${id}"]`);
-  if(btn){
-    btn.textContent = "Guardando...";
-  }
-
-  try{
-    const idx = findIndexById(id);
-    if(idx === -1) throw new Error('Producto no encontrado');
-    const p = productos[idx];
-    if(!p.id || !/^prod\d{4}$/.test(p.id)) p.id = generateNextProdId();
-    p.precio = sanitizePrice(p.precio);
-
-    await saveMainJson(productos, `Actualiza producto ${p.id} - precio ${p.precio}`);
-    await syncPricesToLangs();
-
-    showToast('Producto guardado y precios sincronizados en EN/PT', 'ok', 2600);
-    render(productos);
-  }catch(e){ 
-  console.error(e); 
-  showToast('Error al guardar fila: ' + (e.message||e), 'err', 5000); 
-} finally {
-  ocultarLoading();
-  desbloquearUI();
-
-  if(btn){
-    btn.textContent = "Guardar";
-  }
-}
-}
-/**********************************************************
- * Guardar TODOS - refresca tabla y usa saveMainJson parcheado
- **********************************************************/
-async function guardarTodosLosPrecios(){
-  mostrarLoading();
-  try{
-    // NO reconstruir productos desde la tabla
-    productos = productos.map(p => ({
-      ...p,
-      precio: sanitizePrice(p.precio)
+  try {
+    // 1. Guardar ES
+    const outES = productos.map(p => ({
+      nombre: p.nombre, descripcion: p.descripcion, precio: sanitizePrice(p.precio), imagen: p.imagen, categoria: p.categoria, id: p.id
     }));
+    await githubPutFile(MAIN_JSON, JSON.stringify(outES, null, 2), "Update ES");
 
-    await saveMainJson(productos, `Guardar TODOS los productos - sincronizando precios a EN/PT`);
-    await syncPricesToLangs();
+    // 2. Sincronizar EN y PT (Precios)
+    await syncLangs(productos);
 
-    showToast('Todos los cambios guardados y sincronizados (ES/EN/PT)', 'ok', 3000);
-    render(productos);
-
- }catch(e){
-  console.error(e);
-  showToast('Error al guardar todos: ' + (e.message||e), 'err', 6000);
-} finally {
-  ocultarLoading();
-  desbloquearUI();
+    showToast("¡Carta actualizada al 100%!");
+  } catch(e) {
+    showToast("Error al sincronizar. Intentá de nuevo.", "err");
+  } finally {
+    ocultarLoading();
+    desbloquearUI();
+    loadProducts();
+  }
 }
+
+async function syncLangs(masterList){
+  const files = [ {path: EN_JSON, lang: 'EN'}, {path: PT_JSON, lang: 'PT'} ];
+  for(const f of files){
+    try {
+      const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${f.path}?t=${Date.now()}`);
+      let list = await res.json();
+      list = list.map(item => {
+        const master = masterList.find(m => m.id === item.id);
+        if(master) {
+          const p = sanitizePrice(master.precio);
+          if(item.precio !== undefined) item.precio = p;
+          if(item.price !== undefined) item.price = p;
+          if(item.preco !== undefined) item.preco = p;
+        }
+        return item;
+      });
+      await githubPutFile(f.path, JSON.stringify(list, null, 2), `Sync Prices ${f.lang}`);
+    } catch(e) { console.error("Error en lang", f.path); }
+  }
 }
 
-/**********************************************************
- * Filtrado (no rompe indices: actions usan ids)
- **********************************************************/
+/**************** FORM ****************/
+function toggleForm(){ const f=document.getElementById('form'); f.style.display=(f.style.display==='none'||f.style.display==='')?'block':'none'; }
+function cancelForm(){ document.getElementById('form').reset(); document.getElementById('editId').value=''; toggleForm(); }
+function previewImage(){ const img=document.getElementById('preview'); img.src=document.getElementById('imagen').value; img.style.display='block'; }
+
+function guardarFormulario(){
+  const id = document.getElementById('editId').value;
+  const obj = {
+    nombre: document.getElementById('nombre').value,
+    precio: sanitizePrice(document.getElementById('precio').value),
+    descripcion: document.getElementById('descripcion').value,
+    imagen: document.getElementById('imagen').value,
+    categoria: document.getElementById('categoria').value,
+    id: id || generateNextProdId()
+  };
+
+  if(id) {
+    const idx = findIndexById(id);
+    productos[idx] = obj;
+  } else {
+    productos.push(obj);
+  }
+  render(productos);
+  cancelForm();
+  showToast("Lista actualizada localmente");
+}
+
+function loadIntoFormById(id){
+  const p = productos.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById('editId').value = p.id;
+  document.getElementById('nombre').value = p.nombre;
+  document.getElementById('precio').value = p.precio;
+  document.getElementById('descripcion').value = p.descripcion;
+  document.getElementById('imagen').value = p.imagen;
+  document.getElementById('categoria').value = p.categoria;
+  previewImage();
+  document.getElementById('form').style.display='block';
+  window.scrollTo(0,0);
+}
+
+/**************** UTIL ****************/
 function filterProducts(){
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  if(!q){ render(productos); return; }
-  const filtered = productos.filter(p =>
-    (p.nombre||'').toLowerCase().includes(q) ||
-    (p.descripcion||'').toLowerCase().includes(q) ||
-    (p.categoria||'').toLowerCase().includes(q)
-  );
-  render(filtered);
+  const q = document.getElementById('search').value.toLowerCase();
+  const f = productos.filter(p => p.nombre.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q));
+  render(f);
 }
-  function irTeleprompter(){
-  window.open("https://tilo-restocafe.github.io/cartaaguero/admin/admin.html", "_blank");
-}
-function irWhatsApp(){
-  const numero = "5491123140119"; // ← poné tu número real
-  const mensaje = encodeURIComponent(
-    "Hola, necesito ayuda con el admin de la carta digital"
-  );
-  window.open(`https://wa.me/${numero}?text=${mensaje}`, "_blank");
-}
+function irTeleprompter(){ window.open(`https://${USERNAME}.github.io/${REPO}/admin/admin.html`, "_blank"); }
+function irWhatsApp(){ window.open("https://wa.me/5491123140119?text=Hola+MenuClick+Ayuda", "_blank"); }
 
-/**********************************************************
- * Init
- **********************************************************/
-document.addEventListener('DOMContentLoaded', () => { loadProducts(); });
+// Inicio
+document.addEventListener('DOMContentLoaded', () => {
+  loadProducts();
+  validarTokenGitHub();
+});
 </script>
-<div id="loadingOverlay" style="
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.6);
-color:#fff;
-display:none;
-align-items:center;
-justify-content:center;
-font-size:22px;
-z-index:5000;
-">
-⏳ Guardando cambios... no cierres esta página hasta que se actualice
-</div>
 </body>
 </html>
