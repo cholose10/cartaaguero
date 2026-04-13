@@ -283,6 +283,18 @@ header img{
 </head>
 
 <body>
+ <div id="teleprompter" onclick="abrirModalTele()" style="cursor:pointer;">
+  <div id="tele-wrapper">
+    <div id="tele-track">Cargando sugerencias...</div>
+  </div>
+</div>
+
+<style>
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+</style>
 <!-- TELEPROMPTER -->
 <div id="teleprompter">
   <div id="tele-wrapper">
@@ -392,6 +404,25 @@ style.innerHTML = `
   to{transform:translateX(-50%)}
 }`;
 document.head.appendChild(style);
+  // Función para abrir la ventana con las sugerencias
+function abrirModalTele() {
+  const modal = document.getElementById('modalTele');
+  const contenido = document.getElementById('modal-content-text');
+  
+  // Limpiamos el texto del tele-track para que se vea lindo en la ventana (quitamos los duplicados)
+  const textoSucio = document.getElementById('tele-track').innerText;
+  const textoLimpio = textoSucio.split(' — ')[1].split(' ✦ ')[0]; // Tomamos solo las sugerencias
+  
+  // Armamos una lista con las sugerencias
+  const listaSugerencias = textoLimpio.split('   ✦   ');
+  contenido.innerHTML = "<ul>" + listaSugerencias.map(s => `<li style="margin-bottom:10px">${s}</li>`).join('') + "</ul>";
+  
+  modal.style.display = 'flex';
+}
+
+function cerrarModal() {
+  document.getElementById('modalTele').style.display = 'none';
+}
 
 /* ================= FUNCIONES ORIGINALES ================= */
 
