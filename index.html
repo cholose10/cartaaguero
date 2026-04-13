@@ -144,14 +144,65 @@ header img{
   margin:18px;
 }
 
-#category-buttons button{
-  background:linear-gradient(135deg,#9a7b65,#7a5a46);
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  padding:10px 18px;
-  font-weight:600;
-  cursor:pointer;
+/* ================= CATEGORÍAS ANIMADAS ================= */
+
+#category-buttons button {
+  background: linear-gradient(135deg, #9a7b65, #7a5a46);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rebote suave */
+  position: relative;
+  overflow: hidden; /* Necesario para el efecto de brillo */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  
+  /* Animación de latido constante */
+  animation: latidoSutil 3s infinite ease-in-out;
+}
+
+/* El efecto de brillo que pasa por arriba del botón */
+#category-buttons button::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 20%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(30deg);
+  transition: none;
+  animation: brilloBarrido 4s infinite;
+}
+
+/* Efecto cuando el usuario pasa el mouse o toca */
+#category-buttons button:hover {
+  transform: scale(1.1) translateY(-3px);
+  filter: brightness(1.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Animación de Latido */
+@keyframes latidoSutil {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Animación de Brillo */
+@keyframes brilloBarrido {
+  0% { left: -60%; }
+  20% { left: 120%; }
+  100% { left: 120%; }
+}
+
+/* Resaltar el botón que está seleccionado */
+#category-buttons button.active-cat {
+  background: linear-gradient(135deg, #8c6954, #45270a);
+  border: 1px solid rgba(255,255,255,0.4);
+  animation: none; /* Quitamos el latido cuando ya está seleccionado */
+  transform: scale(1.1);
 }
 
 /* ================= PRODUCTOS ================= */
@@ -409,10 +460,19 @@ function render(arr){
 function renderCategorias(){
   const categorias=["Todos",...new Set(productos.map(p=>p.categoria).filter(Boolean))];
   categoryContainer.innerHTML="";
+  
   categorias.forEach(cat=>{
     const btn=document.createElement("button");
     btn.textContent=cat;
+    
+    // Si es "Todos", lo marcamos como activo al empezar
+    if(cat === "Todos") btn.classList.add("active-cat");
+
     btn.onclick=()=>{
+      // Quitamos el resaltado de todos y se lo ponemos al actual
+      document.querySelectorAll("#category-buttons button").forEach(b => b.classList.remove("active-cat"));
+      btn.classList.add("active-cat");
+
       if(cat==="Todos") render(productos);
       else render(productos.filter(p=>p.categoria===cat));
       scrollToProducts();
