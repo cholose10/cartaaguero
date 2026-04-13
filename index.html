@@ -235,15 +235,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- PRODUCTOS Y CATEGORIAS ---
-  async function load(){
+async function load(){
     let archivo = idiomaActual==="es" ? "productos.json" : (idiomaActual==="en" ? "productos-en.json" : "productos-port.json");
     try {
       const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`,{cache:"no-store"});
-      productos = await res.json();
+      const data = await res.json();
+      
+      // Estandarizamos los nombres de las propiedades para que no den "undefined"
+      productos = data.map(p => ({
+        nombre: p.nombre || p.name || p.nome,
+        descripcion: p.descripcion || p.description || p.descricao,
+        precio: p.precio || p.price || p.preco,
+        imagen: p.imagen || p.image || p.imagem,
+        categoria: p.categoria || p.category
+      }));
+
       renderCategorias();
       render(productos);
       cargarTeleprompter();
-    } catch(e) { console.error(e); }
+    } catch(e) { 
+      console.error("Error cargando productos:", e);
+      productList.innerHTML = `<div style="color:white;">⚠️ Error al cargar el menú de ${idiomaActual}</div>`;
+    }
   }
 
   function render(arr){
