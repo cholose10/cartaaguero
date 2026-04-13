@@ -7,318 +7,154 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: url("img/fondo8.png") repeat;
-  background-size: cover;
-  margin: 0;
-  padding: 0;
-  padding-top: 55px; /* espacio para el teleprompter */
-  color: #45270a;
-  text-align: center;
-  scroll-behavior: smooth;
-}
-/* ================= TELEPROMPTER ================= */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url("img/fondo8.png") repeat;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      padding-top: 55px;
+      color: #45270a;
+      text-align: center;
+      scroll-behavior: smooth;
+    }
 
-#teleprompter{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background:rgba(0,0,0,.92);
-  color:#fff;
-  z-index:2000;
-  padding:12px 16px;
-  font-family:'Playfair Display',serif;
-  overflow:hidden;
-  border-bottom:1px solid rgba(255,255,255,.15);
-}
+    /* ================= TELEPROMPTER ================= */
+    #teleprompter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,.92);
+      color: #fff;
+      z-index: 2000;
+      padding: 12px 16px;
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+      cursor: pointer;
+    }
 
-#tele-wrapper{
-  overflow:hidden;
-  white-space:nowrap;
-  width:100%;
-}
+    #tele-wrapper { overflow: hidden; white-space: nowrap; width: 100%; }
+    #tele-track { display: inline-block; white-space: nowrap; will-change: transform; }
 
-#tele-track{
-  display:inline-block;
-  white-space:nowrap;
-  will-change:transform;
-}
+    @keyframes scrollTele {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
-/* Animación controlada por JS */
-@keyframes scrollText{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+    /* ================= MODAL TELEPROMPTER ================= */
+    #modalTele {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-/* Degradado elegante en bordes */
-#teleprompter::before,
-#teleprompter::after{
-  content:"";
-  position:absolute;
-  top:0;
-  width:60px;
-  height:100%;
-  pointer-events:none;
-  z-index:2;
-}
+    .modal-content {
+      background: #fff;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      position: relative;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: zoomIn 0.3s ease;
+    }
 
-#teleprompter::before{
-  left:0;
-  background:linear-gradient(to right, rgba(0,0,0,.95), transparent);
-}
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
-#teleprompter::after{
-  right:0;
-  background:linear-gradient(to left, rgba(0,0,0,.95), transparent);
-}
+    /* ================= CATEGORÍAS ANIMADAS ================= */
+    #category-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 18px; }
 
-/* ================= HEADER ================= */
+    #category-buttons button {
+      background: linear-gradient(135deg, #9a7b65, #7a5a46);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 22px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      animation: latidoSutil 3s infinite ease-in-out;
+    }
 
-header{
-  height:220px;
-  overflow:hidden;
-}
+    #category-buttons button::after {
+      content: "";
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 20%; height: 200%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(30deg);
+      animation: brilloBarrido 4s infinite;
+    }
 
-header img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+    @keyframes latidoSutil {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
 
-/* ================= IDIOMAS ================= */
+    @keyframes brilloBarrido {
+      0% { left: -60%; }
+      20% { left: 120%; }
+      100% { left: 120%; }
+    }
 
-#languageSwitcher{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:10px 0;
-}
+    #category-buttons button.active-cat {
+      background: linear-gradient(135deg, #8c6954, #45270a);
+      animation: none;
+      transform: scale(1.1);
+    }
 
-.lang-btn{
-  background:#806250;
-  color:#fff;
-  border:none;
-  padding:8px 14px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.lang-btn.active{
-  background:#a07b68;
-}
-
-/* ================= BUSCADOR ================= */
-
-.search-box{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin:15px;
-}
-
-.search-box input{
-  padding:10px;
-  width:60%;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-.search-box button{
-  background:#806250;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  padding:10px 16px;
-  cursor:pointer;
-}
-
-/* ================= CATEGORÍAS ================= */
-
-#category-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-  margin:18px;
-}
-
-/* ================= CATEGORÍAS ANIMADAS ================= */
-
-#category-buttons button {
-  background: linear-gradient(135deg, #9a7b65, #7a5a46);
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 10px 22px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rebote suave */
-  position: relative;
-  overflow: hidden; /* Necesario para el efecto de brillo */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  
-  /* Animación de latido constante */
-  animation: latidoSutil 3s infinite ease-in-out;
-}
-
-/* El efecto de brillo que pasa por arriba del botón */
-#category-buttons button::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -60%;
-  width: 20%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(30deg);
-  transition: none;
-  animation: brilloBarrido 4s infinite;
-}
-
-/* Efecto cuando el usuario pasa el mouse o toca */
-#category-buttons button:hover {
-  transform: scale(1.1) translateY(-3px);
-  filter: brightness(1.2);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-
-/* Animación de Latido */
-@keyframes latidoSutil {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-/* Animación de Brillo */
-@keyframes brilloBarrido {
-  0% { left: -60%; }
-  20% { left: 120%; }
-  100% { left: 120%; }
-}
-
-/* Resaltar el botón que está seleccionado */
-#category-buttons button.active-cat {
-  background: linear-gradient(135deg, #8c6954, #45270a);
-  border: 1px solid rgba(255,255,255,0.4);
-  animation: none; /* Quitamos el latido cuando ya está seleccionado */
-  transform: scale(1.1);
-}
-
-/* ================= PRODUCTOS ================= */
-
-#product-list{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  padding:10px;
-}
-
-.item{
-  background:rgba(255,255,255,.95);
-  border-radius:14px;
-  width:min(420px,100%);
-  box-shadow:0 2px 10px rgba(0,0,0,.15);
-  overflow:hidden;
-}
-
-.item img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-
-.item h3{
-  font-family:'Playfair Display',serif;
-  margin:8px;
-}
-
-.item p{
-  margin:0 8px 10px;
-}
-
-.price{
-  font-weight:bold;
-  margin-bottom:12px;
-  display:block;
-}
-
-/* ================= BOTÓN SUBIR ================= */
-
-#btnUp{
-  position:fixed;
-  bottom:25px;
-  right:25px;
-  background:#8c6954;
-  color:#fff;
-  border:none;
-  border-radius:50%;
-  width:45px;
-  height:45px;
-  font-size:22px;
-  display:none;
-  cursor:pointer;
-}
-#voiceHint{
-  position:fixed;
-  bottom:90px;
-  left:50%;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.85);
-  color:#fff;
-  padding:10px 18px;
-  border-radius:20px;
-  font-size:14px;
-  display:none;
-  z-index:3000;
-  animation:fadeIn .3s ease;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translate(-50%,10px);}
-  to{opacity:1; transform:translate(-50%,0);}
-}
-</style>
+    /* ================= RESTO DE ESTILOS ================= */
+    header { height: 220px; overflow: hidden; }
+    header img { width: 100%; height: 100%; object-fit: cover; }
+    .lang-btn { background: #806250; color: #fff; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; }
+    .lang-btn.active { background: #a07b68; }
+    .search-box { display: flex; justify-content: center; gap: 10px; margin: 15px; }
+    .search-box input { padding: 10px; width: 60%; border-radius: 8px; border: 1px solid #ccc; }
+    .search-box button { background: #806250; color: #fff; border: none; border-radius: 8px; padding: 10px 16px; cursor: pointer; }
+    #product-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px; }
+    .item { background: rgba(255,255,255,.95); border-radius: 14px; width: min(420px,100%); box-shadow: 0 2px 10px rgba(0,0,0,.15); overflow: hidden; }
+    .item img { width: 100%; height: 180px; object-fit: cover; }
+    .price { font-weight: bold; margin-bottom: 12px; display: block; }
+    #btnUp { position: fixed; bottom: 25px; right: 25px; background: #8c6954; color: #fff; border: none; border-radius: 50%; width: 45px; height: 45px; display: none; cursor: pointer; z-index: 1000; }
+  </style>
 </head>
 
 <body>
- <div id="teleprompter" onclick="abrirModalTele()" style="cursor:pointer;">
+
+<div id="teleprompter" onclick="abrirModalTele()">
   <div id="tele-wrapper">
     <div id="tele-track">Cargando sugerencias...</div>
   </div>
 </div>
 
-  <div id="modalTele" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
-
-  <div style="background:#fff; width:100%; max-width:500px; border-radius:15px; position:relative; padding:30px; box-shadow:0 10px 30px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease;">
-
-    <button onclick="cerrarModal()" style="position:absolute; top:10px; right:10px; background:#806250; color:#fff; border:none; border-radius:50%; width:30px; height:30px; cursor:pointer; font-weight:bold;">X</button>
-
+<div id="modalTele">
+  <div class="modal-content">
+    <button onclick="event.stopPropagation(); cerrarModal()" style="position:absolute; top:10px; right:10px; background:#806250; color:#fff; border:none; border-radius:50%; width:30px; height:30px; cursor:pointer;">X</button>
     <h2 style="font-family:'Playfair Display',serif; color:#45270a; margin-top:0;">Sugerencias del día ✦</h2>
-
     <div id="modal-content-text" style="text-align:left; line-height:1.6; color:#333; font-size:18px;"></div>
-
-  </div>
-
-</div>
-<style>
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-</style>
-<!-- TELEPROMPTER -->
-<div id="teleprompter">
-  <div id="tele-wrapper">
-    <div id="tele-track">Cargando sugerencias...</div>
   </div>
 </div>
+
 <header>
   <img src="img/Logo99.jpg" alt="Tilo Café">
 </header>
 
-<div class="banner" id="banner-text">¡Bienvenidos a Tilo Aguero!</div>
+<div class="banner" id="banner-text" style="margin: 15px 0; font-weight: bold;">¡Bienvenidos a Tilo Aguero!</div>
 
 <div id="languageSwitcher">
   <button id="btn-es" class="lang-btn">🇪🇸 Español</button>
@@ -327,7 +163,7 @@ header img{
 </div>
 
 <div class="search-box">
-  <input id="search" type="text" placeholder="Buscar por nombre, descripción o categoría...">
+  <input id="search" type="text" placeholder="Buscar plato...">
   <button id="btnSearch">Buscar</button>
   <button id="btnVoice">🗣️🎤</button>
 </div>
@@ -335,284 +171,124 @@ header img{
 <div id="category-buttons"></div>
 <div id="product-list"></div>
 <button id="btnUp">⬆️</button>
-<div id="voiceHint">🗣️🎤 Podés decir: "¿Qué me recomendás?"</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const USER = 'tilo-restocafe';
+  const REPO = 'cartaaguero';
+  let idiomaActual = localStorage.getItem('idioma') || 'es';
 
-const USER = 'tilo-restocafe';
-const REPO = 'cartaaguero';
-let idiomaActual = localStorage.getItem('idioma') || 'es';
+  const categoryContainer = document.getElementById('category-buttons');
+  const productList = document.getElementById('product-list');
+  const teleTrack = document.getElementById("tele-track");
+  let productos = [];
 
-const btnEs = document.getElementById('btn-es');
-const btnEn = document.getElementById('btn-en');
-const btnPt = document.getElementById('btn-pt');
-const banner = document.getElementById('banner-text');
-const categoryContainer = document.getElementById('category-buttons');
-const productList = document.getElementById('product-list');
-const searchInput = document.getElementById('search');
-const btnSearch = document.getElementById('btnSearch');
-const btnVoice = document.getElementById('btnVoice');  
-const btnUp = document.getElementById('btnUp');
-const voiceHint = document.getElementById("voiceHint");
-const teleTrack = document.getElementById("tele-track");
-
-let productos = [];
-
-/* ================= TELEPROMPTER ================= */
-
-function saludoSegunHora(){
-  const hora = new Date().getHours();
-
-  if(idiomaActual==="es"){
-    if(hora<12) return "☀️ Buenos días";
-    if(hora<19) return "🌤️ Buenas tardes";
-    return "🌙 Buenas noches";
+  // --- MODAL FUNCTIONS ---
+  window.abrirModalTele = function() {
+    const modal = document.getElementById('modalTele');
+    const contenido = document.getElementById('modal-content-text');
+    const textoSucio = teleTrack.innerText;
+    
+    // Intentamos limpiar el texto para mostrarlo en lista
+    const partes = textoSucio.split(' — ');
+    const sugerenciasTexto = partes[1] ? partes[1].split('   ✦   ')[0] : textoSucio;
+    const lista = sugerenciasTexto.split('   ✦   ');
+    
+    contenido.innerHTML = "<ul>" + lista.map(s => `<li style="margin-bottom:10px">${s}</li>`).join('') + "</ul>";
+    modal.style.display = 'flex';
   }
-  if(idiomaActual==="en"){
-    if(hora<12) return "☀️ Good morning";
-    if(hora<19) return "🌤️ Good afternoon";
-    return "🌙 Good evening";
+
+  window.cerrarModal = function() {
+    document.getElementById('modalTele').style.display = 'none';
   }
-  if(idiomaActual==="pt"){
-    if(hora<12) return "☀️ Bom dia";
-    if(hora<19) return "🌤️ Boa tarde";
-    return "🌙 Boa noite";
+
+  // Cerrar modal si clican fuera
+  window.onclick = function(event) {
+    if (event.target == document.getElementById('modalTele')) cerrarModal();
   }
-}
 
-async function cargarTeleprompter(){
-  try{
-    const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json`,{cache:"no-store"});
-    const data = await res.json();
-    const sugerencias = data[idiomaActual] || [];
-
-    const textoFinal = saludoSegunHora()+" — "+sugerencias.join("   ✦   ");
-
-    teleTrack.innerHTML = textoFinal + "   ✦   " + textoFinal;
-
-    iniciarScroll();
-
-  }catch{
-    teleTrack.textContent="Bienvenidos a Tilo Café ☕";
+  // --- TELEPROMPTER ---
+  async function cargarTeleprompter(){
+    try {
+      const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json`,{cache:"no-store"});
+      const data = await res.json();
+      const sugerencias = data[idiomaActual] || [];
+      const saludo = getSaludo();
+      const textoFinal = saludo + " — " + sugerencias.join("   ✦   ");
+      teleTrack.innerHTML = textoFinal + "   ✦   " + textoFinal;
+      iniciarScroll();
+    } catch { teleTrack.textContent = "Bienvenidos a Tilo Café ☕"; }
   }
-}
 
-function iniciarScroll(){
-  const velocidad = 60;
-  const ancho = teleTrack.offsetWidth / 2;
-  const duracion = ancho / velocidad;
+  function getSaludo(){
+    const hora = new Date().getHours();
+    if(idiomaActual==="es") return hora<12 ? "☀️ Buenos días" : (hora<19 ? "🌤️ Buenas tardes" : "🌙 Buenas noches");
+    if(idiomaActual==="en") return hora<12 ? "☀️ Good morning" : (hora<19 ? "🌤️ Good afternoon" : "🌙 Good evening");
+    return hora<12 ? "☀️ Bom dia" : (hora<19 ? "🌤️ Boa tarde" : "🌙 Boa noite");
+  }
 
-  teleTrack.style.animation = "none";
-
-  setTimeout(()=>{
+  function iniciarScroll(){
+    const velocidad = 60;
+    const ancho = teleTrack.offsetWidth / 2;
+    const duracion = ancho / velocidad;
     teleTrack.style.animation = `scrollTele ${duracion}s linear infinite`;
-  },50);
-}
-
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes scrollTele{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}`;
-document.head.appendChild(style);
-  // Función para abrir la ventana con las sugerencias
-function abrirModalTele() {
-  const modal = document.getElementById('modalTele');
-  const contenido = document.getElementById('modal-content-text');
-  
-  // Limpiamos el texto del tele-track para que se vea lindo en la ventana (quitamos los duplicados)
-  const textoSucio = document.getElementById('tele-track').innerText;
-  const textoLimpio = textoSucio.split(' — ')[1].split(' ✦ ')[0]; // Tomamos solo las sugerencias
-  
-  // Armamos una lista con las sugerencias
-  const listaSugerencias = textoLimpio.split('   ✦   ');
-  contenido.innerHTML = "<ul>" + listaSugerencias.map(s => `<li style="margin-bottom:10px">${s}</li>`).join('') + "</ul>";
-  
-  modal.style.display = 'flex';
-}
-
-function cerrarModal() {
-  document.getElementById('modalTele').style.display = 'none';
-}
-
-/* ================= FUNCIONES ORIGINALES ================= */
-
-function scrollToProducts(){
-  const yOffset = -20;
-  const y = productList.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  window.scrollTo({ top:y, behavior:"smooth" });
-}
-
-function limpiarTexto(texto){
-  return texto.toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"");
-}
-
-/* CARGAR PRODUCTOS */
-async function load(){
-
-  actualizarBotones();
-
-  let archivo="productos.json";
-  if(idiomaActual==="en") archivo="productos-en.json";
-  if(idiomaActual==="pt") archivo="productos-port.json";
-
-  const URL=`https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`;
-
-  try{
-    const res=await fetch(URL,{cache:"no-store"});
-    const data=await res.json();
-
-    productos=data.map(p=>({
-      nombre:p.nombre||p.name||p.nome,
-      descripcion:p.descripcion||p.description||p.descricao,
-      precio:p.precio||p.price||p.preco,
-      imagen:p.imagen||p.image||p.imagem,
-      categoria:p.categoria||p.category
-    }));
-
-    renderCategorias();
-    render(productos);
-    cargarTeleprompter();   // 👈 ACÁ ESTABA LO QUE FALTABA
-
-  }catch{
-    productList.innerHTML=`<div class="msg">⚠️ No se pudieron cargar los productos.</div>`;
   }
-}
 
-/* RENDER */
-function render(arr){
-  productList.innerHTML="";
-  if(arr.length===0){
-    productList.innerHTML=`<div class="msg">🔍 No se encontraron resultados.</div>`;
-    return;
+  // --- PRODUCTOS Y CATEGORIAS ---
+  async function load(){
+    let archivo = idiomaActual==="es" ? "productos.json" : (idiomaActual==="en" ? "productos-en.json" : "productos-port.json");
+    try {
+      const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`,{cache:"no-store"});
+      productos = await res.json();
+      renderCategorias();
+      render(productos);
+      cargarTeleprompter();
+    } catch(e) { console.error(e); }
   }
-  arr.forEach(p=>{
-    productList.innerHTML+=`
+
+  function render(arr){
+    productList.innerHTML = arr.map(p => `
       <div class="item">
         <img src="${p.imagen}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
-        <p>${p.descripcion||""}</p>
+        <p>${p.descripcion || ""}</p>
         <span class="price">$${p.precio}</span>
-      </div>`;
-  });
-}
-
-function renderCategorias(){
-  const categorias=["Todos",...new Set(productos.map(p=>p.categoria).filter(Boolean))];
-  categoryContainer.innerHTML="";
-  
-  categorias.forEach(cat=>{
-    const btn=document.createElement("button");
-    btn.textContent=cat;
-    
-    // Si es "Todos", lo marcamos como activo al empezar
-    if(cat === "Todos") btn.classList.add("active-cat");
-
-    btn.onclick=()=>{
-      // Quitamos el resaltado de todos y se lo ponemos al actual
-      document.querySelectorAll("#category-buttons button").forEach(b => b.classList.remove("active-cat"));
-      btn.classList.add("active-cat");
-
-      if(cat==="Todos") render(productos);
-      else render(productos.filter(p=>p.categoria===cat));
-      scrollToProducts();
-    };
-    categoryContainer.appendChild(btn);
-  });
-}
-
-/* BUSCADOR */
-function filtrar(){
-  const texto=limpiarTexto(searchInput.value);
-  return productos.filter(p=>{
-    return limpiarTexto(p.nombre||"").includes(texto) ||
-           limpiarTexto(p.descripcion||"").includes(texto) ||
-           limpiarTexto(p.categoria||"").includes(texto);
-  });
-}
-
-searchInput.addEventListener("input",()=>render(filtrar()));
-btnSearch.addEventListener("click",()=>{ render(filtrar()); scrollToProducts(); });
-searchInput.addEventListener("keydown",e=>{
-  if(e.key==="Enter"){
-    render(filtrar());
-    scrollToProducts();
+      </div>`).join('');
   }
-});
-/* ================= BUSQUEDA POR VOZ ================= */
 
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  function renderCategorias(){
+    const cats = ["Todos", ...new Set(productos.map(p => p.categoria).filter(Boolean))];
+    categoryContainer.innerHTML = cats.map(cat => `
+      <button class="${cat==="Todos"?'active-cat':''}" onclick="filtrarCat('${cat}', this)">${cat}</button>
+    `).join('');
+  }
 
-if (SpeechRecognition) {
+  window.filtrarCat = function(cat, btn){
+    document.querySelectorAll("#category-buttons button").forEach(b => b.classList.remove("active-cat"));
+    btn.classList.add("active-cat");
+    const filtrados = cat === "Todos" ? productos : productos.filter(p => p.categoria === cat);
+    render(filtrados);
+    window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+  }
 
-  const recognition = new SpeechRecognition();
-  function idiomaVoz(){
-  if(idiomaActual==="es") return "es-AR";// español argentina
-  if(idiomaActual==="en") return "en-US";
-  if(idiomaActual==="pt") return "pt-BR";
-}
-recognition.lang = idiomaVoz();
-  recognition.continuous = false;
-  recognition.interimResults = false;
-btnVoice.addEventListener("click", () => {
+  // --- BUSCADOR ---
+  document.getElementById('btnSearch').onclick = () => {
+    const q = document.getElementById('search').value.toLowerCase();
+    const f = productos.filter(p => p.nombre.toLowerCase().includes(q) || (p.categoria && p.categoria.toLowerCase().includes(q)));
+    render(f);
+  };
 
-  voiceHint.style.display="block";
+  // --- IDIOMAS ---
+  document.getElementById('btn-es').onclick = () => { idiomaActual='es'; load(); };
+  document.getElementById('btn-en').onclick = () => { idiomaActual='en'; load(); };
+  document.getElementById('btn-pt').onclick = () => { idiomaActual='pt'; load(); };
 
-  setTimeout(()=>{
-    voiceHint.style.display="none";
-  },4000);
+  // --- BOTON SUBIR ---
+  window.onscroll = () => { document.getElementById('btnUp').style.display = window.scrollY > 300 ? "block" : "none"; };
+  document.getElementById('btnUp').onclick = () => window.scrollTo({top:0, behavior:"smooth"});
 
-  recognition.start();
-  btnVoice.textContent = "🗣️🎙️";
-
-});
-  recognition.addEventListener("result", (event) => {
-    const textoVoz = event.results[0][0].transcript;
-    
-    searchInput.value = textoVoz;
-    render(filtrar());
-    scrollToProducts();
-
-    btnVoice.textContent = "🗣️🎤";
-  });
-
-  recognition.addEventListener("end", () => {
-    btnVoice.textContent = "🗣️🎤";
-  });
-
-} else {
-  btnVoice.style.display = "none";
-}  
-
-/* IDIOMA */
-function actualizarBotones(){
-  btnEs.classList.toggle("active",idiomaActual==="es");
-  btnEn.classList.toggle("active",idiomaActual==="en");
-  btnPt.classList.toggle("active",idiomaActual==="pt");
-
-  if(idiomaActual==="es") banner.textContent="¡Bienvenidos a Tilo Café Aguero!";
-  if(idiomaActual==="en") banner.textContent="Welcome to Tilo Café Aguero!";
-  if(idiomaActual==="pt") banner.textContent="Bem-vindo ao Tilo Café Aguero!";
-}
-
-btnEs.onclick=()=>{idiomaActual="es";localStorage.setItem("idioma","es");load();};
-btnEn.onclick=()=>{idiomaActual="en";localStorage.setItem("idioma","en");load();};
-btnPt.onclick=()=>{idiomaActual="pt";localStorage.setItem("idioma","pt");load();};
-
-/* BOTÓN SUBIR */
-window.addEventListener("scroll",()=>{
-  btnUp.style.display=window.scrollY>300?"block":"none";
-});
-btnUp.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
-
-load();
-
+  load();
 });
 </script>
-
 </body>
 </html>
