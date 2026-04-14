@@ -284,13 +284,53 @@ async function load(){
     window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
   }
 
-  // --- BUSCADOR ---
-  document.getElementById('btnSearch').onclick = () => {
-    const q = document.getElementById('search').value.toLowerCase();
-    const f = productos.filter(p => p.nombre.toLowerCase().includes(q) || (p.categoria && p.categoria.toLowerCase().includes(q)));
+// --- BUSCADOR MEJORADO ---
+  function filtrar() {
+    const q = document.getElementById('search').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const f = productos.filter(p => {
+      const nombre = (p.nombre || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const desc = (p.descripcion || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const cat = (p.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      return nombre.includes(q) || desc.includes(q) || cat.includes(q);
+    });
     render(f);
+  }
+
+  document.getElementById('btnSearch').onclick = () => {
+    filtrar();
+    window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
   };
 
+  document.getElementById('search').onkeyup = (e) => {
+    filtrar(); // Filtra mientras escribís
+    if (e.key === 'Enter') {
+      window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+    }
+  };
+  // --- BÚSQUEDA POR VOZ ---
+  const btnVoice = document.getElementById('btnVoice');
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    
+    recognition.onstart = () => { btnVoice.textContent = "🛑 Listening..."; };
+    recognition.onend = () => { btnVoice.textContent = "🗣️🎤"; };
+    
+    recognition.onresult = (event) => {
+      const voiceText = event.results[0][0].transcript;
+      document.getElementById('search').value = voiceText;
+      filtrar();
+      window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+    };
+
+    btnVoice.onclick = () => {
+      recognition.lang = idiomaActual === 'es' ? 'es-AR' : (idiomaActual === 'en' ? 'en-US' : 'pt-BR');
+      recognition.start();
+    };
+  } else {
+    btnVoice.style.display = 'none'; // Si el navegador no lo soporta, se oculta
+  }
   // --- IDIOMAS ---
   document.getElementById('btn-es').onclick = () => { idiomaActual='es'; load(); };
   document.getElementById('btn-en').onclick = () => { idiomaActual='en'; load(); };
