@@ -58,15 +58,17 @@
     }
 
     .modal-content {
-      background: #fff;
-      width: 100%;
-      max-width: 500px;
-      border-radius: 15px;
-      position: relative;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      animation: zoomIn 0.3s ease;
-    }
+  background: #fff;
+  width: 90%; /* Un poco más ancho para aprovechar el espacio */
+  max-width: 500px;
+  max-height: 85vh; /* IMPORTANTE: No deja que el modal sea más alto que la pantalla */
+  overflow-y: auto;  /* IMPORTANTE: Si el texto es largo, aparece el scroll interno */
+  border-radius: 15px;
+  position: relative;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: zoomIn 0.3s ease;
+}
 
     @keyframes zoomIn {
       from { transform: scale(0.8); opacity: 0; }
@@ -184,19 +186,25 @@ document.addEventListener('DOMContentLoaded', () => {
   let productos = [];
 
   // --- MODAL FUNCTIONS ---
-  window.abrirModalTele = function() {
+ window.abrirModalTele = function() {
     const modal = document.getElementById('modalTele');
     const contenido = document.getElementById('modal-content-text');
     const textoSucio = teleTrack.innerText;
     
-    // Intentamos limpiar el texto para mostrarlo en lista
     const partes = textoSucio.split(' — ');
     const sugerenciasTexto = partes[1] ? partes[1].split('   ✦   ')[0] : textoSucio;
     const lista = sugerenciasTexto.split('   ✦   ');
     
-    contenido.innerHTML = "<ul>" + lista.map(s => `<li style="margin-bottom:10px">${s}</li>`).join('') + "</ul>";
+    // Agregamos un saludo de Ron antes de la lista
+    contenido.innerHTML = `
+      <p style="font-weight:600; color:#603d24;">¡Hola! Soy Ron 🤖, tu mozo digital. Hoy te recomiendo especialmente:</p>
+      <ul style="padding-left: 20px;">
+        ${lista.map(s => `<li style="margin-bottom:12px; font-size:16px;">${s}</li>`).join('')}
+      </ul>
+      <p style="font-size:14px; color:#888; text-align:center; margin-top:20px;">Toca afuera para seguir viendo la carta.</p>
+    `;
     modal.style.display = 'flex';
-  }
+}
 
   window.cerrarModal = function() {
     document.getElementById('modalTele').style.display = 'none';
