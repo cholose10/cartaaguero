@@ -89,7 +89,6 @@
     <div><b>Guardando y sincronizando ES / EN / PT...</b></div>
     <div style="font-size:14px; margin-top:10px; color:#ccc">No cierres la página, se descargará un backup automáticamente.</div>
   </div>
-
 <script>
 const USERNAME = "tilo-restocafe";
 const REPO = "cartaaguero";
@@ -100,6 +99,7 @@ const EN_JSON = "productos-en.json";
 const PT_JSON = "productos-port.json";
 
 let productos = [];
+let guardando = false;
 
 /**************** UI HELPERS ****************/
 
@@ -521,9 +521,23 @@ async function githubPutFile(path, contentString, message){
 
 async function guardarTodosLosPrecios(){
 
+  if(guardando){
+
+    showToast(
+      "⏳ Ya se está guardando...",
+      "info"
+    );
+
+    return;
+  }
+
+  guardando = true;
+
   if(!getToken()){
 
     showToast("Falta Token", "err");
+
+    guardando = false;
 
     return;
   }
@@ -571,7 +585,12 @@ async function guardarTodosLosPrecios(){
 
     await syncLangs(productos);
 
-    showToast("¡Carta actualizada!");
+    render(productos);
+
+    showToast(
+      "✅ Cambios aplicados correctamente",
+      "ok"
+    );
 
   } catch(e){
 
@@ -584,11 +603,19 @@ async function guardarTodosLosPrecios(){
 
   } finally {
 
+    guardando = false;
+
     ocultarLoading();
 
     desbloquearUI();
 
-    loadProducts();
+    render(productos);
+
+    setTimeout(() => {
+
+      loadProducts();
+
+    }, 8000);
   }
 }
 
