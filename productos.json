@@ -10,7 +10,7 @@
   {
     "nombre": "Café expresso jarrito",
     "descripcion": "Café americano",
-    "precio": "8000",
+    "precio": "3800",
     "imagen": "img/Americano.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0002"
@@ -18,7 +18,7 @@
   {
     "nombre": "Café descafeinado",
     "descripcion": "Café descafeinado",
-    "precio": "456",
+    "precio": "8000",
     "imagen": "img/20250813_094842.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0003"
@@ -26,7 +26,7 @@
   {
     "nombre": "Café con leche tradicional",
     "descripcion": "Café con leche tradicional",
-    "precio": "40003511",
+    "precio": "52222",
     "imagen": "img/Cafechechu.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0004"
@@ -34,7 +34,7 @@
   {
     "nombre": "Café expresso Doble",
     "descripcion": "Café expresso Doble",
-    "precio": "55",
+    "precio": "5500",
     "imagen": "img/doble.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0005"
