@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "3600",
+    "price": "7000",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -27,7 +27,7 @@
     "id": "prod0004",
     "name": "Traditional Coffee with Milk",
     "description": "Traditional coffee with milk",
-    "price": "4700",
+    "price": "4000",
     "image": "img/Cafechechu.jpg",
     "category": "Coffee Shop ☕️"
   },
