@@ -176,179 +176,489 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
   const USER = 'tilo-restocafe';
   const REPO = 'cartaaguero';
+
   let idiomaActual = localStorage.getItem('idioma') || 'es';
 
   const categoryContainer = document.getElementById('category-buttons');
   const productList = document.getElementById('product-list');
   const teleTrack = document.getElementById("tele-track");
+
   let productos = [];
 
-  // --- MODAL FUNCTIONS ---
- window.abrirModalTele = function() {
+  // =========================
+  // MODAL
+  // =========================
+
+  window.abrirModalTele = function () {
+
     const modal = document.getElementById('modalTele');
     const contenido = document.getElementById('modal-content-text');
-    const textoSucio = teleTrack.innerText;
-    
-    const partes = textoSucio.split(' — ');
-    const sugerenciasTexto = partes[1] ? partes[1].split('   ✦   ')[0] : textoSucio;
-    const lista = sugerenciasTexto.split('   ✦   ');
-    
-    // Agregamos un saludo de Ron antes de la lista
+
+    const texto = teleTrack.innerText || "";
+
+    const partes = texto.split(" — ");
+
+    const sugerenciasTexto = partes[1] || texto;
+
+    const lista = sugerenciasTexto
+      .split("✦")
+      .map(s => s.trim())
+      .filter(Boolean);
+
     contenido.innerHTML = `
-      <p style="font-weight:600; color:#603d24;">¡Hola! Soy Ron 🤖, tu mozo digital. bienvenido a....:</p>
-      <ul style="padding-left: 20px;">
-        ${lista.map(s => `<li style="margin-bottom:12px; font-size:16px;">${s}</li>`).join('')}
+      <p style="font-weight:600; color:#603d24;">
+        ¡Hola! Soy Ron 🤖, tu mozo digital.
+      </p>
+
+      <ul style="padding-left:20px;">
+        ${lista.map(s => `
+          <li style="margin-bottom:12px; font-size:16px;">
+            ${s}
+          </li>
+        `).join('')}
       </ul>
-      <p style="font-size:14px; color:#888; text-align:center; margin-top:20px;">Toca afuera para seguir viendo la carta.</p>
+
+      <p style="font-size:14px; color:#888; text-align:center;">
+        Tocá afuera para cerrar.
+      </p>
     `;
+
     modal.style.display = 'flex';
-}
+  };
 
-  window.cerrarModal = function() {
+  window.cerrarModal = function () {
     document.getElementById('modalTele').style.display = 'none';
-  }
+  };
 
-  // Cerrar modal si clican fuera
-  window.onclick = function(event) {
-    if (event.target == document.getElementById('modalTele')) cerrarModal();
-  }
+  // Cerrar modal tocando afuera
+  document.getElementById('modalTele').addEventListener('click', function(e){
+    if(e.target === this){
+      cerrarModal();
+    }
+  });
 
-  // --- TELEPROMPTER ---
+  // =========================
+  // TELEPROMPTER
+  // =========================
+
   async function cargarTeleprompter(){
+
     try {
-      const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json`,{cache:"no-store"});
+
+      const res = await fetch(
+        `https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json`,
+        { cache: "no-store" }
+      );
+
       const data = await res.json();
+
       const sugerencias = data[idiomaActual] || [];
+
       const saludo = getSaludo();
+
       const textoFinal = saludo + " — " + sugerencias.join("   ✦   ");
+
       teleTrack.innerHTML = textoFinal + "   ✦   " + textoFinal;
+
       iniciarScroll();
-    } catch { teleTrack.textContent = "Bienvenidos a Tilo Café ☕"; }
+
+    } catch (e) {
+
+      console.error("Error teleprompter:", e);
+
+      teleTrack.textContent = "Bienvenidos a Tilo Café ☕";
+    }
   }
 
   function getSaludo(){
+
     const hora = new Date().getHours();
-    if(idiomaActual==="es") return hora<12 ? "☀️ Buenos días" : (hora<19 ? "🌤️ Buenas tardes" : "🌙 Buenas noches");
-    if(idiomaActual==="en") return hora<12 ? "☀️ Good morning" : (hora<19 ? "🌤️ Good afternoon" : "🌙 Good evening");
-    return hora<12 ? "☀️ Bom dia" : (hora<19 ? "🌤️ Boa tarde" : "🌙 Boa noite");
+
+    if(idiomaActual === "es"){
+      return hora < 12
+        ? "☀️ Buenos días"
+        : hora < 19
+        ? "🌤️ Buenas tardes"
+        : "🌙 Buenas noches";
+    }
+
+    if(idiomaActual === "en"){
+      return hora < 12
+        ? "☀️ Good morning"
+        : hora < 19
+        ? "🌤️ Good afternoon"
+        : "🌙 Good evening";
+    }
+
+    return hora < 12
+      ? "☀️ Bom dia"
+      : hora < 19
+      ? "🌤️ Boa tarde"
+      : "🌙 Boa noite";
   }
 
   function iniciarScroll(){
-    const velocidad = 60;
-    const ancho = teleTrack.offsetWidth / 2;
-    const duracion = ancho / velocidad;
-    teleTrack.style.animation = `scrollTele ${duracion}s linear infinite`;
+
+    teleTrack.style.animation = "none";
+
+    setTimeout(() => {
+
+      const velocidad = 60;
+
+      const ancho = teleTrack.scrollWidth / 2;
+
+      const duracion = ancho / velocidad;
+
+      teleTrack.style.animation =
+        `scrollTele ${duracion}s linear infinite`;
+
+    }, 100);
   }
 
-  // --- PRODUCTOS Y CATEGORIAS ---
-async function load(){
-    let archivo = idiomaActual==="es" ? "productos.json" : (idiomaActual==="en" ? "productos-en.json" : "productos-port.json");
+  // =========================
+  // CARGA PRODUCTOS
+  // =========================
+
+  async function load(){
+
+    localStorage.setItem('idioma', idiomaActual);
+
+    actualizarBotonesIdioma();
+
+    let archivo =
+      idiomaActual === "es"
+      ? "productos.json"
+      : idiomaActual === "en"
+      ? "productos-en.json"
+      : "productos-port.json";
+
     try {
-      const res = await fetch(`https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`,{cache:"no-store"});
+
+      const res = await fetch(
+        `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`,
+        { cache: "no-store" }
+      );
+
       const data = await res.json();
-      
-      // Estandarizamos los nombres de las propiedades para que no den "undefined"
+
       productos = data.map(p => ({
-        nombre: p.nombre || p.name || p.nome,
-        descripcion: p.descripcion || p.description || p.descricao,
-        precio: p.precio || p.price || p.preco,
-        imagen: p.imagen || p.image || p.imagem,
-        categoria: p.categoria || p.category
+
+        nombre:
+          p.nombre ||
+          p.name ||
+          p.nome ||
+          "Sin nombre",
+
+        descripcion:
+          p.descripcion ||
+          p.description ||
+          p.descricao ||
+          "",
+
+        precio:
+          p.precio ||
+          p.price ||
+          p.preco ||
+          "0",
+
+        imagen:
+          p.imagen ||
+          p.image ||
+          p.imagem ||
+          "https://via.placeholder.com/400x300?text=Tilo+Cafe",
+
+        categoria:
+          p.categoria ||
+          p.category ||
+          "Otros"
       }));
 
       renderCategorias();
+
       render(productos);
+
       cargarTeleprompter();
-    } catch(e) { 
+
+    } catch (e) {
+
       console.error("Error cargando productos:", e);
-      productList.innerHTML = `<div style="color:white;">⚠️ Error al cargar el menú de ${idiomaActual}</div>`;
+
+      productList.innerHTML = `
+        <div style="color:white;">
+          ⚠️ Error al cargar menú
+        </div>
+      `;
     }
   }
 
-  function render(arr){
-    productList.innerHTML = arr.map(p => `
-      <div class="item">
-        <img src="${p.imagen}" alt="${p.nombre}">
-        <h3>${p.nombre}</h3>
-        <p>${p.descripcion || ""}</p>
-        <span class="price">$${p.precio}</span>
-      </div>`).join('');
-  }
+  // =========================
+  // RENDER
+  // =========================
 
-  function renderCategorias(){
-    const cats = ["Todos", ...new Set(productos.map(p => p.categoria).filter(Boolean))];
-    categoryContainer.innerHTML = cats.map(cat => `
-      <button class="${cat==="Todos"?'active-cat':''}" onclick="filtrarCat('${cat}', this)">${cat}</button>
+  function render(arr){
+
+    if(!arr.length){
+
+      productList.innerHTML = `
+        <p style="color:white;">
+          No se encontraron productos
+        </p>
+      `;
+
+      return;
+    }
+
+    productList.innerHTML = arr.map(p => `
+
+      <div class="item">
+
+        <img
+          src="${p.imagen}"
+          alt="${p.nombre}"
+          onerror="this.src='https://via.placeholder.com/400x300?text=Sin+Imagen'"
+        >
+
+        <h3>${p.nombre}</h3>
+
+        <p>${p.descripcion}</p>
+
+        <span class="price">
+          $${p.precio}
+        </span>
+
+      </div>
+
     `).join('');
   }
 
-  window.filtrarCat = function(cat, btn){
-    document.querySelectorAll("#category-buttons button").forEach(b => b.classList.remove("active-cat"));
-    btn.classList.add("active-cat");
-    const filtrados = cat === "Todos" ? productos : productos.filter(p => p.categoria === cat);
-    render(filtrados);
-    window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+  // =========================
+  // CATEGORIAS
+  // =========================
+
+  function renderCategorias(){
+
+    const cats = [
+      "Todos",
+      ...new Set(
+        productos.map(p => p.categoria).filter(Boolean)
+      )
+    ];
+
+    categoryContainer.innerHTML = cats.map(cat => `
+
+      <button
+        class="${cat === 'Todos' ? 'active-cat' : ''}"
+        data-cat="${cat}"
+      >
+        ${cat}
+      </button>
+
+    `).join('');
+
+    // Eventos seguros
+    document.querySelectorAll('#category-buttons button')
+      .forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+          const cat = btn.dataset.cat;
+
+          filtrarCat(cat, btn);
+        });
+      });
   }
 
-// --- BUSCADOR MEJORADO ---
-  function filtrar() {
-    const q = document.getElementById('search').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const f = productos.filter(p => {
-      const nombre = (p.nombre || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      const desc = (p.descripcion || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      const cat = (p.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      return nombre.includes(q) || desc.includes(q) || cat.includes(q);
+  window.filtrarCat = function(cat, btn){
+
+    document.querySelectorAll("#category-buttons button")
+      .forEach(b => b.classList.remove("active-cat"));
+
+    btn.classList.add("active-cat");
+
+    const filtrados =
+      cat === "Todos"
+      ? productos
+      : productos.filter(p => p.categoria === cat);
+
+    render(filtrados);
+
+    window.scrollTo({
+      top: productList.offsetTop - 70,
+      behavior: "smooth"
     });
-    render(f);
+  };
+
+  // =========================
+  // BUSCADOR
+  // =========================
+
+  function normalizarTexto(texto){
+
+    return (texto || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function filtrar(){
+
+    const q = normalizarTexto(
+      document.getElementById('search').value
+    );
+
+    const filtrados = productos.filter(p => {
+
+      return (
+        normalizarTexto(p.nombre).includes(q) ||
+        normalizarTexto(p.descripcion).includes(q) ||
+        normalizarTexto(p.categoria).includes(q)
+      );
+    });
+
+    render(filtrados);
   }
 
   document.getElementById('btnSearch').onclick = () => {
+
     filtrar();
-    window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+
+    window.scrollTo({
+      top: productList.offsetTop - 70,
+      behavior: "smooth"
+    });
   };
 
-  document.getElementById('search').onkeyup = (e) => {
-    filtrar(); // Filtra mientras escribís
-    if (e.key === 'Enter') {
-      window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+  document.getElementById('search').addEventListener('keyup', (e) => {
+
+    filtrar();
+
+    if(e.key === 'Enter'){
+
+      window.scrollTo({
+        top: productList.offsetTop - 70,
+        behavior: "smooth"
+      });
     }
-  };
-  // --- BÚSQUEDA POR VOZ ---
-  const btnVoice = document.getElementById('btnVoice');
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  });
 
-  if (SpeechRecognition) {
+  // =========================
+  // VOZ
+  // =========================
+
+  const btnVoice = document.getElementById('btnVoice');
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(SpeechRecognition){
+
     const recognition = new SpeechRecognition();
-    
-    recognition.onstart = () => { btnVoice.textContent = "🛑 Listening..."; };
-    recognition.onend = () => { btnVoice.textContent = "🗣️🎤"; };
-    
+
+    recognition.continuous = false;
+
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      btnVoice.textContent = "🎙️...";
+    };
+
+    recognition.onend = () => {
+      btnVoice.textContent = "🗣️🎤";
+    };
+
+    recognition.onerror = () => {
+      btnVoice.textContent = "🗣️🎤";
+    };
+
     recognition.onresult = (event) => {
+
       const voiceText = event.results[0][0].transcript;
+
       document.getElementById('search').value = voiceText;
+
       filtrar();
-      window.scrollTo({ top: productList.offsetTop - 70, behavior: "smooth" });
+
+      window.scrollTo({
+        top: productList.offsetTop - 70,
+        behavior: "smooth"
+      });
     };
 
     btnVoice.onclick = () => {
-      recognition.lang = idiomaActual === 'es' ? 'es-AR' : (idiomaActual === 'en' ? 'en-US' : 'pt-BR');
+
+      recognition.lang =
+        idiomaActual === 'es'
+        ? 'es-AR'
+        : idiomaActual === 'en'
+        ? 'en-US'
+        : 'pt-BR';
+
       recognition.start();
     };
-  } else {
-    btnVoice.style.display = 'none'; // Si el navegador no lo soporta, se oculta
-  }
-  // --- IDIOMAS ---
-  document.getElementById('btn-es').onclick = () => { idiomaActual='es'; load(); };
-  document.getElementById('btn-en').onclick = () => { idiomaActual='en'; load(); };
-  document.getElementById('btn-pt').onclick = () => { idiomaActual='pt'; load(); };
 
-  // --- BOTON SUBIR ---
-  window.onscroll = () => { document.getElementById('btnUp').style.display = window.scrollY > 300 ? "block" : "none"; };
-  document.getElementById('btnUp').onclick = () => window.scrollTo({top:0, behavior:"smooth"});
+  } else {
+
+    btnVoice.style.display = 'none';
+  }
+
+  // =========================
+  // IDIOMAS
+  // =========================
+
+  function actualizarBotonesIdioma(){
+
+    document.querySelectorAll('.lang-btn')
+      .forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById(`btn-${idiomaActual}`)
+      .classList.add('active');
+  }
+
+  document.getElementById('btn-es').onclick = () => {
+    idiomaActual = 'es';
+    load();
+  };
+
+  document.getElementById('btn-en').onclick = () => {
+    idiomaActual = 'en';
+    load();
+  };
+
+  document.getElementById('btn-pt').onclick = () => {
+    idiomaActual = 'pt';
+    load();
+  };
+
+  // =========================
+  // BOTON SUBIR
+  // =========================
+
+  window.addEventListener('scroll', () => {
+
+    document.getElementById('btnUp').style.display =
+      window.scrollY > 300
+      ? "block"
+      : "none";
+  });
+
+  document.getElementById('btnUp').onclick = () => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  // =========================
+  // INICIO
+  // =========================
 
   load();
+
 });
 </script>
 </body>
