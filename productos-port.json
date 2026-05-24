@@ -2,7 +2,7 @@
   {
     "nome": "Café expresso",
     "descricao": "Café pequeno",
-    "preco": "3600",
+    "preco": "7000",
     "imagem": "img/Cafe.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0001"
@@ -26,7 +26,7 @@
   {
     "nome": "Café com leite tradicional",
     "descricao": "Café com leite tradicional",
-    "preco": "4700",
+    "preco": "4000",
     "imagem": "img/Cafechechu.jpg",
     "categoria": "Cafeteria☕️",
     "id": "prod0004"
