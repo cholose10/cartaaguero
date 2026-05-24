@@ -11,7 +11,7 @@
     "id": "prod0002",
     "name": "Espresso Coffee (jarrito)",
     "description": "Americano coffee",
-    "price": "8000",
+    "price": "3800",
     "image": "img/Americano.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -19,7 +19,7 @@
     "id": "prod0003",
     "name": "Decaf Coffee",
     "description": "Decaffeinated coffee",
-    "price": "456",
+    "price": "8000",
     "image": "img/20250813_094842.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -27,7 +27,7 @@
     "id": "prod0004",
     "name": "Traditional Coffee with Milk",
     "description": "Traditional coffee with milk",
-    "price": "40003511",
+    "price": "52222",
     "image": "img/Cafechechu.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -35,7 +35,7 @@
     "id": "prod0005",
     "name": "Double Espresso Coffee",
     "description": "Double espresso coffee",
-    "price": "55",
+    "price": "5500",
     "image": "img/doble.jpg",
     "category": "Coffee Shop ☕️"
   },
