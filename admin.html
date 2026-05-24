@@ -89,6 +89,7 @@
     <div><b>Guardando y sincronizando ES / EN / PT...</b></div>
     <div style="font-size:14px; margin-top:10px; color:#ccc">No cierres la página, se descargará un backup automáticamente.</div>
   </div>
+  
 <script>
 const USERNAME = "tilo-restocafe";
 const REPO = "cartaaguero";
@@ -588,7 +589,7 @@ async function guardarTodosLosPrecios(){
     render(productos);
 
     showToast(
-      "✅ Cambios aplicados correctamente",
+      "✅ Cambios guardados correctamente",
       "ok"
     );
 
@@ -609,13 +610,13 @@ async function guardarTodosLosPrecios(){
 
     desbloquearUI();
 
+    // Mantener los cambios visibles
     render(productos);
 
-    setTimeout(() => {
-
-      loadProducts();
-
-    }, 8000);
+    showToast(
+      "✅ Datos actualizados",
+      "ok"
+    );
   }
 }
 
