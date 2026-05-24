@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "420000",
+    "price": "4200",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -11,7 +11,7 @@
     "id": "prod0002",
     "name": "Espresso Coffee (jarrito)",
     "description": "Americano coffee",
-    "price": "4500000",
+    "price": "4500",
     "image": "img/Americano.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -19,7 +19,7 @@
     "id": "prod0003",
     "name": "Decaf Coffee",
     "description": "Decaffeinated coffee",
-    "price": "5500000",
+    "price": "5500",
     "image": "img/20250813_094842.jpg",
     "category": "Coffee Shop ☕️"
   },
