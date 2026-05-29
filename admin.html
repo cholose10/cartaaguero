@@ -115,7 +115,7 @@
             color: var(--primary-color);
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
 
         input[type="text"]:focus,
@@ -483,6 +483,25 @@
     </div>
 
     <script>
+        // Helper global para búsqueda inteligente de imágenes en subcarpetas locales
+        window.handleImageError = function(img, originalSrc) {
+            if (!img.dataset.tryStep) {
+                img.dataset.tryStep = "1";
+            }
+            const step = parseInt(img.dataset.tryStep, 10);
+            const fileName = (originalSrc || '').split('/').pop();
+            const folders = ["cafe", "comids", "bebidas", "san"];
+            
+            if (step <= folders.length) {
+                const nextFolder = folders[step - 1];
+                img.dataset.tryStep = (step + 1).toString();
+                img.src = `img/${nextFolder}/${fileName}`;
+            } else {
+                img.src = "https://via.placeholder.com/60x60?text=Sin+Foto";
+                img.onerror = null;
+            }
+        };
+
         // Detección dinámica de GitHub para que el código sea 100% reutilizable en marca blanca
         const host = window.location.hostname;
         const pathParts = window.location.pathname.split("/");
@@ -628,8 +647,20 @@
                 if (tSaved) tInput.value = tSaved;
 
             } catch (e) {
-                console.error(e);
-                showToast("Error de conexión. Mostrando vacía o caché.", 'err');
+                console.warn("Fallo carga desde GitHub, intentando carga local offline:", e);
+                try {
+                    const localRes = await fetch(`./${MAIN_JSON}?t=${Date.now()}`);
+                    if (localRes.ok) {
+                        productos = await localRes.json();
+                        render(productos);
+                        showToast("Cargado offline (Solo Lectura) 🔌", "info");
+                    } else {
+                        throw new Error("No se pudo cargar el archivo local");
+                    }
+                } catch (localErr) {
+                    console.error(localErr);
+                    showToast("Error de conexión. No se pudo cargar el menú.", 'err');
+                }
             }
         }
 
@@ -651,7 +682,7 @@
 
                 tr.innerHTML = `
                     <td style="text-align:center">
-                        <img src="${imagen}" class="mini" onerror="this.src='https://via.placeholder.com/60x60?text=Sin+Foto'">
+                        <img src="${imagen}" class="mini" onerror="handleImageError(this, '${imagen}')">
                     </td>
                     <td>
                         <input type="text" value="${nombre.replace(/"/g, '&quot;')}" placeholder="Nombre del plato">
