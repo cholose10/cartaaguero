@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Mozo Digital</title>
-  <link rel="stylesheet" href="admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mozo Digital</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
 
-<div class="layout">
+    <div class="layout">
 
-  <!-- PANEL IZQUIERDO -->
-  <div class="panel">
+        <!-- PANEL IZQUIERDO -->
+        <div class="panel">
 
-    <h2>📝 Mozo Digital</h2>
+            <h2>📝 Mozo Digital</h2>
 
-    <label>Nombre del local</label>
-    <input type="text" id="nombreLocal" placeholder="Ej: tilo">
+            <label>Nombre del local</label>
+            <input type="text" id="nombreLocal" placeholder="Ej: tilo">
 
-    <label>Idioma</label>
-    <select id="idiomaSelect">
-      <option value="es">Español</option>
-      <option value="en">English</option>
-      <option value="pt">Português</option>
-    </select>
+            <label>Idioma</label>
+            <select id="idiomaSelect">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+            </select>
 
-    <label>Sugerencias (una por línea)</label>
-    <textarea id="editor"></textarea>
+            <label>Sugerencias (una por línea)</label>
+            <textarea id="editor"></textarea>
 
-    <div class="emoji-list">
-      <button type="button">☕</button>
-      <button type="button">🥐</button>
-      <button type="button">🍰</button>
-      <button type="button">🍔</button>
-      <button type="button">🍺</button>
-      <button type="button">🎉</button>
-      <button type="button">🔥</button>
-      <button type="button">❤️</button>
-      <button type="button">🍽️ </button>
-      <button type="button">🧑‍🍳 </button>
-      <button type="button">🥰 </button>
-      <button type="button">✨</button>
+            <div class="emoji-list">
+                <button type="button">☕</button>
+                <button type="button">🥐</button>
+                <button type="button">🍰</button>
+                <button type="button">🍔</button>
+                <button type="button">🍺</button>
+                <button type="button">🎉</button>
+                <button type="button">🔥</button>
+                <button type="button">❤️</button>
+                <button type="button">🍽️ </button>
+                <button type="button">🧑‍🍳 </button>
+                <button type="button">🥰 </button>
+                <button type="button">✨</button>
+            </div>
+
+            <button id="guardar">Guardar cambios</button>
+            <small id="estado"></small>
+
+        </div>
+
+        <!-- PREVIEW DERECHO -->
+        <div class="preview">
+            <!-- 🔥 IMPORTANTE: mismo nivel que index.html -->
+            <iframe src="https://tilo-restocafe.github.io/cartaaguero/"></iframe>
+        </div>
+
     </div>
 
-    <button id="guardar">Guardar cambios</button>
-    <small id="estado"></small>
-
-  </div>
-
-  <!-- PREVIEW DERECHO -->
-  <div class="preview">
-    <!-- 🔥 IMPORTANTE: mismo nivel que index.html -->
-    <iframe src="https://tilo-restocafe.github.io/cartaaguero/"></iframe>
-  </div>
-
-</div>
-
-<script src="admin.js"></script>
+    <script src="admin.js"></script>
 
 </body>
+
 </html>
-
-
