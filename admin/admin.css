@@ -1,57 +1,57 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .layout {
-  display: flex;
-  height: 100vh;
+    display: flex;
+    height: 100vh;
 }
 
 .panel {
-  width: 400px;
-  background: #111;
-  color: white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-y: auto;
+    width: 400px;
+    background: #111;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
 }
 
 .panel input,
 .panel select,
 .panel textarea {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
 }
 
 #editor {
-  height: 220px;
-  resize: vertical;
+    height: 220px;
+    resize: vertical;
 }
 
 .emoji-list {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
 .emoji-list button {
-  cursor: pointer;
-  font-size: 18px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .preview {
-  flex: 1;
+    flex: 1;
 }
 
 .preview iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+    width: 100%;
+    height: 100%;
+    border: none;
 }
