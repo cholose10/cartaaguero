@@ -9,6 +9,70 @@
 </head>
 
 <body>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mozo Digital</title>
+    <!-- Google Fonts for consistency -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- PANEL IZQUIERDO -->
+        <div class="panel">
+
+            <h2>📝 Mozo Digital</h2>
+
+            <!-- CONFIGURACIÓN DE TOKEN (EVITA EL PROMPT) -->
+            <div class="token-section">
+                <label>GitHub Token:</label>
+                <div class="token-row">
+                    <input type="password" id="token" placeholder="Pegar Token para editar">
+                    <button id="btnSaveToken" title="Guardar Token">💾</button>
+                    <button id="btnClearToken" title="Borrar Token" class="danger">🗑️</button>
+                </div>
+                <span id="tokenStatus">Validando...</span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(196, 141, 73, 0.2); margin: 15px 0;">
+
+            <label>Nombre del local</label>
+            <input type="text" id="nombreLocal" placeholder="Ej: Tilo Café">
+
+            <label>Idioma</label>
+            <select id="idiomaSelect">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+            </select>
+
+            <label>Sugerencias (una por línea)</label>
+            <textarea id="editor" placeholder="Escribe aquí las sugerencias del día..."></textarea>
+
+            <div class="emoji-list">
+                <button type="button">☕</button>
+                <button type="button">🥐</button>
+                <button type="button">🍰</button>
+                <button type="button">🍔</button>
+                <button type="button">🍺</button>
+                <button type="button">🎉</button>
+                <button type="button">🔥</button>
+                <button type="button">❤️</button>
+                <button type="button">🍽️</button>
+                <button type="button">🧑‍🍳</button>
+                <button type="button">🥰</button>
+                <button type="button">✨</button>
+            </div>
+
+            <button id="guardar" class="btn-main">Guardar en la nube (GitHub)</button>
+            <small id="estado"></small>
 
     <div class="layout">
 
