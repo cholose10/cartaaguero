@@ -1186,4 +1186,38 @@
                     window.scrollY > 400 ? "block" : "none";
             });
 
-       
+            document.getElementById('btnUp').onclick = () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            };
+
+            // =============================================
+            // VISTA PREVIA DEL ADMINISTRADOR EN TIEMPO REAL
+            // =============================================
+            window.addEventListener('message', (e) => {
+                if (e.data && e.data.type === "updateSuggestions") {
+                    const localName = e.data.config?.nombreLocal || "Tilo Café";
+                    document.title = localName;
+                    bannerText.textContent = `¡Bienvenidos a ${localName}!`;
+
+                    const sugerencias = e.data.sugerencias || [];
+                    const saludo = getSaludo();
+                    const textoFinal = saludo + " — " + sugerencias.join("   ✦   ");
+
+                    teleTrack.innerHTML = textoFinal + "   ✦   " + textoFinal;
+                    iniciarScroll();
+                }
+            });
+
+            // =============================================
+            // ARRANQUE INICIAL
+            // =============================================
+            load();
+
+        });
+    </script>
+</body>
+
+</html>
