@@ -3,7 +3,7 @@
     "id": "prod0001",
     "name": "Espresso Coffee",
     "description": "Small coffee",
-    "price": "3500",
+    "price": "6000",
     "image": "img/Cafe.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -19,7 +19,7 @@
     "id": "prod0003",
     "name": "Decaf Coffee",
     "description": "Decaffeinated coffee",
-    "price": "5500",
+    "price": "8000",
     "image": "img/20250813_094842.jpg",
     "category": "Coffee Shop ☕️"
   },
@@ -552,14 +552,6 @@
     "category": "🍽️Meals"
   },
   {
-    "id": "prod0070",
-    "name": "Smoke Milanesa",
-    "description": "Tomato sauce, bacon jam, cheddar. Served with mashed potatoes, pasta, salad or fries",
-    "price": "25000",
-    "image": "img/smo.jpg",
-    "category": "🍽️Meals"
-  },
-  {
     "id": "prod0071",
     "name": "Battered Hake Fillet",
     "description": "Served with mixed mashed potatoes",
@@ -744,14 +736,6 @@
     "category": "🍽️Meals"
   },
   {
-    "id": "prod0094",
-    "name": "Teriyaki Chicken",
-    "description": "Chicken breast in sweet sauce with sautéed rice and vegetables",
-    "price": "24500",
-    "image": "img/Tari.jpg",
-    "category": "🍽️Meals"
-  },
-  {
     "id": "prod0095",
     "name": "Blue Salmon",
     "description": "Grilled pink salmon in blue cheese cream sauce with Spanish potatoes",
@@ -789,22 +773,6 @@
     "description": "Grilled tenderloin in mushroom sauce with French fries",
     "price": "37500",
     "image": "img/Lochapi.jpg",
-    "category": "🍽️Meals"
-  },
-  {
-    "id": "prod0100",
-    "name": "Beef Loin Skewers",
-    "description": "With French fries (for 2 people)",
-    "price": "73000",
-    "image": "",
-    "category": "🍽️Meals"
-  },
-  {
-    "id": "prod0101",
-    "name": "Chicken Skewers",
-    "description": "With French fries (for 2 people)",
-    "price": "53000",
-    "image": "",
     "category": "🍽️Meals"
   },
   {
@@ -1414,14 +1382,6 @@
     "price": "12500",
     "image": "img/Brouni.jpg",
     "category": "🍮Desserts"
-  },
-  {
-    "id": "prod0178",
-    "name": "DAILY MENU or SPECIALS",
-    "description": "Daily menu: dish + drink + dessert or coffee. The special includes only the dish.",
-    "price": "1000",
-    "image": "",
-    "category": "📋DAILY MENU/SPECIALS & NEWS"
   },
   {
     "id": "prod0179",
