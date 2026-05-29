@@ -192,11 +192,18 @@ async function cargarJSON() {
     }
 }
 
+/* AUTOMATIC TEXTAREA RESIZING */
+function autoResizeTextarea() {
+    textarea.style.height = "auto";
+    textarea.style.height = (textarea.scrollHeight + 4) + "px";
+}
+
 /* MOSTRAR SUGERENCIAS DEL IDIOMA SELECCIONADO */
 function mostrarIdioma() {
     const idioma = idiomaSelect.value;
     const lista = jsonCompleto[idioma] || [];
     textarea.value = lista.join("\n");
+    autoResizeTextarea();
 }
 
 /* GUARDAR SUGERENCIAS EN GITHUB */
@@ -283,7 +290,10 @@ if (btnClearToken) {
 
 // Live preview binding
 nombreLocalInput.addEventListener("input", actualizarVistaPrevia);
-textarea.addEventListener("input", actualizarVistaPrevia);
+textarea.addEventListener("input", () => {
+    autoResizeTextarea();
+    actualizarVistaPrevia();
+});
 idiomaSelect.addEventListener("change", () => {
     mostrarIdioma();
     actualizarVistaPrevia();
@@ -305,6 +315,7 @@ document.querySelectorAll(".emoji-list button").forEach(btn => {
         textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
         
         // Trigger live preview update
+        autoResizeTextarea();
         actualizarVistaPrevia();
     });
 });
