@@ -9,12 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary-color: #4a2c11;    /* Espresso Dark */
             --secondary-color: #c48d49;  /* Caramel Gold */
             --accent-color: #5d3e26;     /* Cocoa Medium */
             --bg-color: #faf6f0;         /* Cream Soft */
-            --glass-bg: rgba(255, 255, 255, 0.78);
+            --glass-bg: rgba(251, 248, 243, 0.88); /* Soft warm cream instead of cold white */
             --glass-border: rgba(255, 255, 255, 0.5);
             --shadow-sm: 0 4px 12px rgba(69, 39, 10, 0.04);
             --shadow-md: 0 10px 30px rgba(69, 39, 10, 0.08);
@@ -66,6 +70,9 @@
             border-bottom: 1px solid rgba(196, 141, 73, 0.3);
             cursor: pointer;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            will-change: transform;
         }
 
         #tele-wrapper {
@@ -185,6 +192,7 @@
         #languageSwitcher {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 10px;
             margin: 20px 0;
         }
@@ -240,6 +248,7 @@
 
         .search-box input {
             flex: 1;
+            min-width: 0;
             border: none;
             background: transparent;
             padding: 12px 16px;
@@ -411,6 +420,11 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,90 C30,75 10,55 10,35 C10,18 24,10 45,15 C47,15.5 49,17 50,18 C51,17 53,15.5 55,15 C76,10 90,18 90,35 C90,55 70,75 50,90 Z' fill='none' stroke='%23c48d49' stroke-width='1.5' stroke-opacity='0.12' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M50,18 L50,90' fill='none' stroke='%23c48d49' stroke-width='1.5' stroke-opacity='0.12' stroke-linecap='round'/%3E%3Cpath d='M50,30 Q38,24 30,28 M50,30 Q62,24 70,28 M50,45 Q36,39 24,47 M50,45 Q64,39 76,47 M50,60 Q38,56 20,68 M50,60 Q62,56 80,68 M50,75 Q42,73 30,83 M50,75 Q58,73 70,83' fill='none' stroke='%23c48d49' stroke-width='1' stroke-opacity='0.12' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px bottom 12px;
+            background-size: 65px 65px;
         }
 
         .item h3 {
@@ -496,6 +510,188 @@
                 height: 180px;
             }
         }
+
+        @media(max-width: 480px) {
+            .search-box {
+                width: 92%;
+                padding: 4px;
+                border-radius: 14px;
+                gap: 6px;
+                margin: 20px auto;
+            }
+            .search-box input {
+                padding: 10px 8px 10px 12px;
+                font-size: 16px; /* Prevents auto-zoom on iOS Safari */
+            }
+            .search-box button {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+            #btnVoice {
+                padding: 8px 10px;
+            }
+            #languageSwitcher {
+                gap: 8px;
+                padding: 0 10px;
+            }
+            .lang-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* ================= VOICE SEARCH OVERLAY ================= */
+        #voice-overlay {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background: rgba(41, 23, 7, 0.96);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 3px solid var(--secondary-color);
+            z-index: 3000;
+            padding: 30px 20px calc(30px + env(safe-area-inset-bottom));
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-out;
+            transform: translateY(100%);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            box-sizing: border-box;
+        }
+
+        #voice-overlay.active {
+            display: block;
+            transform: translateY(0);
+            animation: slideUpVoice 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideUpVoice {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .voice-overlay-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .voice-mic-icon {
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 20px rgba(196, 141, 73, 0.4);
+            z-index: 2;
+            position: relative;
+        }
+
+        .voice-glow-ring {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            z-index: 1;
+            animation: rippleVoice 1.8s infinite ease-out;
+        }
+
+        @keyframes rippleVoice {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        #voice-status-text {
+            font-family: 'Playfair Display', serif;
+            color: #f5eedc;
+            font-size: 22px;
+            margin: 16px 0 6px 0;
+            font-weight: 600;
+        }
+
+        #voice-sub-text {
+            color: rgba(245, 238, 220, 0.7);
+            font-size: 14px;
+            margin: 0 0 20px 0;
+        }
+
+        /* Animated voice waves */
+        .voice-waves {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: 40px;
+            margin-bottom: 15px;
+        }
+
+        .voice-wave {
+            width: 4px;
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            animation: soundBounce 1.2s infinite ease-in-out alternate;
+        }
+
+        .voice-wave.bar-1 { animation-delay: 0.1s; }
+        .voice-wave.bar-2 { animation-delay: 0.3s; }
+        .voice-wave.bar-3 { animation-delay: 0.6s; height: 12px; }
+        .voice-wave.bar-4 { animation-delay: 0.2s; }
+        .voice-wave.bar-5 { animation-delay: 0.4s; }
+
+        @keyframes soundBounce {
+            0% {
+                height: 8px;
+                transform: scaleY(1);
+            }
+            100% {
+                height: 38px;
+                transform: scaleY(1);
+                background-color: #f5eedc;
+            }
+        }
+
+        #btn-cancel-voice {
+            position: absolute;
+            top: -10px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #f5eedc;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        #btn-cancel-voice:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -547,6 +743,24 @@
 
     <!-- BOTÓN SUBIR RÁPIDO -->
     <button id="btnUp">⬆</button>
+
+    <!-- OVERLAY DE BÚSQUEDA POR VOZ (ANIMADO) -->
+    <div id="voice-overlay">
+        <div class="voice-overlay-content">
+            <div class="voice-glow-ring"></div>
+            <div class="voice-mic-icon">🎙️</div>
+            <h3 id="voice-status-text">Escuchando...</h3>
+            <p id="voice-sub-text">Hable ahora para buscar en el menú</p>
+            <div class="voice-waves">
+                <div class="voice-wave bar-1"></div>
+                <div class="voice-wave bar-2"></div>
+                <div class="voice-wave bar-3"></div>
+                <div class="voice-wave bar-4"></div>
+                <div class="voice-wave bar-5"></div>
+            </div>
+            <button id="btn-cancel-voice" title="Cancelar">✕</button>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -631,9 +845,9 @@
             // =============================================
             async function cargarTeleprompter() {
                 try {
-                    let url = `./sugerencias.json`;
+                    let url = `./sugerencias.json?t=${Date.now()}`;
                     if (!isLocal) {
-                        url = `https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json`;
+                        url = `https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json?t=${Date.now()}`;
                     }
 
                     const res = await fetch(url, { cache: "no-store" });
@@ -694,9 +908,9 @@
                             : "productos-port.json";
 
                 try {
-                    let url = `./${archivo}`;
+                    let url = `./${archivo}?t=${Date.now()}`;
                     if (!isLocal) {
-                        url = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}`;
+                        url = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}?t=${Date.now()}`;
                     }
 
                     const res = await fetch(url, { cache: "no-store" });
@@ -852,6 +1066,10 @@
             // INTERFAZ DE VOZ CON ANIMACIÓN
             // =============================================
             const btnVoice = document.getElementById('btnVoice');
+            const voiceOverlay = document.getElementById('voice-overlay');
+            const voiceStatusText = document.getElementById('voice-status-text');
+            const voiceSubText = document.getElementById('voice-sub-text');
+            const btnCancelVoice = document.getElementById('btn-cancel-voice');
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             if (SpeechRecognition) {
@@ -859,19 +1077,35 @@
                 recognition.continuous = false;
                 recognition.interimResults = false;
 
+                const voiceTexts = {
+                    es: { listening: "Escuchando...", subtext: "Hable ahora para buscar en el menú" },
+                    en: { listening: "Listening...", subtext: "Speak now to search the menu" },
+                    pt: { listening: "Ouvindo...", subtext: "Fale agora para buscar no menu" }
+                };
+
+                const closeVoiceOverlay = () => {
+                    btnVoice.textContent = "🎙️";
+                    btnVoice.classList.remove("recording");
+                    voiceOverlay.classList.remove('active');
+                };
+
                 recognition.onstart = () => {
                     btnVoice.textContent = "🎙️";
                     btnVoice.classList.add("recording");
+                    
+                    const langTexts = voiceTexts[idiomaActual] || voiceTexts.es;
+                    voiceStatusText.textContent = langTexts.listening;
+                    voiceSubText.textContent = langTexts.subtext;
+                    
+                    voiceOverlay.classList.add('active');
                 };
 
                 recognition.onend = () => {
-                    btnVoice.textContent = "🎙️";
-                    btnVoice.classList.remove("recording");
+                    closeVoiceOverlay();
                 };
 
                 recognition.onerror = () => {
-                    btnVoice.textContent = "🎙️";
-                    btnVoice.classList.remove("recording");
+                    closeVoiceOverlay();
                 };
 
                 recognition.onresult = (event) => {
@@ -892,6 +1126,11 @@
                                 ? 'en-US'
                                 : 'pt-BR';
                     recognition.start();
+                };
+
+                btnCancelVoice.onclick = () => {
+                    recognition.abort();
+                    closeVoiceOverlay();
                 };
             } else {
                 btnVoice.style.display = 'none';
@@ -939,12 +1178,12 @@
             };
 
             // =============================================
-            // ARRANQUE INICIAL
+            // VISTA PREVIA DEL ADMINISTRADOR EN TIEMPO REAL
             // =============================================
-            load();
+            window.addEventListener('message', (e) => {
+                if (e.data && e.data.type === "updateSuggestions") {
+                    const localName = e.data.config?.nombreLocal || "Tilo Café";
+                    document.title = localName;
+                    bannerText.textContent = `¡Bienvenidos a ${localName}!`;
 
-        });
-    </script>
-</body>
-
-</html>
+       
