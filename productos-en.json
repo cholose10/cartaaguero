@@ -1390,13 +1390,5 @@
     "price": "9200",
     "image": "img/tortas.jpg",
     "category": "📋DAILY MENU/SPECIALS & NEWS"
-  },
-  {
-    "id": "prod0180",
-    "name": "cocoa cappuccino",
-    "description": "coffee milk cream and",
-    "price": "11000",
-    "image": "img/cremaadi.jpg",
-    "category": "Cafeteria☕️"
   }
 ]
