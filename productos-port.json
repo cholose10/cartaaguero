@@ -1390,13 +1390,5 @@
     "preco": "9200",
     "imagem": "img/tortas.jpg",
     "categoria": "📋Menu do dia/Sugestões e novidades"
-  },
-  {
-    "id": "prod0180",
-    "nome": "selva negra",
-    "descricao": "doce de leite merenge caramelo",
-    "preco": "15000",
-    "imagem": "img/cafe.jpg",
-    "categoria": "Refeitório☕️"
   }
 ]
