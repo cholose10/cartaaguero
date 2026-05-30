@@ -14,7 +14,7 @@
             --secondary-color: #c48d49;  /* Caramel Gold */
             --accent-color: #9c6c40;     /* Cocoa Gold */
             --bg-color: #1e1208;         /* Very dark chocolate */
-            --white: #ffc897;            /* Dark chocolate background */
+            --white: #291707;            /* Dark chocolate background */
             --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
             --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.7);
@@ -47,7 +47,7 @@
             background: rgba(41, 23, 7, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 223, 184, 0.25);
+            border: 1px solid rgba(196, 141, 73, 0.25);
             border-radius: 24px;
             padding: 30px;
             box-shadow: var(--shadow-lg);
@@ -154,7 +154,7 @@
             background: #4a773c;
         }
         button.secondary:hover {
-            background: #870a0a;
+            background: #37592c;
         }
 
         button.danger {
@@ -311,7 +311,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(236, 204, 175, 0.8);
+            background: rgba(41, 23, 7, 0.8);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
@@ -405,8 +405,11 @@
         <div class="topRow">
             <div class="git-config">
                 <div class="git-title">📍 Datos del Repositorio de GitHub</div>
-                <div style="margin-bottom: 8px;"><span class="small">Repositorio actual:</span> <b id="repoDisplay">cargando...</b></div>
-                <div class="token-group">
+                <div style="margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                    <div><span class="small">Repositorio actual:</span> <b id="repoDisplay">cargando...</b></div>
+                    <button id="btnLockAdmin" onclick="toggleAdminLock()" style="padding: 4px 10px; font-size: 12px; background: rgba(196, 141, 73, 0.15); border: 1px solid rgba(196, 141, 73, 0.4); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">🔒 Acceso Propietario</button>
+                </div>
+                <div class="token-group" id="tokenControlGroup" style="display: none; flex-wrap: wrap; gap: 8px; align-items: center;">
                     <label style="font-size:14px; font-weight:600;">GitHub Token:</label>
                     <input type="password" id="token" placeholder="Pegar Token" style="max-width:220px">
                     <button onclick="saveToken()">Guardar</button>
@@ -451,6 +454,50 @@
                 <div>
                     <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Categoría</label>
                     <input id="categoria" type="text" placeholder="Ej: Cafetería☕️" style="width:100%;">
+                </div>
+                
+                <!-- SECCIÓN TRADUCCIONES -->
+                <div style="grid-column: 1 / -1; margin-top: 10px; border-top: 1px dashed rgba(196, 141, 73, 0.25); padding-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <h4 style="margin: 0; color: var(--secondary-color); font-family: 'Playfair Display', serif; font-size: 16px; display: flex; align-items: center; gap: 6px;">🌐 Traducciones de Idioma (Opcional)</h4>
+                        <button type="button" onclick="autoTraducir()" style="background: var(--accent-color); font-size: 12px; padding: 6px 12px; border-radius: 8px; box-shadow: var(--shadow-sm);">✨ Auto-traducir con IA</button>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; background: rgba(0,0,0,0.15); padding: 15px; border-radius: 12px; border: 1px solid rgba(196, 141, 73, 0.15);">
+                        <!-- ENGLISH SECTION -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">🇬🇧 Inglés (EN)</div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nombre (EN)</label>
+                                <input id="nombre_en" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoría (EN)</label>
+                                <input id="categoria_en" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descripción (EN)</label>
+                                <textarea id="descripcion_en" rows="2" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- PORTUGUESE SECTION -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">🇧🇷 Portugués (PT)</div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nome (PT)</label>
+                                <input id="nombre_pt" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoria (PT)</label>
+                                <input id="categoria_pt" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descrição (PT)</label>
+                                <textarea id="descripcion_pt" rows="2" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div style="margin-top:20px; display:flex; gap:10px;">
@@ -522,6 +569,8 @@
         const PT_JSON = "productos-port.json";
 
         let productos = [];
+        let productosEN = [];
+        let productosPT = [];
         let guardando = false;
 
         /**************** UI HELPERS ****************/
@@ -564,7 +613,35 @@
             }, 3000);
         }
 
-        /**************** TOKEN DE GITHUB ****************/
+        /**************** TOKEN DE GITHUB Y SEGURIDAD ****************/
+        const ADMIN_CODE = "aguero2026";
+
+        function toggleAdminLock() {
+            const group = document.getElementById('tokenControlGroup');
+            const btn = document.getElementById('btnLockAdmin');
+            
+            if (group.style.display === 'flex') {
+                group.style.display = 'none';
+                btn.innerHTML = '🔒 Acceso Propietario';
+                sessionStorage.removeItem('admin_unlocked');
+                showToast("Acceso propietario cerrado", "info");
+            } else {
+                if (sessionStorage.getItem('admin_unlocked') === 'true') {
+                    group.style.display = 'flex';
+                    btn.innerHTML = '🔓 Propietario Activo';
+                    return;
+                }
+                const code = prompt("Ingresa el código de seguridad para gestionar el Token:");
+                if (code === ADMIN_CODE) {
+                    group.style.display = 'flex';
+                    btn.innerHTML = '🔓 Propietario Activo';
+                    sessionStorage.setItem('admin_unlocked', 'true');
+                    showToast("Acceso propietario concedido", "ok");
+                } else if (code !== null) {
+                    showToast("Código incorrecto", "err");
+                }
+            }
+        }
 
         function saveToken() {
             const t = document.getElementById('token').value.trim();
@@ -633,13 +710,26 @@
 
         async function loadProducts() {
             try {
-                const r = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${MAIN_JSON}?t=${Date.now()}`);
-                if (!r.ok) throw new Error('Error al cargar archivo maestro');
-                
-                const data = await r.json();
-                if (!Array.isArray(data)) throw new Error('El JSON no contiene un array válido');
+                // Carga en paralelo de todos los JSON
+                const [rES, rEN, rPT] = await Promise.all([
+                    fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${MAIN_JSON}?t=${Date.now()}`),
+                    fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${EN_JSON}?t=${Date.now()}`),
+                    fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${PT_JSON}?t=${Date.now()}`)
+                ]);
 
+                if (!rES.ok) throw new Error('Error al cargar archivo maestro');
+                
+                const data = await rES.json();
+                if (!Array.isArray(data)) throw new Error('El JSON no contiene un array válido');
                 productos = data;
+
+                if (rEN.ok) {
+                    try { productosEN = await rEN.json(); } catch(e) { console.error("Error parseando EN_JSON", e); }
+                }
+                if (rPT.ok) {
+                    try { productosPT = await rPT.json(); } catch(e) { console.error("Error parseando PT_JSON", e); }
+                }
+
                 render(productos);
 
                 const tInput = document.getElementById('token');
@@ -649,9 +739,17 @@
             } catch (e) {
                 console.warn("Fallo carga desde GitHub, intentando carga local offline:", e);
                 try {
-                    const localRes = await fetch(`./${MAIN_JSON}?t=${Date.now()}`);
+                    const [localRes, localResEN, localResPT] = await Promise.all([
+                        fetch(`./${MAIN_JSON}?t=${Date.now()}`),
+                        fetch(`./${EN_JSON}?t=${Date.now()}`),
+                        fetch(`./${PT_JSON}?t=${Date.now()}`)
+                    ]);
+
                     if (localRes.ok) {
                         productos = await localRes.json();
+                        if (localResEN.ok) productosEN = await localResEN.json();
+                        if (localResPT.ok) productosPT = await localResPT.json();
+                        
                         render(productos);
                         showToast("Cargado offline (Solo Lectura) 🔌", "info");
                     } else {
@@ -748,6 +846,8 @@
         function eliminarProductoPorId(id) {
             if (!confirm('¿Deseas quitar este plato de la lista?')) return;
             productos = productos.filter(p => p.id !== id);
+            productosEN = productosEN.filter(p => p.id !== id);
+            productosPT = productosPT.filter(p => p.id !== id);
             render(productos);
             showToast("Plato eliminado localmente. Guarda cambios para aplicar a la nube.", "info");
         }
@@ -764,6 +864,13 @@
                 document.getElementById('form').reset();
                 document.getElementById('formTitle').innerText = "Agregar Nuevo Producto";
                 document.getElementById('preview').style.display = 'none';
+                // Limpiar traducciones
+                document.getElementById('nombre_en').value = '';
+                document.getElementById('descripcion_en').value = '';
+                document.getElementById('categoria_en').value = '';
+                document.getElementById('nombre_pt').value = '';
+                document.getElementById('descripcion_pt').value = '';
+                document.getElementById('categoria_pt').value = '';
                 setTimeout(() => document.getElementById('nombre').focus(), 100);
             }
         }
@@ -773,6 +880,13 @@
             document.getElementById('editId').value = '';
             document.getElementById('preview').style.display = 'none';
             document.getElementById('form').style.display = 'none';
+            // Limpiar traducciones
+            document.getElementById('nombre_en').value = '';
+            document.getElementById('descripcion_en').value = '';
+            document.getElementById('categoria_en').value = '';
+            document.getElementById('nombre_pt').value = '';
+            document.getElementById('descripcion_pt').value = '';
+            document.getElementById('categoria_pt').value = '';
         }
 
         function previewImage() {
@@ -788,27 +902,129 @@
             img.onload = () => img.style.display = 'block';
         }
 
+        async function autoTraducir() {
+            const esNombre = document.getElementById('nombre').value.trim();
+            const esDesc = document.getElementById('descripcion').value.trim();
+            const esCat = document.getElementById('categoria').value.trim();
+            
+            if (!esNombre) {
+                showToast("Escribe primero el nombre en español para poder traducir", "err");
+                return;
+            }
+            
+            showToast("Traduciendo con IA...", "info");
+            
+            async function translateText(text, fromLang, toLang) {
+                if (!text) return "";
+                try {
+                    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.responseData && data.responseData.translatedText) {
+                            return data.responseData.translatedText;
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error translating:", e);
+                }
+                return text; // fallback
+            }
+            
+            try {
+                const [enName, enDesc, enCat, ptName, ptDesc, ptCat] = await Promise.all([
+                    translateText(esNombre, 'es', 'en'),
+                    translateText(esDesc, 'es', 'en'),
+                    translateText(esCat, 'es', 'en'),
+                    translateText(esNombre, 'es', 'pt'),
+                    translateText(esDesc, 'es', 'pt'),
+                    translateText(esCat, 'es', 'pt')
+                ]);
+                
+                document.getElementById('nombre_en').value = enName;
+                document.getElementById('descripcion_en').value = enDesc;
+                document.getElementById('categoria_en').value = enCat;
+                
+                document.getElementById('nombre_pt').value = ptName;
+                document.getElementById('descripcion_pt').value = ptDesc;
+                document.getElementById('categoria_pt').value = ptCat;
+                
+                showToast("¡Traducciones automáticas generadas! 🌐", "ok");
+            } catch(e) {
+                showToast("Error en el servicio de traducción", "err");
+            }
+        }
+
         function guardarFormulario() {
             const id = document.getElementById('editId').value;
             const nombre = document.getElementById('nombre').value.trim();
+            const precio = sanitizePrice(document.getElementById('precio').value);
+            const descripcion = document.getElementById('descripcion').value.trim();
+            const imagen = document.getElementById('imagen').value.trim() || 'img/Cafe.jpg';
+            const categoria = document.getElementById('categoria').value.trim() || 'General☕️';
 
             if (!nombre) {
                 showToast("El plato debe tener un nombre", "err");
                 return;
             }
 
+            const newId = id || generateNextProdId();
+
             const obj = {
+                id: newId,
                 nombre,
-                precio: sanitizePrice(document.getElementById('precio').value),
-                descripcion: document.getElementById('descripcion').value.trim(),
-                imagen: document.getElementById('imagen').value.trim() || 'img/Cafe.jpg',
-                categoria: document.getElementById('categoria').value.trim() || 'General☕️',
-                id: id || generateNextProdId()
+                precio,
+                descripcion,
+                imagen,
+                categoria
+            };
+
+            // Recoger valores de traducción
+            const nombre_en = document.getElementById('nombre_en').value.trim();
+            const descripcion_en = document.getElementById('descripcion_en').value.trim();
+            const categoria_en = document.getElementById('categoria_en').value.trim();
+
+            const nombre_pt = document.getElementById('nombre_pt').value.trim();
+            const descripcion_pt = document.getElementById('descripcion_pt').value.trim();
+            const categoria_pt = document.getElementById('categoria_pt').value.trim();
+
+            const objEN = {
+                id: newId,
+                name: nombre_en || nombre,
+                description: descripcion_en || descripcion,
+                price: precio,
+                image: imagen,
+                category: categoria_en || categoria
+            };
+
+            const objPT = {
+                id: newId,
+                nome: nombre_pt || nombre,
+                descricao: descripcion_pt || descripcion,
+                preco: precio,
+                imagem: imagen,
+                categoria: categoria_pt || categoria
             };
 
             if (id) {
+                // Editar maestro
                 const idx = findIndexById(id);
                 if (idx !== -1) productos[idx] = obj;
+
+                // Editar inglés
+                const idxEN = productosEN.findIndex(p => p.id === id);
+                if (idxEN !== -1) {
+                    productosEN[idxEN] = objEN;
+                } else {
+                    productosEN.push(objEN);
+                }
+
+                // Editar portugués
+                const idxPT = productosPT.findIndex(p => p.id === id);
+                if (idxPT !== -1) {
+                    productosPT[idxPT] = objPT;
+                } else {
+                    productosPT.push(objPT);
+                }
             } else {
                 // Prevenir nombres duplicados para evitar errores
                 const existe = productos.some(p => p.nombre.toLowerCase() === nombre.toLowerCase());
@@ -817,6 +1033,8 @@
                     return;
                 }
                 productos.push(obj);
+                productosEN.push(objEN);
+                productosPT.push(objPT);
             }
 
             render(productos);
@@ -834,6 +1052,17 @@
             document.getElementById('descripcion').value = p.descripcion || '';
             document.getElementById('imagen').value = p.imagen || '';
             document.getElementById('categoria').value = p.categoria || '';
+
+            // Cargar traducciones si existen en memoria
+            const pEN = productosEN.find(x => x.id === id);
+            document.getElementById('nombre_en').value = pEN ? (pEN.name || '') : '';
+            document.getElementById('descripcion_en').value = pEN ? (pEN.description || '') : '';
+            document.getElementById('categoria_en').value = pEN ? (pEN.category || '') : '';
+
+            const pPT = productosPT.find(x => x.id === id);
+            document.getElementById('nombre_pt').value = pPT ? (pPT.nome || '') : '';
+            document.getElementById('descripcion_pt').value = pPT ? (pPT.descricao || '') : '';
+            document.getElementById('categoria_pt').value = pPT ? (pPT.categoria || '') : '';
 
             previewImage();
             
@@ -953,27 +1182,18 @@
         // Algoritmo maestro de alineación y sincronización de traducciones
         async function syncTargetLangs(masterList) {
             const languages = [
-                { path: EN_JSON, lang: 'EN', keyName: 'name', keyDesc: 'description', keyCat: 'category', keyPrice: 'price', keyImg: 'image' },
-                { path: PT_JSON, lang: 'PT', keyName: 'nome', keyDesc: 'descricao', keyCat: 'categoria', keyPrice: 'preco', keyImg: 'imagem' }
+                { path: EN_JSON, lang: 'EN', localList: productosEN, keyName: 'name', keyDesc: 'description', keyCat: 'category', keyPrice: 'price', keyImg: 'image' },
+                { path: PT_JSON, lang: 'PT', localList: productosPT, keyName: 'nome', keyDesc: 'descricao', keyCat: 'categoria', keyPrice: 'preco', keyImg: 'imagem' }
             ];
 
             for (const f of languages) {
                 try {
-                    // Leer JSON actual de traducción
-                    const res = await fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${f.path}?t=${Date.now()}`);
-                    let targetList = [];
-                    
-                    if (res.ok) {
-                        const parsed = await res.json();
-                        if (Array.isArray(parsed)) targetList = parsed;
-                    }
-
                     // Sincronizar e inyectar manteniendo traducciones y forzando orden máster
                     const syncedList = masterList.map(masterItem => {
-                        // Buscar si el producto ya existía
-                        const currentTr = targetList.find(t => t.id === masterItem.id);
+                        // Buscar si el producto ya existía localmente
+                        const currentTr = f.localList.find(t => t.id === masterItem.id);
 
-                        // Mapear respetando las llaves específicas del idioma (ES, EN o PT)
+                        // Mapear respetando las llaves específicas del idioma (EN o PT)
                         const syncedItem = { id: masterItem.id };
 
                         // 1. Nombre traducido o fallback en español
@@ -996,6 +1216,10 @@
 
                         return syncedItem;
                     });
+
+                    // Mantener las listas de traducción en memoria actualizadas
+                    if (f.lang === 'EN') productosEN = syncedList;
+                    if (f.lang === 'PT') productosPT = syncedList;
 
                     // Guardar lista sincronizada de traducción en su archivo correspondiente
                     await githubPutFile(
@@ -1044,6 +1268,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadProducts();
             validarTokenGitHub();
+            
+            // Auto-desbloquear visualmente el token si la pestaña ya lo hizo en la sesión actual
+            if (sessionStorage.getItem('admin_unlocked') === 'true') {
+                const group = document.getElementById('tokenControlGroup');
+                const btn = document.getElementById('btnLockAdmin');
+                if (group && btn) {
+                    group.style.display = 'flex';
+                    btn.innerHTML = '🔓 Propietario Activo';
+                }
+            }
         });
     </script>
 </body>
