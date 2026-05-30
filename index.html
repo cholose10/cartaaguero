@@ -757,7 +757,7 @@
 
     <!-- HEADER HERO -->
     <header>
-        <img src="1779292392781.png" alt="menuclick">
+        <img src="1779292392781.png" alt="Tilo Café">
     </header>
 
     <!-- BANNER Y TITULO AUTO-AJUSTABLE -->
@@ -805,6 +805,12 @@
     </div>
 
     <script>
+        // ==========================================
+        // CONFIGURACIÓN DE LA SUCURSAL
+        // Modifica esta variable al instalar en cada local:
+        // ==========================================
+        const NOMBRE_LOCAL = "Tilo Café Aguero";
+
         // Helper global para búsqueda inteligente de imágenes en subcarpetas locales
         window.handleImageError = function (img, originalSrc) {
             if (!img.dataset.tryStep) {
@@ -825,6 +831,15 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+
+            // Aplicar nombre de sucursal de forma inmediata para evitar parpadeos
+            if (typeof NOMBRE_LOCAL !== 'undefined' && NOMBRE_LOCAL) {
+                document.title = NOMBRE_LOCAL;
+                const bannerTextEl = document.getElementById("banner-text");
+                if (bannerTextEl) {
+                    bannerTextEl.textContent = `¡Bienvenidos a ${NOMBRE_LOCAL}!`;
+                }
+            }
 
             // Detección dinámica de GitHub para soporte marca blanca
             const host = window.location.hostname;
@@ -923,7 +938,7 @@
                     const data = await res.json();
 
                     // Ajustar título y banner de forma genérica
-                    const localName = data.config?.nombreLocal || "Tilo Café";
+                    const localName = NOMBRE_LOCAL || data.config?.nombreLocal || "Tilo Café";
                     document.title = localName;
                     bannerText.textContent = `¡Bienvenidos a ${localName}!`;
 
@@ -1259,7 +1274,7 @@
             // =============================================
             window.addEventListener('message', (e) => {
                 if (e.data && e.data.type === "updateSuggestions") {
-                    const localName = e.data.config?.nombreLocal || "Tilo Café";
+                    const localName = e.data.config?.nombreLocal || NOMBRE_LOCAL || "Tilo Café";
                     document.title = localName;
                     bannerText.textContent = `¡Bienvenidos a ${localName}!`;
 
