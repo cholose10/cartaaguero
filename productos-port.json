@@ -1390,13 +1390,5 @@
     "preco": "9200",
     "imagem": "img/tortas.jpg",
     "categoria": "📋Menu do dia/Sugestões e novidades"
-  },
-  {
-    "id": "prod0180",
-    "nome": "cappuccino de cacau",
-    "descricao": "creme de leite de café e",
-    "preco": "11000",
-    "imagem": "img/cremaadi.jpg",
-    "categoria": "Refeitório☕️"
   }
 ]
