@@ -1390,13 +1390,5 @@
     "imagen": "img/tortas.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0179"
-  },
-  {
-    "nombre": "cocoa capuchino",
-    "descripcion": "cafe leche crema y",
-    "precio": "11000",
-    "imagen": "img/cremaadi.jpg",
-    "categoria": "Cafetería☕️",
-    "id": "prod0180"
   }
 ]
