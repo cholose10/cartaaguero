@@ -1390,13 +1390,5 @@
     "imagen": "img/tortas.jpg",
     "categoria": "📋/SUGERENCIAS Y NOVEDADES",
     "id": "prod0179"
-  },
-  {
-    "nombre": "selba negra",
-    "descripcion": "dulce de leche merenge caramelo",
-    "precio": "15000",
-    "imagen": "img/cafe.jpg",
-    "categoria": "Cafetería☕️",
-    "id": "prod0180"
   }
 ]
