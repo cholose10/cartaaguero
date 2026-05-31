@@ -353,10 +353,72 @@ if (btnTraducir) {
     btnTraducir.addEventListener("click", autoTraducirSugerencias);
 }
 
+// Local state saving to keep all languages in memory synchronized
+function guardarEstadoLocal() {
+    const idioma = idiomaSelect.value;
+    const lineas = textarea.value
+        .split("\n")
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+    jsonCompleto[idioma] = lineas;
+    if (!jsonCompleto.config) jsonCompleto.config = {};
+    jsonCompleto.config.nombreLocal = nombreLocalInput.value;
+}
+
+// GitHub Token Protection / Security Lock
+const ADMIN_CODE = "aguero2026";
+
+function toggleAdminLock() {
+    const group = document.getElementById('tokenControlGroup');
+    const btn = document.getElementById('btnLockAdmin');
+    if (!group || !btn) return;
+    
+    if (group.style.display === 'flex') {
+        group.style.display = 'none';
+        btn.innerHTML = '🔒 Acceso Propietario';
+        sessionStorage.removeItem('admin_unlocked');
+        estado.textContent = "Acceso propietario cerrado 🔒";
+        estado.style.color = "#c48d49";
+    } else {
+        if (sessionStorage.getItem('admin_unlocked') === 'true') {
+            group.style.display = 'flex';
+            btn.innerHTML = '🔓 Propietario Activo';
+            return;
+        }
+        const code = prompt("Ingresa el código de seguridad para gestionar el Token:");
+        if (code === ADMIN_CODE) {
+            group.style.display = 'flex';
+            btn.innerHTML = '🔓 Propietario Activo';
+            sessionStorage.setItem('admin_unlocked', 'true');
+            estado.textContent = "Acceso propietario concedido 🔓";
+            estado.style.color = "#4a773c";
+        } else if (code !== null) {
+            alert("Código incorrecto");
+        }
+    }
+}
+
+// Automatically restore owner panel view if unlocked in session
+function restaurarBloqueoAdmin() {
+    const group = document.getElementById('tokenControlGroup');
+    const btn = document.getElementById('btnLockAdmin');
+    if (group && btn && sessionStorage.getItem('admin_unlocked') === 'true') {
+        group.style.display = 'flex';
+        btn.innerHTML = '🔓 Propietario Activo';
+    }
+}
+
+// Expose globally for HTML onclick inline handling
+window.toggleAdminLock = toggleAdminLock;
+
 // Live preview binding
-nombreLocalInput.addEventListener("input", actualizarVistaPrevia);
+nombreLocalInput.addEventListener("input", () => {
+    guardarEstadoLocal();
+    actualizarVistaPrevia();
+});
 textarea.addEventListener("input", () => {
     autoResizeTextarea();
+    guardarEstadoLocal();
     actualizarVistaPrevia();
 });
 idiomaSelect.addEventListener("change", () => {
@@ -381,6 +443,7 @@ document.querySelectorAll(".emoji-list button").forEach(btn => {
         
         // Trigger live preview update
         autoResizeTextarea();
+        guardarEstadoLocal();
         actualizarVistaPrevia();
     });
 });
@@ -395,6 +458,7 @@ window.addEventListener("message", (e) => {
 /* INICIAR */
 async function iniciar() {
     inicializarIframe();
+    restaurarBloqueoAdmin();
     await validarTokenGitHub();
     await cargarJSON();
 }
