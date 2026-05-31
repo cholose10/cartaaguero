@@ -17,10 +17,13 @@
         <!-- PANEL IZQUIERDO -->
         <div class="panel">
 
-            <h2>📝 Mozo Digital</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c48d49; padding-bottom: 8px; margin-bottom: 12px;">
+                <h2 style="margin: 0; border: none; padding: 0;">📝 Mozo Digital</h2>
+                <button id="btnLockAdmin" onclick="toggleAdminLock()" style="padding: 4px 10px; font-size: 12px; background: rgba(196, 141, 73, 0.15); border: 1px solid rgba(196, 141, 73, 0.4); border-radius: 6px; color: #f5eedc; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-family: 'Outfit', sans-serif; transition: all 0.2s;">🔒 Acceso Propietario</button>
+            </div>
 
             <!-- CONFIGURACIÓN DE TOKEN (EVITA EL PROMPT) -->
-            <div class="token-section">
+            <div class="token-section" id="tokenControlGroup" style="display: none;">
                 <label>GitHub Token:</label>
                 <div class="token-row">
                     <input type="password" id="token" placeholder="Pegar Token para editar">
