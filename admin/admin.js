@@ -350,6 +350,10 @@ if (btnClearToken) {
     });
 }
 
+if (btnGuardar) {
+    btnGuardar.addEventListener("click", guardarJSON);
+}
+
 const btnTraducir = document.getElementById("btnTraducir");
 if (btnTraducir) {
     btnTraducir.addEventListener("click", autoTraducirSugerencias);
