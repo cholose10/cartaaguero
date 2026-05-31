@@ -757,7 +757,7 @@
 
     <!-- HEADER HERO -->
     <header>
-        <img src="menunegro.jpeg" alt="Tilo Café">
+        <img src="1779292392781.png" alt="Tilo Café">
     </header>
 
     <!-- BANNER Y TITULO AUTO-AJUSTABLE -->
@@ -809,7 +809,7 @@
         // CONFIGURACIÓN DE LA SUCURSAL
         // Modifica esta variable al instalar en cada local:
         // ==========================================
-        const NOMBRE_LOCAL = "menuclick";
+        const NOMBRE_LOCAL = "Tilo Café Aguero";
 
         // Helper global para búsqueda inteligente de imágenes en subcarpetas locales
         window.handleImageError = function (img, originalSrc) {
@@ -831,13 +831,52 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+            let idiomaActual = localStorage.getItem('idioma') || 'es';
+
+            const PAGE_TEXTS = {
+                es: {
+                    welcome: "¡Bienvenidos a {localName}!",
+                    searchPlaceholder: "Buscar plato...",
+                    searchBtn: "Buscar",
+                    voiceTitle: "Búsqueda por voz",
+                    todosCat: "Todos",
+                    mozoTitle: "Sugerencias de Ron ✦",
+                    mozoSub: "Aquí tienes mis sugerencias para hoy",
+                    mozoFooter: "Toca afuera para cerrar el diálogo."
+                },
+                en: {
+                    welcome: "Welcome to {localName}!",
+                    searchPlaceholder: "Search dish...",
+                    searchBtn: "Search",
+                    voiceTitle: "Voice search",
+                    todosCat: "All",
+                    mozoTitle: "Ron's Suggestions ✦",
+                    mozoSub: "Here are my suggestions for today",
+                    mozoFooter: "Tap outside to close."
+                },
+                pt: {
+                    welcome: "Bem-vindos a {localName}!",
+                    searchPlaceholder: "Buscar prato...",
+                    searchBtn: "Buscar",
+                    voiceTitle: "Pesquisa por voz",
+                    todosCat: "Todos",
+                    mozoTitle: "Sugestões do Ron ✦",
+                    mozoSub: "Aqui estão minhas sugestões para hoje",
+                    mozoFooter: "Toque fora para fechar."
+                }
+            };
+
+            function getWelcomeText(localName, lang) {
+                const template = PAGE_TEXTS[lang]?.welcome || PAGE_TEXTS.es.welcome;
+                return template.replace("{localName}", localName);
+            }
 
             // Aplicar nombre de sucursal de forma inmediata para evitar parpadeos
             if (typeof NOMBRE_LOCAL !== 'undefined' && NOMBRE_LOCAL) {
                 document.title = NOMBRE_LOCAL;
                 const bannerTextEl = document.getElementById("banner-text");
                 if (bannerTextEl) {
-                    bannerTextEl.textContent = `¡Bienvenidos a ${NOMBRE_LOCAL}!`;
+                    bannerTextEl.textContent = getWelcomeText(NOMBRE_LOCAL, idiomaActual);
                 }
             }
 
@@ -856,8 +895,6 @@
             // Detección de desarrollo local (Localhost/127.0.0.1 o protocolo file://)
             const isLocal = host === "localhost" || host === "127.0.0.1" || window.location.protocol === "file:";
 
-            let idiomaActual = localStorage.getItem('idioma') || 'es';
-
             const categoryContainer = document.getElementById('category-buttons');
             const productList = document.getElementById('product-list');
             const teleTrack = document.getElementById("tele-track");
@@ -871,6 +908,12 @@
             window.abrirModalTele = function () {
                 const modal = document.getElementById('modalTele');
                 const contenido = document.getElementById('modal-content-text');
+                const modalTitle = modal.querySelector('h2');
+
+                const texts = PAGE_TEXTS[idiomaActual] || PAGE_TEXTS.es;
+                if (modalTitle) {
+                    modalTitle.textContent = texts.mozoTitle;
+                }
 
                 const texto = teleTrack.innerText || "";
                 const partes = texto.split(" — ");
@@ -885,8 +928,8 @@
                     <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; background:rgba(196, 141, 73, 0.08); padding:12px 16px; border-radius:16px;">
                         <span style="font-size:32px;">🤖</span>
                         <div>
-                            <p style="font-weight:600; color:var(--primary-color); margin:0; font-size:16px;">Ron, tu Mozo Digital</p>
-                            <p style="font-size:12px; color:var(--accent-color); margin:0;">Aquí tienes mis sugerencias para hoy</p>
+                            <p style="font-weight:600; color:var(--primary-color); margin:0; font-size:16px;">Ron</p>
+                            <p style="font-size:12px; color:var(--accent-color); margin:0;">${texts.mozoSub}</p>
                         </div>
                     </div>
 
@@ -899,7 +942,7 @@
                     </ul>
 
                     <p style="font-size:13px; color:#888; text-align:center; margin:0;">
-                        Toca afuera para cerrar el diálogo.
+                        ${texts.mozoFooter}
                     </p>
                 `;
 
@@ -940,7 +983,7 @@
                     // Ajustar título y banner de forma genérica
                     const localName = NOMBRE_LOCAL || data.config?.nombreLocal || "Tilo Café";
                     document.title = localName;
-                    bannerText.textContent = `¡Bienvenidos a ${localName}!`;
+                    bannerText.textContent = getWelcomeText(localName, idiomaActual);
 
                     const sugerencias = data[idiomaActual] || [];
                     const saludo = getSaludo();
@@ -983,6 +1026,13 @@
             async function load() {
                 localStorage.setItem('idioma', idiomaActual);
                 actualizarBotonesIdioma();
+
+                // Traducir textos fijos de la página
+                const texts = PAGE_TEXTS[idiomaActual] || PAGE_TEXTS.es;
+                document.getElementById('search').placeholder = texts.searchPlaceholder;
+                document.getElementById('btnSearch').textContent = texts.searchBtn;
+                const btnVoice = document.getElementById('btnVoice');
+                if (btnVoice) btnVoice.title = texts.voiceTitle;
 
                 let archivo =
                     idiomaActual === "es"
@@ -1072,14 +1122,15 @@
             // SISTEMA DINÁMICO DE CATEGORÍAS
             // =============================================
             function renderCategorias() {
+                const texts = PAGE_TEXTS[idiomaActual] || PAGE_TEXTS.es;
                 const cats = [
-                    "Todos",
+                    texts.todosCat,
                     ...new Set(productos.map(p => p.categoria).filter(Boolean))
                 ];
 
                 categoryContainer.innerHTML = cats.map(cat => `
                     <button
-                      class="${cat === 'Todos' ? 'active-cat' : ''}"
+                      class="${cat === texts.todosCat ? 'active-cat' : ''}"
                       data-cat="${cat}"
                     >
                       ${cat}
@@ -1095,13 +1146,14 @@
             }
 
             window.filtrarCat = function (cat, btn) {
+                const texts = PAGE_TEXTS[idiomaActual] || PAGE_TEXTS.es;
                 document.querySelectorAll("#category-buttons button")
                     .forEach(b => b.classList.remove("active-cat"));
 
                 btn.classList.add("active-cat");
 
                 const filtrados =
-                    cat === "Todos"
+                    cat === texts.todosCat
                         ? productos
                         : productos.filter(p => p.categoria === cat);
 
@@ -1274,9 +1326,14 @@
             // =============================================
             window.addEventListener('message', (e) => {
                 if (e.data && e.data.type === "updateSuggestions") {
+                    if (e.data.idioma) {
+                        idiomaActual = e.data.idioma;
+                        localStorage.setItem('idioma', idiomaActual);
+                        actualizarBotonesIdioma();
+                    }
                     const localName = e.data.config?.nombreLocal || NOMBRE_LOCAL || "Tilo Café";
                     document.title = localName;
-                    bannerText.textContent = `¡Bienvenidos a ${localName}!`;
+                    bannerText.textContent = getWelcomeText(localName, idiomaActual);
 
                     const sugerencias = e.data.sugerencias || [];
                     const saludo = getSaludo();
