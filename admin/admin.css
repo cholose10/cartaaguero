@@ -180,3 +180,12 @@ body {
     height: 100%;
     border: none;
 }
+
+#btnTraducir {
+    transition: all 0.2s ease;
+}
+
+#btnTraducir:hover {
+    background: rgba(196, 141, 73, 0.35) !important;
+    transform: scale(1.02);
+}
