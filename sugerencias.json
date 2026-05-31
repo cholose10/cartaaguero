@@ -1,31 +1,31 @@
 {
-    "config": {
-        "nombreLocal": "Tilo Café Aguero"
-    },
-    "es": [
-        "🙋‍♂️ Hola, soy Ron tu mozo digital 🤖!.",
-        "Elegí una categoría o encontrá lo que buscás con el buscador 🔎 ❤️.",
-        "Todas las promociones de desayuno y merienda incluyen ☕ y exprimido de 🍊.",
-        "🍻 Happy hour todos los días de 18 a 00 hs. ❤️✨.",
-        "🌞 .",
-        "\"¡Hola! Soy Ron. Hoy te recomiendo nuestras medialunas recién horneadas con un café bien caliente. ¿Te tienta?\"",
-        "🥘 (Para destacar el plato del día. hoy tenemos....",
-        "\"¡Bienvenido! Soy Ron. El Chef me dijo que no podés irte sin probar nuestra especialidad de hoy. ¡Dale una mirada a las fotos!\"",
-        "🌙la noche esta Para la cenas y tragos o un vino )",
-        ". Soy Ron. Relajate y disfrutá, yo me encargo de que veas cada plato tal como es. ¿Empezamos con algo para compartir🍺🍽️ ❤️?\""
-    ],
-    "en": [
-        "\"Hi! I'm Ron. Today's recommendation is...\"",
-        "🥐 Our premium breakfast includes coffee ☕ and orange juice 🍊.",
-        "🍽 The daily menu includes drinks, desserts or coffee.",
-        "🍻 Happy hour from 6pm to 8pm.",
-        "😊 We’re waiting for you at {{Tilo Café}}!"
-    ],
-    "pt": [
-        "🙋‍♂️ Olá, sou seu garçom digital.",
-        "🥐 Nosso café da manhã premium inclui café ☕ e suco de laranja 🍊.",
-        "🍽 O menu diário inclui bebidas, sobremesas ou café..",
-        "🍻 Happy hour das 18h às 20h.",
-        "😊 Esperamos você no {{Tilo Café}}!"
-    ]
+  "config": {
+    "nombreLocal": "Tilo Café Aguero"
+  },
+  "es": [
+    "🙋‍♂️ Hola, soy Ron tu mozo digital 🤖!.",
+    "Elegí una categoría o encontrá lo que buscás con el buscador 🔎 ❤️.",
+    "Todas las promociones de desayuno y merienda incluyen ☕ y exprimido de 🍊.",
+    "🍻 Happy hour todos los días de 18 a 00 hs. ❤️✨.",
+    "🌞 .",
+    "\"¡Hola! Soy Ron. Hoy te recomiendo nuestras medialunas recién horneadas con un café bien caliente. ¿Te tienta?\"",
+    "🥘 (Para destacar el plato del día. hoy tenemos....",
+    "\"¡Bienvenido! Soy Ron. El Chef me dijo que no podés irte sin probar nuestra especialidad de hoy. ¡Dale una mirada a las fotos!\"",
+    "🌙la noche esta Para la cenas y tragos o un vino )",
+    ". Soy Ron. Relajate y disfrutá, yo me encargo de que veas cada plato tal como es. ¿Empezamos con algo para compartir🍺🍽️ ❤️?\""
+  ],
+  "en": [
+    "\"Hi! I'm Ron. Today's recommendation is...\"",
+    "🥐 Our premium breakfast includes coffee ☕ and orange juice 🍊.",
+    "🍽 The daily menu includes drinks, desserts or coffee.",
+    "🍻 Happy hour from 6pm to 8pm.",
+    "😊 We’re waiting for you at {{Tilo Café}}!"
+  ],
+  "pt": [
+    "🙋‍♂️ Olá, sou seu garçom digital.",
+    "🥐 Nosso café da manhã premium inclui café ☕ e suco de laranja 🍊.",
+    "🍽 O menu diário inclui bebidas, sobremesas ou café..",
+    "🍻 Happy hour das 18h às 20h.",
+    "😊 Esperamos você no {{Tilo Café}}!"
+  ]
 }
