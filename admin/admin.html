@@ -42,7 +42,10 @@
                 <option value="pt">Português</option>
             </select>
 
-            <label>Sugerencias (una por línea)</label>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 4px;">
+                <label style="margin: 0;">Sugerencias (una por línea)</label>
+                <button type="button" id="btnTraducir" style="background: rgba(196, 141, 73, 0.15); border: 1px solid rgba(196, 141, 73, 0.4); border-radius: 6px; color: #f5eedc; font-size: 11px; padding: 4px 10px; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: 'Outfit', sans-serif;">✨ Traducir con IA</button>
+            </div>
             <textarea id="editor" placeholder="Escribe aquí las sugerencias del día..."></textarea>
 
             <div class="emoji-list">
