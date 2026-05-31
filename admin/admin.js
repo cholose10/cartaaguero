@@ -318,6 +318,7 @@ async function guardarJSON() {
             
             // Forzar actualización en tiempo real en el iframe
             actualizarVistaPrevia();
+            alert("¡Cambios guardados con éxito en la nube! ✅");
         } else {
             const errInfo = await res.text();
             throw new Error(`Código ${res.status}: ${errInfo}`);
@@ -326,6 +327,7 @@ async function guardarJSON() {
         console.error(e);
         estado.textContent = "Error al guardar sugerencias ❌";
         estado.style.color = "#b03a2e";
+        alert("Hubo un error al guardar los cambios en la nube: " + e.message);
     }
 }
 
