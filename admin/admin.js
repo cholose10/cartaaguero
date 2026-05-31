@@ -93,7 +93,8 @@ function actualizarVistaPrevia() {
         iframe.contentWindow.postMessage({
             type: "updateSuggestions",
             config: { nombreLocal: nombreLocalInput.value },
-            sugerencias: lineas
+            sugerencias: lineas,
+            idioma: idiomaSelect.value
         }, "*");
     }
 }
@@ -206,6 +207,65 @@ function mostrarIdioma() {
     autoResizeTextarea();
 }
 
+async function translateText(text, fromLang, toLang) {
+    if (!text) return "";
+    try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${fromLang}|${toLang}`);
+        if (res.ok) {
+            const data = await res.json();
+            if (data.responseData && data.responseData.translatedText) {
+                return data.responseData.translatedText;
+            }
+        }
+    } catch (e) {
+        console.error("Error translating:", e);
+    }
+    return text; // fallback
+}
+
+async function autoTraducirSugerencias() {
+    const sourceLang = idiomaSelect.value;
+    const lineas = textarea.value
+        .split("\n")
+        .map(l => l.trim())
+        .filter(l => l.length > 0);
+
+    if (lineas.length === 0) {
+        alert("Escribe primero las sugerencias en el editor para poder traducir.");
+        return;
+    }
+
+    estado.textContent = "Traduciendo sugerencias con IA...";
+    estado.style.color = "#c48d49";
+
+    const targetLangs = ['es', 'en', 'pt'].filter(l => l !== sourceLang);
+    const translations = {};
+
+    try {
+        for (const tLang of targetLangs) {
+            translations[tLang] = await Promise.all(
+                lineas.map(line => translateText(line, sourceLang, tLang))
+            );
+        }
+
+        // Guardar las traducciones en memoria
+        jsonCompleto[sourceLang] = lineas;
+        for (const tLang of targetLangs) {
+            jsonCompleto[tLang] = translations[tLang];
+        }
+
+        estado.textContent = "¡Traducciones automáticas completadas! (Guarda cambios) ✅";
+        estado.style.color = "#4a773c";
+
+        // Forzar actualización en tiempo real en el iframe
+        actualizarVistaPrevia();
+    } catch (e) {
+        console.error("Error translating suggestions:", e);
+        estado.textContent = "Error en el servicio de traducción ❌";
+        estado.style.color = "#b03a2e";
+    }
+}
+
 /* GUARDAR SUGERENCIAS EN GITHUB */
 async function guardarJSON() {
     const token = obtenerTokenLocal();
@@ -286,6 +346,11 @@ if (btnClearToken) {
         if (tokenInput) tokenInput.value = "";
         location.reload();
     });
+}
+
+const btnTraducir = document.getElementById("btnTraducir");
+if (btnTraducir) {
+    btnTraducir.addEventListener("click", autoTraducirSugerencias);
 }
 
 // Live preview binding
