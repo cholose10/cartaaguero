@@ -189,3 +189,8 @@ body {
     background: rgba(196, 141, 73, 0.35) !important;
     transform: scale(1.02);
 }
+
+#btnLockAdmin:hover {
+    background: rgba(196, 141, 73, 0.35) !important;
+    transform: scale(1.02);
+}
