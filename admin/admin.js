@@ -296,6 +296,23 @@ async function guardarJSON() {
     const url = `https://api.github.com/repos/${USER}/${REPO}/contents/${FILE_PATH}`;
 
     try {
+        // 1. Obtener dinámicamente el SHA más reciente del archivo en GitHub para evitar conflictos de sobrescritura
+        let sha = shaActual;
+        try {
+            const cacheBuster = `?t=${Date.now()}`;
+            const resInfo = await fetch(`${url}${cacheBuster}`, {
+                headers: { Authorization: `token ${token}` }
+            });
+            if (resInfo.ok) {
+                const data = await resInfo.json();
+                sha = data.sha;
+                shaActual = sha; // Actualizar globalmente
+            }
+        } catch (errSha) {
+            console.warn("No se pudo obtener el SHA más reciente de GitHub:", errSha);
+        }
+
+        // 2. Realizar la escritura (PUT) con el SHA correcto
         const res = await fetch(url, {
             method: "PUT",
             headers: {
@@ -305,7 +322,7 @@ async function guardarJSON() {
             body: JSON.stringify({
                 message: `Actualización de sugerencias de Ron (${idioma.toUpperCase()})`,
                 content: contenidoBase64,
-                sha: shaActual,
+                sha: sha,
                 branch: BRANCH
             })
         });
