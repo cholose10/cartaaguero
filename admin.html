@@ -36,7 +36,7 @@
             content: "";
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(30, 18, 8, 0.85); /* Dark veil to ease eye strain */
+            background: rgba(30, 18, 8, 0.85); /* Dark veil */
             z-index: -1;
             pointer-events: none;
         }
@@ -180,6 +180,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Zona de arrastrar fotos */
+        .dropZone {
+            border: 2px dashed var(--secondary-color);
+            padding: 18px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.25);
+            color: var(--primary-color);
+            margin-top: 4px;
+            transition: all 0.2s ease;
+        }
+        .dropZone:hover, .dropZone.dragover {
+            background: rgba(196, 141, 73, 0.18);
+            border-color: var(--primary-color);
+        }
+
         table {
             width: 100%;
             border-collapse: separate;
@@ -218,7 +235,6 @@
             border-bottom: none;
         }
 
-        /* Borderless premium inline editing elements */
         td input[type="text"], td textarea {
             border: 1px solid transparent;
             background: transparent;
@@ -446,11 +462,23 @@
                     <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Descripción</label>
                     <textarea id="descripcion" rows="2" style="width:100%;"></textarea>
                 </div>
-                <div>
-                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Ruta de Imagen (img/nombre.jpg)</label>
-                    <input id="imagen" type="text" oninput="previewImage()" style="width:100%;">
+                
+                <!-- CARGA DE IMAGEN CON DRAG & DROP -->
+                <div style="grid-column: 1 / -1">
+                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Imagen del Producto</label>
+                    <input type="file" id="imagenFile" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
+                    <div id="dropZone" class="dropZone" 
+                         onclick="document.getElementById('imagenFile').click()"
+                         ondragover="handleDragOver(event)" 
+                         ondragleave="handleDragLeave(event)" 
+                         ondrop="handleDrop(event)">
+                        📸 <b id="dropText">Hacé clic aquí o arrastrá tu foto desde tu computadora</b>
+                        <div style="font-size:12px; color:var(--secondary-color); margin-top:4px">Se subirá automáticamente a la carpeta <code>img/</code> en GitHub</div>
+                    </div>
+                    <input type="hidden" id="imagen">
                     <img id="preview" class="previewImg" style="display:none">
                 </div>
+
                 <div>
                     <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Categoría</label>
                     <input id="categoria" type="text" placeholder="Ej: Cafetería☕️" style="width:100%;">
@@ -549,12 +577,11 @@
             }
         };
 
-        // Detección dinámica de GitHub para que el código sea 100% reutilizable en marca blanca
         const host = window.location.hostname;
         const pathParts = window.location.pathname.split("/");
 
-        let USERNAME = "tilo-restocafe"; // Fallback por defecto
-        let REPO = "cartaaguero";       // Fallback por defecto
+        let USERNAME = "electrogenesis10-ops";
+        let REPO = "carta";
 
         if (host.includes(".github.io")) {
             USERNAME = host.split(".")[0];
@@ -688,11 +715,87 @@
             }
         }
 
+        /**************** LÓGICA DE SUBIR IMAGEN A GITHUB (DRAG & DROP) ****************/
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("dropZone").classList.add("dragover");
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("dropZone").classList.remove("dragover");
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("dropZone").classList.remove("dragover");
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                procesarYSubirImagen(e.dataTransfer.files[0]);
+            }
+        }
+
+        function handleFileSelect(e) {
+            if (e.target.files && e.target.files[0]) {
+                procesarYSubirImagen(e.target.files[0]);
+            }
+        }
+
+        async function procesarYSubirImagen(file) {
+            if (!file.type.startsWith("image/")) {
+                showToast("Por favor seleccioná un archivo de imagen válido", "err");
+                return;
+            }
+
+            const token = getToken();
+            if (!token) {
+                showToast("Primero ingresá y guardá tu Token de GitHub", "err");
+                return;
+            }
+
+            mostrarLoading();
+            const dropText = document.getElementById("dropText");
+            if (dropText) dropText.innerText = "⏳ Subiendo foto a GitHub...";
+
+            try {
+                const base64Full = await fileToBase64(file);
+                const base64Data = base64Full.split(',')[1];
+
+                const ext = file.name.split('.').pop().toLowerCase() || 'jpg';
+                const nombreLimpio = file.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+                const pathGitHub = `img/${Date.now()}_${nombreLimpio}.${ext}`;
+
+                await githubPutFile(pathGitHub, base64Data, `Subida de foto ${pathGitHub} desde Admin`, true);
+
+                document.getElementById("imagen").value = pathGitHub;
+                previewImage();
+
+                showToast("¡Foto subida a la carpeta img/ de GitHub con éxito!", "ok");
+            } catch (err) {
+                console.error(err);
+                showToast("Error al subir foto: " + (err.message || err), "err");
+            } finally {
+                ocultarLoading();
+                if (dropText) dropText.innerText = "📸 Hacé clic aquí o arrastrá tu foto desde tu computadora";
+            }
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
         /**************** CORE DE DATOS ****************/
 
         function sanitizePrice(v) {
             if (v === undefined || v === null) return '0';
-            return String(v).replace(/[^\d]/g, ''); // Solo números enteros
+            return String(v).replace(/[^\d]/g, '');
         }
 
         function findIndexById(id) {
@@ -710,7 +813,6 @@
 
         async function loadProducts() {
             try {
-                // Carga en paralelo de todos los JSON
                 const [rES, rEN, rPT] = await Promise.all([
                     fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${MAIN_JSON}?t=${Date.now()}`),
                     fetch(`https://raw.githubusercontent.com/${USERNAME}/${REPO}/${BRANCH}/${EN_JSON}?t=${Date.now()}`),
@@ -762,7 +864,7 @@
             }
         }
 
-        /**************** RENDER DE TABLA INTERACTIVA (SPREADSHEET MODE) ****************/
+        /**************** RENDER DE TABLA INTERACTIVA ****************/
 
         function render(lista) {
             const tb = document.getElementById('tbody');
@@ -800,7 +902,6 @@
                     </td>
                 `;
 
-                // Configurar auto-guardado en array local al tipear
                 const inputs = tr.querySelectorAll('input');
                 inputs[0].oninput = e => updateLocal(p.id, 'nombre', e.target.value);
                 inputs[1].oninput = e => updateLocal(p.id, 'categoria', e.target.value);
@@ -811,7 +912,6 @@
                 const precioInput = tr.querySelector('.input-precio');
                 precioInput.oninput = e => updateLocal(p.id, 'precio', e.target.value);
 
-                // Soporte rápido de navegación por teclado en precios con tecla Tab
                 precioInput.addEventListener('keydown', function (e) {
                     if (e.key === 'Tab') {
                         const siguienteFila = tr.nextElementSibling;
@@ -864,7 +964,8 @@
                 document.getElementById('form').reset();
                 document.getElementById('formTitle').innerText = "Agregar Nuevo Producto";
                 document.getElementById('preview').style.display = 'none';
-                // Limpiar traducciones
+                document.getElementById('imagen').value = '';
+                
                 document.getElementById('nombre_en').value = '';
                 document.getElementById('descripcion_en').value = '';
                 document.getElementById('categoria_en').value = '';
@@ -878,9 +979,10 @@
         function cancelForm() {
             document.getElementById('form').reset();
             document.getElementById('editId').value = '';
+            document.getElementById('imagen').value = '';
             document.getElementById('preview').style.display = 'none';
             document.getElementById('form').style.display = 'none';
-            // Limpiar traducciones
+            
             document.getElementById('nombre_en').value = '';
             document.getElementById('descripcion_en').value = '';
             document.getElementById('categoria_en').value = '';
@@ -927,7 +1029,7 @@
                 } catch (e) {
                     console.error("Error translating:", e);
                 }
-                return text; // fallback
+                return text;
             }
             
             try {
@@ -978,7 +1080,6 @@
                 categoria
             };
 
-            // Recoger valores de traducción
             const nombre_en = document.getElementById('nombre_en').value.trim();
             const descripcion_en = document.getElementById('descripcion_en').value.trim();
             const categoria_en = document.getElementById('categoria_en').value.trim();
@@ -1006,11 +1107,9 @@
             };
 
             if (id) {
-                // Editar maestro
                 const idx = findIndexById(id);
                 if (idx !== -1) productos[idx] = obj;
 
-                // Editar inglés
                 const idxEN = productosEN.findIndex(p => p.id === id);
                 if (idxEN !== -1) {
                     productosEN[idxEN] = objEN;
@@ -1018,7 +1117,6 @@
                     productosEN.push(objEN);
                 }
 
-                // Editar portugués
                 const idxPT = productosPT.findIndex(p => p.id === id);
                 if (idxPT !== -1) {
                     productosPT[idxPT] = objPT;
@@ -1026,7 +1124,6 @@
                     productosPT.push(objPT);
                 }
             } else {
-                // Prevenir nombres duplicados para evitar errores
                 const existe = productos.some(p => p.nombre.toLowerCase() === nombre.toLowerCase());
                 if (existe) {
                     showToast("Ya existe un producto con este nombre", "info");
@@ -1053,7 +1150,6 @@
             document.getElementById('imagen').value = p.imagen || '';
             document.getElementById('categoria').value = p.categoria || '';
 
-            // Cargar traducciones si existen en memoria
             const pEN = productosEN.find(x => x.id === id);
             document.getElementById('nombre_en').value = pEN ? (pEN.name || '') : '';
             document.getElementById('descripcion_en').value = pEN ? (pEN.description || '') : '';
@@ -1073,14 +1169,13 @@
 
         /**************** CONEXIÓN API GITHUB (PUT FILE) ****************/
 
-        async function githubPutFile(path, contentString, message) {
+        async function githubPutFile(path, contentString, message, isBase64 = false) {
             const token = getToken();
             if (!token) throw new Error("No has configurado un token de GitHub.");
 
             const cacheBuster = `?t=${Date.now()}`;
             let sha = undefined;
 
-            // 1. Obtener SHA del archivo si ya existe para poder sobrescribirlo
             try {
                 const resInfo = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/${path}${cacheBuster}`, {
                     headers: { Authorization: `token ${token}` }
@@ -1091,13 +1186,14 @@
                     sha = data.sha;
                 }
             } catch (e) {
-                console.warn("No se pudo obtener SHA previo (puede ser un archivo nuevo):", path, e);
+                console.warn("No se pudo obtener SHA previo:", path, e);
             }
 
-            // 2. Realizar la escritura (PUT) codificando el archivo a base64
+            const base64Content = isBase64 ? contentString : btoa(unescape(encodeURIComponent(contentString)));
+
             const body = {
                 message,
-                content: btoa(unescape(encodeURIComponent(contentString))),
+                content: base64Content,
                 branch: BRANCH,
                 sha
             };
@@ -1117,7 +1213,7 @@
             }
         }
 
-        /**************** GUARDADO TOTAL Y SINCRONIZACIÓN INTELIGENTE EN 3 IDIOMAS ****************/
+        /**************** GUARDADO TOTAL Y SINCRONIZACIÓN EN 3 IDIOMAS ****************/
 
         async function guardarTodosLosPrecios() {
             if (guardando) {
@@ -1135,7 +1231,6 @@
             mostrarLoading();
             bloquearUI();
 
-            // 1. Descarga automática de respaldo JSON (Seguridad ante todo)
             try {
                 const backupBlob = new Blob([JSON.stringify(productos, null, 2)], { type: 'application/json' });
                 const a = document.createElement('a');
@@ -1147,7 +1242,6 @@
             }
 
             try {
-                // 2. Guardar archivo Maestro Español (productos.json)
                 const cleanMasterList = productos.map(p => ({
                     nombre: p.nombre || '',
                     descripcion: p.descripcion || '',
@@ -1163,7 +1257,6 @@
                     "Actualización del Menú Maestro (Español)"
                 );
 
-                // 3. Sincronizar de forma inteligente inglés y portugués
                 await syncTargetLangs(cleanMasterList);
 
                 showToast("✨ ¡Carta sincronizada y guardada en GitHub correctamente!", "ok");
@@ -1179,107 +1272,74 @@
             }
         }
 
-        // Algoritmo maestro de alineación y sincronización de traducciones
         async function syncTargetLangs(masterList) {
             const languages = [
-                { path: EN_JSON, lang: 'EN', localList: productosEN, keyName: 'name', keyDesc: 'description', keyCat: 'category', keyPrice: 'price', keyImg: 'image' },
-                { path: PT_JSON, lang: 'PT', localList: productosPT, keyName: 'nome', keyDesc: 'descricao', keyCat: 'categoria', keyPrice: 'preco', keyImg: 'imagem' }
+                { path: EN_JSON, lang: 'EN', localList: productosEN },
+                { path: PT_JSON, lang: 'PT', localList: productosPT }
             ];
 
             for (const f of languages) {
                 try {
-                    // Sincronizar e inyectar manteniendo traducciones y forzando orden máster
                     const syncedList = masterList.map(masterItem => {
-                        // Buscar si el producto ya existía localmente
-                        const currentTr = f.localList.find(t => t.id === masterItem.id);
-
-                        // Mapear respetando las llaves específicas del idioma (EN o PT)
-                        const syncedItem = { id: masterItem.id };
-
-                        // 1. Nombre traducido o fallback en español
-                        const trName = currentTr ? (currentTr[f.keyName] || currentTr.nombre || masterItem.nombre) : masterItem.nombre;
-                        syncedItem[f.keyName] = trName;
-
-                        // 2. Descripción traducida o fallback en español
-                        const trDesc = currentTr ? (currentTr[f.keyDesc] || currentTr.descripcion || masterItem.descripcion) : masterItem.descripcion;
-                        syncedItem[f.keyDesc] = trDesc;
-
-                        // 3. Precio sincronizado del máster
-                        syncedItem[f.keyPrice] = masterItem.precio;
-
-                        // 4. Imagen sincronizada del máster
-                        syncedItem[f.keyImg] = masterItem.imagen;
-
-                        // 5. Categoría traducida o fallback en español
-                        const trCat = currentTr ? (currentTr[f.keyCat] || currentTr.categoria || masterItem.categoria) : masterItem.categoria;
-                        syncedItem[f.keyCat] = trCat;
-
-                        return syncedItem;
+                        const currentTr = (f.localList || []).find(x => x.id === masterItem.id) || {};
+                        
+                        if (f.lang === 'EN') {
+                            return {
+                                id: masterItem.id,
+                                name: currentTr.name || masterItem.nombre || '',
+                                description: currentTr.description || masterItem.descripcion || '',
+                                price: masterItem.precio,
+                                image: masterItem.imagen,
+                                category: currentTr.category || masterItem.categoria || ''
+                            };
+                        } else {
+                            return {
+                                nome: currentTr.nome || masterItem.nombre || '',
+                                descricao: currentTr.descricao || masterItem.descripcion || '',
+                                preco: masterItem.precio,
+                                imagem: masterItem.imagen,
+                                categoria: currentTr.categoria || masterItem.categoria || '',
+                                id: masterItem.id
+                            };
+                        }
                     });
 
-                    // Mantener las listas de traducción en memoria actualizadas
-                    if (f.lang === 'EN') productosEN = syncedList;
-                    if (f.lang === 'PT') productosPT = syncedList;
-
-                    // Guardar lista sincronizada de traducción en su archivo correspondiente
                     await githubPutFile(
                         f.path,
                         JSON.stringify(syncedList, null, 2),
-                        `Sincronización automática de precios e imágenes (${f.lang})`
+                        `Sincronización automática de precios y traducciones (${f.lang})`
                     );
-
-                } catch (e) {
-                    console.error(`Error sincronizando idioma ${f.lang}:`, e);
-                    showToast(`Sincronización fallida para el menú en ${f.lang}`, "err");
+                } catch (err) {
+                    console.error(`Error sincronizando idioma ${f.lang}:`, err);
                 }
             }
         }
-
-        /**************** BÚSQUEDA Y FILTRADO ****************/
 
         function filterProducts() {
             const q = document.getElementById('search').value.toLowerCase().trim();
-            if (!q) {
-                render(productos);
-                return;
-            }
-
-            const filtrados = productos.filter(p => {
-                const nombre = (p.nombre || '').toLowerCase();
-                const categoria = (p.categoria || '').toLowerCase();
-                return nombre.includes(q) || categoria.includes(q);
-            });
-            render(filtrados);
+            if (!q) { render(productos); return; }
+            const filtered = productos.filter(p =>
+                (p.nombre || '').toLowerCase().includes(q) ||
+                (p.descripcion || '').toLowerCase().includes(q) ||
+                (p.categoria || '').toLowerCase().includes(q)
+            );
+            render(filtered);
         }
 
-        /**************** ENLACES ****************/
-
         function irTeleprompter() {
-            // Abre las sugerencias del mozo digital basadas en la ruta actual
-            window.open(`admin/admin.html`, "_blank");
+            window.open(`https://${USERNAME}.github.io/${REPO}/admin.html`, "_blank");
         }
 
         function irWhatsApp() {
-            window.open("https://wa.me/5491123140119?text=Hola+MenuClick+Ayuda+Carta", "_blank");
+            const numero = "5491123140119";
+            const mensaje = encodeURIComponent("Hola, necesito ayuda con el admin de la carta digital");
+            window.open(`https://wa.me/${numero}?text=${mensaje}`, "_blank");
         }
 
-        /**************** INICIALIZADOR ****************/
-
         document.addEventListener('DOMContentLoaded', () => {
-            loadProducts();
             validarTokenGitHub();
-            
-            // Auto-desbloquear visualmente el token si la pestaña ya lo hizo en la sesión actual
-            if (sessionStorage.getItem('admin_unlocked') === 'true') {
-                const group = document.getElementById('tokenControlGroup');
-                const btn = document.getElementById('btnLockAdmin');
-                if (group && btn) {
-                    group.style.display = 'flex';
-                    btn.innerHTML = '🔓 Propietario Activo';
-                }
-            }
+            loadProducts();
         });
     </script>
 </body>
-
 </html>
